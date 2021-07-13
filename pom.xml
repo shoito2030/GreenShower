@@ -8,7 +8,7 @@
 		<version>2.5.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>jp.ac.hcs.s3a103</groupId>
+	<groupId>jp.ac.hcs.s3a131</groupId>
 	<artifactId>webportal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>webportal</name>
@@ -16,7 +16,7 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
-<dependencies>
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -97,7 +97,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-</dependencies>
+		
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -109,4 +110,3 @@
 	</build>
 
 </project>
-
