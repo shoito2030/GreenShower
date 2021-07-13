@@ -1,0 +1,10 @@
+ログイン成功！
+<div class="col-sm-6" role="presentation"
+				sec:authorize="hasRole('STAFF')">
+				<div class="content-box">
+					<h2>ユーザ管理</h2>
+					<form method="get" th:action="@{/user/list}">
+						<button type="submit" class="btn btn-primary">ユーザ管理へ</button>
+					</form>
+				</div>
+			</div>
