@@ -26,7 +26,7 @@ public class UserController {
 	@GetMapping("/user/list")
 	public String getUserList(Model model) {
 
-		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
+		// 取得できなかった場合は空のOptionalが格納される
 		Optional<UserEntity> userEntity = userService.selectAll();
 
 		// 処理失敗によりトップ画面へ
