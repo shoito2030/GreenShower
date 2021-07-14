@@ -19,7 +19,6 @@ public class UserController {
 	/**
 	 * ユーザ情報一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
-	 * @param principal ログイン情報
 	 * @param model
 	 * @return ユーザ情報一覧画面 or トップ画面
 	 */
@@ -35,6 +34,6 @@ public class UserController {
 		}
 
 		model.addAttribute("userEntity", userEntity.get());
-		return "user/userList";
+		return "user/list";
 	}
 }
