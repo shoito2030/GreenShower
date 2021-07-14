@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="UTF-8">
+<title>WebPortal Main</title>
+
+<!-- モバイル設定 -->
+<th:block th:fragment="frag_mobile">
+	<meta id="viewport" name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="manifest" th:href="@{/css/manifest.json}"
+		crossorigin="use-credentials">
+	<meta name="application-name" content="WebPortal">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="WebPortal">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+</th:block>
+
+<!-- アイコン設定 -->
+<th:block th:fragment="frag_icon">
+	<link rel="icon" th:href="@{/img/favicon.ico}" sizes="192x192"
+		href="../static/img/favicon.ico">
+	<link rel="shortcut icon" th:href="@{/img/favicon.ico}">
+	<link rel="apple-touch-icon" th:href="@{/img/favicon.ico}">
+	<link rel="apple-touch-icon" th:href="@{/img/favicon.ico}"
+		sizes="192x192">
+	<link rel="apple-touch-icon" th:href="@{/img/favicon.ico}"
+		sizes="58x58">
+	
+	<!-- FontAwesome -->
+	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+</th:block>
+
+<!-- スタイル設定 -->
+<th:block th:fragment="frag_style">
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/ress.css}"
+		href="../static/css/ress.css">
+	<link rel="stylesheet" th:href="@{/css/common.css}"
+		href="../static/css/common.css">
+</th:block>
+
+</head>
+
+<body>
+
+	<!-- 共通ヘッダ -->
+	<th:block th:fragment="frag_header">
+		<div>
+			<span>ここにヘッダーを作る</span>
+			<ul>
+				<li><a href="#">就活ポータル.com</a></li>
+				<li><a href="#">就職活動管理</a></li>
+				<li><a href="#">受験報告管理</a></li>
+				<li><a href="#">証明書管理</a></li>
+				<li><a href="#">メッセージ</a></li>
+				<li><a href="#">設定</a></li>
+				<li><a href="logout">Log Out</a></li>
+			</ul>
+		</div>
+	</th:block>
+
+	<!-- 共通スクリプト -->
+	<th:block th:fragment="frag_script">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"></script>
+	</th:block>
+</body>
+</html>

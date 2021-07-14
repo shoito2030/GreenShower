@@ -1,10 +1,18 @@
-ログイン成功！
-<div class="col-sm-6" role="presentation"
-				sec:authorize="hasRole('STAFF')">
-				<div class="content-box">
-					<h2>ユーザ管理</h2>
-					<form method="get" th:action="@{/user/list}">
-						<button type="submit" class="btn btn-primary">ユーザ管理へ</button>
-					</form>
-				</div>
-			</div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="UTF-8">
+<title>就活ポータルトップ画面</title>
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
+</head>
+
+<body>
+	<th:block th:insert="components/part::frag_header"></th:block>
+
+<th:block th:insert="components/part::frag_script"></th:block>
+</body>
+</html>

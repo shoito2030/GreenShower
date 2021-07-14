@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS users (
      register_user_id VARCHAR(254) NOT NULL,
     update_date TIMESTAMP,
     update_user_id VARCHAR(254),
-    enabled BOOLEAN,
+    enabled BOOLEAN DEFAULT true,
     
     CONSTRAINT fk_register_user_id
     	FOREIGN KEY (register_user_id)
