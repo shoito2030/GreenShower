@@ -11,8 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 /**
- * ユーザ情報のデータを管理する.
- * - usersテーブル
+ * ユーザ情報のデータを管理する. - usersテーブル
  */
 
 @Repository
@@ -23,10 +22,11 @@ public class UserRepository {
 
 //	/** SQL 1件取得 */
 //	private static final String SQL_SELECT_ONE = "SELECT * FROM m_user WHERE user_id = ?";
-//
-//	/** SQL 1件追加 enabled追加*/
-//	private static final String SQL_INSERT_ONE = "INSERT INTO m_user(user_id, encrypted_password, user_name, darkmode, role, enabled) VALUES(?, ?, ?, ?, ?, ?)";
-//
+
+	/** SQL 1件追加 enabled追加 */
+	private static final String SQL_INSERT_ONE = 
+			"users (user_id, encrypted_password, name, dark_mode, role, classroom, class_number, register_date, register_user_id, update_date, update_user_id, enabled) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
 //	/** SQL 1件更新 管理者 パスワード更新有 */
 //	private static final String SQL_UPDATE_ONE_WITH_PASSWORD = "UPDATE m_user SET encrypted_password = ?, user_name = ?, role = ? WHERE user_id = ?";
 //
@@ -50,6 +50,7 @@ public class UserRepository {
 
 	/**
 	 * Userテーブルから全データを取得.
+	 * 
 	 * @return UserEntity
 	 * @throws DataAccessException
 	 */
@@ -75,6 +76,7 @@ public class UserRepository {
 
 	/**
 	 * Userテーブルから取得したデータをUserEntity形式にマッピングする.
+	 * 
 	 * @param resultList Userテーブルから取得したデータ
 	 * @return UserEntity
 	 */
@@ -92,31 +94,38 @@ public class UserRepository {
 			data.setRegister_user_id((String) map.get("register_user_id"));
 			data.setUpdate_date((Date) map.get("update_date"));
 			data.setUpdate_user_id((String) map.get("update_user_id"));
-			data.setEnabled((boolean)map.get("enabled"));
-			
+			data.setEnabled((boolean) map.get("enabled"));
+
 			entity.getUserlist().add(data);
 		}
 		return entity;
 	}
 
-//	/**
-//	 * Userテーブルにデータを1件追加する.
-//	 * @param data 追加するユーザ情報
-//	 * @return 追加データ数
-//	 * @throws DataAccessException
-//	 */
-//	public int insertOne(UserData data) throws DataAccessException {
-//		int rowNumber = jdbc.update(SQL_INSERT_ONE,
-//				data.getUser_id(),
-//				passwordEncoder.encode(data.getPassword()),
-//				data.getUser_name(),
-//				data.getDarkmode(),
-//				data.getRole().getId(),
-//				data.getEnabled());
-//				
-//		return rowNumber;
-//	}
-//
+	/**
+	 * Userテーブルにデータを1件追加する.
+	 * 
+	 * @param data 追加するユーザ情報
+	 * @return 追加データ数
+	 * @throws DataAccessException
+	 */
+	public int insertOne(UserData data) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_INSERT_ONE, 
+				data.getUser_id(),
+				passwordEncoder.encode(data.getEncrypted_password()), 
+				data.getName(), 
+				data.getRole().toString(),
+				data.getClassroom(),
+				data.getClass_number(),
+				data.isDark_mode(),
+				data.getRegister_date(),
+				data.getRegister_user_id(),
+				data.getUpdate_date(),
+				data.getUser_id(),
+				data.isEnabled());
+
+		return rowNumber;
+	}
+
 //	/**
 //	 * (管理用)Userテーブルのデータを1件更新する(パスワード更新有).
 //	 * @param data 更新するユーザ情報

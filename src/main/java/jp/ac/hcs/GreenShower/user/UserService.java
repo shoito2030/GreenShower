@@ -29,6 +29,7 @@ public class UserService {
 
 		return Optional.ofNullable(userEntity);
 	}
+	
 
 //	/**
 //	 * ユーザIDに紐づいた情報を1件だけ取得する
@@ -49,24 +50,24 @@ public class UserService {
 //		return Optional.ofNullable(userData);
 //	}
 //
-//	/**
-//	 * ユーザマスタに新たなユーザ情報を1件追加する
-//	 * 
-//	 * @param form 検証済み入力情報
-//	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
-//	 */
-//	public boolean insert(UserForm form) {
-//		int rowNumber = 0;
-//
-//		try {
-//			// 追加処理を行い、追加できた件数を取得
-//			rowNumber = userRepository.insertOne(refillToUserData(form));
-//		} catch (DataAccessException e) {
-//			e.printStackTrace();
-//		}
-//		return rowNumber > 0;
-//	}
-//
+	/**
+	 * ユーザマスタに新たなユーザ情報を1件追加する
+	 * 
+	 * @param form 検証済み入力情報
+	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
+	 */
+	public boolean insert(UserForm form) {
+		int rowNumber = 0;
+
+		try {
+			// 追加処理を行い、追加できた件数を取得
+			rowNumber = userRepository.insertOne(refillToUserData(form));
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return rowNumber > 0;
+	}
+
 //	/**
 //	 * ユーザマスタからidに紐づく情報を削除する
 //	 * 
@@ -118,26 +119,33 @@ public class UserService {
 //		return rowNumber > 0;
 //	}
 //
-//	/**
-//	 * 入力情報をUserData型に変換する（insert用）
-//	 * 
-//	 * @param form 検証済み入力データ
-//	 * @return UserData
-//	 */
-//	private UserData refillToUserData(UserForm form) {
-//		UserData data = new UserData();
-//		data.setUser_id(form.getUser_id());
-//		data.setPassword(form.getPassword());
-//		data.setUser_name(form.getUser_name());
-//		data.setRole(Role.idOf(form.getRole()));
-//
-//		// 要件に従い初期値は下記とする（UserData参照）
-//		data.setDarkmode(false);
-//		data.setEnabled(true);
-//
-//		return data;
-//	}
-//
+	/**
+	 * 入力情報をUserData型に変換する（insert用）
+	 * 
+	 * @param form 検証済み入力データ
+	 * @return UserData
+	 */
+	private UserData refillToUserData(UserForm form) {
+		UserData data = new UserData();
+		
+		data.setUser_id(form.getUser_id());
+		data.setEncrypted_password(form.getEncrypted_password());
+		data.setName(form.getName());
+		data.setRole(Role.valueOf(form.getRole()));
+		data.setClassroom(form.getClassroom());
+		data.setClass_number(form.getClass_number());
+		data.setRegister_date(form.getRegister_date());
+		data.setRegister_user_id(form.getRegister_user_id());
+
+		// 要件に従い初期値は下記とする（UserData参照）
+		data.setUpdate_date(null);
+		data.setUpdate_user_id(null);
+		data.setDark_mode(false);
+		data.setEnabled(true);
+
+		return data;
+	}
+
 //	/**
 //	 * 入力情報をUserData型に変換する（update用）
 //	 * 
