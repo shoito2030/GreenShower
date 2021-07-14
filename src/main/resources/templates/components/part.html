@@ -68,7 +68,7 @@
 			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 			
 			<li>
-				<form method="get" th:action="@{/user}">
+				<form method="get" th:action="@{/user/list}">
 						<button type="submit" class="btn btn-outline-light my-2 my-sm-0">ユーザ管理へ</button>
 					</form>
 				</li>
@@ -92,7 +92,7 @@
 			<li>
 				<!-- 管理者のみのコンテンツ -->
 				<div class="content-box">
-					<form method="get" th:action="@{/user}">
+					<form method="get" th:action="@{/user/list}">
 						<button type="submit" class="btn btn-primary">ユーザ管理へ</button>
 					</form>
 				</div>
