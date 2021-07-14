@@ -53,7 +53,38 @@
 	<!-- 共通ヘッダ -->
 	<th:block th:fragment="frag_header">
 		<div>
-			<span>ここにヘッダーを作る</span>
+			
+			<!-- 共通ヘッダ -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<h1>
+			<a class="navbar-brand title-font" th:href="@{/}">就活ポータル.com</a>
+		</h1>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarToggler" aria-controls="navbarToggler"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarToggler">
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/change}"> <img class="config-img"
+						th:src="@{/img/config.png}" src="../static/img/config.png">
+				</a></li>
+				<li>
+					<form class="my-2 my-lg-0" method="post" th:action="@{/logout}">
+						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+			
+			<div class="content-box">
+					<form method="get" th:action="@{/user}">
+						<button type="submit" class="btn btn-primary">ユーザ管理へ</button>
+					</form>
+			</div>
+				
 			<ul>
 				<li><a href="#">就活ポータル.com</a></li>
 				<li><a href="#">就職活動管理</a></li>
