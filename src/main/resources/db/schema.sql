@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
     user_id VARCHAR(254) PRIMARY KEY,
     encrypted_password VARCHAR(100) NOT NULL,
     name VARCHAR(60) NOT NULL,
-    role VARCHAR(7) NOT NULL,
+    role VARCHAR(12) NOT NULL,
     classroom CHAR(4),
     class_number CHAR(2),
     dark_mode BOOLEAN NOT NULL DEFAULT false,
