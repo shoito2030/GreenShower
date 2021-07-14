@@ -29,9 +29,10 @@
 		sizes="192x192">
 	<link rel="apple-touch-icon" th:href="@{/img/favicon.ico}"
 		sizes="58x58">
-	
+
 	<!-- FontAwesome -->
-	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+		rel="stylesheet">
 </th:block>
 
 <!-- スタイル設定 -->
@@ -53,56 +54,83 @@
 	<!-- 共通ヘッダ -->
 	<th:block th:fragment="frag_header">
 		<div>
-			
+
 			<!-- 共通ヘッダ -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<h1>
-			<a class="navbar-brand title-font" th:href="@{/}">就活ポータル.com</a>
-		</h1>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarToggler" aria-controls="navbarToggler"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarToggler">
-			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-			
-			<li>
-				<form method="get" th:action="@{/user/list}">
-						<button type="submit" class="btn btn-outline-light my-2 my-sm-0">ユーザ管理へ</button>
-					</form>
-				</li>
-			
-				<li class="nav-item active"><a class="nav-link"
-					th:href="@{/change}"> <img class="config-img"
-						th:src="@{/img/config.png}" src="../static/img/config.png">
-				</a></li>
-				
-				<li>
-					<form class="my-2 my-lg-0" method="post" th:action="@{/logout}">
-						<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
-					</form>
-				</li>
-			</ul>
-		</div>
-	</nav>
-			
-				
-			<ul>
-			<li>
-				<!-- 管理者のみのコンテンツ -->
-				<div class="content-box">
-					<form method="get" th:action="@{/user/list}">
-						<button type="submit" class="btn btn-primary">ユーザ管理へ</button>
-					</form>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<h1>
+					<a class="navbar-brand title-font" th:href="@{/}">就活ポータル.com</a>
+				</h1>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarToggler" aria-controls="navbarToggler"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarToggler">
+					<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+						<li>
+							<form method="get" th:action="@{/user/list}">
+								<button type="submit" class="btn btn-outline-light my-2 my-sm-0">受験報告管理</button>
+							</form>
+						</li>
+
+						<li>
+							<form method="get" th:action="@{/user/list}">
+								<button type="submit" class="btn btn-outline-light my-2 my-sm-0">証明書発行</button>
+							</form>
+						</li>
+
+						<li>
+							<form method="get" th:action="@{/user/list}">
+								<button type="submit" class="btn btn-outline-light my-2 my-sm-0">ユーザ管理へ</button>
+							</form>
+						</li>
+
+						<li class="nav-item active"><a class="nav-link"
+							th:href="@{/change}"> <img class="config-img"
+								th:src="@{/img/config.png}" src="../static/img/config.png">
+						</a></li>
+
+						<li>
+							<form class="my-2 my-lg-0" method="post" th:action="@{/logout}">
+								<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
+							</form>
+						</li>
+					</ul>
 				</div>
-			</li>
+			</nav>
+
+
+			<ul>
+
+				<li>
+					<!-- 管理者のみのコンテンツ -->
+					<div class="content-box">
+						<form method="get" th:action="@{/user/}">
+							<button type="submit" class="btn btn-primary">受験報告管理</button>
+						</form>
+					</div>
+				</li>
+
+				<li>
+					<div class="content-box">
+						<form method="get" th:action="@{/user/list}">
+							<button type="submit" class="btn btn-primary">証明書発行</button>
+						</form>
+					</div>
+				</li>
+
+				<li>
+					<!-- 管理者のみのコンテンツ -->
+					<div class="content-box">
+						<form method="get" th:action="@{/user/list}">
+							<button type="submit" class="btn btn-primary">ユーザ管理</button>
+						</form>
+					</div>
+				</li>
+
 				<li><a href="#">就職活動管理</a></li>
-				<li><a href="#">受験報告管理</a></li>
-				<li><a href="#">証明書管理</a></li>
 				<li><a href="#">メッセージ</a></li>
-				<li><a href="#">設定</a></li>
-				<li><a href="logout">Log Out</a></li>
 			</ul>
 		</div>
 	</th:block>
