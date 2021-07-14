@@ -29,22 +29,31 @@
 				<th>ユーザID</th>
 				<th>氏名</th>
 				<th>所属クラス</th>
+				<th>番号</th>
 				<th>権限</th>
 				<th>ダークモード</th>
 				<th>アカウント有効性</th>
 				<th>登録日時</th>
+				<th>登録者</th>
+				<th>更新日時</th>
+				<th>更新者</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="userList : ${userEntity.userlist}">
 				<td><span th:text="*{userList.user_id}"></span></td>
-				<td><span th:text="*{userList.user_name}"></span></td>
-				<td><span th:text="*{userList.user_classa}"></span></td>
+				<td><span th:text="*{userList.name}"></span></td>
+				<td><span th:text="*{userList.classroom}"></span></td>
+				<td><span th:text="*{userList.class_number}"></span></td>
 				<td><span th:text="*{userList.user_role}"></span></td>
 				<td><span th:if="*{userList.dark_mode}">ダークモード</span> <span
-					th:if="*{!userList.darkmode}">-</span></td>
+					th:if="*{!userList.dark_mode}">-</span></td>
 				<td><span th:if="*{userList.enabled}">有効</span> <span
 					th:if="*{!userList.enabled}">無効</span></td>
+				<td><span th:text="*{userList.register_date}"></span></td>
+				<td><span th:text="*{userList.register_user_id}"></span></td>
+				<td><span th:text="*{userList.update_date}"></span></td>
+				<td><span th:text="*{userList.update_user_id}"></span></td>
 			</tr>
 		</tbody>
 	</table>
