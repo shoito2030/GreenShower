@@ -16,6 +16,13 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * ユーザ情報一覧画面を表示する - 処理失敗時：トップ画面を表示
+	 * 
+	 * @param principal ログイン情報
+	 * @param model
+	 * @return ユーザ情報一覧画面 or トップ画面
+	 */
 	@GetMapping("/user/list")
 	public String getUserList(Model model) {
 
