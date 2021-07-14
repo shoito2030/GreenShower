@@ -1,5 +1,7 @@
 package jp.ac.hcs.GreenShower.user;
 
+import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -18,21 +20,13 @@ public class UserData {
 	 * パスワード
 	 * 必須入力、長さ4から100桁まで、半角英数字のみ
 	 */
-	private String password;
-	
-	/**
-	 * アカウント有効性
-	 * - 有効 : true
-	 * - 無効 : false
-	 * ユーザ作成時はtrue固定
-	 */
-	private boolean enabled;
+	private String encrypted_password;
 	
 	/**
 	 * ユーザ名
 	 * 必須入力
 	 */
-	private String user_name;
+	private String name;
 	
 	/**
 	 * ダークモードフラグ
@@ -40,7 +34,7 @@ public class UserData {
 	 * - OFF:false
 	 * ユーザ作成時はfalse固定
 	 */
-	private boolean darkmode;
+	private boolean dark_mode;
 	
 	/**
 	 * 権限
@@ -55,7 +49,47 @@ public class UserData {
 	 * 所属クラス
 	 * 固定長文字列(4)
 	 */
-	private String classa;
+	private String classroom;
+	
+	/**
+	 * 出席番号
+	 * 固定長文字列(2)
+	 */
+	private String class_number;
+	
+	/**
+	 * 登録日時
+	 * 登録時に取得したタイムスタンプ（日時をミリ秒まで）
+	 */
+	private Date register_date;
+	
+	/**
+	 * 登録者のユーザID
+	 * ユーザマスタのユーザIDを参照
+	 */
+	private String register_user_id;
+	
+	/**
+	 * 更新者のユーザID
+	 * 更新時に取得したタイムスタンプ（日時をミリ秒まで）
+	 * 更新が行われるまでNULL
+	 */
+	private Date update_date;
+	
+	/**
+	 * 更新者のユーザID
+	 * ユーザマスタのユーザIDを参照
+	 * 更新が行われるまでNULL
+	 */
+	private String update_user_id;
+	
+	/**
+	 * アカウント有効性
+	 * - 有効 : true
+	 * - 無効 : false
+	 * ユーザ作成時はtrue固定
+	 */
+	private boolean enabled;
 
 }
 
