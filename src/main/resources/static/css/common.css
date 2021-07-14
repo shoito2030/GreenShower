@@ -15,13 +15,13 @@ h1 {
 .container {
 	margin-top: 10px;
 }
-
+ 
 .content-box {
 	min-width :250px;
 	margin: 5px;
 	padding: 10px;
 	border-radius: 3px;
-	background-color: #FFFF99;
+	background-color: rgb(206, 223, 232);
 }
 
 .content-box ul {
