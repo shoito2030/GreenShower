@@ -13,15 +13,13 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<form method="post" name="Search" th:action="@{/user/search}">
-						<div class="input-group">
-							<input type="text" class="form-control" name="search"
-								placeholder="学生の氏名で検索"> <span
-								class="input-group-btn">
-								<button type="submit" class="btn btn-success bg-info"
-									id="search">検索</button>
-							</span>
-						</div>
-					</form>
+		<div class="input-group">
+			<input type="text" class="form-control" name="search"
+				placeholder="学生の氏名で検索"> <span class="input-group-btn">
+				<button type="submit" class="btn btn-success bg-info" id="search">検索</button>
+			</span>
+		</div>
+	</form>
 	<table>
 		<thead>
 			<tr>
@@ -53,10 +51,15 @@
 				<td><span th:text="*{userList.register_user_id}"></span></td>
 				<td><span th:text="*{userList.update_date}"></span></td>
 				<td><span th:text="*{userList.update_user_id}"></span></td>
+				<td><a class="btn btn-success"
+					th:href="@{'/user/detail/'+ *{userList.user_id}}">詳細</a></td>
 			</tr>
 		</tbody>
 	</table>
-	
+	<form method="get" th:action="@{/user/insert}">
+		<button type="submit" class="btn btn-warning">作成</button>
+	</form>
+
 	<th:block th:insert="components/part::frag_script"></th:block>
 </body>
 </html>
