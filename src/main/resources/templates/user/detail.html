@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
 </head>
 <body>
-<h1>作成中</h1>
+	<th:block th:insert="components/part::frag_header"></th:block>
+
+	<th:block th:insert="components/part::frag_script"></th:block>
+	<div class="container">
+		<div class="content-box">
+			<h2>ユーザ詳細</h2>
+			<div class="input-form">
+				<form method="post" th:action="@{/user/update}"
+					th:object="${userData}">
+
+					<label for="user_id">ユーザID(メールアドレス)</label>
+					<p class="view-mail" th:text="*{user_id}"></p>
+					<input type="hidden" name="user_id" th:value="*{user_id}">
+
+					<hr>
+
+					<label for="name">ユーザ名</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_name"
+							placeholder="情報 太郎" th:field="*{name}">
+					</div>
+
+					<label for="classroom">クラス</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="classroom"
+							placeholder="SXAY" th:field="*{classroom}">
+					</div>
+
+					<label for="class_number">番号</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="class_number"
+							placeholder="00" th:field="*{class_number}">
+					</div>
+
+					<label for="role">権限設定</label>
+					<div class="form-group input-box">
+						<div>
+							<input type="radio" name="role" th:field="*{role}" value="ROLE_STUDENT" id="role1">学生
+						</div>
+						<div>
+							<input type="radio" name="role" th:field="*{role}" value="	ROLE_TEACHER" id="role2">担任
+						</div>
+						<div>
+							<input type="radio" name="role" th:field="*{role}" value="ROLE_STAFF" id="role3">事務
+						</div>
+					</div>
+					
+					<label for="enabled">アカウント有効性</label>
+					<div class="form-group input-box">
+						<div>
+							<input type="radio" name="enabled" th:field="*{enabled}" value="true" id="true">有効
+						</div>
+						<div>
+							<input type="radio" name="enabled" th:field="*{enabled}" value="false" id="false">無効
+						</div>
+					</div>
+					
+					<button class="btn btn-primary" type="submit" name="update">更新</button>
+				</form>
+				<hr>
+				<form method="post" th:action="@{/user/delete}"
+					th:object="${userData}">
+					<input type="hidden" th:value="*{user_id}" name="user_id">
+					<button class="btn btn-danger" type="submit" name="delete"
+						id="delete">削除</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- 共通スクリプト -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 </body>
 </html>
