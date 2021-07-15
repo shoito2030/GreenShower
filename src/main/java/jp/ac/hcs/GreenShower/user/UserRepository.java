@@ -28,7 +28,8 @@ public class UserRepository {
 			"INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	
 	/** SQL 1件更新 管理者実行用 */
-	private static final String SQL_UPDATE_ONE_FOR_ADMIN = "UPDATE users SET name = ?, role = ?, classroom = ?, class_number = ?, enabled = ? WHERE user_id = ?";
+	private static final String SQL_UPDATE_ONE_FOR_ADMIN = 
+			"UPDATE users SET name = ?, role = ?, classroom = ?, class_number = ?, enabled = ?, update_date = ?,  update_user_id = ? WHERE user_id = ?";
 
 //	/** SQL 1件更新 管理者 パスワード更新有 */
 //	private static final String SQL_UPDATE_ONE_WITH_PASSWORD = "UPDATE m_user SET encrypted_password = ?, user_name = ?, role = ? WHERE user_id = ?";
@@ -135,10 +136,15 @@ public class UserRepository {
 	 */
 	public int updateOneForAdmin(UserData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_UPDATE_ONE_FOR_ADMIN,
-				passwordEncoder.encode(data.getPassword()),
-				data.getUser_name(),
-				data.getRole().getId(),
+				data.getName(),
+				data.getRole().toString(),
+				data.getClassroom(),
+				data.getClass_number(),
+				data.isEnabled(),
+				data.getUpdate_date(),
+				data.getUpdate_user_id(),
 				data.getUser_id());
+		
 		return rowNumber;
 	}
 

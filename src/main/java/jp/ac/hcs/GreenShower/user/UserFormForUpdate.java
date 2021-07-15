@@ -1,5 +1,6 @@
 package jp.ac.hcs.GreenShower.user;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
@@ -9,6 +10,11 @@ import lombok.Data;
  */
 @Data
 public class UserFormForUpdate {
+	
+	/** ユーザID（メールアドレス）*/
+	@NotBlank(message = "{require_check}")
+	@Email(message = "{email_check}")
+	private String user_id;
 
 	/** ユーザ名 */
 	@NotBlank(message = "{require_check}")
@@ -33,7 +39,6 @@ public class UserFormForUpdate {
 	/**
 	 * アカウント有効性 - 有効 : true - 無効 : false ユーザ作成時はtrue固定
 	 */
-	@NotBlank(message = "{require_check}")
 	private boolean enabled;
 
 }

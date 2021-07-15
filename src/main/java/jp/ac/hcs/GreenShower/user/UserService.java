@@ -1,5 +1,6 @@
 package jp.ac.hcs.GreenShower.user;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,11 +92,11 @@ public class UserService {
 	 * @param form 検証済み入力データ
 	 * @return - true：更新件数1件以上（処理成功）の場合 - false：更新件数0件（処理失敗）の場合
 	 */
-	public boolean updateForAdmin(UserFormForUpdate form) {
+	public boolean updateForAdmin(UserFormForUpdate form, String update_user_id) {
 		int rowNumber = 0;
 
 		// UserFormForUpdate型 → UserData型
-		UserData userData = refillToUserData(form);
+		UserData userData = refillToUserData(form, update_user_id);
 
 		try {
 			// 管理者用更新処理
@@ -139,7 +140,7 @@ public class UserService {
 		data.setUser_id(form.getUser_id());
 		data.setEncrypted_password(form.getEncrypted_password());
 		data.setName(form.getName());
-		data.setRole(Role.valueOf(form.getRole()));
+		data.setRole(Role.getRoleByValue(form.getRole()));
 		data.setClassroom(form.getClassroom());
 		data.setClass_number(form.getClass_number());
 		data.setRegister_user_id(register_user_id);
@@ -153,13 +154,17 @@ public class UserService {
 	 * @param form 検証済み入力データ
 	 * @return UserData
 	 */
-	private UserData refillToUserData(UserFormForUpdate form) {
+	private UserData refillToUserData(UserFormForUpdate form, String update_user_id) {
 		UserData data = new UserData();
+		data.setUser_id(form.getUser_id());
 		data.setName(form.getName());
-		data.setRole(Role.valueOf(form.getRole()));
+		data.setRole(Role.getRoleByValue(form.getRole()));
 		data.setClassroom(form.getClassroom());
-		data.setClass_number(form.getClassroom());
+		data.setClass_number(form.getClass_number());
 		data.setEnabled(form.isEnabled());
+		
+		data.setUpdate_date(new Date());		
+		data.setUpdate_user_id(update_user_id);
 		return data;
 	}
 

@@ -42,7 +42,7 @@
 				<td><span th:text="*{userList.name}"></span></td>
 				<td><span th:text="*{userList.classroom}"></span></td>
 				<td><span th:text="*{userList.class_number}"></span></td>
-				<td><span th:text="*{userList.role}"></span></td>
+				<td><span th:text="*{userList.role.label}"></span></td>
 				<td><span th:if="*{userList.dark_mode}">ダークモード</span> <span
 					th:if="*{!userList.dark_mode}">-</span></td>
 				<td><span th:if="*{userList.enabled}">有効</span> <span

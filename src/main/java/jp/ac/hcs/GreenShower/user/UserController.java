@@ -40,7 +40,6 @@ public class UserController {
 		}
 
 		model.addAttribute("userEntity", userEntity.get());
-		log.info("userEntity:"+ userEntity.get().toString());
 		return "user/list";
 	}
 
@@ -161,13 +160,13 @@ public class UserController {
 		log.info("入力情報：" + form.toString());
 
 		// 実行結果を取得
-		boolean isSuccess = userService.updateForAdmin(form);
-//
-//		if (isSuccess) {
-//			log.info("[" + principal.getName() + "]さんが[" + form.getUser_id() + "]さんのユーザ情報の変更に成功");
-//		} else {
-//			log.warn("[" + principal.getName() + "]さんが[" + form.getUser_id() + "]さんのユーザ情報の変更に失敗");
-//		}
+		boolean isSuccess = userService.updateForAdmin(form, principal.getName());
+
+		if (isSuccess) {
+			log.info("[" + principal.getName() + "]さんが[" + form.getName() + "]さんのユーザ情報の変更に成功");
+		} else {
+			log.warn("[" + principal.getName() + "]さんが[" + form.getName() + "]さんのユーザ情報の変更に失敗");
+		}
 
 		return getUserList(model);
 	}
