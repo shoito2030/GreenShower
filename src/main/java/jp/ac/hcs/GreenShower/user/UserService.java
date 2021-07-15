@@ -135,6 +135,7 @@ public class UserService {
 		data.setRole(Role.valueOf(form.getRole()));
 		data.setClassroom(form.getClassroom());
 		data.setClass_number(form.getClass_number());
+		
 		data.setRegister_user_id(register_user_id);
 
 		// 要件に従い初期値は下記とする（UserData参照）
