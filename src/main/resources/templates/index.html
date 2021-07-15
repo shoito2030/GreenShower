@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>就活ポータルトップ画面</title>
+<title>就活ポータルトップ</title>
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
@@ -13,6 +13,39 @@
 <body>
 	<th:block th:insert="components/part::frag_header"></th:block>
 
-<th:block th:insert="components/part::frag_script"></th:block>
+	<th:block th:insert="components/part::frag_script"></th:block>
+
+	<div class="container">
+		<div class="row">
+
+
+			<div class="content-box">
+				<form method="get" th:action="@{/user/}">
+					<button type="submit" class="btn btn-primary">受験報告管理</button>
+				</form>
+			</div>
+
+
+
+			<div class="content-box">
+				<form method="get" th:action="@{/user/list}">
+					<button type="submit" class="btn btn-primary">証明書発行</button>
+				</form>
+			</div>
+
+
+
+
+			<!-- 管理者のみのコンテンツ -->
+			<div class="content-box" role="presentation"
+				sec:authorize="hasRole('ROLE_TEACHER') or hasRole('ROLE_STAFF')">
+				<form method="get" th:action="@{/user/list}">
+					<button type="submit" class="btn btn-primary">ユーザ管理</button>
+				</form>
+			</div>
+
+
+		</div>
+	</div>
 </body>
 </html>
