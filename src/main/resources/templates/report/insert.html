@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>ユーザ管理</title>
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
+</head>
+</head>
+<body>
+	<th:block th:insert="components/part::frag_header"></th:block>
+
+	<!-- コンテンツ -->
+	<div class="container">
+		<div class="content-box">
+			<h2>受験報告新規登録</h2>
+
+			<div class="input-form">
+				<form method="post" th:action="@{/report/insert}">
+
+					<label for="user_name">企業名</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">求人番号</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">申請日</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">申し込み区分</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">日時</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">郵便番号</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">受験場所</label>
+					<div class="form-group input-box">
+					<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">会場区分</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">試験区分</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">試験概要</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">結果通知方法</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+					<label for="user_name">試験詳細</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="user_id">
+					</div>
+					
+
+					<button type="submit" class="btn btn-warning">登録</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+	<th:block th:insert="components/part::frag_script"></th:block>
+</body>
+</html>
