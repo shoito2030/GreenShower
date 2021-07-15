@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="UTF-8">
+<title>就活ポータルトップ</title>
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
+</head>
+
+<body>
+	<th:block th:insert="components/part::frag_header"></th:block>
+
+	<th:block th:insert="components/part::frag_script"></th:block>
+
+	<div class="container">
+		<div class="row">
+		
+		
+		<p>ここに受験報告リストを表示する</p>
+		
+			<div class="content-box">
+				<form method="get" th:action="@{/report/insert}">
+					<button type="submit" class="btn btn-primary">受験報告新規作成</button>
+				</form>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>
