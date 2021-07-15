@@ -81,9 +81,11 @@
 						</li>
 
 						<li>
+						<div role="presentation" sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
 							<form method="get" th:action="@{/user/list}">
-								<button type="submit" class="btn btn-outline-light my-2 my-sm-0">ユーザ管理へ</button>
+								<button type="submit" class="btn btn-outline-light my-2 my-sm-0">ユーザ管理</button>
 							</form>
+							</div>
 						</li>
 
 						<li class="nav-item active"><a class="nav-link"
@@ -101,37 +103,6 @@
 			</nav>
 
 
-			<ul>
-
-				<li>
-					<!-- 管理者のみのコンテンツ -->
-					<div class="content-box">
-						<form method="get" th:action="@{/user/}">
-							<button type="submit" class="btn btn-primary">受験報告管理</button>
-						</form>
-					</div>
-				</li>
-
-				<li>
-					<div class="content-box">
-						<form method="get" th:action="@{/user/list}">
-							<button type="submit" class="btn btn-primary">証明書発行</button>
-						</form>
-					</div>
-				</li>
-
-				<li>
-					<!-- 管理者のみのコンテンツ -->
-					<div class="content-box">
-						<form method="get" th:action="@{/user/list}">
-							<button type="submit" class="btn btn-primary">ユーザ管理</button>
-						</form>
-					</div>
-				</li>
-
-				<li><a href="#">就職活動管理</a></li>
-				<li><a href="#">メッセージ</a></li>
-			</ul>
 		</div>
 	</th:block>
 
