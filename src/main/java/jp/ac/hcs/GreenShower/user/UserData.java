@@ -94,8 +94,8 @@ public class UserData {
 }
 
 enum Role {
-	ROLE_STUDENT(1, "管理者"),
-	ROLE_TEACHER(2, "一般"),
+	ROLE_STUDENT(1, "学生"),
+	ROLE_TEACHER(2, "担任"),
 	ROLE_STAFF(3, "事務");
 	
 	/** ID */

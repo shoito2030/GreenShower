@@ -17,6 +17,7 @@ public class UserFormForUpdate {
 	/**
 	 * 権限 - 学生 : "ROLE_STUDENT" - 担任 : "ROLE_TEACHER" - 事務 : "ROLE_STAFF" 必須入力
 	 */
+	@NotBlank(message = "{require_check}")
 	private String role;
 
 	/**

@@ -26,6 +26,9 @@ public class UserRepository {
 	/** SQL 1件追加 enabled追加 */
 	private static final String SQL_INSERT_ONE = 
 			"INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	
+	/** SQL 1件更新 管理者 パスワード更新有 */
+	private static final String SQL_UPDATE_ONE_WITH_PASSWORD = "UPDATE m_user SET encrypted_password = ?, user_name = ?, role = ? WHERE user_id = ?";
 
 //	/** SQL 1件更新 管理者 パスワード更新有 */
 //	private static final String SQL_UPDATE_ONE_WITH_PASSWORD = "UPDATE m_user SET encrypted_password = ?, user_name = ?, role = ? WHERE user_id = ?";
