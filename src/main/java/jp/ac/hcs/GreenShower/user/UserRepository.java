@@ -20,12 +20,12 @@ public class UserRepository {
 	/** SQL 全件取得（ユーザID昇順） */
 	private static final String SQL_SELECT_ALL = "SELECT * FROM users order by user_id";
 
-//	/** SQL 1件取得 */
-//	private static final String SQL_SELECT_ONE = "SELECT * FROM m_user WHERE user_id = ?";
+	/** SQL 1件取得 */
+	private static final String SQL_SELECT_ONE = "SELECT * FROM users WHERE user_id = ?";
 
 	/** SQL 1件追加 enabled追加 */
 	private static final String SQL_INSERT_ONE = 
-			"users (user_id, encrypted_password, name, dark_mode, role, classroom, class_number, register_date, register_user_id, update_date, update_user_id, enabled) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			"users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
 //	/** SQL 1件更新 管理者 パスワード更新有 */
 //	private static final String SQL_UPDATE_ONE_WITH_PASSWORD = "UPDATE m_user SET encrypted_password = ?, user_name = ?, role = ? WHERE user_id = ?";
@@ -39,8 +39,8 @@ public class UserRepository {
 //	/** SQL 1件更新 一般ユーザ パスワード更新無 */
 //	private static final String SQL_UPDATE_GENERAL = "UPDATE m_user SET user_name = ?, darkmode = ? WHERE user_id = ?";
 //
-//	/** SQL 1件削除 */
-//	private static final String SQL_DELETE_ONE = "DELETE FROM m_user WHERE user_id = ?";
+	/** SQL 1件削除 */
+	private static final String SQL_DELETE_ONE = "DELETE FROM users WHERE user_id = ?";
 
 	@Autowired
 	private JdbcTemplate jdbc;
@@ -60,19 +60,19 @@ public class UserRepository {
 		return userEntity;
 	}
 
-//	/**
-//	 * UserテーブルからユーザIDをキーにデータを1件を取得.
-//	 * @param user_id 検索するユーザID
-//	 * @return UserEntity
-//	 * @throws DataAccessException
-//	 */
-//	public UserData selectOne(String user_id) throws DataAccessException {
-//		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, user_id);
-//		UserEntity entity = mappingSelectResult(resultList);
-//		// 必ず1件のみのため、最初のUserDataを取り出す
-//		UserData data = entity.getUserlist().get(0);
-//		return data;
-//	}
+	/**
+	 * UserテーブルからユーザIDをキーにデータを1件を取得.
+	 * @param user_id 検索するユーザID
+	 * @return UserEntity
+	 * @throws DataAccessException
+	 */
+	public UserData selectOne(String user_id) throws DataAccessException {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, user_id);
+		UserEntity entity = mappingSelectResult(resultList);
+		// 必ず1件のみのため、最初のUserDataを取り出す
+		UserData data = entity.getUserlist().get(0);
+		return data;
+	}
 
 	/**
 	 * Userテーブルから取得したデータをUserEntity形式にマッピングする.
@@ -116,12 +116,7 @@ public class UserRepository {
 				data.getRole().toString(),
 				data.getClassroom(),
 				data.getClass_number(),
-				data.isDark_mode(),
-				data.getRegister_date(),
-				data.getRegister_user_id(),
-				data.getUpdate_date(),
-				data.getUser_id(),
-				data.isEnabled());
+				data.getRegister_user_id());
 
 		return rowNumber;
 	}
@@ -183,16 +178,16 @@ public class UserRepository {
 //				userData.getUser_id());
 //		return rowNumber;
 //	}
-//
-//	/**
-//	 * Userテーブルのデータを1件削除する.
-//	 * @param user_id 削除するユーザID
-//	 * @return 削除データ数
-//	 * @throws DataAccessException
-//	 */
-//	public int deleteOne(String user_id) throws DataAccessException {
-//		int rowNumber = jdbc.update(SQL_DELETE_ONE, user_id);
-//		return rowNumber;
-//	}
+
+	/**
+	 * Userテーブルのデータを1件削除する.
+	 * @param user_id 削除するユーザID
+	 * @return 削除データ数
+	 * @throws DataAccessException
+	 */
+	public int deleteOne(String user_id) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_DELETE_ONE, user_id);
+		return rowNumber;
+	}
 
 }
