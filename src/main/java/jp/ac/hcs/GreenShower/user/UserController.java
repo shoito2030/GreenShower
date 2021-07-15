@@ -40,6 +40,7 @@ public class UserController {
 		}
 
 		model.addAttribute("userEntity", userEntity.get());
+		log.info("userEntity:"+ userEntity.get().toString());
 		return "user/list";
 	}
 
@@ -138,36 +139,36 @@ public class UserController {
 		return getUserList(model);
 	}
 
-//	/**
-//	 * ユーザ情報を更新する
-//	 * 
-//	 * @param form          入力情報
-//	 * @param bindingResult 入力情報の検証結果
-//	 * @param principal     ログイン情報
-//	 * @param model
-//	 * @return getUserListに処理を委譲しているのでそちらを参照すること
-//	 */
-//	@PostMapping("user/update")
-//	public String updateUser(@ModelAttribute @Validated UserFormForUpdate form, BindingResult bindingResult,
-//			Principal principal, Model model) {
-//
-//		// 入力チェックに引っかかった場合、後続の処理を実行しない
-//		if (bindingResult.hasErrors()) {
-//			log.info("データ挿入失敗：" + form.toString());
-//			return getUserList(model);
-//		}
-//
-//		log.info("入力情報：" + form.toString());
-//
-//		// 実行結果を取得
-//		boolean isSuccess = userService.updateForAdmin(form);
+	/**
+	 * ユーザ情報を更新する
+	 * 
+	 * @param form          入力情報
+	 * @param bindingResult 入力情報の検証結果
+	 * @param principal     ログイン情報
+	 * @param model
+	 * @return getUserListに処理を委譲しているのでそちらを参照すること
+	 */
+	@PostMapping("user/update")
+	public String updateUser(@ModelAttribute @Validated UserFormForUpdate form, BindingResult bindingResult,
+			Principal principal, Model model) {
+
+		// 入力チェックに引っかかった場合、後続の処理を実行しない
+		if (bindingResult.hasErrors()) {
+			log.info("データ挿入失敗：" + form.toString());
+			return getUserList(model);
+		}
+
+		log.info("入力情報：" + form.toString());
+
+		// 実行結果を取得
+		boolean isSuccess = userService.updateForAdmin(form);
 //
 //		if (isSuccess) {
 //			log.info("[" + principal.getName() + "]さんが[" + form.getUser_id() + "]さんのユーザ情報の変更に成功");
 //		} else {
 //			log.warn("[" + principal.getName() + "]さんが[" + form.getUser_id() + "]さんのユーザ情報の変更に失敗");
 //		}
-//
-//		return getUserList(model);
-//	}
+
+		return getUserList(model);
+	}
 }

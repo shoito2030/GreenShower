@@ -33,6 +33,7 @@ public class UserFormForUpdate {
 	/**
 	 * アカウント有効性 - 有効 : true - 無効 : false ユーザ作成時はtrue固定
 	 */
+	@NotBlank(message = "{require_check}")
 	private boolean enabled;
 
 }
