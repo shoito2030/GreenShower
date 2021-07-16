@@ -111,7 +111,7 @@ public class ReportController {
 
 		model.addAttribute("reportData", reportData.get());
 
-		return "user/detail";
+		return "report/detail";
 	}
 
 }
