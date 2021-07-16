@@ -1,12 +1,34 @@
 package jp.ac.hcs.GreenShower.report;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class ReportService {
 
-	public ReportService() {
-		// TODO 自動生成されたコンストラクター・スタブ
+	@Autowired
+	ReportRepository reportRepository;
+	
+	/**
+	 * 受験報告情報を全件取得する
+	 * 
+	 * @return Optional<ReportEntity>
+	 */
+	public Optional<ReportEntity> selectAll() {
+		ReportEntity reportEntity;
+
+		try {
+			reportEntity = reportRepository.selectAll();
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			reportEntity = null;
+		}
+
+		return Optional.ofNullable(reportEntity);
 	}
 
 }

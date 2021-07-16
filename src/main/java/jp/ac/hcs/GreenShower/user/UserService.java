@@ -105,25 +105,6 @@ public class UserService {
 			e.printStackTrace();
 		}
 
-//		if (userData.getName().isEmpty()) {
-//			// 名前の変更なし
-//			try {
-//				// 管理者用更新処理
-//				rowNumber = userRepository.updateOneWithPassword(userData);
-//			} catch (DataAccessException e) {
-//				e.printStackTrace();
-//			}
-//
-//		} else {
-//			// パスワードの変更あり
-//			try {
-//				// 管理者用更新処理
-//				rowNumber = userRepository.updateOneWithPassword(userData);
-//			} catch (DataAccessException e) {
-//				e.printStackTrace();
-//			}
-//		}
-
 		return rowNumber > 0;
 	}
 

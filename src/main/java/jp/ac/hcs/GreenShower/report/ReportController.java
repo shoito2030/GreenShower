@@ -1,6 +1,7 @@
 package jp.ac.hcs.GreenShower.report;
 
 import java.security.Principal;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ReportController {
-	
+
 	@Autowired
 	private ReportService reportService;
-	
+
 	/**
 	 * 受験報告情報一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
@@ -30,8 +31,8 @@ public class ReportController {
 	@GetMapping("/report/list")
 	public String getReportList(Model model) {
 
-//		// 取得できなかった場合は空のOptionalが格納される
-//		Optional<UserEntity> userEntity = reportService.selectAll();
+	// 取得できなかった場合は空のOptionalが格納される
+	Optional<ReportEntity> reportEntity = reportService.selectAll();
 //
 //		// 処理失敗によりトップ画面へ
 //		if (userEntity.isEmpty()) {
@@ -41,7 +42,7 @@ public class ReportController {
 //		model.addAttribute("userEntity", userEntity.get());
 		return "report/list";
 	}
-	
+
 	/**
 	 * 受験報告情報登録画面を表示する
 	 * 
@@ -53,8 +54,7 @@ public class ReportController {
 	public String getUserInsert(UserFormForInsert form, Model model) {
 		return "report/insert";
 	}
-	
-	
+
 	/**
 	 * 新たにユーザ情報を追加する
 	 * 
