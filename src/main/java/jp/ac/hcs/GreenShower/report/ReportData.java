@@ -138,6 +138,11 @@ public class ReportData {
 	private int result_notification;
 	
 	/**
+	 * 1-2の数字
+	 */
+	private String result_notification_day;
+	
+	/**
 	 * 適性試験詳細
 	 * 1：SPI
 	 * 2：CAB／GAB
