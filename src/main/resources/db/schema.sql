@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS report (
     test_summary VARCHAR(2),
     test_summary_other VARCHAR(60),
     result_notification VARCHAR(2),
+    result_notification_day INT,
     aptitude_test_detail VARCHAR(2),
     aptitude_test_detail_other VARCHAR(60),
     interview_detail VARCHAR(2),
