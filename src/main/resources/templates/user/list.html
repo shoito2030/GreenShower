@@ -4,6 +4,15 @@
 <head>
 <meta charset="UTF-8">
 <title>ユーザ管理</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.min.js" integrity="sha256-p4O2FDM/VsnStiXmXzKW9svZQjxXFufx7GKCmrHtsRI=" crossorigin="anonymous"></script>
+<script>
+(function ($){
+        $(document).ready(function(){
+                $('input#qs').quicksearch('table tbody tr');
+        });
+})(jQuery.noConflict(true));
+</script>
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
@@ -11,18 +20,12 @@
 </head>
 <body>
 	<th:block th:insert="components/part::frag_header"></th:block>
-
-	<form method="post" name="Search" th:action="@{/user/search}">
-		<div class="input-group">
-			<input type="text" class="form-control" name="search"
-				placeholder="学生の氏名で検索"> <span class="input-group-btn">
-				<button type="submit" class="btn btn-success bg-info" id="search">検索</button>
-			</span>
-		</div>
-	</form>
-	<table>
+	
+	絞り込み：<input id="qs" name="qs" type="text">
+	
+	<table id="user_table">
 		<thead>
-			<tr>
+			<tr class="target">
 				<th>ユーザID</th>
 				<th>氏名</th>
 				<th>所属クラス</th>
