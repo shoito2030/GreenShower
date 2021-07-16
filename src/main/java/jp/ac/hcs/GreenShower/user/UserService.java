@@ -140,7 +140,7 @@ public class UserService {
 		data.setUser_id(form.getUser_id());
 		data.setEncrypted_password(form.getEncrypted_password());
 		data.setName(form.getName());
-		data.setRole(Role.getRoleByValue(form.getRole()));
+		data.setRole(Role.valueOf(form.getRole()));
 		data.setClassroom(form.getClassroom());
 		data.setClass_number(form.getClass_number());
 		data.setRegister_user_id(register_user_id);
@@ -158,7 +158,7 @@ public class UserService {
 		UserData data = new UserData();
 		data.setUser_id(form.getUser_id());
 		data.setName(form.getName());
-		data.setRole(Role.getRoleByValue(form.getRole()));
+		data.setRole(Role.valueOf(form.getRole()));
 		data.setClassroom(form.getClassroom());
 		data.setClass_number(form.getClass_number());
 		data.setEnabled(form.isEnabled());

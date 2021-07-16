@@ -93,20 +93,4 @@ enum Role {
 	public String getValue() {
 		return this.value;
 	}
-
-	/**
-	 * 引数の値と一致するRoleを返却する
-	 * 
-	 * @param value ROLE_から続く文字列
-	 * @return Role
-	 */
-	public static Role getRoleByValue(String value) {
-		for (Role role : values()) {
-			if (role.getValue().equals(value)) {
-				return role;
-			}
-		}
-		throw new IllegalArgumentException("valueに該当するenumは存在しません");
-	}
-
 }
