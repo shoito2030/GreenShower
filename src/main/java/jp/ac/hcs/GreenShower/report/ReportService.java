@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import jp.ac.hcs.GreenShower.user.UserEntity;
-
 
 @Service
 public class ReportService {
@@ -18,19 +16,19 @@ public class ReportService {
 	/**
 	 * 受験報告情報を全件取得する
 	 * 
-	 * @return Optional<UserEntity>
+	 * @return Optional<ReportEntity>
 	 */
-	public Optional<UserEntity> selectAll() {
-		UserEntity userEntity;
+	public Optional<ReportEntity> selectAll() {
+		ReportEntity reportEntity;
 
 		try {
-			userEntity = reportRepository.selectAll();
+			reportEntity = reportRepository.selectAll();
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			userEntity = null;
+			reportEntity = null;
 		}
 
-		return Optional.ofNullable(userEntity);
+		return Optional.ofNullable(reportEntity);
 	}
 
 }
