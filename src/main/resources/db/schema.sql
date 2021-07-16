@@ -29,3 +29,42 @@ CREATE TABLE IF NOT EXISTS users (
     	REFERENCES users (user_id)
     	ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS report (
+	report_id INT PRIMARY KEY,
+    user_id VARCHAR(254),
+    classroom CHAR(4),
+    class_number CHAR(2),
+    name VARCHAR(60),
+    course_code CHAR(4),
+    company_name VARCHAR(60),
+    company_name_kana VARCHAR(60),
+    datetime DATE,
+    place VARCHAR(60),
+    entry_section VARCHAR(2),
+    entry_section_other VARCHAR(60),
+    venue_section VARCHAR(2),
+    venue_section_other VARCHAR(60),
+    test_section VARCHAR(2),
+    test_section_other VARCHAR(60),
+    test_summary VARCHAR(2),
+    test_summary_other VARCHAR(60),
+    result_notification VARCHAR(2),
+    aptitude_test_detail VARCHAR(2),
+    aptitude_test_detail_other VARCHAR(60),
+    interview_detail VARCHAR(2),
+    interview_detail_other VARCHAR(60),
+    interview_number INT,
+    interviewer_number INT,
+    interviewer_position VARCHAR(60),
+    interview_time INT,
+    theme VARCHAR(60),
+    question_contents VARCHAR(60),
+    report_status VARCHAR(2),
+    registered_date DATE,
+    request_date DATE,
+    registered_user_id VARCHAR(254),
+    remarks VARCHAR(254)
+    
+
+);

@@ -37,7 +37,7 @@ public class ReportData {
 	/**
 	 * 学科コード
 	 */
-	private String course;
+	private String course_code;
 	
 	/**
 	 * 企業名
@@ -45,9 +45,14 @@ public class ReportData {
 	private String company_name;
 	
 	/**
+	 * 企業名カナ
+	 */
+	private String company_name_kana;
+	
+	/**
 	 * 日時
 	 */
-	private Date date;
+	private Date datetime;
 	
 	/**
 	 * 受験場所
