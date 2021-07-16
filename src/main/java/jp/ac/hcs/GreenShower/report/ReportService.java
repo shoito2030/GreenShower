@@ -30,5 +30,24 @@ public class ReportService {
 
 		return Optional.ofNullable(reportEntity);
 	}
+	
+	
+	/**
+	 * 受験報告情報を全件取得する
+	 * 
+	 * @return Optional<ReportData>
+	 */
+	public Optional<ReportData> selectOne(String user_id) {
+		ReportData reportEntity;
+
+		try {
+			reportEntity = reportRepository.selectOne(user_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			reportEntity = null;
+		}
+
+		return Optional.ofNullable(reportEntity);
+	}
 
 }

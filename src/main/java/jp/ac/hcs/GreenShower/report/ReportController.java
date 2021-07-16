@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.ac.hcs.GreenShower.user.UserFormForInsert;
@@ -33,13 +34,13 @@ public class ReportController {
 
 	// 取得できなかった場合は空のOptionalが格納される
 	Optional<ReportEntity> reportEntity = reportService.selectAll();
-//
-//		// 処理失敗によりトップ画面へ
-//		if (userEntity.isEmpty()) {
-//			return "index";
-//		}
-//
-//		model.addAttribute("userEntity", userEntity.get());
+
+		// 処理失敗によりトップ画面へ
+		if (reportEntity.isEmpty()) {
+			return "index";
+		}
+
+		model.addAttribute("reportEntity", reportEntity.get());
 		return "report/list";
 	}
 
@@ -87,6 +88,30 @@ public class ReportController {
 //		model.addAttribute("msg", "ユーザ情報の作成が無事完了しました。");
 
 		return getReportList(model);
+	}
+	
+	/**
+	 * ユーザ詳細情報画面を表示する
+	 * 
+	 * @param user_id   検索するユーザID
+	 * @param principal ログイン情報
+	 * @param model
+	 * @return - 処理成功時：ユーザ詳細情報画面 - 処理失敗時：トップ画面
+	 */
+	@GetMapping("report/detail/{id}")
+	public String getUserDetail(@PathVariable("id") String user_id, Principal principal, Model model) {
+
+		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
+		Optional<ReportData> reportData = reportService.selectOne(user_id);
+
+		// 処理失敗によりトップ画面へ
+		if (reportData.isEmpty()) {
+			return "index";
+		}
+
+		model.addAttribute("reportData", reportData.get());
+
+		return "user/detail";
 	}
 
 }

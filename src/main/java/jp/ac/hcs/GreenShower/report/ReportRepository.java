@@ -10,8 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import jp.ac.hcs.GreenShower.user.UserData;
-
 @Repository
 public class ReportRepository {
 
@@ -44,14 +42,14 @@ public class ReportRepository {
 	/**
 	 * UserテーブルからユーザIDをキーにデータを1件を取得.
 	 * @param user_id 検索するユーザID
-	 * @return UserEntity
+	 * @return ReportData
 	 * @throws DataAccessException
 	 */
-	public UserData selectOne(String user_id) throws DataAccessException {
+	public ReportData selectOne(String user_id) throws DataAccessException {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, user_id);
 		ReportEntity entity = mappingSelectResult(resultList);
 		// 必ず1件のみのため、最初のUserDataを取り出す
-		UserData data = entity.getReportlist().get(0);
+		ReportData data = entity.getReportlist().get(0);
 		return data;
 	}
 	
@@ -67,7 +65,7 @@ public class ReportRepository {
 		for (Map<String, Object> map : resultList) {
 			ReportData data = new ReportData();
 			
-			data.setReport_id((String) map.get("report_id"));
+			data.setReport_id((int) map.get("report_id"));
 			data.setUser_id((String) map.get("user_id"));
 			data.setClassroom((String) map.get("classroom"));
 			data.setClass_number((String) map.get("class_number"));
@@ -77,18 +75,18 @@ public class ReportRepository {
 			data.setCompany_name_kana((String) map.get("company_name_kana"));
 			data.setDatetime((Date) map.get("datetime"));
 			data.setPlace((String) map.get("place"));
-			data.setEntry_section((int) map.get("entry_section"));
+			data.setEntry_section((String) map.get("entry_section"));
 			data.setEntry_section_other((String) map.get("entry_section_other"));
-			data.setVenue_section((int) map.get("venue_section"));
+			data.setVenue_section((String) map.get("venue_section"));
 			data.setVenue_section_other((String) map.get("venue_section_other"));
-			data.setTest_section((int) map.get("test_section"));
+			data.setTest_section((String) map.get("test_section"));
 			data.setTest_section_other((String) map.get("test_section_other"));
-			data.setTest_summary((int) map.get("test_summary"));
+			data.setTest_summary((String) map.get("test_summary"));
 			data.setTest_summary_other((String) map.get("test_summary_other"));
-			data.setResult_notification((int) map.get("result_notification"));
-			data.setAptitude_test_detail((int) map.get("aptitude_test_detail"));
+			data.setResult_notification((String) map.get("result_notification"));
+			data.setAptitude_test_detail((String) map.get("aptitude_test_detail"));
 			data.setAptitude_test_detail_other((String) map.get("aptitude_test_detail_other"));
-			data.setInterview_detail((int) map.get("interview_detail"));
+			data.setInterview_detail((String) map.get("interview_detail"));
 			data.setInterview_detail_other((String) map.get("interview_detail_other"));
 			data.setInterview_number((int) map.get("interview_number"));
 			data.setInterviewer_number((int) map.get("interviewer_number"));
@@ -96,7 +94,7 @@ public class ReportRepository {
 			data.setInterview_time((int) map.get("interview_time"));
 			data.setTheme((String) map.get("itheme"));
 			data.setQuestion_contents((String) map.get("question_contents"));
-			data.setReport_status((int) map.get("report_status"));
+			data.setReport_status((String) map.get("report_status"));
 			data.setRegistered_date((Date) map.get("request_date"));
 			data.setRegistered_user_id((String) map.get("registered_user_id"));
 			data.setRemarks((String) map.get("remarks"));

@@ -9,7 +9,7 @@ public class ReportData {
 	/**
 	 * 受験報告ID
 	 */
-	private String report_id;
+	private int report_id;
 	
 	/**
 	 * ユーザID(メールアドレス)
@@ -68,7 +68,7 @@ public class ReportData {
 	 * 5：ジョブカフェ等
 	 * 99：その他
 	 */
-	private int entry_section;
+	private String entry_section;
 	
 	/**
 	 * 申し込み区分その他
@@ -84,7 +84,7 @@ public class ReportData {
 	 * 5：東京地区：外会場
 	 * 99：その他
 	 */
-	private int venue_section;
+	private String venue_section;
 	
 	/**
 	 * 会場区分その他
@@ -100,7 +100,7 @@ public class ReportData {
 	 * 5：最終試験
 	 * 99：その他（〇次試験）
 	 */
-	private int test_section;
+	private String test_section;
 	
 	/**
 	 * 試験区分その他
@@ -117,7 +117,7 @@ public class ReportData {
 	 * 6：個人面接
 	 * 99：その他
 	 */
-	private int test_summary;
+	private String test_summary;
 	
 	/**
 	 * 試験概要その他
@@ -135,7 +135,7 @@ public class ReportData {
 	 * 7：メール
 	 * 8：Web
 	 */
-	private int result_notification;
+	private String result_notification;
 	
 	/**
 	 * 1-2の数字
@@ -153,7 +153,7 @@ public class ReportData {
 	 * 7：作文テーマ
 	 * 99：その他適性
 	 */
-	private int aptitude_test_detail;
+	private String aptitude_test_detail;
 	
 	/**
 	 * 適性試験詳細その他
@@ -170,7 +170,7 @@ public class ReportData {
 	 * 6：面接時間
 	 * 7：GD／GW時のテーマ
 	 */
-	private int interview_detail;
+	private String interview_detail;
 	
 	/**
 	 * 面接詳細その他
@@ -214,7 +214,7 @@ public class ReportData {
 	 * 3：承認待ち
 	 * 4：承認済み
 	 */
-	private int report_status;
+	private String report_status;
 	
 	/**
 	 * 登録日時
