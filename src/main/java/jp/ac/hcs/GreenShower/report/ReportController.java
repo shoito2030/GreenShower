@@ -99,10 +99,10 @@ public class ReportController {
 	 * @return - 処理成功時：ユーザ詳細情報画面 - 処理失敗時：トップ画面
 	 */
 	@GetMapping("report/detail/{id}")
-	public String getUserDetail(@PathVariable("id") String user_id, Principal principal, Model model) {
+	public String getUserDetail(@PathVariable("id") String report_id, Principal principal, Model model) {
 
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
-		Optional<ReportData> reportData = reportService.selectOne(user_id);
+		Optional<ReportData> reportData = reportService.selectOne(report_id);
 
 		// 処理失敗によりトップ画面へ
 		if (reportData.isEmpty()) {

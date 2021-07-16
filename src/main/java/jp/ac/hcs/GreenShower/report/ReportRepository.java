@@ -17,7 +17,7 @@ public class ReportRepository {
 	private static final String SQL_SELECT_ALL = "SELECT * FROM report order by classroom, class_number";
 
 	/** SQL 1件取得 */
-	private static final String SQL_SELECT_ONE = "SELECT * FROM report WHERE user_id = ?";
+	private static final String SQL_SELECT_ONE = "SELECT * FROM report WHERE report_id = ?";
 	
 	
 	@Autowired
@@ -28,7 +28,7 @@ public class ReportRepository {
 	
 	
 	/**
-	 * Userテーブルから全データを取得.
+	 * reportテーブルから全データを取得.
 	 * 
 	 * @return ReportEntity
 	 * @throws DataAccessException
@@ -40,13 +40,13 @@ public class ReportRepository {
 	}
 
 	/**
-	 * UserテーブルからユーザIDをキーにデータを1件を取得.
-	 * @param user_id 検索するユーザID
+	 * reportテーブルからレポートIDをキーにデータを1件を取得.
+	 * @param report_id 検索するレポートID
 	 * @return ReportData
 	 * @throws DataAccessException
 	 */
-	public ReportData selectOne(String user_id) throws DataAccessException {
-		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, user_id);
+	public ReportData selectOne(String report_id) throws DataAccessException {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, report_id);
 		ReportEntity entity = mappingSelectResult(resultList);
 		// 必ず1件のみのため、最初のUserDataを取り出す
 		ReportData data = entity.getReportlist().get(0);
@@ -54,10 +54,10 @@ public class ReportRepository {
 	}
 	
 	/**
-	 * Userテーブルから取得したデータをUserEntity形式にマッピングする.
+	 * reportテーブルから取得したデータをReportEntity形式にマッピングする.
 	 * 
-	 * @param resultList Userテーブルから取得したデータ
-	 * @return UserEntity
+	 * @param resultList reportテーブルから取得したデータ
+	 * @return ReportEntity
 	 */
 	private ReportEntity mappingSelectResult(List<Map<String, Object>> resultList) {
 		ReportEntity entity = new ReportEntity();

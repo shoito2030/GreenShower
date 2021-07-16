@@ -37,11 +37,11 @@ public class ReportService {
 	 * 
 	 * @return Optional<ReportData>
 	 */
-	public Optional<ReportData> selectOne(String user_id) {
+	public Optional<ReportData> selectOne(String report_id) {
 		ReportData reportEntity;
 
 		try {
-			reportEntity = reportRepository.selectOne(user_id);
+			reportEntity = reportRepository.selectOne(report_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			reportEntity = null;
