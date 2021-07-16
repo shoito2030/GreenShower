@@ -26,6 +26,10 @@ public class UserRepository {
 	/** SQL 1件追加 enabled追加 */
 	private static final String SQL_INSERT_ONE = 
 			"INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	
+	/** SQL 1件更新 管理者実行用 */
+	private static final String SQL_UPDATE_ONE_FOR_ADMIN = 
+			"UPDATE users SET name = ?, role = ?, classroom = ?, class_number = ?, enabled = ?, update_date = ?,  update_user_id = ? WHERE user_id = ?";
 
 //	/** SQL 1件更新 管理者 パスワード更新有 */
 //	private static final String SQL_UPDATE_ONE_WITH_PASSWORD = "UPDATE m_user SET encrypted_password = ?, user_name = ?, role = ? WHERE user_id = ?";
@@ -87,9 +91,11 @@ public class UserRepository {
 			UserData data = new UserData();
 			data.setUser_id((String) map.get("user_id"));
 			data.setEncrypted_password((String) map.get("encrypted_password"));
+			data.setName((String) map.get("name"));
 			data.setDark_mode((boolean) map.get("dark_mode"));
 			data.setRole(Role.valueOf((String) map.get("role")));
 			data.setClassroom((String) map.get("classroom"));
+			data.setClass_number((String) map.get("class_number"));
 			data.setRegister_date((Date) map.get("register_date"));
 			data.setRegister_user_id((String) map.get("register_user_id"));
 			data.setUpdate_date((Date) map.get("update_date"));
@@ -118,6 +124,27 @@ public class UserRepository {
 				data.getClass_number(),
 				data.getRegister_user_id());
 
+		return rowNumber;
+	}
+	
+	
+	/**
+	 * (管理用)Userテーブルのデータを1件更新する(パスワード更新有).
+	 * @param data 更新するユーザ情報
+	 * @return 更新データ数
+	 * @throws DataAccessException
+	 */
+	public int updateOneForAdmin(UserData data) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_UPDATE_ONE_FOR_ADMIN,
+				data.getName(),
+				data.getRole().toString(),
+				data.getClassroom(),
+				data.getClass_number(),
+				data.isEnabled(),
+				data.getUpdate_date(),
+				data.getUpdate_user_id(),
+				data.getUser_id());
+		
 		return rowNumber;
 	}
 
