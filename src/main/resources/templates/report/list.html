@@ -15,20 +15,41 @@
 
 	<th:block th:insert="components/part::frag_script"></th:block>
 
-	<div class="container">
-		<div class="row">
-		
-		
-		<p>ここに受験報告リストを表示する</p>
-		
-			<div class="content-box">
-				<form method="get" th:action="@{/report/insert}">
-					<button type="submit" class="btn btn-primary">受験報告新規作成</button>
-				</form>
-			</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th>所属クラス</th>
+				<th>出席番号</th>
+				<th>ユーザ名</th>
+				<th>学科コード</th>
+				<th>企業名</th>
+				<th>試験区分</th>
+				<th>試験概要</th>
+				<th>登録日時</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="reportList : ${reportEntity.reportlist}">
+				<td><span th:text="*{reportList.classroom}"></span></td>
+				<td><span th:text="*{reportList.class_number}"></span></td>
+				<td><span th:text="*{reportList.name}"></span></td>
+				<td><span th:text="*{reportList.course_code}"></span></td>
+				<td><span th:text="*{reportList.company_name}"></span></td>
+				<td><span th:text="*{reportList.test_section}"></span></td>
+				<td><span th:text="*{reportList.test_summary}"></span></td>
+				<td><span th:text="*{reportList.registered_date}"></span></td>
+			</tr>
+		</tbody>
+	</table>
 
 
-		</div>
+
+	<div class="content-box">
+		<form method="get" th:action="@{/report/insert}">
+			<button type="submit" class="btn btn-primary">受験報告新規作成</button>
+		</form>
 	</div>
+
 </body>
 </html>
