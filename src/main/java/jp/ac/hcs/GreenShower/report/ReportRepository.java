@@ -25,9 +25,9 @@ public class ReportRepository {
 			+ "company_name_kana, datetime, place, entry_section, entry_section_other, venue_section, venue_section_other, test_section,"
 			+ "test_section_other, test_summary, test_summary_other, result_notification, result_notification_day, aptitude_test_detail,"
 			+ "aptitude_test_detail_other, interview_detail, interview_detail_other, interview_number, interviewer_number, interviewer_position,"
-			+ "interview_time, theme, question_contents, report_status, registered_date, request_date, registered_user_id, remarks)"
+			+ "interview_time, theme, question_contents, report_status, request_date, registered_user_id, remarks)"
 			+ "VALUES((SELECT MAX(report_id) + 1 FROM report),? , (SELECT classroom FROM users WHERE user_id = ? ), (SELECT class_number FROM users WHERE user_id = ? )"
-			+ ", (SELECT name FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ ", (SELECT name FROM users WHERE user_id = ?), (SELECT SUBSTRING(classroom, 1)  FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	
 	@Autowired
@@ -75,12 +75,12 @@ public class ReportRepository {
 				
 				data.getUser_id(),
 				
-				// classroom,class_number,nameはユーザIDと紐づけてuserテーブルから取得する
+				// classroom,class_number,name,class_cordはユーザIDと紐づけてuserテーブルから取得する
+				data.getUser_id(),
 				data.getUser_id(),
 				data.getUser_id(),
 				data.getUser_id(),
 				
-				data.getCourse_code(),
 				data.getCompany_name(),
 				data.getCompany_name_kana(),
 				data.getDatetime(),
@@ -106,7 +106,6 @@ public class ReportRepository {
 				data.getTheme(),
 				data.getQuestion_contents(),
 				data.getReport_status(),
-				data.getRegistered_date(),
 				data.getRequest_date(),
 				data.getRegistered_user_id(),
 				data.getRemarks());

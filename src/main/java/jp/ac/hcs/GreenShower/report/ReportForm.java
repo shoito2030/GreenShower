@@ -198,5 +198,10 @@ public class ReportForm {
 	//@NotBlank(message = "{require_check}")
 	private String question_contents;
 	
+	/**
+	 * 申請日
+	 */
+	private Date request_date; 
+	
 
 }

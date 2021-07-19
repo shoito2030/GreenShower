@@ -68,7 +68,7 @@ public class ReportController {
 	public String getReportInsert(@ModelAttribute @Validated ReportForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
 
-		// 入力チェックに引っかかった場合、前の画面に戻る
+//		// 入力チェックに引っかかった場合、前の画面に戻る
 //		if (bindingResult.hasErrors()) {
 //			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
 //			log.info("入力情報：" + form.toString());

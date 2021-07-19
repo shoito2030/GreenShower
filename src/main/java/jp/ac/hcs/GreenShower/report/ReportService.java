@@ -84,7 +84,7 @@ public class ReportService {
 //		data.setClassroom();
 //		data.setClass_number();
 //		data.setName();
-		data.setCourse_code(null);
+//		data.setCourse_code();
 		data.setCompany_name(form.getCompany_name());
 		data.setCompany_name_kana(form.getCompany_name_kana());		
 		data.setDatetime(form.getDatetime());
@@ -110,7 +110,7 @@ public class ReportService {
 		data.setTheme(form.getTheme());
 		data.setQuestion_contents(form.getQuestion_contents());
 		data.setReport_status(null);
-		data.setRequest_date(null);
+		data.setRequest_date(form.getRequest_date());
 		data.setRegistered_user_id(register_user_id);
 		data.setRemarks(null);
 
