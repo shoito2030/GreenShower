@@ -98,7 +98,7 @@ public class ReportController {
 	 * @return - 処理成功時：ユーザ詳細情報画面 - 処理失敗時：トップ画面
 	 */
 	@GetMapping("report/detail/{id}")
-	public String getUserDetail(@PathVariable("id") String report_id, Principal principal, Model model) {
+	public String getReportDetail(@PathVariable("id") String report_id, Principal principal, Model model) {
 
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
 		Optional<ReportData> reportData = reportService.selectOne(report_id);
@@ -124,6 +124,30 @@ public class ReportController {
 	 */
 	@GetMapping("report/edit/{id}")
 	public String getEdit(@PathVariable("id") String report_id, Principal principal, Model model) {
+
+		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
+		Optional<ReportData> reportData = reportService.selectOne(report_id);
+
+		// 処理失敗によりトップ画面へ
+		if (reportData.isEmpty()) {
+			return "index";
+		}
+
+		model.addAttribute("reportData", reportData.get());
+
+		return "report/edit";
+	}
+	
+	/**
+	 * ユーザ詳細情報画面を表示する
+	 * 
+	 * @param user_id   検索するユーザID
+	 * @param principal ログイン情報
+	 * @param model
+	 * @return - 処理成功時：ユーザ詳細情報画面 - 処理失敗時：トップ画面
+	 */
+	@GetMapping("report/update/{id}")
+	public String getReportUpdate(@PathVariable("id") String report_id, Principal principal, Model model) {
 
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
 		Optional<ReportData> reportData = reportService.selectOne(report_id);
