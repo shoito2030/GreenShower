@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import jp.ac.hcs.GreenShower.user.UserFormForInsert;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -52,7 +51,7 @@ public class ReportController {
 	 * @return 受験報告情報登録画面
 	 */
 	@GetMapping("report/insert")
-	public String getUserInsert(UserFormForInsert form, Model model) {
+	public String getReportInsert(ReportForm form, Model model) {
 		return "report/insert";
 	}
 
@@ -66,18 +65,18 @@ public class ReportController {
 	 * @return - 処理失敗時：ユーザ登録画面（管理者用） - 処理成功時：getUserListに処理を委譲しているのでそちらを参照すること
 	 */
 	@PostMapping("report/insert")
-	public String getUserInsert(@ModelAttribute @Validated UserFormForInsert form, BindingResult bindingResult,
+	public String getReportInsert(@ModelAttribute @Validated ReportForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
 
 		// 入力チェックに引っかかった場合、前の画面に戻る
-		if (bindingResult.hasErrors()) {
-			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
-			log.info("入力情報：" + form.toString());
-
-			model.addAttribute("errmsg", "ユーザ情報の登録に失敗しました。入力内容をお確かめください。");
-
-			return getUserInsert(form, model);
-		}
+//		if (bindingResult.hasErrors()) {
+//			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
+//			log.info("入力情報：" + form.toString());
+//
+//			model.addAttribute("errmsg", "ユーザ情報の登録に失敗しました。入力内容をお確かめください。");
+//
+//			return getReportInsert(form, model);
+//		}
 
 		// 追加処理実行
 		reportService.insert(form, principal.getName());

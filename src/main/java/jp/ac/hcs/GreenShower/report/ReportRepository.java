@@ -27,7 +27,7 @@ public class ReportRepository {
 			+ "aptitude_test_detail_other, interview_detail, interview_detail_other, interview_number, interviewer_number, interviewer_position,"
 			+ "interview_time, theme, question_contents, report_status, registered_date, request_date, registered_user_id, remarks)"
 			+ "VALUES((SELECT MAX(report_id) + 1 FROM report),? , (SELECT classroom FROM users WHERE user_id = ? ), (SELECT class_number FROM users WHERE user_id = ? )"
-			+ ", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ ", (SELECT name FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	
 	@Autowired
@@ -64,7 +64,7 @@ public class ReportRepository {
 	}
 	
 	/**
-	 * Userテーブルにデータを1件追加する.
+	 * reportテーブルにデータを1件追加する.
 	 * 
 	 * @param data 追加するユーザ情報
 	 * @return 追加データ数
@@ -72,14 +72,14 @@ public class ReportRepository {
 	 */
 	public int insertOne(ReportData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_INSERT_ONE, 
-//				data.getReport_id(),
+				
 				data.getUser_id(),
-//				data.getClassroom(),
-//				data.getClass_number(),
-//				data.getName(), 
-				data.getUser_id(),
+				
+				// classroom,class_number,nameはユーザIDと紐づけてuserテーブルから取得する
 				data.getUser_id(),
 				data.getUser_id(),
+				data.getUser_id(),
+				
 				data.getCourse_code(),
 				data.getCompany_name(),
 				data.getCompany_name_kana(),
@@ -106,6 +106,7 @@ public class ReportRepository {
 				data.getTheme(),
 				data.getQuestion_contents(),
 				data.getReport_status(),
+				data.getRegistered_date(),
 				data.getRequest_date(),
 				data.getRegistered_user_id(),
 				data.getRemarks());

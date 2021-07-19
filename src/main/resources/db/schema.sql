@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS report (
     theme VARCHAR(60),
     question_contents VARCHAR(60),
     report_status VARCHAR(2),
-    registered_date DATE,
+    registered_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ,
     request_date DATE,
     registered_user_id VARCHAR(254),
     remarks VARCHAR(254)

@@ -2,36 +2,33 @@ package jp.ac.hcs.GreenShower.report;
 
 import java.util.Date;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
 import lombok.Data;
 
 @Data
 public class ReportForm {
-	/** 受験報告ID */
-	@NotBlank(message = "{require_check}")
-	private int report_id;
+//	/** 受験報告ID */
+//	@NotBlank(message = "{require_check}")
+//	private int report_id;
 	
-	/**
-	 * ユーザID(メールアドレス)
-	 * メールアドレス形式
-	 */
-	@NotBlank(message = "{require_check}")
-	@Email(message = "{email_check}")
-	private String user_id;
+//	/**
+//	 * ユーザID(メールアドレス)
+//	 * メールアドレス形式
+//	 */
+//	@NotBlank(message = "{require_check}")
+//	@Email(message = "{email_check}")
+//	private String user_id;
 	
 	
 	/**
 	 * 企業名
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String company_name;
 	
 	/**
 	 * 企業名カナ
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String company_name_kana;
 	
 	/**
@@ -42,7 +39,7 @@ public class ReportForm {
 	/**
 	 * 受験場所
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String place;
 	
 	/**
@@ -54,7 +51,7 @@ public class ReportForm {
 	 * 5：ジョブカフェ等
 	 * 99：その他
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String entry_section;
 	
 	/**
@@ -71,7 +68,7 @@ public class ReportForm {
 	 * 5：東京地区：外会場
 	 * 99：その他
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String venue_section;
 	
 	/**
@@ -88,7 +85,7 @@ public class ReportForm {
 	 * 5：最終試験
 	 * 99：その他（〇次試験）
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String test_section;
 	
 	/**
@@ -106,7 +103,7 @@ public class ReportForm {
 	 * 6：個人面接
 	 * 99：その他
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String test_summary;
 	
 	/**
@@ -125,7 +122,7 @@ public class ReportForm {
 	 * 7：メール
 	 * 8：Web
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String result_notification;
 	
 	/**
@@ -144,7 +141,7 @@ public class ReportForm {
 	 * 7：作文テーマ
 	 * 99：その他適性
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String aptitude_test_detail;
 	
 	/**
@@ -162,7 +159,7 @@ public class ReportForm {
 	 * 6：面接時間
 	 * 7：GD／GW時のテーマ
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String interview_detail;
 	
 	/**
@@ -198,7 +195,7 @@ public class ReportForm {
 	/**
 	 * 出題内容
 	 */
-	@NotBlank(message = "{require_check}")
+	//@NotBlank(message = "{require_check}")
 	private String question_contents;
 	
 
