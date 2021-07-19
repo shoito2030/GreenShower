@@ -66,6 +66,4 @@ CREATE TABLE IF NOT EXISTS report (
     request_date DATE,
     registered_user_id VARCHAR(254),
     remarks VARCHAR(254)
-    
-
 );

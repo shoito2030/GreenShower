@@ -19,9 +19,14 @@ public class ReportRepository {
 	/** SQL 1件取得 */
 	private static final String SQL_SELECT_ONE = "SELECT * FROM report WHERE report_id = ?";
 	
-	/** SQL 1件追加 enabled追加 */
+	/** SQL 1件追加  */
 	private static final String SQL_INSERT_ONE = 
-			"INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
+			"INSERT INTO report (report_id, user_id, classroom, role, classroom, class_number, name, course_code, company_name,"
+			+ "company_name_kana, datetime, place, entry_section, entry_section_other, venue_section, venue_section_other, test_section,"
+			+ "test_section_other, test_summary, test_summary_other, result_notification, result_notification_day, aptitude_test_detail,"
+			+ "aptitude_test_detail_other, interview_detail, interview_detail_other, interview_number, interviewer_number, interviewer_position,"
+			+ "interview_time, theme, question_contents, report_status, registered_date, request_date, registered_user_id, remarks)"
+			+ " VALUES((SELECT MAX(report_id) + 1 FROM task), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	
 	@Autowired
@@ -90,6 +95,8 @@ public class ReportRepository {
 				data.getAptitude_test_detail_other(),
 				data.getInterview_detail(),
 				data.getInterview_detail_other(),
+				data.getInterview_number(),
+				data.getInterviewer_number(),
 				data.getInterviewer_position(),
 				data.getInterview_time(),
 				data.getTheme(),
