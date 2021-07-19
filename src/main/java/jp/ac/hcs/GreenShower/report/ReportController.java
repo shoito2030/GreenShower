@@ -69,23 +69,23 @@ public class ReportController {
 	public String getUserInsert(@ModelAttribute @Validated UserFormForInsert form, BindingResult bindingResult,
 			Principal principal, Model model) {
 
-//		// 入力チェックに引っかかった場合、前の画面に戻る
-//		if (bindingResult.hasErrors()) {
-//			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
-//			log.info("入力情報：" + form.toString());
-//
-//			model.addAttribute("errmsg", "ユーザ情報の登録に失敗しました。入力内容をお確かめください。");
-//
-//			return getUserInsert(form, model);
-//		}
-//
-//		// 追加処理実行
-//		userService.insert(form, principal.getName());
-//
-//		log.info("[" + principal.getName() + "]さんが新しいユーザを登録しました。");
-//		log.info("新規ユーザ情報：" + form.toString());
-//
-//		model.addAttribute("msg", "ユーザ情報の作成が無事完了しました。");
+		// 入力チェックに引っかかった場合、前の画面に戻る
+		if (bindingResult.hasErrors()) {
+			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
+			log.info("入力情報：" + form.toString());
+
+			model.addAttribute("errmsg", "ユーザ情報の登録に失敗しました。入力内容をお確かめください。");
+
+			return getUserInsert(form, model);
+		}
+
+		// 追加処理実行
+		reportService.insert(form, principal.getName());
+
+		log.info("[" + principal.getName() + "]さんが新しいユーザを登録しました。");
+		log.info("新規ユーザ情報：" + form.toString());
+
+		model.addAttribute("msg", "ユーザ情報の作成が無事完了しました。");
 
 		return getReportList(model);
 	}

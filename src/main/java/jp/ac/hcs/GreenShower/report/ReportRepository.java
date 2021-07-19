@@ -19,6 +19,10 @@ public class ReportRepository {
 	/** SQL 1件取得 */
 	private static final String SQL_SELECT_ONE = "SELECT * FROM report WHERE report_id = ?";
 	
+	/** SQL 1件追加 enabled追加 */
+	private static final String SQL_INSERT_ONE = 
+			"INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
+	
 	
 	@Autowired
 	private JdbcTemplate jdbc;
@@ -52,6 +56,52 @@ public class ReportRepository {
 		ReportData data = entity.getReportlist().get(0);
 		return data;
 	}
+	
+	/**
+	 * Userテーブルにデータを1件追加する.
+	 * 
+	 * @param data 追加するユーザ情報
+	 * @return 追加データ数
+	 * @throws DataAccessException
+	 */
+	public int insertOne(ReportData data) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_INSERT_ONE, 
+				data.getReport_id(),
+				data.getUser_id(),
+				data.getClassroom(),
+				data.getClass_number(),
+				data.getName(), 
+				data.getCourse_code(),
+				data.getCompany_name(),
+				data.getCompany_name_kana(),
+				data.getDatetime(),
+				data.getPlace(),
+				data.getEntry_section(),
+				data.getEntry_section_other(),
+				data.getVenue_section(),
+				data.getVenue_section_other(),
+				data.getTest_section(),
+				data.getTest_section_other(),
+				data.getTest_summary(),
+				data.getTest_summary_other(),
+				data.getResult_notification(),
+				data.getResult_notification_day(),
+				data.getAptitude_test_detail(),
+				data.getAptitude_test_detail_other(),
+				data.getInterview_detail(),
+				data.getInterview_detail_other(),
+				data.getInterviewer_position(),
+				data.getInterview_time(),
+				data.getTheme(),
+				data.getQuestion_contents(),
+				data.getReport_status(),
+				data.getRequest_date(),
+				data.getRegistered_user_id(),
+				data.getRemarks());
+
+		return rowNumber;
+	}
+	
 	
 	/**
 	 * reportテーブルから取得したデータをReportEntity形式にマッピングする.
