@@ -13,42 +13,44 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
-
-	<form method="post" name="userInsert" th:action="@{/user/insert}">
-		<table>
-			<tr>
-				<th>ユーザID（メールアドレス）</th>
-				<td><input type="text" class="form-control" name="user_id"
-					placeholder="(例)xxx.@xxx.xx"></td>
-			</tr>
-			<tr>
-				<th>パスワード</th>
-				<td><input type="password" class="form-control"
-					name="encrypted_password" placeholder="4～100文字で入力すること"></td>
-			</tr>
-			<tr>
-				<th>氏名</th>
-				<td><input type="text" class="form-control" name="name"
-					placeholder="(例)情報太郎"></td>
-			</tr>
-			<tr>
-				<th>権限</th>
-				<td><select name="role">
-						<option value="ROLE_STUDENT">学生</option>
-						<option value="ROLE_TEACHER">担任</option>
-						<option value="ROLE_STAFF">事務</option>
-				</select></td>
-			</tr>
-			<tr>
-				<th>クラス番号</th>
-				<td><input type="text" class="form-control" name="classroom"
-					placeholder="SXAY">
-					<input type="text" class="form-control" name="class_number"
-					placeholder="00"></td>
-			</tr>
-		</table>
-		<button type="submit" class="btn btn-warning">登録</button>
-	</form>
+	<div class="container">
+		<div class="content-box">
+			<form method="post" name="userInsert" th:action="@{/user/insert}">
+				<table>
+					<tr>
+						<th>ユーザID（メールアドレス）</th>
+						<td><input type="text" class="form-control" name="user_id"
+							placeholder="(例)xxx.@xxx.xx"></td>
+					</tr>
+					<tr>
+						<th>パスワード</th>
+						<td><input type="password" class="form-control"
+							name="encrypted_password" placeholder="4～100文字で入力すること"></td>
+					</tr>
+					<tr>
+						<th>氏名</th>
+						<td><input type="text" class="form-control" name="name"
+							placeholder="(例)情報太郎"></td>
+					</tr>
+					<tr>
+						<th>権限</th>
+						<td><select name="role">
+								<option value="ROLE_STUDENT">学生</option>
+								<option value="ROLE_TEACHER">担任</option>
+								<option value="ROLE_STAFF">事務</option>
+						</select></td>
+					</tr>
+					<tr>
+						<th>クラス番号</th>
+						<td><input type="text" class="form-control" name="classroom"
+							placeholder="SXAY"> <input type="text"
+							class="form-control" name="class_number" placeholder="00"></td>
+					</tr>
+				</table>
+				<button type="submit" class="btn btn-warning">登録</button>
+			</form>
+		</div>
+	</div>
 	<!-- 共通スクリプト -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
