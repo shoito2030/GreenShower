@@ -4,14 +4,20 @@
 <head>
 <meta charset="UTF-8">
 <title>ユーザ管理</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.min.js" integrity="sha256-p4O2FDM/VsnStiXmXzKW9svZQjxXFufx7GKCmrHtsRI=" crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"
+	integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.min.js"
+	integrity="sha256-p4O2FDM/VsnStiXmXzKW9svZQjxXFufx7GKCmrHtsRI="
+	crossorigin="anonymous"></script>
 <script>
-(function ($){
-        $(document).ready(function(){
-                $('input#qs').quicksearch('table tbody tr');
-        });
-})(jQuery.noConflict(true));
+	(function($) {
+		$(document).ready(function() {
+			$('input#qs').quicksearch('table tbody tr');
+		});
+	})(jQuery.noConflict(true));
 </script>
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
@@ -20,47 +26,50 @@
 </head>
 <body>
 	<th:block th:insert="components/part::frag_header"></th:block>
-	
+
 	<th:block th:insert="components/part::frag_script"></th:block>
-	
-	絞り込み：<input id="qs" name="qs" type="text">
-	
-	<table id="user_table">
-		<thead>
-			<tr class="target">
-				<th>ユーザID</th>
-				<th>氏名</th>
-				<th>所属クラス</th>
-				<th>番号</th>
-				<th>権限</th>
-				<th>ダークモード</th>
-				<th>アカウント有効性</th>
-				<th>登録日時</th>
-				<th>登録者</th>
-				<th>更新日時</th>
-				<th>更新者</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="userList : ${userEntity.userlist}">
-				<td><span th:text="*{userList.user_id}"></span></td>
-				<td><span th:text="*{userList.name}"></span></td>
-				<td><span th:text="*{userList.classroom}"></span></td>
-				<td><span th:text="*{userList.class_number}"></span></td>
-				<td><span th:text="*{userList.role.label}"></span></td>
-				<td><span th:if="*{userList.dark_mode}">ダークモード</span> <span
-					th:if="*{!userList.dark_mode}">-</span></td>
-				<td><span th:if="*{userList.enabled}">有効</span> <span
-					th:if="*{!userList.enabled}">無効</span></td>
-				<td><span th:text="*{userList.register_date}"></span></td>
-				<td><span th:text="*{userList.register_user_id}"></span></td>
-				<td><span th:text="*{userList.update_date}"></span></td>
-				<td><span th:text="*{userList.update_user_id}"></span></td>
-				<td><a class="btn btn-success"
-					th:href="@{'/user/detail/'+ *{userList.user_id}}">詳細</a></td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="container">
+		<div class="content-box">
+			絞り込み：<input id="qs" name="qs" type="text">
+
+			<table id="user_table">
+				<thead>
+					<tr class="target">
+						<th>ユーザID</th>
+						<th>氏名</th>
+						<th>所属クラス</th>
+						<th>番号</th>
+						<th>権限</th>
+						<th>ダークモード</th>
+						<th>アカウント有効性</th>
+						<th>登録日時</th>
+						<th>登録者</th>
+						<th>更新日時</th>
+						<th>更新者</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="userList : ${userEntity.userlist}">
+						<td><span th:text="*{userList.user_id}"></span></td>
+						<td><span th:text="*{userList.name}"></span></td>
+						<td><span th:text="*{userList.classroom}"></span></td>
+						<td><span th:text="*{userList.class_number}"></span></td>
+						<td><span th:text="*{userList.role.label}"></span></td>
+						<td><span th:if="*{userList.dark_mode}">ダークモード</span> <span
+							th:if="*{!userList.dark_mode}">-</span></td>
+						<td><span th:if="*{userList.enabled}">有効</span> <span
+							th:if="*{!userList.enabled}">無効</span></td>
+						<td><span th:text="*{userList.register_date}"></span></td>
+						<td><span th:text="*{userList.register_user_id}"></span></td>
+						<td><span th:text="*{userList.update_date}"></span></td>
+						<td><span th:text="*{userList.update_user_id}"></span></td>
+						<td><a class="btn btn-success"
+							th:href="@{'/user/detail/'+ *{userList.user_id}}">詳細</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<form method="get" th:action="@{/user/insert}">
 		<button type="submit" class="btn btn-warning">作成</button>
 	</form>
