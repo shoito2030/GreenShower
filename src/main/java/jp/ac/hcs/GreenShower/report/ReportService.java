@@ -82,7 +82,40 @@ public class ReportService {
 	private ReportData refillToReportData(UserFormForInsert form, String register_user_id) {
 		ReportData data = new ReportData();
 
-		
+		data.getReport_id();
+		data.getUser_id();
+		data.getClassroom();
+		data.getClass_number();
+		data.getName();
+		data.getCourse_code();
+		data.getCompany_name();
+		data.getCompany_name_kana();
+		data.getDatetime();
+		data.getPlace();
+		data.getEntry_section();
+		data.getEntry_section_other();
+		data.getVenue_section();
+		data.getVenue_section_other();
+		data.getTest_section();
+		data.getTest_section_other();
+		data.getTest_summary();
+		data.getTest_summary_other();
+		data.getResult_notification();
+		data.getResult_notification_day();
+		data.getAptitude_test_detail();
+		data.getAptitude_test_detail_other();
+		data.getInterview_detail();
+		data.getInterview_detail_other();
+		data.getInterview_number();
+		data.getInterviewer_number();
+		data.getInterviewer_position();
+		data.getInterview_time();
+		data.getTheme();
+		data.getQuestion_contents();
+		data.getReport_status();
+		data.getRequest_date();
+		data.getRegistered_user_id();
+		data.getRemarks();
 		data.setRegistered_user_id(register_user_id);
 
 		return data;

@@ -21,12 +21,13 @@ public class ReportRepository {
 	
 	/** SQL 1件追加  */
 	private static final String SQL_INSERT_ONE = 
-			"INSERT INTO report (report_id, user_id, classroom, role, classroom, class_number, name, course_code, company_name,"
+			"INSERT INTO report (report_id, user_id, classroom, class_number, name, course_code, company_name,"
 			+ "company_name_kana, datetime, place, entry_section, entry_section_other, venue_section, venue_section_other, test_section,"
 			+ "test_section_other, test_summary, test_summary_other, result_notification, result_notification_day, aptitude_test_detail,"
 			+ "aptitude_test_detail_other, interview_detail, interview_detail_other, interview_number, interviewer_number, interviewer_position,"
 			+ "interview_time, theme, question_contents, report_status, registered_date, request_date, registered_user_id, remarks)"
-			+ " VALUES((SELECT MAX(report_id) + 1 FROM task), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "VALUES((SELECT MAX(report_id) + 1 FROM report),? , (SELECT classroom FROM users WHERE user_id = ? ), (SELECT class_number FROM users WHERE user_id = ? )"
+			+ ", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	
 	@Autowired
@@ -71,11 +72,14 @@ public class ReportRepository {
 	 */
 	public int insertOne(ReportData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_INSERT_ONE, 
-				data.getReport_id(),
+//				data.getReport_id(),
 				data.getUser_id(),
-				data.getClassroom(),
-				data.getClass_number(),
-				data.getName(), 
+//				data.getClassroom(),
+//				data.getClass_number(),
+//				data.getName(), 
+				data.getUser_id(),
+				data.getUser_id(),
+				data.getUser_id(),
 				data.getCourse_code(),
 				data.getCompany_name(),
 				data.getCompany_name_kana(),
