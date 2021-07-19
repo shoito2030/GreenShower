@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8">
+<title>ユーザ詳細画面</title>
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
+</head>
+<body>
+	<th:block th:insert="components/part::frag_header"></th:block>
+
+	<th:block th:insert="components/part::frag_script"></th:block>
+	<div class="container">
+		<div class="content-box">
+			<h2>受験報告編集</h2>
+			<div class="input-form">
+				<form method="post" th:action="@{/report/update}">
+					<div th:object="${reportData}">
+						<label for="user_id">ユーザID(メールアドレス)</label> <span
+							th:text="${reportData.user_id}"></span><br>
+
+						<hr>
+
+						<label for="classroom">所属クラス</label> <span
+							th:text="${reportData.classroom}"></span><br>
+
+						<hr>
+
+						<label for="class_number">出席番号</label> <span
+							th:text="${reportData.class_number}"></span><br>
+
+						<hr>
+
+						<label for="name">氏名</label> <span th:text="${reportData.name}"></span><br>
+
+						<hr>
+
+						<label for="course_code">学科コード</label> <span
+							th:text="${reportData.course_code}"></span><br>
+
+						<hr>
+
+						<label for="company_name">企業名</label>
+						<div class="form-group input-box">
+							<input type="text" class="form-control" name="company_name"
+								placeholder="(例)株式会社アイウエオ" th:field="*{company_name}">
+						</div>
+						<hr>
+
+						<label for="company_name_kana">企業名カナ</label>
+						<div class="form-group input-box">
+							<input type="text" class="form-control" name="company_name_kana"
+								placeholder="(例)アイウ" th:field="*{company_name_kana}">
+						</div>
+
+						<hr>
+
+						<label for="datetime">日時</label>
+						<div class="form-group input-box">
+							<input type="date" class="form-control" name="datetime"
+								th:field="*{datetime}">
+						</div>
+
+						<hr>
+
+						<label for="place">受験場所</label>
+						<div class="form-group input-box">
+							<input type="text" class="form-control" name="place"
+								th:field="*{place}">
+						</div>
+
+						<hr>
+
+						<label for="entry_section">申し込み区分</label>
+						<div class="form-group input-box">
+
+							<input type="radio" name="entry_section"
+								th:field="*{entry_section}" value="1">学校斡旋 <input
+								type="radio" name="entry_section" th:field="*{entry_section}"
+								value="2">ネット：斡旋サイト <input type="radio"
+								name="entry_section" th:field="*{entry_section}" value="3">新聞・雑誌
+
+							<input type="radio" name="entry_section"
+								th:field="*{entry_section}" value="4">ネット：企業HP <input
+								type="radio" name="entry_section" th:field="*{entry_section}"
+								value="5">ジョブカフェ等 <input type="radio"
+								name="entry_section" th:field="*{entry_section}" value="99">その他
+
+						</div>
+
+						<hr>
+
+						<label for="venue_section">会場区分</label>
+						<div class="form-group input-box">
+
+							<input type="radio" name="venue_section"
+								th:field="*{venue_section}" value="1">札幌：会社 <input
+								type="radio" name="venue_section" th:field="*{venue_section} "
+								value="2">札幌：外会場 <input type="radio"
+								name="venue_section" th:field="*{venue_section}" value="3">札幌：HCS
+
+							<input type="radio" name="venue_section"
+								th:field="*{venue_section}" value="4">東京：会社 <input
+								type="radio" name="venue_section" th:field="*{venue_section}"
+								value="5">東京：外会場 <input type="radio"
+								name="venue_section" value="99">その他
+
+						</div>
+						<hr>
+
+						<label for="test_section">試験区分</label>
+						<div class="form-group input-box">
+							<input type="radio" name="test_section"
+								th:field="*{test_section}" value="1">1次試験 <input
+								type="radio" name="test_section" th:field="*{test_section}"
+								value="2">２次試験 <input type="radio" name="test_section"
+								th:field="*{test_section}" value="3">３次試験 <input
+								type="radio" name="test_section" th:field="*{test_section}"
+								value="4">４次試験 <input type="radio" name="test_section"
+								th:field="*{test_section}" value="5">最終試験 <input
+								type="radio" name="test_section" th:field="*{test_section}"
+								value="99">その他
+
+						</div>
+						<hr>
+
+						<label for="test_summary">試験概要</label>
+						<div class="form-group input-box">
+
+							<input type="radio" name="test_summary"
+								th:field="*{test_summary}" value="1">適性 <input
+								type="radio" name="test_summary" th:field="*{test_summary}"
+								value="2">筆記・作文 <input type="radio" name="test_summary"
+								th:field="*{test_summary}" value="3">ディスカッション <input
+								type="radio" name="test_summary" th:field="*{test_summary}"
+								value="4">グループワーク <input type="radio"
+								name="test_summary" th:field="*{test_summary}" value="5">集団面接
+
+							<input type="radio" name="test_summary"
+								th:field="*{test_summary}" value="6">個人面接 <input
+								type="radio" name="test_summary" th:field="*{test_summary}"
+								value="99">その他
+
+						</div>
+
+						<hr>
+
+						<label for="result_notification">結果通知方法</label>
+						<div class="form-group input-box">
+
+							<input type="radio" name="result_notification"
+								th:field="*{result_notification}" value="1">〇日後 <input
+								type="radio" name="result_notification"
+								th:field="*{result_notification}" value="2">〇日後:合格のみ <input
+								type="radio" name="result_notification"
+								th:field="*{result_notification}" value="3">本人 <input
+								type="radio" name="result_notification"
+								th:field="*{result_notification}" value="4">学校 <input
+								type="radio" name="result_notification"
+								th:field="*{result_notification}" value="5">電話 <input
+								type="radio" name="result_notification"
+								th:field="*{result_notification}" value="6">郵便 <input
+								type="radio" name="result_notification"
+								th:field="*{result_notification}" value="7">メール <input
+								type="radio" name="result_notification"
+								th:field="*{result_notification}" value="8">Web
+
+
+						</div>
+
+						<hr>
+
+						<label for="aptitude_test_detail">適性試験詳細</label>
+						<div class="form-group input-box">
+
+							<input type="radio" name="aptitude_test_detail"
+								th:field="*{aptitude_test_detail}" value="1">SPI <input
+								type="radio" name="aptitude_test_detail"
+								th:field="*{aptitude_test_detail}" value="2">CAB/GAB <input
+								type="radio" name="aptitude_test_detail"
+								th:field="*{aptitude_test_detail}" value="3">職業適性 <input
+								type="radio" name="aptitude_test_detail"
+								th:field="*{aptitude_test_detail}" value="4">クレベリン <input
+								type="radio" name="aptitude_test_detail"
+								th:field="*{aptitude_test_detail}" value="5">一般常識 <input
+								type="radio" name="aptitude_test_detail"
+								th:field="*{aptitude_test_detail}" value="6">専門知識 <input
+								type="radio" name="aptitude_test_detail"
+								th:field="*{aptitude_test_detail}" value="7">作文テーマ <input
+								type="radio" name="aptitude_test_detail"
+								th:field="*{aptitude_test_detail}" value="99">その他適性
+
+
+						</div>
+
+						<hr>
+
+						<label for="interview_detail">面接詳細</label>
+						<div class="form-group input-box">
+
+							<input type="radio" name="interview_detail"
+								th:field="*{interview_detail}" value="1">形態：個人 <input
+								type="radio" name="interview_detail"
+								th:field="*{interview_detail}" value="2">形態：集団
+
+
+						</div>
+
+						<hr>
+
+						<label for="interview_number">面接に参加した学生の数</label>
+						<div class="form-group input-box">
+							<input type="text" class="form-control" name="interview_number"
+								th:field="*{interview_number}">人
+						</div>
+
+						<hr>
+
+						<label for="interviewer_number">面接官の数</label>
+						<div class="form-group input-box">
+							<input type="text" class="form-control" name="interviewer_number"
+								th:field="*{interviewer_number}">人
+						</div>
+
+						<hr>
+
+						<label for="interviewer_position">面接官の役職</label>
+						<div class="form-group input-box">
+							<input type="text" class="form-control"
+								name="interviewer_position" th:field="*{interviewer_number}">
+						</div>
+
+						<hr>
+
+						<label for="interview_time">面接時間</label>
+						<div class="form-group input-box">
+							<input type="text" class="form-control" name="interview_time"
+								th:field="*{interview_time}">分
+						</div>
+
+						<hr>
+
+						<label for="theme">GD／GW時のテーマ</label>
+						<div class="form-group input-box">
+							<input type="text" class="form-control" name="theme"
+								th:field="*{theme}">
+						</div>
+
+						<hr>
+
+						<label for="question_contents">出題内容</label>
+						<div class="form-group input-box">
+							<input type="text" class="form-control" name="question_contents"
+								th:field="*{question_contents}">
+						</div>
+
+						<hr>
+
+						<label for="registered_date">受験報告状態</label> <span
+							th:text="${reportData.registered_date}"></span><br>
+
+						<hr>
+
+						<label for="registered_date">登録日時</label> <span
+							th:text="${reportData.registered_date}"></span><br>
+
+						<hr>
+
+						<label for="request_date">申請日</label> <span
+							th:text="${reportData.request_date}"></span><br>
+
+						<hr>
+
+						<label for="registered_user_id">登録者のユーザID</label> <span
+							th:text="${reportData.registered_user_id}"></span><br>
+
+						<hr>
+
+						<label for="remarksl">備考</label> <span
+							th:text="${reportData.remarks}"></span><br>
+					</div>
+
+					<button type="submit" class="btn btn-warning">変更</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- 共通スクリプト -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
