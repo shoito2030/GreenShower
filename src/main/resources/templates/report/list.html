@@ -29,26 +29,18 @@
 	<table>
 		<thead>
 			<tr>
-				<th>所属クラス</th>
-				<th>出席番号</th>
-				<th>ユーザ名</th>
-				<th>学科コード</th>
 				<th>企業名</th>
 				<th>試験区分</th>
-				<th>試験概要</th>
-				<th>登録日時</th>
+				<th>登録者</th>
+				<th>申請状態</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="reportList : ${reportEntity.reportlist}">
-				<td><span th:text="*{reportList.classroom}"></span></td>
-				<td><span th:text="*{reportList.class_number}"></span></td>
-				<td><span th:text="*{reportList.name}"></span></td>
-				<td><span th:text="*{reportList.course_code}"></span></td>
 				<td><span th:text="*{reportList.company_name}"></span></td>
 				<td><span th:text="*{reportList.test_section}"></span></td>
-				<td><span th:text="*{reportList.test_summary}"></span></td>
-				<td><span th:text="*{reportList.registered_date}"></span></td>
+				<td><span th:text="*{reportList.registered_user_id}"></span></td>
+				<td><span th:text="*{reportList.report_status}"></span></td>
 				<td><a class="btn btn-success"
 					th:href="@{'/report/detail/'+ *{reportList.report_id}}">詳細</a></td>
 			</tr>
