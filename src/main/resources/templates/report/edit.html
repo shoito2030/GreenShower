@@ -18,6 +18,9 @@
 			<div class="input-form">
 				<form method="post" th:action="@{/report/update}">
 					<div th:object="${reportData}">
+					
+					<input type="hidden" name="report_id" th:value="*{report_id}">
+					
 						<label for="user_id">ユーザID(メールアドレス)</label> <span
 							th:text="${reportData.user_id}"></span><br>
 
@@ -258,8 +261,8 @@
 
 						<hr>
 
-						<label for="registered_date">受験報告状態</label> <span
-							th:text="${reportData.registered_date}"></span><br>
+						<label for="report_status">受験報告状態</label> <span
+							th:text="${reportData.report_status}"></span><br>
 
 						<hr>
 

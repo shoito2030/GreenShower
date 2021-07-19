@@ -16,6 +16,9 @@
 		<div class="content-box">
 			<h2>受験情報詳細</h2>
 			<div th:object="${reportData}">
+			
+			<input type="hidden" name="report_id" th:value="*{report_id}">
+			
 					<label for="user_id">ユーザID(メールアドレス)</label>
 					<span th:text="${reportData.user_id}"></span><br>
 
@@ -126,8 +129,8 @@
 
 					<hr>
 
-					<label for="registered_date">受験報告状態</label>
-					<span th:text="${reportData.registered_date}"></span><br>
+					<label for="report_status">受験報告状態</label>
+					<span th:text="${reportData.report_status}"></span><br>
 
 					<hr>
 

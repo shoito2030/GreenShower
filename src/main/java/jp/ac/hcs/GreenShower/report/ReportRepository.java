@@ -106,6 +106,7 @@ public class ReportRepository {
 				data.getTheme(),
 				data.getQuestion_contents(),
 				data.getReport_status(),
+				data.getRegistered_date(),
 				data.getRequest_date(),
 				data.getRegistered_user_id(),
 				data.getRemarks());
