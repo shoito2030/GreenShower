@@ -235,6 +235,7 @@ public class ReportData {
 	 * 備考
 	 */
 	private String remarks;
+	
 }
 
 
