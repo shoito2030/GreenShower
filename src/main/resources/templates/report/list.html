@@ -5,14 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>就活ポータルトップ</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.min.js" integrity="sha256-p4O2FDM/VsnStiXmXzKW9svZQjxXFufx7GKCmrHtsRI=" crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"
+	integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.min.js"
+	integrity="sha256-p4O2FDM/VsnStiXmXzKW9svZQjxXFufx7GKCmrHtsRI="
+	crossorigin="anonymous"></script>
 <script>
-(function ($){
-        $(document).ready(function(){
-                $('input#qs').quicksearch('table tbody tr');
-        });
-})(jQuery.noConflict(true));
+	(function($) {
+		$(document).ready(function() {
+			$('input#qs').quicksearch('table tbody tr');
+		});
+	})(jQuery.noConflict(true));
 </script>
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
@@ -23,41 +29,44 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
+	<div class="container">
+		<div class="content-box">
+			</th:block>
 
-	絞り込み：<input id="qs" name="qs" type="text">
+			絞り込み：<input id="qs" name="qs" type="text">
+			<div class="resposive">
+				<table class="table table-striped table-light">
+					<thead class="thead-dark">
+						<tr>
+							<th>企業名</th>
+							<th>試験区分</th>
+							<th>登録者</th>
+							<th>申請状態</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="reportList : ${reportEntity.reportlist}">
+							<td><span th:text="*{reportList.company_name}"></span></td>
+							<td><span th:text="*{reportList.test_section}"></span></td>
+							<td><span th:text="*{reportList.registered_user_id}"></span></td>
+							<td><span th:text="*{reportList.report_status}"></span></td>
+							<td><a class="btn btn-success"
+								th:href="@{'/report/detail/'+ *{reportList.report_id}}">詳細</a></td>
+							<td><a class="btn btn-success"
+								th:href="@{'/report/edit/'+ *{reportList.report_id}}">編集</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
-	<table class="table table-striped table-light">
-		<thead class="thead-dark">
-			<tr>
-				<th>企業名</th>
-				<th>試験区分</th>
-				<th>登録者</th>
-				<th>申請状態</th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="reportList : ${reportEntity.reportlist}">
-				<td><span th:text="*{reportList.company_name}"></span></td>
-				<td><span th:text="*{reportList.test_section}"></span></td>
-				<td><span th:text="*{reportList.registered_user_id}"></span></td>
-				<td><span th:text="*{reportList.report_status}"></span></td>
-				<td><a class="btn btn-success"
-					th:href="@{'/report/detail/'+ *{reportList.report_id}}">詳細</a></td>
-					<td><a class="btn btn-success"
-					th:href="@{'/report/edit/'+ *{reportList.report_id}}">編集</a></td>
-			</tr>
-		</tbody>
-	</table>
 
 
-
-	<div class="content-box">
-		<form method="get" th:action="@{/report/insert}">
-			<button type="submit" class="btn btn-primary">受験報告新規作成</button>
-		</form>
+			<form method="get" th:action="@{/report/insert}">
+				<button type="submit" class="btn btn-primary">受験報告新規作成</button>
+			</form>
+		</div>
 	</div>
-
 </body>
 </html>
