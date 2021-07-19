@@ -43,6 +43,8 @@
 				<td><span th:text="*{reportList.report_status}"></span></td>
 				<td><a class="btn btn-success"
 					th:href="@{'/report/detail/'+ *{reportList.report_id}}">詳細</a></td>
+					<td><a class="btn btn-success"
+					th:href="@{'/report/edit/'+ *{reportList.report_id}}">編集</a></td>
 			</tr>
 		</tbody>
 	</table>

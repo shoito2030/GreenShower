@@ -126,15 +126,15 @@ public class ReportController {
 	@GetMapping("report/edit/{id}")
 	public String getEdit(@PathVariable("id") String report_id, Principal principal, Model model) {
 
-//		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
-//		Optional<ReportData> reportData = reportService.selectOne(report_id);
-//
-//		// 処理失敗によりトップ画面へ
-//		if (reportData.isEmpty()) {
-//			return "index";
-//		}
-//
-//		model.addAttribute("reportData", reportData.get());
+		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
+		Optional<ReportData> reportData = reportService.selectOne(report_id);
+
+		// 処理失敗によりトップ画面へ
+		if (reportData.isEmpty()) {
+			return "index";
+		}
+
+		model.addAttribute("reportData", reportData.get());
 
 		return "report/edit";
 	}
