@@ -146,20 +146,24 @@ public class ReportController {
 	 * @param model
 	 * @return - 処理成功時：ユーザ詳細情報画面 - 処理失敗時：トップ画面
 	 */
-	@GetMapping("report/update/{id}")
-	public String getReportUpdate(@PathVariable("id") String report_id, Principal principal, Model model) {
+	@PostMapping("report/update")
+	public String getReportUpdate(@ModelAttribute @Validated ReportForm form,
+			 Principal principal, Model model) {
 
+//		// 入力チェックに引っかかった場合、前の画面に戻る
+//		if (bindingResult.hasErrors()) {
+//			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
+//			log.info("入力情報：" + form.toString());
+//
+//			model.addAttribute("errmsg", "ユーザ情報の登録に失敗しました。入力内容をお確かめください。");
+//
+//			return getReportInsert(form, model);
+//		}
+		
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
-		Optional<ReportData> reportData = reportService.selectOne(report_id);
+		reportService.update(form);
 
-		// 処理失敗によりトップ画面へ
-		if (reportData.isEmpty()) {
-			return "index";
-		}
-
-		model.addAttribute("reportData", reportData.get());
-
-		return "report/edit";
+		return getReportList(model);
 	}
 
 }
