@@ -168,8 +168,8 @@ public class ReportService {
 	 * @param user_id ユーザID
 	 * @throws DataAccessException
 	 */
-	public void taskListCsvOut() throws DataAccessException {
-		reportRepository.tasklistCsvOut();
+	public void reportListCsvOut() throws DataAccessException {
+		reportRepository.reportlistCsvOut();
 	}
 
 	/**

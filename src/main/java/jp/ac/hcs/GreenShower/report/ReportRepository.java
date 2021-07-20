@@ -29,10 +29,6 @@ public class ReportRepository {
 			+ "VALUES((SELECT MAX(report_id) + 1 FROM report),? , (SELECT classroom FROM users WHERE user_id = ? ), (SELECT class_number FROM users WHERE user_id = ? )"
 			+ ", (SELECT name FROM users WHERE user_id = ?), (SELECT SUBSTRING(classroom, 1)  FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-//	private static final String SQL_INSERT_ONE = 
-//			"INSERT INTO report VALUES((SELECT MAX(report_id) + 1 FROM report),? , (SELECT classroom FROM users WHERE user_id = ? ), (SELECT class_number FROM users WHERE user_id = ? )"
-//			+ ", (SELECT name FROM users WHERE user_id = ?), (SELECT SUBSTRING(classroom, 1)  FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	
 	/** SQL 1件更新  */
 	private static final String SQL_UPDATE_ONE = "UPDATE report SET company_name = ?,"
 			+ "company_name_kana = ?, datetime = ?, place = ?, entry_section = ?, entry_section_other = ?, venue_section = ?, venue_section_other = ?, test_section = ?,"
@@ -232,7 +228,7 @@ public class ReportRepository {
 	 * @param user_id 検索するユーザID
 	 * @throws DataAccessException
 	 */
-	public void tasklistCsvOut() throws DataAccessException {
+	public void reportlistCsvOut() throws DataAccessException {
 
 		// CSVファイル出力用設定
 		TaskRowCallbackHandler handler = new TaskRowCallbackHandler();

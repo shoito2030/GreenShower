@@ -83,6 +83,8 @@ public class ReportController {
 //
 //			return getReportInsert(form, model);
 //		}
+		
+		log.info("入力情報（試験区分）：" + form.getTest_section());
 
 		// 追加処理実行
 		reportService.insert(form, principal.getName());
@@ -198,15 +200,15 @@ public class ReportController {
 	 * @param model
 	 * @return タスク情報のCSVファイル
 	 */
-	@PostMapping("/task/csv")
-	public ResponseEntity<byte[]> getTaskCsv(Principal principal, Model model) {
+	@PostMapping("/report/csv")
+	public ResponseEntity<byte[]> getReportCsv(Principal principal, Model model) {
 
 		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_TASK_CSV;
 
 		log.info("[" + principal.getName() + "]CSVファイル作成:" + OUTPUT_FULLPATH);
 
 		// CSVファイルをサーバ上に作成
-		reportService.taskListCsvOut();
+		reportService.reportListCsvOut();
 
 		// CSVファイルをサーバから読み込み
 		byte[] bytes = null;
