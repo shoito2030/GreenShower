@@ -40,6 +40,9 @@ public class ReportRepository {
 			+ "aptitude_test_detail_other = ?, interview_detail = ?, interview_detail_other = ?, interview_number = ?, interviewer_number = ?, interviewer_position = ?,"
 			+ "interview_time = ?, theme = ?, question_contents = ?, request_date = ? WHERE report_id = ?";
 	
+	/** SQL 1件更新  */
+	private static final String SQL_UPDATE_REPORT_STATUS = "UPDATE report SET report_status = ? WHERE report_id = ?";
+	
 	@Autowired
 	private JdbcTemplate jdbc;
 
@@ -207,6 +210,18 @@ public class ReportRepository {
 				data.getRequest_date(),
 				data.getReport_id());
 		return rowNumber;
+	}
+	
+	/**
+	 * 
+	 * @param report_id
+	 * @param report_status
+	 * @return
+	 */
+	public int updateStatus(String report_id, String report_status) {
+		int rowNumber = jdbc.update(SQL_UPDATE_REPORT_STATUS,
+				report_id, report_status);
+		return rowNumber ;
 	}
 
 }

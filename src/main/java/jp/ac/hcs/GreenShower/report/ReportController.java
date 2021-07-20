@@ -176,8 +176,8 @@ public class ReportController {
 	 * @param model
 	 * @return 受験報告情報一覧画面
 	 */
-	@PostMapping("report/stauts_change")
-	public String changeStauts(@ModelAttribute @Validated ReportForm form,
+	@PostMapping("report/change_status/")
+	public String changeStauts(@PathVariable("id") String report_id, String report_status,
 			 Principal principal, Model model) {
 
 //		// 入力チェックに引っかかった場合、前の画面に戻る
@@ -193,7 +193,7 @@ public class ReportController {
 		
 		
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
-		reportService.update(form);
+		reportService.updateStatus(report_id, report_status);
 
 		return getReportList(model);
 	}

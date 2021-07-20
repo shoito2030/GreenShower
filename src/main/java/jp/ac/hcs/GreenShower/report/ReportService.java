@@ -139,4 +139,23 @@ public class ReportService {
 		return data;
 	}
 
+	
+	/**
+	 * 受験報告情報ステータス変更用
+	 * @param report_id
+	 * @param report_status
+	 */
+	public boolean updateStatus(String report_id, String report_status) {
+		int rowNumber = 0;
+
+		try {
+			// 追加処理を行い、追加できた件数を取得
+			rowNumber = reportRepository.updateStatus(report_id, report_status);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return rowNumber > 0;
+		
+	}
+
 }
