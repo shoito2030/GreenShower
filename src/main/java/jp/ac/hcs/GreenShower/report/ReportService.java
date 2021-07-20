@@ -33,7 +33,7 @@ public class ReportService {
 	
 	
 	/**
-	 * 受験報告情報を全件取得する
+	 * 受験報告情報を取得する
 	 * 
 	 * @return Optional<ReportData>
 	 */
