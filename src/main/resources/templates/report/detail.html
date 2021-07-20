@@ -18,7 +18,8 @@
 			<div th:object="${reportData}">
 				<label for="user_id">ユーザID(メールアドレス)</label> <span
 					th:text="${reportData.user_id}"></span><br>
-				<form method="post" th:action="@{/report/change_status/'+ *{reportData.report_id}}">
+				<form method="post"
+					th:action="@{/report/change_status/'+ *{reportData.report_id}}">
 					<div class="form-group input-box">
 
 						<input type="hidden" name="report_id" th:value="*{report_id}">
@@ -78,8 +79,18 @@
 
 				<hr>
 
+				<label for="entry_section_other">申し込み区分その他</label> <span
+					th:text="${reportData.entry_section_other}"></span><br>
+
+				<hr>
+
 				<label for="venue_section">会場区分</label> <span
 					th:text="${reportData.venue_section}"></span><br>
+
+				<hr>
+
+				<label for="venue_section_other">会場区分その他</label> <span
+					th:text="${reportData.venue_section_other}"></span><br>
 
 				<hr>
 
@@ -88,13 +99,24 @@
 
 				<hr>
 
+				<label for="test_section_other">試験区分その他</label> <span
+					th:text="${reportData.test_section_other}"></span><br>
+
+				<hr>
+
 				<label for="test_summary">試験概要</label> <span
 					th:text="${reportData.test_summary}"></span><br>
 
 				<hr>
 
+				<label for="test_summary_other">試験概要その他</label> <span
+					th:text="${reportData.test_summary_other}"></span><br>
+
+				<hr>
+
 				<label for="result_notification">結果通知方法</label> <span
-					th:text="${reportData.result_notification}"></span><br>
+					th:text="${reportData.result_notification}"></span><br><span
+					th:text="${reportData.result_notification_day}">日後</span>
 
 				<hr>
 
