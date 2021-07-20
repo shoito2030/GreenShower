@@ -46,7 +46,7 @@ public class ReportController {
 	/**
 	 * 受験報告情報登録画面を表示する
 	 * 
-	 * @param form  登録時の入力チェック用UserForm
+	 * @param form  登録時の入力チェック用ReportForm
 	 * @param model
 	 * @return 受験報告情報登録画面
 	 */
@@ -56,18 +56,19 @@ public class ReportController {
 	}
 
 	/**
-	 * 新たにユーザ情報を追加する
+	 * 新たに受験報告情報を登録する
 	 * 
-	 * @param form          入力情報
+	 * @param form          登録時の入力チェック用ReportForm
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
 	 * @param model
-	 * @return - 処理失敗時：ユーザ登録画面（管理者用） - 処理成功時：getUserListに処理を委譲しているのでそちらを参照すること
+	 * @return 受験報告情報一覧画面
 	 */
 	@PostMapping("report/insert")
 	public String getReportInsert(@ModelAttribute @Validated ReportForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
 
+		// コメントアウトを外すと、フォームのバリデーション機能でエラーが送出される。原因不明
 //		// 入力チェックに引っかかった場合、前の画面に戻る
 //		if (bindingResult.hasErrors()) {
 //			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
@@ -90,12 +91,12 @@ public class ReportController {
 	}
 	
 	/**
-	 * ユーザ詳細情報画面を表示する
+	 * 受験報告詳細情報画面を表示する
 	 * 
-	 * @param user_id   検索するユーザID
+	 * @param report_id   検索するユーザID
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return - 処理成功時：ユーザ詳細情報画面 - 処理失敗時：トップ画面
+	 * @return - 処理成功時：受験報告詳細情報画面 - 処理失敗時：受験報告情報一覧画面
 	 */
 	@GetMapping("report/detail/{id}")
 	public String getReportDetail(@PathVariable("id") String report_id, Principal principal, Model model) {
@@ -103,9 +104,9 @@ public class ReportController {
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
 		Optional<ReportData> reportData = reportService.selectOne(report_id);
 
-		// 処理失敗によりトップ画面へ
+		// 処理失敗により受験報告情報一覧画面へ
 		if (reportData.isEmpty()) {
-			return "index";
+			return getReportList(model);
 		}
 
 		model.addAttribute("reportData", reportData.get());
@@ -115,12 +116,12 @@ public class ReportController {
 	
 	
 	/**
-	 * ユーザ詳細情報画面を表示する
+	 * 受験報告編集画面を表示する
 	 * 
-	 * @param user_id   検索するユーザID
+	 * @param report_id   検索するユーザID
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return - 処理成功時：ユーザ詳細情報画面 - 処理失敗時：トップ画面
+	 * @return - 処理成功時：受験報告編集画面 - 処理失敗時：受験報告情報一覧画面
 	 */
 	@GetMapping("report/edit/{id}")
 	public String getEdit(@PathVariable("id") String report_id, Principal principal, Model model) {
@@ -130,7 +131,7 @@ public class ReportController {
 
 		// 処理失敗によりトップ画面へ
 		if (reportData.isEmpty()) {
-			return "index";
+			return getReportList(model);
 		}
 
 		model.addAttribute("reportData", reportData.get());
@@ -139,15 +140,44 @@ public class ReportController {
 	}
 	
 	/**
-	 * ユーザ詳細情報画面を表示する
+	 * 受験報告情報を更新をする
 	 * 
 	 * @param user_id   検索するユーザID
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return - 処理成功時：ユーザ詳細情報画面 - 処理失敗時：トップ画面
+	 * @return 受験報告情報一覧画面
 	 */
 	@PostMapping("report/update")
 	public String getReportUpdate(@ModelAttribute @Validated ReportForm form,
+			 Principal principal, Model model) {
+
+//		// 入力チェックに引っかかった場合、前の画面に戻る
+//		if (bindingResult.hasErrors()) {
+//			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
+//			log.info("入力情報：" + form.toString());
+//
+//			model.addAttribute("errmsg", "ユーザ情報の登録に失敗しました。入力内容をお確かめください。");
+//
+//			return getReportInsert(form, model);
+//		}
+		
+		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
+		reportService.update(form);
+
+		return getReportList(model);
+	}
+	
+	
+	/**
+	 * 受験報告情報を更新をする
+	 * 
+	 * @param user_id   検索するユーザID
+	 * @param principal ログイン情報
+	 * @param model
+	 * @return 受験報告情報一覧画面
+	 */
+	@PostMapping("report/change")
+	public String changeReportStauts(@ModelAttribute @Validated ReportForm form,
 			 Principal principal, Model model) {
 
 //		// 入力チェックに引っかかった場合、前の画面に戻る

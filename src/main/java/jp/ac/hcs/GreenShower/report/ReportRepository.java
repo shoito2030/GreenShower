@@ -25,9 +25,9 @@ public class ReportRepository {
 			+ "company_name_kana, datetime, place, entry_section, entry_section_other, venue_section, venue_section_other, test_section,"
 			+ "test_section_other, test_summary, test_summary_other, result_notification, result_notification_day, aptitude_test_detail,"
 			+ "aptitude_test_detail_other, interview_detail, interview_detail_other, interview_number, interviewer_number, interviewer_position,"
-			+ "interview_time, theme, question_contents, report_status, request_date, registered_user_id, remarks)"
+			+ "interview_time, theme, question_contents, request_date, registered_user_id)"
 			+ "VALUES((SELECT MAX(report_id) + 1 FROM report),? , (SELECT classroom FROM users WHERE user_id = ? ), (SELECT class_number FROM users WHERE user_id = ? )"
-			+ ", (SELECT name FROM users WHERE user_id = ?), (SELECT SUBSTRING(classroom, 1)  FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ ", (SELECT name FROM users WHERE user_id = ?), (SELECT SUBSTRING(classroom, 1)  FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 //	private static final String SQL_INSERT_ONE = 
 //			"INSERT INTO report VALUES((SELECT MAX(report_id) + 1 FROM report),? , (SELECT classroom FROM users WHERE user_id = ? ), (SELECT class_number FROM users WHERE user_id = ? )"
@@ -115,10 +115,8 @@ public class ReportRepository {
 				data.getInterview_time(),
 				data.getTheme(),
 				data.getQuestion_contents(),
-				data.getReport_status(),
 				data.getRequest_date(),
-				data.getRegistered_user_id(),
-				data.getRemarks());
+				data.getRegistered_user_id());
 
 		return rowNumber;
 	}
@@ -180,7 +178,7 @@ public class ReportRepository {
 	 * @param data
 	 * @return
 	 */
-	public int updateOneForStudent(ReportData data) {
+	public int updateReportForStudent(ReportData data) {
 		int rowNumber = jdbc.update(SQL_UPDATE_ONE,
 				data.getCompany_name(),
 				data.getCompany_name_kana(),

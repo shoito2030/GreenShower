@@ -76,7 +76,7 @@ public class ReportService {
 		int rowNumber = 0;
 		try {
 			
-			rowNumber = reportRepository.updateOneForStudent(reportData);
+			rowNumber = reportRepository.updateReportForStudent(reportData);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
