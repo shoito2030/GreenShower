@@ -176,8 +176,8 @@ public class ReportController {
 	 * @param model
 	 * @return 受験報告情報一覧画面
 	 */
-	@PostMapping("report/change")
-	public String changeReportStauts(@ModelAttribute @Validated ReportForm form,
+	@PostMapping("report/stauts_change")
+	public String changeStauts(@ModelAttribute @Validated ReportForm form,
 			 Principal principal, Model model) {
 
 //		// 入力チェックに引っかかった場合、前の画面に戻る
