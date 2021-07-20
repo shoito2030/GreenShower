@@ -1,5 +1,10 @@
 package jp.ac.hcs.GreenShower.report;
 
+import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
@@ -156,6 +161,28 @@ public class ReportService {
 		}
 		return rowNumber > 0;
 		
+	}
+	
+	/**
+	 * タスク情報をCSVファイルとしてサーバに保存する.
+	 * @param user_id ユーザID
+	 * @throws DataAccessException
+	 */
+	public void reportListCsvOut() throws DataAccessException {
+		reportRepository.reportlistCsvOut();
+	}
+
+	/**
+	 * サーバーに保存されているファイルを取得して、byte配列に変換する.
+	 * @param fileName ファイル名
+	 * @return ファイルのbyte配列
+	 * @throws IOException ファイル取得エラー
+	 */
+	public byte[] getFile(String fileName) throws IOException {
+		FileSystem fs = FileSystems.getDefault();
+		Path p = fs.getPath(fileName);
+		byte[] bytes = Files.readAllBytes(p);
+		return bytes;
 	}
 
 }

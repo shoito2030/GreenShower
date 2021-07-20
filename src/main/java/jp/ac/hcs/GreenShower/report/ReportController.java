@@ -1,9 +1,13 @@
 package jp.ac.hcs.GreenShower.report;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jp.ac.hcs.GreenShower.WebConfig;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -78,6 +83,8 @@ public class ReportController {
 //
 //			return getReportInsert(form, model);
 //		}
+		
+		log.info("入力情報（試験区分）：" + form.getTest_section());
 
 		// 追加処理実行
 		reportService.insert(form, principal.getName());
@@ -176,26 +183,50 @@ public class ReportController {
 	 * @param model
 	 * @return 受験報告情報一覧画面
 	 */
-	@PostMapping("report/change_status/")
+	@PostMapping("report/change_status/{id}")
 	public String changeStauts(@PathVariable("id") String report_id, String report_status,
 			 Principal principal, Model model) {
-
-//		// 入力チェックに引っかかった場合、前の画面に戻る
-//		if (bindingResult.hasErrors()) {
-//			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
-//			log.info("入力情報：" + form.toString());
-//
-//			model.addAttribute("errmsg", "ユーザ情報の登録に失敗しました。入力内容をお確かめください。");
-//
-//			return getReportInsert(form, model);
-//		}
-		
-		
 		
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
 		reportService.updateStatus(report_id, report_status);
-
+		log.info("[" + principal.getName() + "]さんがレポートステータスを更新しました");
 		return getReportList(model);
+	}
+	
+	/**
+	 * 自分の全てのタスク情報をCSVファイルとしてダウンロードさせる.
+	 * 
+	 * @param principal ログイン情報
+	 * @param model
+	 * @return タスク情報のCSVファイル
+	 */
+	@PostMapping("/report/csv")
+	public ResponseEntity<byte[]> getReportCsv(Principal principal, Model model) {
+
+		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_TASK_CSV;
+
+		log.info("[" + principal.getName() + "]CSVファイル作成:" + OUTPUT_FULLPATH);
+
+		// CSVファイルをサーバ上に作成
+		reportService.reportListCsvOut();
+
+		// CSVファイルをサーバから読み込み
+		byte[] bytes = null;
+		try {
+			bytes = reportService.getFile(OUTPUT_FULLPATH);
+			log.info("[" + principal.getName() + "]CSVファイル読み込み成功:" + OUTPUT_FULLPATH);
+		} catch (IOException e) {
+			log.warn("[" + principal.getName() + "]CSVファイル読み込み失敗:" + OUTPUT_FULLPATH);
+			e.printStackTrace();
+		}
+
+		// CSVファイルのダウンロード用ヘッダー情報設定
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type", "text/csv; charset=UTF-8");
+		header.setContentDispositionFormData("filename", WebConfig.FILENAME_TASK_CSV);
+
+		// CSVファイルを端末へ送信
+		return new ResponseEntity<byte[]>(bytes, header, HttpStatus.OK);
 	}
 
 }

@@ -83,6 +83,10 @@
 			<form method="get" th:action="@{/report/insert}">
 				<button type="submit" class="btn btn-primary">受験報告新規作成</button>
 			</form>
+			
+			<form method="post" th:action="@{/report/csv}">
+				<button type="submit" class="btn btn-info">CSV出力</button>
+			</form>
 		</div>
 	</div>
 </body>

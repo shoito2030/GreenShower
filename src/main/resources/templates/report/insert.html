@@ -70,11 +70,8 @@
 							type="radio" name="venue_section" value="3">札幌：HCS <input
 							type="radio" name="venue_section" value="4">東京：会社 <input
 							type="radio" name="venue_section" value="5">東京：外会場 <input
-							type="radio" name="venue_section" value="99">その他
-
-						<div class="form-group input-box">
-							<input type="text" class="form-control" name="venue_section">
-						</div>
+							type="radio" name="venue_section" value="99">その他 <input
+							type="text" class="form-control" name="venue_section_other">
 					</div>
 
 					<label for="test_section">試験区分</label>
@@ -83,9 +80,10 @@
 						<input type="radio" name="test_section" value="1">1次試験 <input
 							type="radio" name="test_section" value="2">２次試験 <input
 							type="radio" name="test_section" value="3">３次試験 <input
-							type="radio" name="test_section" value="4">４次試験 <input
-							type="radio" name="test_section" value="99">その他 <input
-							type="checkbox" name="test_section" value="5">最終試験
+							type="radio" name="test_section" value="4">４次試験<input
+							type="checkbox" name="test_section" value="5">最終試験 <input
+							type="radio" name="test_section" value="99">その他<input
+							type="text" class="form-control" name="test_section_other">
 
 					</div>
 
@@ -98,29 +96,22 @@
 							type="radio" name="test_summary" value="4">グループワーク <input
 							type="radio" name="test_summary" value="5">集団面接 <input
 							type="radio" name="test_summary" value="6">個人面接 <input
-							type="radio" name="test_summary" value="99">その他
+							type="radio" name="test_summary" value="99">その他<input
+							type="text" class="form-control" name="test_summary_other">
 
 					</div>
 
 					<label for="result_notification">結果通知方法</label>
 					<div class="form-group input-box">
 
-						<input type="radio" name="result_notification" value="1">〇日後
-
-						<input type="radio" name="result_notification" value="2">〇日後:合格のみ
-
-						<input type="radio" name="result_notification" value="3">本人
-
-						<input type="radio" name="result_notification" value="4">学校
-
-						<input type="radio" name="result_notification" value="5">電話
-
-						<input type="radio" name="result_notification" value="6">郵便
-
-						<input type="radio" name="result_notification" value="7">メール
-
-						<input type="radio" name="result_notification" value="8">Web
-
+						<input type="checkbox" name="result_notification" value="2">合格のみ
+						<input type="checkbox" name="result_notification" value="3">本人
+						<input type="checkbox" name="result_notification" value="4">学校
+						<input type="checkbox" name="result_notification" value="5">電話
+						<input type="checkbox" name="result_notification" value="6">郵便
+						<input type="checkbox" name="result_notification" value="7">メール
+						<input type="checkbox" name="result_notification" value="8">Web
+						結果通達(日後)<input type="number" name="result_notification" value="1">
 
 					</div>
 
@@ -134,7 +125,7 @@
 
 						<input type="radio" name="aptitude_test_detail" value="3">職業適性
 
-						<input type="radio" name="aptitude_test_detail" value="4">クレベリン
+						<input type="radio" name="aptitude_test_detail" value="4">クレぺリン
 
 						<input type="radio" name="aptitude_test_detail" value="5">一般常識
 
@@ -142,7 +133,9 @@
 
 						<input type="radio" name="aptitude_test_detail" value="7">作文テーマ
 
-						<input type="radio" name="aptitude_test_detail" value="99">その他適性
+						<input type="radio" name="aptitude_test_detail" value="99">その他適性<input
+							type="text" class="form-control"
+							name="aptitude_test_detail_other">
 
 
 					</div>
@@ -151,38 +144,15 @@
 					<div class="form-group input-box">
 
 						<input type="radio" name="interview_detail" value="1">形態：個人
-
-						<input type="radio" name="interview_detail" value="2">形態：集団
+						<input type="radio" name="interview_detail" value="2">形態：集団(名/回)<input
+							type="number" name="interview_number">面接官(人数)<input
+							type="number" name="interviewer_number">面接官(役職)<input
+							type="text" class="form-control" name="interviewer_position">面接時間(分)<input
+							type="number" name="interview_time">GD／GW時のテーマ<input
+							type="text" class="form-control" name="theme">
 
 
 					</div>
-
-					<label for="interview_number">面接に参加した学生の数</label>
-					<div class="form-group input-box">
-						<input type="text" class="form-control" name="interview_number">
-					</div>
-
-					<label for="interviewer_number">面接官の数</label>
-					<div class="form-group input-box">
-						<input type="text" class="form-control" name="interviewer_number">
-					</div>
-
-					<label for="interviewer_position">面接官の役職</label>
-					<div class="form-group input-box">
-						<input type="text" class="form-control"
-							name="interviewer_position">
-					</div>
-
-					<label for="interview_time">面接時間</label>
-					<div class="form-group input-box">
-						<input type="text" class="form-control" name="interview_time">
-					</div>
-
-					<label for="theme">GD／GW時のテーマ</label>
-					<div class="form-group input-box">
-						<input type="text" class="form-control" name="theme">
-					</div>
-
 					<label for="question_contents">出題内容</label>
 					<div class="form-group input-box">
 						<input type="text" class="form-control" name="question_contents">
