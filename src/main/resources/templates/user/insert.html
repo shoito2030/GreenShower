@@ -7,7 +7,18 @@
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
-</head>
+<script type="text/javascript">
+function clickBtn2(){
+	document.getElementById("dis1").setAttribute("disabled", true);
+	document.getElementById("dis2").setAttribute("disabled", true);
+}
+</script>
+<script type="text/javascript">
+function clickBtn1(){
+	document.getElementById("dis1").removeAttribute("disabled");
+	document.getElementById("dis2").removeAttribute("disabled");
+}
+</script>
 </head>
 <body>
 	<th:block th:insert="components/part::frag_header"></th:block>
@@ -35,16 +46,16 @@
 					<tr>
 						<th>権限</th>
 						<td><select name="role">
-								<option value="ROLE_STUDENT">学生</option>
-								<option value="ROLE_TEACHER">担任</option>
-								<option value="ROLE_STAFF">事務</option>
+								<option value="ROLE_STUDENT" onclick="clickBtn1();">学生</option>
+								<option value="ROLE_TEACHER" onclick="clickBtn2();">担任</option>
+								<option value="ROLE_STAFF" onclick="clickBtn2();">事務</option>
 						</select></td>
 					</tr>
 					<tr>
 						<th>クラス番号</th>
 						<td><input type="text" class="form-control" name="classroom"
-							placeholder="SXAY"> <input type="text"
-							class="form-control" name="class_number" placeholder="00"></td>
+							placeholder="SXAY" id="dis1"> <input type="text"
+							class="form-control" name="class_number" placeholder="00" id="dis2"></td>
 					</tr>
 				</table>
 				<button type="submit" class="btn btn-warning">登録</button>
