@@ -18,21 +18,23 @@
 			<div th:object="${reportData}">
 				<label for="user_id">ユーザID(メールアドレス)</label> <span
 					th:text="${reportData.user_id}"></span><br>
+				<form method="post"
+					th:action="@{'/report/change_status/'+ *{report_id}}">
+					<div class="form-group input-box">
 
-				<div class="form-group input-box">
+						<input type="hidden" name="report_id" th:value="*{report_id}">
 
-					<input type="hidden" name="report_id" th:value="*{report_id}">
+						<input type="radio" name="report_status"
+							th:field="*{report_status}" value="1">承認待ち <input
+							type="radio" name="report_status" th:field="*{report_status}"
+							value="2">承認済み <input type="radio" name="report_status"
+							th:field="*{report_status}" value="3">差し戻し <input
+							type="radio" name="report_status" th:field="*{report_status}"
+							value="4">破棄
 
-					<input type="radio" name="report_status"
-						th:field="*{report_status}" value="1">承認待ち <input
-						type="radio" name="report_status" th:field="*{report_status}"
-						value="2">承認済み <input type="radio" name="report_status"
-						th:field="*{report_status}" value="3">差し戻し <input
-						type="radio" name="report_status" th:field="*{report_status}"
-						value="4">破棄
-						<a class="btn btn-success"
-						th:href="@{'/report/change_status/'+ *{report_id}}">状態変更</a>
-				</div>
+					</div>
+					<button type="submit" class="btn btn-warning">状態変更</button>
+				</form>
 				<hr>
 				<label for="classroom">所属クラス</label> <span
 					th:text="${reportData.classroom}"></span><br>
@@ -113,8 +115,8 @@
 				<hr>
 
 				<label for="result_notification">結果通知方法</label> <span
-					th:text="${reportData.result_notification}"></span><br>
-				<span th:text="${reportData.result_notification_day}">日後</span>
+					th:text="${reportData.result_notification}"></span><br><span
+					th:text="${reportData.result_notification_day}">日後</span>
 
 				<hr>
 
