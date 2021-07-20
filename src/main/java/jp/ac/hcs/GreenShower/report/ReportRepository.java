@@ -156,6 +156,7 @@ public class ReportRepository {
 			data.setTest_summary((String) map.get("test_summary"));
 			data.setTest_summary_other((String) map.get("test_summary_other"));
 			data.setResult_notification((String) map.get("result_notification"));
+//			data.setResult_notification_day((String) map.get("result_notification_day"));
 			data.setAptitude_test_detail((String) map.get("aptitude_test_detail"));
 			data.setAptitude_test_detail_other((String) map.get("aptitude_test_detail_other"));
 			data.setInterview_detail((String) map.get("interview_detail"));
@@ -164,10 +165,11 @@ public class ReportRepository {
 			data.setInterviewer_number((int) map.get("interviewer_number"));
 			data.setInterviewer_position((String) map.get("interviewer_position"));
 			data.setInterview_time((int) map.get("interview_time"));
-			data.setTheme((String) map.get("itheme"));
+			data.setTheme((String) map.get("theme"));
 			data.setQuestion_contents((String) map.get("question_contents"));
 			data.setReport_status((String) map.get("report_status"));
-			data.setRegistered_date((Date) map.get("request_date"));
+			data.setRegistered_date((Date) map.get("registered_date"));
+			data.setRequest_date((Date) map.get("request_date"));
 			data.setRegistered_user_id((String) map.get("registered_user_id"));
 			data.setRemarks((String) map.get("remarks"));
 
@@ -222,6 +224,20 @@ public class ReportRepository {
 		int rowNumber = jdbc.update(SQL_UPDATE_REPORT_STATUS,
 				report_id, report_status);
 		return rowNumber ;
+	}
+	
+	
+	/**
+	 * TaskテーブルからユーザIDをキーにデータを全件取得し、CSVファイルとしてサーバに保存する.
+	 * @param user_id 検索するユーザID
+	 * @throws DataAccessException
+	 */
+	public void tasklistCsvOut() throws DataAccessException {
+
+		// CSVファイル出力用設定
+		TaskRowCallbackHandler handler = new TaskRowCallbackHandler();
+
+		jdbc.query(SQL_SELECT_ALL, handler);
 	}
 
 }

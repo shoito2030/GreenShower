@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jp.ac.hcs.GreenShower.report.ReportEntity;
 import jp.ac.hcs.GreenShower.report.ReportService;
 @Controller
 public class PdfController {
@@ -14,8 +15,11 @@ public class PdfController {
     
     @RequestMapping("/pdf")
     public MyPdfView pdf(@RequestParam("id") String id, MyPdfView mav) {
-//        ReportEntity reportEntity = reportService.getReport(id);
-//        mav.addStaticAttribute("reportEntity", reportEntity);
+        //ReportEntity reportEntity = reportService.getReport(id);
+        ReportEntity reportEntity = null;
+        mav.addStaticAttribute("reportEntity", reportEntity);
         return mav;
     }
+    
+    
 }
