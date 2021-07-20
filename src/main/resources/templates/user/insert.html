@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="UTF-8">
-<title>ユーザ管理</title>
+<title>ユーザ新規作成</title>
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
@@ -53,7 +53,7 @@ function clickBtn1(){
 					</tr>
 					<tr>
 						<th>権限</th>
-						<td><select name="role" >
+						<td><select name="role">
 								<option value="ROLE_STUDENT" onclick="clickBtn1();">学生</option>
 								<option value="ROLE_TEACHER" onclick="clickBtn2();">担任</option>
 								<option value="ROLE_STAFF" onclick="clickBtn2();">事務</option>
