@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS report (
 	report_id INT PRIMARY KEY,
+	job_number INT,
     user_id VARCHAR(254),
     classroom CHAR(4),
     class_number CHAR(2),

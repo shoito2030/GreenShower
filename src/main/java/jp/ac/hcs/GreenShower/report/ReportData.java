@@ -12,6 +12,11 @@ public class ReportData {
 	private int report_id;
 	
 	/**
+	 * 求人番号
+	 */
+	private int job_number;
+	
+	/**
 	 * ユーザID(メールアドレス)
 	 * メールアドレス形式
 	 */
