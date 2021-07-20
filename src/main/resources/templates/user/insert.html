@@ -26,26 +26,34 @@ function clickBtn1(){
 	<th:block th:insert="components/part::frag_script"></th:block>
 	<div class="container">
 		<div class="content-box">
-			<form method="post" name="userInsert" th:action="@{/user/insert}">
+		<p th:text="${errmsg}" style="background-color:#ffcc99;"></p>
+			<form method="post" name="userInsert" th:action="@{/user/insert}" th:object="${userFormForInsert}">
 				<table>
 					<tr>
 						<th>ユーザID（メールアドレス）</th>
-						<td><input type="text" class="form-control" name="user_id"
-							placeholder="(例)xxx.@xxx.xx"></td>
+						<td>
+						<input type="text" class="form-control" name="user_id"
+							placeholder="(例)xxx.@xxx.xx" th:field="*{user_id}"/>
+							<span class="text-danger" th:if="${#fields.hasErrors('user_id')}" th:errors="*{user_id}">user_id error</span>
+						</td>
 					</tr>
 					<tr>
 						<th>パスワード</th>
 						<td><input type="password" class="form-control"
-							name="encrypted_password" placeholder="4～100文字で入力すること"></td>
+							name="encrypted_password" placeholder="4～100文字で入力すること" th:field="*{encrypted_password}"/>
+							<span class="text-danger" th:if="${#fields.hasErrors('encrypted_password')}" th:errors="*{encrypted_password}">encrypted_password error</span>
+							</td>
 					</tr>
 					<tr>
 						<th>氏名</th>
 						<td><input type="text" class="form-control" name="name"
-							placeholder="(例)情報太郎"></td>
+							placeholder="(例)情報太郎" th:field="*{name}"/>
+							<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</span>
+							</td>
 					</tr>
 					<tr>
 						<th>権限</th>
-						<td><select name="role">
+						<td><select name="role" >
 								<option value="ROLE_STUDENT" onclick="clickBtn1();">学生</option>
 								<option value="ROLE_TEACHER" onclick="clickBtn2();">担任</option>
 								<option value="ROLE_STAFF" onclick="clickBtn2();">事務</option>
@@ -54,8 +62,10 @@ function clickBtn1(){
 					<tr>
 						<th>クラス番号</th>
 						<td><input type="text" class="form-control" name="classroom"
-							placeholder="SXAY" id="dis1"> <input type="text"
-							class="form-control" name="class_number" placeholder="00" id="dis2"></td>
+							placeholder="SXAY" id="dis1" th:field="*{classroom}"/>
+							<span class="text-danger" th:if="${#fields.hasErrors('classroom')}" th:errors="*{classroom}">name error</span>
+							 <input type="text" class="form-control" name="class_number" placeholder="00" id="dis2" th:field="*{class_number}"/>
+							 <span class="text-danger" th:if="${#fields.hasErrors('class_number')}" th:errors="*{class_number}">name error</span></td>
 					</tr>
 				</table>
 				<button type="submit" class="btn btn-warning">登録</button>
