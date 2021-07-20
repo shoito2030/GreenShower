@@ -43,12 +43,12 @@ public class UserFormForInsert {
 	/**
 	 * 所属クラス 固定長文字列(4)
 	 */
-	@Length(min = 4, max = 4, message = "{length_check}")
+	@Length(min = 0, max = 4, message = "{length_check}")
 	private String classroom;
 
 	/**
 	 * 出席番号 固定長文字列(2)
 	 */
-	@Length(min = 2, max = 2, message = "{length_check}")
+	@Length(min = 0, max = 2, message = "{length_check}")
 	private String class_number;
 }
