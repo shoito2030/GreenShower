@@ -16,144 +16,172 @@
 		<div class="content-box">
 			<h2>受験情報詳細</h2>
 			<div th:object="${reportData}">
-			
-			<input type="hidden" name="report_id" th:value="*{report_id}">
-			
-					<label for="user_id">ユーザID(メールアドレス)</label>
-					<span th:text="${reportData.user_id}"></span><br>
+				<label for="user_id">ユーザID(メールアドレス)</label> <span
+					th:text="${reportData.user_id}"></span><br>
+				<form method="post"
+					th:action="@{/report/change_status/'+ *{reportData.report_id}}">
+					<div class="form-group input-box">
 
-					<hr>
+						<input type="hidden" name="report_id" th:value="*{report_id}">
 
-					<label for="classroom">所属クラス</label>
-					<span th:text="${reportData.classroom}"></span><br>
+						<input type="radio" name="report_status"
+							th:field="*{report_status}" value="1">承認待ち <input
+							type="radio" name="report_status" th:field="*{report_status}"
+							value="2">承認済み <input type="radio" name="report_status"
+							th:field="*{report_status}" value="3">差し戻し <input
+							type="radio" name="report_status" th:field="*{report_status}"
+							value="4">破棄
 
-					<hr>
+					</div>
+					<button type="submit" class="btn btn-warning">状態変更</button>
+				</form>
+				<hr>
+				<label for="classroom">所属クラス</label> <span
+					th:text="${reportData.classroom}"></span><br>
 
-					<label for="class_number">出席番号</label>
-					<span th:text="${reportData.class_number}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="class_number">出席番号</label> <span
+					th:text="${reportData.class_number}"></span><br>
 
-					<label for="name">氏名</label>
-					<span th:text="${reportData.name}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="name">氏名</label> <span th:text="${reportData.name}"></span><br>
 
-					<label for="course_code">学科コード</label>
-					<span th:text="${reportData.course_code}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="course_code">学科コード</label> <span
+					th:text="${reportData.course_code}"></span><br>
 
-					<label for="company_name">企業名</label>
-					<span th:text="${reportData.company_name}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="company_name">企業名</label> <span
+					th:text="${reportData.company_name}"></span><br>
 
-					<label for="company_name_kana">企業名カナ</label>
-					<span th:text="${reportData.company_name_kana}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="company_name_kana">企業名カナ</label> <span
+					th:text="${reportData.company_name_kana}"></span><br>
 
-					<label for="datetime">日時</label>
-					<span th:text="${reportData.datetime}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="datetime">日時</label> <span
+					th:text="${reportData.datetime}"></span><br>
 
-					<label for="place">受験場所</label>
-					<span th:text="${reportData.place}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="place">受験場所</label> <span th:text="${reportData.place}"></span><br>
 
-					<label for="entry_section">申し込み区分</label>
-					<span th:text="${reportData.entry_section}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="entry_section">申し込み区分</label> <span
+					th:text="${reportData.entry_section}"></span><br>
 
-					<label for="venue_section">会場区分</label>
-					<span th:text="${reportData.venue_section}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="entry_section_other">申し込み区分その他</label> <span
+					th:text="${reportData.entry_section_other}"></span><br>
 
-					<label for="test_section">試験区分</label>
-					<span th:text="${reportData.test_section}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="venue_section">会場区分</label> <span
+					th:text="${reportData.venue_section}"></span><br>
 
-					<label for="test_summary">試験概要</label>
-					<span th:text="${reportData.test_summary}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="venue_section_other">会場区分その他</label> <span
+					th:text="${reportData.venue_section_other}"></span><br>
 
-					<label for="result_notification">結果通知方法</label>
-					<span th:text="${reportData.result_notification}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="test_section">試験区分</label> <span
+					th:text="${reportData.test_section}"></span><br>
 
-					<label for="aptitude_test_detail">適性試験詳細</label>
-					<span th:text="${reportData.aptitude_test_detail}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="test_section_other">試験区分その他</label> <span
+					th:text="${reportData.test_section_other}"></span><br>
 
-					<label for="interview_detail">面接詳細</label>
-					<span th:text="${reportData.interview_detail}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="test_summary">試験概要</label> <span
+					th:text="${reportData.test_summary}"></span><br>
 
-					<label for="interview_number">面接に参加した学生の数</label>
-					<span th:text="${reportData.interview_number}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="test_summary_other">試験概要その他</label> <span
+					th:text="${reportData.test_summary_other}"></span><br>
 
-					<label for="interviewer_number">面接官の数</label>
-					<span th:text="${reportData.interviewer_number}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="result_notification">結果通知方法</label> <span
+					th:text="${reportData.result_notification}"></span><br><span
+					th:text="${reportData.result_notification_day}">日後</span>
 
-					<label for="interviewer_position">面接官の役職</label>
-					<span th:text="${reportData.interviewer_position}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="aptitude_test_detail">適性試験詳細</label> <span
+					th:text="${reportData.aptitude_test_detail}"></span><br>
 
-					<label for="interview_time">面接時間</label>
-					<span th:text="${reportData.interview_time}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="interview_detail">面接詳細</label> <span
+					th:text="${reportData.interview_detail}"></span><br>
 
-					<label for="theme">GD／GW時のテーマ</label>
-					<span th:text="${reportData.theme}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="interview_number">面接に参加した学生の数</label> <span
+					th:text="${reportData.interview_number}"></span><br>
 
-					<label for="question_contents">出題内容</label>
-					<span th:text="${reportData.question_contents}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="interviewer_number">面接官の数</label> <span
+					th:text="${reportData.interviewer_number}"></span><br>
 
-					<label for="report_status">受験報告状態</label>
-					<span th:text="${reportData.report_status}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="interviewer_position">面接官の役職</label> <span
+					th:text="${reportData.interviewer_position}"></span><br>
 
-					<label for="registered_date">登録日時</label>
-					<span th:text="${reportData.registered_date}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="interview_time">面接時間</label> <span
+					th:text="${reportData.interview_time}"></span><br>
 
-					<label for="request_date">申請日</label>
-					<span th:text="${reportData.request_date}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="theme">GD／GW時のテーマ</label> <span
+					th:text="${reportData.theme}"></span><br>
 
-					<label for="registered_user_id">登録者のユーザID</label>
-					
-					<span th:text="${reportData.registered_user_id}"></span><br>
+				<hr>
 
-					<hr>
+				<label for="question_contents">出題内容</label> <span
+					th:text="${reportData.question_contents}"></span><br>
 
-					<label for="remarksl">備考</label>
-					<span th:text="${reportData.remarks}"></span><br>
+				<hr>
 
-					
+				<label for="report_status">受験報告状態</label> <span
+					th:text="${reportData.report_status}"></span><br>
+
+				<hr>
+
+				<label for="registered_date">登録日時</label> <span
+					th:text="${reportData.registered_date}"></span><br>
+
+				<hr>
+
+				<label for="request_date">申請日</label> <span
+					th:text="${reportData.request_date}"></span><br>
+
+				<hr>
+
+				<label for="registered_user_id">登録者のユーザID</label> <span
+					th:text="${reportData.registered_user_id}"></span><br>
+
+				<hr>
+
+				<label for="remarksl">備考</label> <span
+					th:text="${reportData.remarks}"></span><br>
 			</div>
 		</div>
 	</div>
