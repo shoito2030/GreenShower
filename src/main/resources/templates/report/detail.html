@@ -19,7 +19,7 @@
 				<label for="user_id">ユーザID(メールアドレス)</label> <span
 					th:text="${reportData.user_id}"></span><br>
 				<form method="post"
-					th:action="@{/report/change_status/'+ *{reportData.report_id}}">
+					th:action="@{'/report/change_status/'+ *{report_id}}">
 					<div class="form-group input-box">
 
 						<input type="hidden" name="report_id" th:value="*{report_id}">
@@ -74,8 +74,13 @@
 
 				<hr>
 
-				<label for="entry_section">申し込み区分</label> <span
-					th:text="${reportData.entry_section}"></span><br>
+				<label for="entry_section">申し込み区分</label><br>
+				<span th:if="*{entry_section} == '1'">学校斡旋</span>
+				<span th:if="*{entry_section} == '2'">ネット：斡旋サイト</span>
+				<span th:if="*{entry_section} == '3'">ネット：企業HP</span>
+				<span th:if="*{entry_section} == '4'">新聞・雑誌</span>
+				<span th:if="*{entry_section} == '5'">ジョブカフェ等</span>
+				<span th:if="*{entry_section} == '99'">その他</span>
 
 				<hr>
 
@@ -84,8 +89,13 @@
 
 				<hr>
 
-				<label for="venue_section">会場区分</label> <span
-					th:text="${reportData.venue_section}"></span><br>
+				<label for="venue_section">会場区分</label><br>
+				<span th:if="*{venue_section} == '1'">札幌：会社</span>
+				<span th:if="*{venue_section} == '2'">札幌：外会場</span>
+				<span th:if="*{venue_section} == '3'">札幌：HCS</span>
+				<span th:if="*{venue_section} == '4'">東京地区：会社</span>
+				<span th:if="*{venue_section} == '5'">東京地区：外会場</span>
+				<span th:if="*{venue_section} == '99'">その他</span>
 
 				<hr>
 
@@ -94,8 +104,13 @@
 
 				<hr>
 
-				<label for="test_section">試験区分</label> <span
-					th:text="${reportData.test_section}"></span><br>
+				<label for="test_section">試験区分</label><br>
+				<span th:if="*{test_section} == '1'">1次試験</span>
+				<span th:if="*{test_section} == '2'">2次試験</span>
+				<span th:if="*{test_section} == '3'">3次試験</span>
+				<span th:if="*{test_section} == '4'">4次試験</span>
+				<span th:if="*{test_section} == '5'">最終試験</span>
+				<span th:if="*{test_section} == '99'">その他</span>
 
 				<hr>
 
@@ -104,8 +119,14 @@
 
 				<hr>
 
-				<label for="test_summary">試験概要</label> <span
-					th:text="${reportData.test_summary}"></span><br>
+				<label for="test_summary">試験概要</label><br>
+				<span th:if="*{test_summary} == '1'">適性</span>
+				<span th:if="*{test_summary} == '2'">筆記・作文</span>
+				<span th:if="*{test_summary} == '3'">ディスカッション</span>
+				<span th:if="*{test_summary} == '4'">グループワーク</span>
+				<span th:if="*{test_summary} == '5'">集団面接</span>
+				<span th:if="*{test_summary} == '6'">個人面接</span>
+				<span th:if="*{test_summary} == '99'">その他</span>
 
 				<hr>
 
@@ -114,14 +135,26 @@
 
 				<hr>
 
-				<label for="result_notification">結果通知方法</label> <span
-					th:text="${reportData.result_notification}"></span><br><span
-					th:text="${reportData.result_notification_day}">日後</span>
+				<label for="result_notification">結果通知方法</label><br>
+				<span th:if="*{result_notification} == '3'">本人</span>
+				<span th:if="*{result_notification} == '4'">学校</span>
+				<span th:if="*{result_notification} == '5'">電話</span>
+				<span th:if="*{result_notification} == '6'">郵送</span>
+				<span th:if="*{result_notification} == '7'">メール</span>
+				<span th:if="*{result_notification} == '8'">Web</span>
+				<span th:text="${reportData.result_notification_day}">日後</span>
 
 				<hr>
 
-				<label for="aptitude_test_detail">適性試験詳細</label> <span
-					th:text="${reportData.aptitude_test_detail}"></span><br>
+				<label for="aptitude_test_detail">適性試験詳細</label><br>
+				<span th:if="*{aptitude_test_detail} == '1'">SPI</span>
+				<span th:if="*{aptitude_test_detail} == '2'">CAB／GAB</span>
+				<span th:if="*{aptitude_test_detail} == '3'">職業適性</span>
+				<span th:if="*{aptitude_test_detail} == '4'">クレペリン</span>
+				<span th:if="*{aptitude_test_detail} == '5'">一般常識</span>
+				<span th:if="*{aptitude_test_detail} == '6'">専門知識</span>
+				<span th:if="*{aptitude_test_detail} == '7'">作文テーマ</span>
+				<span th:if="*{aptitude_test_detail} == '99'">その他適性</span>
 
 				<hr>
 
@@ -160,8 +193,11 @@
 
 				<hr>
 
-				<label for="report_status">受験報告状態</label> <span
-					th:text="${reportData.report_status}"></span><br>
+				<label for="report_status">受験報告状態</label><br> <span
+					th:if="*{report_status} == '1'">承認待ち</span> <span
+					th:if="*{report_status} == '2'">承認済み</span> <span
+					th:if="*{report_status} == '3'">差し戻し</span> <span
+					th:if="*{report_status} == '4'">破棄</span>
 
 				<hr>
 

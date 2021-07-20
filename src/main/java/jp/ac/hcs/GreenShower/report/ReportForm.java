@@ -18,6 +18,10 @@ public class ReportForm {
 //	@Email(message = "{email_check}")
 //	private String user_id;
 	
+	/**
+	 * レポートID
+	 */
+	private int report_id;
 	
 	/**
 	 * 企業名
@@ -34,7 +38,7 @@ public class ReportForm {
 	/**
 	 * 日時
 	 */
-	private Date datetime;
+	private String datetime;
 	
 	/**
 	 * 受験場所

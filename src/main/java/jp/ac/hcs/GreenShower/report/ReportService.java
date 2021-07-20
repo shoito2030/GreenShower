@@ -1,5 +1,7 @@
 package jp.ac.hcs.GreenShower.report;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,18 @@ public class ReportService {
 		return rowNumber > 0;
 	}
 	
+	public boolean update(ReportForm form) {
+		ReportData reportData = refillToReportData(form, null);
+		int rowNumber = 0;
+		try {
+			
+			rowNumber = reportRepository.updateReportForStudent(reportData);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		
+		return rowNumber > 0;
+	}
 	
 	/**
 	 * 入力情報をUserData型に変換する（insert用）
@@ -85,9 +99,17 @@ public class ReportService {
 //		data.setClass_number();
 //		data.setName();
 //		data.setCourse_code();
+		data.setReport_id(form.getReport_id());		
 		data.setCompany_name(form.getCompany_name());
-		data.setCompany_name_kana(form.getCompany_name_kana());		
-		data.setDatetime(form.getDatetime());
+		data.setCompany_name_kana(form.getCompany_name_kana());
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			data.setDatetime(dateFormat.parse(form.getDatetime()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		data.setPlace(form.getPlace());
 		data.setEntry_section(form.getEntry_section());
 		data.setEntry_section_other(form.getEntry_section_other());
@@ -115,6 +137,25 @@ public class ReportService {
 		data.setRemarks(null);
 
 		return data;
+	}
+
+	
+	/**
+	 * 受験報告情報ステータス変更用
+	 * @param report_id
+	 * @param report_status
+	 */
+	public boolean updateStatus(String report_id, String report_status) {
+		int rowNumber = 0;
+
+		try {
+			// 追加処理を行い、追加できた件数を取得
+			rowNumber = reportRepository.updateStatus(report_id, report_status);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return rowNumber > 0;
+		
 	}
 
 }
