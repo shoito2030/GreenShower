@@ -18,9 +18,9 @@
 			<div class="input-form">
 				<form method="post" th:action="@{/report/update}">
 					<div th:object="${reportData}">
-					
-					<input type="hidden" name="report_id" th:value="*{report_id}">
-					
+
+						<input type="hidden" name="report_id" th:value="*{report_id}">
+
 						<label for="user_id">ユーザID(メールアドレス)</label> <span
 							th:text="${reportData.user_id}"></span><br>
 
@@ -90,7 +90,8 @@
 								type="radio" name="entry_section" th:field="*{entry_section}"
 								value="5">ジョブカフェ等 <input type="radio"
 								name="entry_section" th:field="*{entry_section}" value="99">その他
-
+							<input type="text" class="form-control"
+								name="entry_section_other" th:field="*{entry_section_other}">
 						</div>
 
 						<hr>
@@ -108,8 +109,9 @@
 								th:field="*{venue_section}" value="4">東京：会社 <input
 								type="radio" name="venue_section" th:field="*{venue_section}"
 								value="5">東京：外会場 <input type="radio"
-								name="venue_section" value="99">その他
-
+								name="venue_section" value="99">その他 <input type="text"
+								class="form-control" name="venue_section_other"
+								th:field="*{venue_section_other}">
 						</div>
 						<hr>
 
@@ -124,28 +126,28 @@
 								value="4">４次試験 <input type="radio" name="test_section"
 								th:field="*{test_section}" value="5">最終試験 <input
 								type="radio" name="test_section" th:field="*{test_section}"
-								value="99">その他
-
+								value="99">その他 <input type="text" class="form-control"
+								name="test_section_other" th:field="*{test_section_other}">
 						</div>
 						<hr>
 
 						<label for="test_summary">試験概要</label>
 						<div class="form-group input-box">
 
-							<input type="radio" name="test_summary"
+							<input type="checkbox" name="test_summary"
 								th:field="*{test_summary}" value="1">適性 <input
-								type="radio" name="test_summary" th:field="*{test_summary}"
-								value="2">筆記・作文 <input type="radio" name="test_summary"
-								th:field="*{test_summary}" value="3">ディスカッション <input
-								type="radio" name="test_summary" th:field="*{test_summary}"
-								value="4">グループワーク <input type="radio"
-								name="test_summary" th:field="*{test_summary}" value="5">集団面接
-
-							<input type="radio" name="test_summary"
-								th:field="*{test_summary}" value="6">個人面接 <input
-								type="radio" name="test_summary" th:field="*{test_summary}"
-								value="99">その他
-
+								type="checkbox" name="test_summary" th:field="*{test_summary}"
+								value="2">筆記・作文 <input type="checkbox"
+								name="test_summary" th:field="*{test_summary}" value="3">ディスカッション
+							<input type="checkbox" name="test_summary"
+								th:field="*{test_summary}" value="4">グループワーク <input
+								type="checkbox" name="test_summary" th:field="*{test_summary}"
+								value="5">集団面接 <input type="checkbox"
+								name="test_summary" th:field="*{test_summary}" value="6">個人面接
+							<input type="checkbox" name="test_summary"
+								th:field="*{test_summary}" value="99">その他 <input
+								type="text" class="form-control" name="test_summary_other"
+								th:field="*{test_summary_other}">
 						</div>
 
 						<hr>
@@ -153,23 +155,22 @@
 						<label for="result_notification">結果通知方法</label>
 						<div class="form-group input-box">
 
-							<input type="radio" name="result_notification"
-								th:field="*{result_notification}" value="1">〇日後 <input
-								type="radio" name="result_notification"
-								th:field="*{result_notification}" value="2">〇日後:合格のみ <input
-								type="radio" name="result_notification"
+							<input type="checkbox" name="result_notification"
+								th:field="*{result_notification}" value="2">合格のみ <input
+								type="checkbox" name="result_notification"
 								th:field="*{result_notification}" value="3">本人 <input
-								type="radio" name="result_notification"
+								type="checkbox" name="result_notification"
 								th:field="*{result_notification}" value="4">学校 <input
-								type="radio" name="result_notification"
+								type="checkbox" name="result_notification"
 								th:field="*{result_notification}" value="5">電話 <input
-								type="radio" name="result_notification"
+								type="checkbox" name="result_notification"
 								th:field="*{result_notification}" value="6">郵便 <input
-								type="radio" name="result_notification"
+								type="checkbox" name="result_notification"
 								th:field="*{result_notification}" value="7">メール <input
-								type="radio" name="result_notification"
-								th:field="*{result_notification}" value="8">Web
-
+								type="checkbox" name="result_notification"
+								th:field="*{result_notification}" value="8">Web 結果通達(日後)<input
+								type="number" name="result_notification"
+								th:field="*{result_notification}" value="1">
 
 						</div>
 
@@ -178,22 +179,24 @@
 						<label for="aptitude_test_detail">適性試験詳細</label>
 						<div class="form-group input-box">
 
-							<input type="radio" name="aptitude_test_detail"
+							<input type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="1">SPI <input
-								type="radio" name="aptitude_test_detail"
+								type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="2">CAB/GAB <input
-								type="radio" name="aptitude_test_detail"
+								type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="3">職業適性 <input
-								type="radio" name="aptitude_test_detail"
+								type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="4">クレベリン <input
-								type="radio" name="aptitude_test_detail"
+								type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="5">一般常識 <input
-								type="radio" name="aptitude_test_detail"
+								type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="6">専門知識 <input
-								type="radio" name="aptitude_test_detail"
+								type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="7">作文テーマ <input
-								type="radio" name="aptitude_test_detail"
-								th:field="*{aptitude_test_detail}" value="99">その他適性
+								type="checkbox" name="aptitude_test_detail"
+								th:field="*{aptitude_test_detail}" value="99">その他適性<input
+								type="text" class="form-control" name="aptitude_test_detail_other"
+								th:field="*{aptitude_test_detail_other}">
 
 
 						</div>
@@ -206,7 +209,16 @@
 							<input type="radio" name="interview_detail"
 								th:field="*{interview_detail}" value="1">形態：個人 <input
 								type="radio" name="interview_detail"
-								th:field="*{interview_detail}" value="2">形態：集団
+								th:field="*{interview_detail}" value="2">形態：集団(名/回)<input
+								type="number" name="interview_number"
+								th:field="*{interview_number}">面接官(人数)<input
+								type="number" name="interviewer_number"
+								th:field="*{interviewer_number}">面接官(役職)<input
+								type="text" class="form-control" name="interviewer_position"
+								th:field="*{interviewer_position}">面接時間(分)<input
+								type="number" name="interview_time" th:field="*{interview_time}">GD／GW時のテーマ<input
+								type="text" class="form-control" name="theme"
+								th:field="*{theme}">
 
 
 						</div>
@@ -261,8 +273,11 @@
 
 						<hr>
 
-						<label for="report_status">受験報告状態</label> <span
-							th:text="${reportData.report_status}"></span><br>
+						<label for="report_status">受験報告状態</label><br>
+							<span th:if="*{report_status} == '1'">承認待ち</span>
+							<span th:if="*{report_status} == '2'">承認済み</span>
+							<span th:if="*{report_status} == '3'">差し戻し</span>
+							<span th:if="*{report_status} == '4'">破棄</span>
 
 						<hr>
 
