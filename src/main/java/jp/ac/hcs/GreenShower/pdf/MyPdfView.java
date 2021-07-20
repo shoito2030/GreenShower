@@ -1,4 +1,4 @@
-package jp.ac.hcs.GreenShower.report.pdf;
+package jp.ac.hcs.GreenShower.pdf;
 
 import java.util.Map;
 
