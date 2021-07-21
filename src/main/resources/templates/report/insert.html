@@ -15,6 +15,8 @@
 		function not_ES_other() {
 			document.getElementById("entry_section_other").setAttribute(
 					"disabled", true);
+			var textForm = document.getElementById("entry_section_other");
+			  textForm.value = '';
 		}
 	</script>
 	<script type="text/javascript">
@@ -27,6 +29,8 @@
 		function not_VS_other() {
 			document.getElementById("venue_section_other").setAttribute(
 					"disabled", true);
+			var textForm = document.getElementById("venue_section_other");
+			  textForm.value = '';
 		}
 	</script>
 	<script type="text/javascript">
@@ -39,6 +43,8 @@
 		function not_TSec_other() {
 			document.getElementById("test_section_other").setAttribute(
 					"disabled", true);
+			var textForm = document.getElementById("test_section_other");
+			  textForm.value = '';
 		}
 	</script>
 	<script type="text/javascript">
@@ -51,6 +57,8 @@
 		function not_TSum_other() {
 			document.getElementById("test_summary_other").setAttribute(
 					"disabled", true);
+			var textForm = document.getElementById("test_summary_other");
+			  textForm.value = '';
 		}
 	</script>
 	<script type="text/javascript">
@@ -63,6 +71,8 @@
 		function not_ATD_other() {
 			document.getElementById("aptitude_test_detail_other").setAttribute(
 					"disabled", true);
+			var textForm = document.getElementById("aptitude_test_detail_other");
+			  textForm.value = '';
 		}
 	</script>
 	<script type="text/javascript">
@@ -104,7 +114,7 @@
 							type="radio" name="entry_section" value="5" onclick="not_ES_other()">ジョブカフェ等 <input
 							type="radio" name="entry_section" value="99" onclick="click_ES_other()">その他<input
 							type="text" class="form-control" name="entry_section_other"
-							id="entry_section_other">
+							id="entry_section_other" disabled>
 
 					</div>
 
@@ -132,7 +142,7 @@
 							type="radio" name="venue_section" value="4" onclick="not_VS_other()">東京：会社 <input
 							type="radio" name="venue_section" value="5" onclick="not_VS_other()">東京：外会場 <input
 							type="radio" name="venue_section" value="99" onclick="click_VS_other()">その他 <input
-							type="text" class="form-control" name="venue_section_other" id="venue_section_other">
+							type="text" class="form-control" name="venue_section_other" id="venue_section_other" disabled>
 					</div>
 
 					<label for="test_section">試験区分</label>
@@ -144,7 +154,7 @@
 							type="radio" name="test_section" value="4" onclick="not_TSec_other()">４次試験<input
 							type="checkbox" name="test_section" value="5">最終試験 <input
 							type="radio" name="test_section" value="99" onclick="click_TSec_other()">その他<input
-							type="text" class="form-control" name="test_section_other" id="test_section_other">
+							type="text" class="form-control" name="test_section_other" id="test_section_other" disabled>
 
 					</div>
 
@@ -158,7 +168,7 @@
 							type="radio" name="test_summary" value="5" onclick="not_TSum_other()">集団面接 <input
 							type="radio" name="test_summary" value="6" onclick="not_TSum_other()">個人面接 <input
 							type="radio" name="test_summary" value="99" onclick="click_TSum_other()">その他<input
-							type="text" class="form-control" name="test_summary_other" id="test_summary_other">
+							type="text" class="form-control" name="test_summary_other" id="test_summary_other" disabled>
 
 					</div>
 
@@ -196,7 +206,7 @@
 
 						<input type="radio" name="aptitude_test_detail" value="99" onclick="click_ATD_other()">その他適性<input
 							type="text" class="form-control"
-							name="aptitude_test_detail_other" id="aptitude_test_detail_other">
+							name="aptitude_test_detail_other" id="aptitude_test_detail_other" disabled>
 
 
 					</div>
