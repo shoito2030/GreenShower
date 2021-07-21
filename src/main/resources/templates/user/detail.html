@@ -14,6 +14,7 @@
 	<th:block th:insert="components/part::frag_script"></th:block>
 	<div class="container">
 		<div class="content-box">
+		<p th:text="${errmsg}" style="background-color:#ffcc99;"></p>
 			<h2>ユーザ詳細</h2>
 			<div class="input-form">
 				<form method="post" th:action="@{/user/update}"
