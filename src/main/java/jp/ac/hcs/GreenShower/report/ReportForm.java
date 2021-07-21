@@ -56,7 +56,7 @@ public class ReportForm {
 	 * 99：その他
 	 */
 	//@NotBlank(message = "{require_check}")
-	private String entry_section;
+	private int entry_section;
 	
 	/**
 	 * 申し込み区分その他
@@ -73,7 +73,7 @@ public class ReportForm {
 	 * 99：その他
 	 */
 	//@NotBlank(message = "{require_check}")
-	private String venue_section;
+	private int venue_section;
 	
 	/**
 	 * 会場区分その他
@@ -90,7 +90,7 @@ public class ReportForm {
 	 * 99：その他（〇次試験）
 	 */
 	//@NotBlank(message = "{require_check}")
-	private String test_section;
+	private int test_section;
 	
 	/**
 	 * 試験区分その他
@@ -108,7 +108,7 @@ public class ReportForm {
 	 * 99：その他
 	 */
 	//@NotBlank(message = "{require_check}")
-	private String test_summary;
+	private int test_summary;
 	
 	/**
 	 * 試験概要その他
@@ -127,7 +127,7 @@ public class ReportForm {
 	 * 8：Web
 	 */
 	//@NotBlank(message = "{require_check}")
-	private String result_notification;
+	private int result_notification;
 	
 	/**
 	 * 1-2の数字
@@ -146,7 +146,7 @@ public class ReportForm {
 	 * 99：その他適性
 	 */
 	//@NotBlank(message = "{require_check}")
-	private String aptitude_test_detail;
+	private int aptitude_test_detail;
 	
 	/**
 	 * 適性試験詳細その他
@@ -164,7 +164,7 @@ public class ReportForm {
 	 * 7：GD／GW時のテーマ
 	 */
 	//@NotBlank(message = "{require_check}")
-	private String interview_detail;
+	private int interview_detail;
 	
 	/**
 	 * 面接詳細その他

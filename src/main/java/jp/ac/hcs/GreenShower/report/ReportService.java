@@ -13,6 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import jp.ac.hcs.GreenShower.report.ReportData.Aptitude_test_detail;
+import jp.ac.hcs.GreenShower.report.ReportData.Entry_section;
+import jp.ac.hcs.GreenShower.report.ReportData.Interview_detail;
+import jp.ac.hcs.GreenShower.report.ReportData.Result_notification;
+import jp.ac.hcs.GreenShower.report.ReportData.Test_section;
+import jp.ac.hcs.GreenShower.report.ReportData.Test_summary;
+import jp.ac.hcs.GreenShower.report.ReportData.Venue_section;
+
 
 @Service
 public class ReportService {
@@ -116,19 +124,19 @@ public class ReportService {
 		}
 		
 		data.setPlace(form.getPlace());
-		data.setEntry_section(form.getEntry_section());
+		data.setEntry_section(Entry_section.idOf(form.getEntry_section()));
 		data.setEntry_section_other(form.getEntry_section_other());
-		data.setVenue_section(form.getVenue_section());
+		data.setVenue_section(Venue_section.idOf(form.getVenue_section()));
 		data.setVenue_section_other(form.getVenue_section_other());
-		data.setTest_section(form.getTest_section());
+		data.setTest_section(Test_section.idOf((form.getTest_section())));
 		data.setTest_section_other(form.getEntry_section_other());
-		data.setTest_summary(form.getTest_summary());
+		data.setTest_summary(Test_summary.idOf(form.getTest_summary()));
 		data.setTest_summary_other(form.getTest_summary_other());
-		data.setResult_notification(form.getResult_notification());
+		data.setResult_notification(Result_notification.idOf(form.getResult_notification()));
 		data.setResult_notification_day(form.getResult_notification_day());
-		data.setAptitude_test_detail(form.getAptitude_test_detail());
+		data.setAptitude_test_detail(Aptitude_test_detail.idOf(form.getAptitude_test_detail()));
 		data.setAptitude_test_detail_other(form.getAptitude_test_detail_other());
-		data.setInterview_detail(form.getInterview_detail());
+		data.setInterview_detail(Interview_detail.idOf(form.getInterview_detail()));
 		data.setInterview_detail_other(form.getInterview_detail_other());
 		data.setInterview_number(form.getInterview_number());
 		data.setInterviewer_number(form.getInterviewer_number());		
