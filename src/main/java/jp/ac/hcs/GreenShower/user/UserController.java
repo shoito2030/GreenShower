@@ -154,7 +154,7 @@ public class UserController {
 		// 入力チェックに引っかかった場合、後続の処理を実行しない
 		if (bindingResult.hasErrors()) {
 			log.info("データ挿入失敗：" + form.toString());
-			return getUserList(model);
+			return getUserDetail(form.getUser_id(), principal, model);
 		}
 
 		log.info("入力情報：" + form.toString());

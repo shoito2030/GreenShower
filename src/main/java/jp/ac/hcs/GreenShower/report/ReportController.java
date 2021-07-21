@@ -157,6 +157,8 @@ public class ReportController {
 	@PostMapping("report/update")
 	public String getReportUpdate(@ModelAttribute @Validated ReportForm form,
 			 Principal principal, Model model) {
+		
+		log.info("入力情報：" + form.toString());
 
 //		// 入力チェックに引っかかった場合、前の画面に戻る
 //		if (bindingResult.hasErrors()) {
@@ -169,7 +171,14 @@ public class ReportController {
 //		}
 		
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
-		reportService.update(form);
+		boolean isSuccess = reportService.update(form);
+		
+		if(isSuccess) {
+			log.info("[" + principal.getName() + "]さんが受験報告情報を修正しました");
+		} else {
+			log.info("[" + principal.getName() + "]さんが受験報告情報を修正しました");
+		}
+		
 
 		return getReportList(model);
 	}
