@@ -12,6 +12,7 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
+	
 	<div class="container">
 		<div class="content-box">
 			<h2>受験情報詳細</h2>
@@ -23,13 +24,14 @@
 					<div class="form-group input-box">
 
 						<input type="hidden" name="report_id" th:value="*{report_id}">
-
+						
+						
 						<input type="radio" name="report_status"
-							th:field="*{report_status}" value="1">承認待ち <input
-							type="radio" name="report_status" th:field="*{report_status}"
+						value="1" th:checked="${reportData.report_status.id == 1}">承認待ち <input
+							type="radio" name="report_status" th:checked="${reportData.report_status.id == 2}"
 							value="2">承認済み <input type="radio" name="report_status"
-							th:field="*{report_status}" value="3">差し戻し <input
-							type="radio" name="report_status" th:field="*{report_status}"
+							th:checked="${reportData.report_status.id == 3}" value="3">差し戻し <input
+							type="radio" name="report_status" th:checked="${reportData.report_status.id == 4}"
 							value="4">破棄
 
 					</div>
@@ -71,8 +73,8 @@
 
 				<hr>
 
-				<label for="place">受験場所</label><br>
-				<span th:text="${reportData.place}"></span><br>
+				<label for="place">受験場所</label><br> <span
+					th:text="${reportData.place}"></span><br>
 
 				<hr>
 
