@@ -96,13 +96,14 @@ public class ReportRepository {
 				data.getUser_id(), data.getUser_id(), data.getUser_id(), data.getUser_id(),
 
 				data.getCompany_name(), data.getCompany_name_kana(), data.getDatetime(), data.getPlace(),
-				data.getEntry_section(), data.getEntry_section_other(), data.getVenue_section(),
-				data.getVenue_section_other(), data.getTest_section(), data.getTest_section_other(),
-				data.getTest_summary(), data.getTest_summary_other(), data.getResult_notification(),
-				data.getResult_notification_day(), data.getAptitude_test_detail(), data.getAptitude_test_detail_other(),
-				data.getInterview_detail(), data.getInterview_detail_other(), data.getInterview_number(),
-				data.getInterviewer_number(), data.getInterviewer_position(), data.getInterview_time(), data.getTheme(),
-				data.getQuestion_contents(), data.getRequest_date(), data.getRegistered_user_id());
+				data.getEntry_section().getId(), data.getEntry_section_other(), data.getVenue_section().getId(),
+				data.getVenue_section_other(), data.getTest_section().getId(), data.getTest_section_other(),
+				data.getTest_summary().getId(), data.getTest_summary_other(), data.getResult_notification().getId(),
+				data.getResult_notification_day(), data.getAptitude_test_detail().getId(),
+				data.getAptitude_test_detail_other(), data.getInterview_detail().getId(),
+				data.getInterview_detail_other(), data.getInterview_number(), data.getInterviewer_number(),
+				data.getInterviewer_position(), data.getInterview_time(), data.getTheme(), data.getQuestion_contents(),
+				data.getRequest_date(), data.getRegistered_user_id());
 
 		return rowNumber;
 	}
@@ -118,7 +119,7 @@ public class ReportRepository {
 
 		for (Map<String, Object> map : resultList) {
 			ReportData data = new ReportData();
-			
+
 			data.setReport_id((int) map.get("report_id"));
 			data.setUser_id((String) map.get("user_id"));
 			data.setClassroom((String) map.get("classroom"));
@@ -137,9 +138,11 @@ public class ReportRepository {
 			data.setTest_section_other((String) map.get("test_section_other"));
 			data.setTest_summary(Test_summary.idOf(Integer.parseInt((String) map.get("test_summary"))));
 			data.setTest_summary_other((String) map.get("test_summary_other"));
-			data.setResult_notification(Result_notification.idOf(Integer.parseInt((String) map.get("result_notification"))));
+			data.setResult_notification(
+					Result_notification.idOf(Integer.parseInt((String) map.get("result_notification"))));
 //			data.setResult_notification_day((String) map.get("result_notification_day"));
-			data.setAptitude_test_detail(Aptitude_test_detail.idOf(Integer.parseInt((String) map.get("aptitude_test_detail"))));
+			data.setAptitude_test_detail(
+					Aptitude_test_detail.idOf(Integer.parseInt((String) map.get("aptitude_test_detail"))));
 			data.setAptitude_test_detail_other((String) map.get("aptitude_test_detail_other"));
 			data.setInterview_detail(Interview_detail.idOf(Integer.parseInt((String) map.get("interview_detail"))));
 			data.setInterview_detail_other((String) map.get("interview_detail_other"));

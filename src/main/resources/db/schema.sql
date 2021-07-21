@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS report (
     interview_time INT,
     theme VARCHAR(60),
     question_contents VARCHAR(60),
-    report_status VARCHAR(2),
+    report_status VARCHAR(2) DEFAULT '1',
     registered_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ,
     request_date DATE,
     registered_user_id VARCHAR(254),
