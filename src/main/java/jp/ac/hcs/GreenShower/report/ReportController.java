@@ -157,6 +157,8 @@ public class ReportController {
 	@PostMapping("report/update")
 	public String getReportUpdate(@ModelAttribute @Validated ReportForm form,
 			 Principal principal, Model model) {
+		
+		log.info("入力情報：" + form.toString());
 
 //		// 入力チェックに引っかかった場合、前の画面に戻る
 //		if (bindingResult.hasErrors()) {
