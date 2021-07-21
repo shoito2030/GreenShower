@@ -10,6 +10,14 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
 import jp.ac.hcs.GreenShower.WebConfig;
+import jp.ac.hcs.GreenShower.report.ReportData.Aptitude_test_detail;
+import jp.ac.hcs.GreenShower.report.ReportData.Entry_section;
+import jp.ac.hcs.GreenShower.report.ReportData.Interview_detail;
+import jp.ac.hcs.GreenShower.report.ReportData.Report_status;
+import jp.ac.hcs.GreenShower.report.ReportData.Result_notification;
+import jp.ac.hcs.GreenShower.report.ReportData.Test_section;
+import jp.ac.hcs.GreenShower.report.ReportData.Test_summary;
+import jp.ac.hcs.GreenShower.report.ReportData.Venue_section;
 
 /**
  * SQLで取得した結果をCSVファイルとしてサーバに保存する.
@@ -36,17 +44,17 @@ public class TaskRowCallbackHandler implements RowCallbackHandler {
 						+ "," + rs.getString("class_number") + "," + rs.getString("name") + ","
 						+ rs.getString("course_code") + "," + rs.getString("company_name") + ","
 						+ rs.getString("company_name_kana") + "," + rs.getDate("datetime") + "," + rs.getString("place")
-						+ "," + rs.getString("entry_section") + "," + rs.getString("entry_section_other") + ","
-						+ rs.getString("venue_section") + "," + rs.getString("venue_section_other") + ","
-						+ rs.getString("test_section") + "," + rs.getString("test_section_other") + ","
-						+ rs.getString("test_summary") + "," + rs.getString("test_summary_other") + ","
-						+ rs.getString("result_notification") + "," 
+						+ "," + Entry_section.idOf(rs.getInt("entry_section")).getValue() + "," + rs.getString("entry_section_other") + ","
+						+ Venue_section.idOf(rs.getInt("venue_section")).getValue() +  "," + rs.getString("venue_section_other") + ","
+						+ Test_section.idOf(rs.getInt("test_section")).getValue() +  "," + rs.getString("test_section_other") + ","
+						+ Test_summary.idOf(rs.getInt("test_summary")).getValue() + "," + rs.getString("test_summary_other") + ","
+						+ Result_notification.idOf(rs.getInt("result_notification")).getValue() + "," 
 						//+ rs.getString("result_notification_day") + ","
-						+ rs.getString("aptitude_test_detail") + "," + rs.getString("interview_detail") + ","
+						+ Aptitude_test_detail.idOf(rs.getInt("aptitude_test_detail")).getValue() + "," + Interview_detail.idOf(rs.getInt("interview_detail")).getValue() + ","
 						+ rs.getString("interview_detail_other") + "," + rs.getInt("interview_number") + ","
 						+ rs.getInt("interviewer_number") + "," + rs.getString("interviewer_position") + ","
 						+ rs.getInt("interview_time") + "," + rs.getString("theme") + ","
-						+ rs.getString("question_contents") + "," + rs.getString("report_status") + ","
+						+ rs.getString("question_contents") + "," + Report_status.idOf(rs.getInt("report_status")).getValue() + ","
 						+ rs.getDate("registered_date") + "," + rs.getDate("request_date") + ","
 						+ rs.getString("registered_user_id") + "," + rs.getString("remarks");
 

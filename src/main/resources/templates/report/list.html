@@ -52,21 +52,15 @@
 							<td><span th:text="*{reportList.company_name}"></span></td>
 							
 							<td>
-							<span th:if="*{reportList.test_section} == '1'">1次試験</span>
-							<span th:if="*{reportList.test_section} == '2'">2次試験</span>
-							<span th:if="*{reportList.test_section} == '3'">3次試験</span>
-							<span th:if="*{reportList.test_section} == '4'">4次試験</span>
-							<span th:if="*{reportList.test_section} == '5'">最終試験</span>
-							<span th:if="*{reportList.test_section} == '99'">その他</span>
+							<span th:text="*{reportList.test_section.value}"></span>
+							
 							</td>
 							
 							<td><span th:text="*{reportList.registered_user_id}"></span></td>
 							
 							<td>
-							<span th:if="*{reportList.report_status} == '1'">承認待ち</span>
-							<span th:if="*{reportList.report_status} == '2'">承認済み</span>
-							<span th:if="*{reportList.report_status} == '3'">差し戻し</span>
-							<span th:if="*{reportList.report_status} == '4'">破棄</span>
+							<span th:text="*{reportList.report_status.value}"></span>
+							
 							
 							</td>
 							
