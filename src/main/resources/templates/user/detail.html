@@ -28,7 +28,7 @@
 					<label for="name">ユーザ名</label>
 					<div class="form-group input-box">
 						<input type="text" class="form-control" name="name"
-							placeholder="情報 太郎" th:field="*{name}"/>
+							placeholder="情報 太郎" th:field="*{name}">
 							<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">user_id error</span>
 					</div>
 

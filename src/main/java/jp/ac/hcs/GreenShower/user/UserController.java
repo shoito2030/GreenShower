@@ -166,6 +166,7 @@ public class UserController {
 			log.info("[" + principal.getName() + "]さんが[" + form.getName() + "]さんのユーザ情報の変更に成功");
 		} else {
 			log.warn("[" + principal.getName() + "]さんが[" + form.getName() + "]さんのユーザ情報の変更に失敗");
+			model.addAttribute("errmsg", "変更出来ませんでした。再度手順をやり直してください");
 		}
 
 		return getUserList(model);
