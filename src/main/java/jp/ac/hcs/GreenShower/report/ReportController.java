@@ -169,7 +169,14 @@ public class ReportController {
 //		}
 		
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
-		reportService.update(form);
+		boolean isSuccess = reportService.update(form);
+		
+		if(isSuccess) {
+			log.info("[" + principal.getName() + "]さんが受験報告情報を修正しました");
+		} else {
+			log.info("[" + principal.getName() + "]さんが受験報告情報を修正しました");
+		}
+		
 
 		return getReportList(model);
 	}

@@ -121,6 +121,7 @@ public class ReportRepository {
 			ReportData data = new ReportData();
 
 			data.setReport_id((int) map.get("report_id"));
+			data.setJob_number((int) map.get("job_number"));
 			data.setUser_id((String) map.get("user_id"));
 			data.setClassroom((String) map.get("classroom"));
 			data.setClass_number((String) map.get("class_number"));
@@ -135,11 +136,13 @@ public class ReportRepository {
 			data.setVenue_section(Venue_section.idOf(Integer.parseInt((String) map.get("venue_section"))));
 			data.setVenue_section_other((String) map.get("venue_section_other"));
 			data.setTest_section(Test_section.idOf(Integer.parseInt((String) map.get("test_section"))));
+			data.setTest_final((boolean) map.get("test_final"));
 			data.setTest_section_other((String) map.get("test_section_other"));
 			data.setTest_summary(Test_summary.idOf(Integer.parseInt((String) map.get("test_summary"))));
 			data.setTest_summary_other((String) map.get("test_summary_other"));
 			data.setResult_notification(
 					Result_notification.idOf(Integer.parseInt((String) map.get("result_notification"))));
+			data.setSuccess_only((boolean) map.get("success_only"));
 			data.setResult_notification_day((int) map.get("result_notification_day"));
 			data.setAptitude_test_detail(
 					Aptitude_test_detail.idOf(Integer.parseInt((String) map.get("aptitude_test_detail"))));

@@ -589,23 +589,3 @@ public class ReportData {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
