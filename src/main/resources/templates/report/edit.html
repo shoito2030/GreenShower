@@ -12,6 +12,77 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
+	<script type="text/javascript">
+		function not_ES_other() {
+			document.getElementById("entry_section_other").setAttribute(
+					"disabled", true);
+			var textForm = document.getElementById("entry_section_other");
+			textForm.value = '';
+		}
+	</script>
+	<script type="text/javascript">
+		function click_ES_other() {
+			document.getElementById("entry_section_other").removeAttribute(
+					"disabled");
+		}
+	</script>
+	<script type="text/javascript">
+		function not_VS_other() {
+			document.getElementById("venue_section_other").setAttribute(
+					"disabled", true);
+			var textForm = document.getElementById("venue_section_other");
+			textForm.value = '';
+		}
+	</script>
+	<script type="text/javascript">
+		function click_VS_other() {
+			document.getElementById("venue_section_other").removeAttribute(
+					"disabled");
+		}
+	</script>
+	<script type="text/javascript">
+		function not_TSec_other() {
+			document.getElementById("test_section_other").setAttribute(
+					"disabled", true);
+			var textForm = document.getElementById("test_section_other");
+			textForm.value = '';
+		}
+	</script>
+	<script type="text/javascript">
+		function click_TSec_other() {
+			document.getElementById("test_section_other").removeAttribute(
+					"disabled");
+		}
+	</script>
+	<script type="text/javascript">
+		function not_TSum_other() {
+			document.getElementById("test_summary_other").setAttribute(
+					"disabled", true);
+			var textForm = document.getElementById("test_summary_other");
+			textForm.value = '';
+		}
+	</script>
+	<script type="text/javascript">
+		function click_TSum_other() {
+			document.getElementById("test_summary_other").removeAttribute(
+					"disabled");
+		}
+	</script>
+	<script type="text/javascript">
+		function not_ATD_other() {
+			document.getElementById("aptitude_test_detail_other").setAttribute(
+					"disabled", true);
+			var textForm = document
+					.getElementById("aptitude_test_detail_other");
+			textForm.value = '';
+		}
+	</script>
+	<script type="text/javascript">
+		function click_ATD_other() {
+			document.getElementById("aptitude_test_detail_other")
+					.removeAttribute("disabled");
+		}
+	</script>
 	<div class="container">
 		<div class="content-box">
 			<h2>受験報告編集</h2>
@@ -62,7 +133,7 @@
 
 						<label for="datetime">日時</label>
 						<div class="form-group input-box">
-							<input type="date" class="form-control" name="datetime"
+							<input type="datetime-local" class="form-control" name="datetime"
 								th:field="*{datetime}">
 						</div>
 
@@ -80,18 +151,21 @@
 						<div class="form-group input-box">
 
 							<input type="radio" name="entry_section"
-								th:field="*{entry_section}" value="1">学校斡旋 <input
-								type="radio" name="entry_section" th:field="*{entry_section}"
-								value="2">ネット：斡旋サイト <input type="radio"
-								name="entry_section" th:field="*{entry_section}" value="3">新聞・雑誌
-
+								th:field="*{entry_section}" value="1" onclick="not_ES_other()">学校斡旋
 							<input type="radio" name="entry_section"
-								th:field="*{entry_section}" value="4">ネット：企業HP <input
-								type="radio" name="entry_section" th:field="*{entry_section}"
-								value="5">ジョブカフェ等 <input type="radio"
-								name="entry_section" th:field="*{entry_section}" value="99">その他
-							<input type="text" class="form-control"
-								name="entry_section_other" th:field="*{entry_section_other}">
+								th:field="*{entry_section}" value="2" onclick="not_ES_other()">ネット：斡旋サイト
+							<input type="radio" name="entry_section"
+								th:field="*{entry_section}" value="3" onclick="not_ES_other()">新聞・雑誌
+							<input type="radio" name="entry_section"
+								th:field="*{entry_section}" value="4" onclick="not_ES_other()">ネット：企業HP
+							<input type="radio" name="entry_section"
+								th:field="*{entry_section}" value="5" onclick="not_ES_other()">ジョブカフェ等
+							<input type="radio" name="entry_section"
+								th:field="*{entry_section}" value="99"
+								onclick="click_ES_other()">その他 <input type="text"
+								class="form-control" name="entry_section_other"
+								th:field="*{entry_section_other}" id="entry_section_other"
+								disabled>
 						</div>
 
 						<hr>
@@ -100,54 +174,55 @@
 						<div class="form-group input-box">
 
 							<input type="radio" name="venue_section"
-								th:field="*{venue_section}" value="1">札幌：会社 <input
-								type="radio" name="venue_section" th:field="*{venue_section} "
-								value="2">札幌：外会場 <input type="radio"
-								name="venue_section" th:field="*{venue_section}" value="3">札幌：HCS
-
+								th:field="*{venue_section}" value="1" onclick="not_VS_other()">札幌：会社
 							<input type="radio" name="venue_section"
-								th:field="*{venue_section}" value="4">東京：会社 <input
-								type="radio" name="venue_section" th:field="*{venue_section}"
-								value="5">東京：外会場 <input type="radio"
-								name="venue_section" value="99">その他 <input type="text"
+								th:field="*{venue_section}" value="2" onclick="not_VS_other()">札幌：外会場
+							<input type="radio" name="venue_section"
+								th:field="*{venue_section}" value="3" onclick="not_VS_other()">札幌：HCS
+							<input type="radio" name="venue_section"
+								th:field="*{venue_section}" value="4" onclick="not_VS_other()">東京：会社
+							<input type="radio" name="venue_section"
+								th:field="*{venue_section}" value="5" onclick="not_VS_other()">東京：外会場
+							<input type="radio" name="venue_section" value="99"
+								onclick="click_VS_other()">その他 <input type="text"
 								class="form-control" name="venue_section_other"
-								th:field="*{venue_section_other}">
+								th:field="*{venue_section_other}" id="venue_section_other"
+								disabled>
 						</div>
 						<hr>
 
 						<label for="test_section">試験区分</label>
 						<div class="form-group input-box">
 							<input type="radio" name="test_section"
-								th:field="*{test_section}" value="1">1次試験 <input
-								type="radio" name="test_section" th:field="*{test_section}"
-								value="2">２次試験 <input type="radio" name="test_section"
-								th:field="*{test_section}" value="3">３次試験 <input
-								type="radio" name="test_section" th:field="*{test_section}"
-								value="4">４次試験 <input type="checkbox" name="test_section"
-								th:field="*{test_section}" value="5">最終試験 <input
-								type="radio" name="test_section" th:field="*{test_section}"
-								value="99">その他 <input type="text" class="form-control"
-								name="test_section_other" th:field="*{test_section_other}">
+								th:field="*{test_section}" value="1" onclick="not_TSec_other()">1次試験
+							<input type="radio" name="test_section"
+								th:field="*{test_section}" value="2" onclick="not_TSec_other()">２次試験
+							<input type="radio" name="test_section"
+								th:field="*{test_section}" value="3" onclick="not_TSec_other()">３次試験
+							<input type="radio" name="test_section"
+								th:field="*{test_section}" value="4" onclick="not_TSec_other()">４次試験
+							<input type="hidden" name="test_final" value="false"> <input
+								type="checkbox" name="test_final" th:field="*{test_final}"
+								value="true">最終試験 <input type="radio"
+								name="test_section" th:field="*{test_section}" value="99"
+								onclick="click_TSec_other()">その他 <input type="text"
+								class="form-control" name="test_section_other"
+								th:field="*{test_section_other}" id="test_section_other"
+								disabled>
 						</div>
 						<hr>
 
 						<label for="test_summary">試験概要</label>
 						<div class="form-group input-box">
 
-							<input type="checkbox" name="test_summary"
-								th:field="*{test_summary}" value="1">適性 <input
-								type="checkbox" name="test_summary" th:field="*{test_summary}"
-								value="2">筆記・作文 <input type="checkbox"
-								name="test_summary" th:field="*{test_summary}" value="3">ディスカッション
-							<input type="checkbox" name="test_summary"
-								th:field="*{test_summary}" value="4">グループワーク <input
-								type="checkbox" name="test_summary" th:field="*{test_summary}"
-								value="5">集団面接 <input type="checkbox"
-								name="test_summary" th:field="*{test_summary}" value="6">個人面接
-							<input type="checkbox" name="test_summary"
-								th:field="*{test_summary}" value="99">その他 <input
-								type="text" class="form-control" name="test_summary_other"
-								th:field="*{test_summary_other}">
+							<input type="radio" name="test_summary" th:field="*{test_summary}" value="1" onclick="not_TSum_other()">適性
+							<input type="radio" name="test_summary" th:field="*{test_summary}" value="2" onclick="not_TSum_other()">筆記・作文
+							<input type="radio" name="test_summary" th:field="*{test_summary}" value="3" onclick="not_TSum_other()">ディスカッション
+							<input type="radio" name="test_summary" th:field="*{test_summary}" value="4" onclick="not_TSum_other()">グループワーク
+							<input type="radio" name="test_summary" th:field="*{test_summary}" value="5" onclick="not_TSum_other()">集団面接
+							<input type="radio" name="test_summary" th:field="*{test_summary}" value="6" onclick="not_TSum_other()">個人面接
+							<input type="radio" name="test_summary" th:field="*{test_summary}" value="99" onclick="click_TSum_other()">その他
+							<input type="text" class="form-control" name="test_summary_other" th:field="*{test_summary_other}" id="test_summary_other" disabled>
 						</div>
 
 						<hr>
@@ -155,22 +230,22 @@
 						<label for="result_notification">結果通知方法</label>
 						<div class="form-group input-box">
 
-							<input type="checkbox" name="result_notification"
-								th:field="*{result_notification}" value="2">合格のみ <input
-								type="checkbox" name="result_notification"
-								th:field="*{result_notification}" value="3">本人 <input
-								type="checkbox" name="result_notification"
-								th:field="*{result_notification}" value="4">学校 <input
-								type="checkbox" name="result_notification"
-								th:field="*{result_notification}" value="5">電話 <input
-								type="checkbox" name="result_notification"
-								th:field="*{result_notification}" value="6">郵便 <input
-								type="checkbox" name="result_notification"
-								th:field="*{result_notification}" value="7">メール <input
-								type="checkbox" name="result_notification"
-								th:field="*{result_notification}" value="8">Web 結果通達(日後)<input
-								type="number" name="result_notification"
-								th:field="*{result_notification}" value="1">
+							<input type="hidden" name="success_only" value="false"> <input
+								type="checkbox" name="success_only" th:field="*{success_only}"
+								value="true">合格のみ <input type="radio"
+								name="result_notification" th:field="*{result_notification}"
+								value="1">本人 <input type="radio"
+								name="result_notification" th:field="*{result_notification}"
+								value="2">学校 <input type="radio"
+								name="result_notification" th:field="*{result_notification}"
+								value="3">電話 <input type="radio"
+								name="result_notification" th:field="*{result_notification}"
+								value="4">郵便 <input type="radio"
+								name="result_notification" th:field="*{result_notification}"
+								value="5">メール <input type="radio"
+								name="result_notification" th:field="*{result_notification}"
+								value="6">Web<br> 結果通達(日後)<input type="number"
+								name="result_notification" th:field="*{result_notification}">
 
 						</div>
 
@@ -179,23 +254,19 @@
 						<label for="aptitude_test_detail">適性試験詳細</label>
 						<div class="form-group input-box">
 
+							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="1">SPI
+							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="2">CAB/GAB
+							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="3">職業適性
+							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="4">クレぺリン
+							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="5">一般常識
 							<input type="checkbox" name="aptitude_test_detail"
-								th:field="*{aptitude_test_detail}" value="1">SPI <input
-								type="checkbox" name="aptitude_test_detail"
-								th:field="*{aptitude_test_detail}" value="2">CAB/GAB <input
-								type="checkbox" name="aptitude_test_detail"
-								th:field="*{aptitude_test_detail}" value="3">職業適性 <input
-								type="checkbox" name="aptitude_test_detail"
-								th:field="*{aptitude_test_detail}" value="4">クレぺリン <input
-								type="checkbox" name="aptitude_test_detail"
-								th:field="*{aptitude_test_detail}" value="5">一般常識 <input
-								type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="6">専門知識 <input
 								type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="7">作文テーマ <input
 								type="checkbox" name="aptitude_test_detail"
 								th:field="*{aptitude_test_detail}" value="99">その他適性<input
-								type="text" class="form-control" name="aptitude_test_detail_other"
+								type="text" class="form-control"
+								name="aptitude_test_detail_other"
 								th:field="*{aptitude_test_detail_other}">
 
 
@@ -273,11 +344,8 @@
 
 						<hr>
 
-						<label for="report_status">受験報告状態</label><br>
-							<span th:if="*{report_status} == '1'">承認待ち</span>
-							<span th:if="*{report_status} == '2'">承認済み</span>
-							<span th:if="*{report_status} == '3'">差し戻し</span>
-							<span th:if="*{report_status} == '4'">破棄</span>
+						<label for="report_status">受験報告状態</label><br> <span
+							th:text="*{report_status.value}"></span>
 
 						<hr>
 
@@ -296,8 +364,8 @@
 
 						<hr>
 
-						<label for="remarksl">備考</label> <span
-							th:text="${reportData.remarks}"></span><br>
+						<label for="remarksl">備考</label><br> <input type="text"
+							class="form-control" name="remarks" th:field="*{remarks}">
 					</div>
 
 					<button type="submit" class="btn btn-warning">変更</button>
