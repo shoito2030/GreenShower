@@ -218,7 +218,7 @@ public class ReportRepository {
 	 */
 	public int updateStatus(String report_id, String report_status) {
 		int rowNumber = jdbc.update(SQL_UPDATE_REPORT_STATUS,
-				report_id, report_status);
+				report_status, report_id);
 		return rowNumber ;
 	}
 	

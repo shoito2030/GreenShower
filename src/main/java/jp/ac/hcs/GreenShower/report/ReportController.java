@@ -183,11 +183,10 @@ public class ReportController {
 	 * @param model
 	 * @return 受験報告情報一覧画面
 	 */
-	@PostMapping("report/change_status/{id}")
-	public String changeStauts(@PathVariable("id") String report_id, String report_status,
+	@PostMapping("report/change_status/{report_id}")
+	public String changeStauts(@PathVariable("report_id") String report_id, String report_status,
 			 Principal principal, Model model) {
 		
-		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
 		reportService.updateStatus(report_id, report_status);
 		log.info("[" + principal.getName() + "]さんがレポートステータスを更新しました");
 		return getReportList(model);
