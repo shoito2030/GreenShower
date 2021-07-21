@@ -254,20 +254,15 @@
 						<label for="aptitude_test_detail">適性試験詳細</label>
 						<div class="form-group input-box">
 
-							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="1">SPI
-							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="2">CAB/GAB
-							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="3">職業適性
-							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="4">クレぺリン
-							<input type="checkbox" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="5">一般常識
-							<input type="checkbox" name="aptitude_test_detail"
-								th:field="*{aptitude_test_detail}" value="6">専門知識 <input
-								type="checkbox" name="aptitude_test_detail"
-								th:field="*{aptitude_test_detail}" value="7">作文テーマ <input
-								type="checkbox" name="aptitude_test_detail"
-								th:field="*{aptitude_test_detail}" value="99">その他適性<input
-								type="text" class="form-control"
-								name="aptitude_test_detail_other"
-								th:field="*{aptitude_test_detail_other}">
+							<input type="radio" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="1" onclick="not_ATD_other()">SPI
+							<input type="radio" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="2" onclick="not_ATD_other()">CAB/GAB
+							<input type="radio" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="3" onclick="not_ATD_other()">職業適性
+							<input type="radio" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="4" onclick="not_ATD_other()">クレぺリン
+							<input type="radio" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="5" onclick="not_ATD_other()">一般常識
+							<input type="radio" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="6" onclick="not_ATD_other()">専門知識
+							<input type="radio" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="7" onclick="not_ATD_other()">作文テーマ
+							<input type="radio" name="aptitude_test_detail" th:field="*{aptitude_test_detail}" value="99" onclick="click_ATD_other()">その他適性
+							<input type="text" class="form-control" name="aptitude_test_detail_other" th:field="*{aptitude_test_detail_other}" id="aptitude_test_detail_other" disabled>
 
 
 						</div>
