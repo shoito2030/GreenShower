@@ -174,15 +174,15 @@
 
 					<label for="result_notification">結果通知方法</label>
 					<div class="form-group input-box">
-
-						<input type="checkbox" name="result_notification" value="2">合格のみ
-						<input type="checkbox" name="result_notification" value="3">本人
-						<input type="checkbox" name="result_notification" value="4">学校
-						<input type="checkbox" name="result_notification" value="5">電話
-						<input type="checkbox" name="result_notification" value="6">郵便
-						<input type="checkbox" name="result_notification" value="7">メール
-						<input type="checkbox" name="result_notification" value="8">Web
-						結果通達(日後)<input type="number" name="result_notification" value="1">
+					<input type="hidden" name="success_only" value="false">
+						<input type="checkbox" name="success_only" value="true">合格のみ
+						<input type="radio" name="result_notification" value="1">本人
+						<input type="radio" name="result_notification" value="2">学校
+						<input type="radio" name="result_notification" value="3">電話
+						<input type="radio" name="result_notification" value="4">郵便
+						<input type="radio" name="result_notification" value="5">メール
+						<input type="radio" name="result_notification" value="6">Web
+						結果通達(日後)<input type="number" name="result_notification_day">
 
 					</div>
 
