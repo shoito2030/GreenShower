@@ -7,6 +7,43 @@
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
+<script type="text/javascript">
+	function clickBtn2() {
+		document.getElementById("dis1").setAttribute("disabled", true);
+		document.getElementById("dis2").setAttribute("disabled", true);
+	}
+</script>
+<script type="text/javascript">
+	function clickBtn1() {
+		document.getElementById("dis1").removeAttribute("disabled");
+		document.getElementById("dis2").removeAttribute("disabled");
+	}
+</script>
+<script type="text/javascript">
+	window.addEventListener('DOMContentLoaded', function() {
+		var role = document.userDitail.role.value;
+		if(role != "ROLE_STUDENT"){
+			document.getElementById("dis1").setAttribute("disabled", true);
+			document.getElementById("dis2").setAttribute("disabled", true);
+		}
+		var name = document.getElementById("name").value;
+		if (name != ""){
+			document.getElementById("btn").removeAttribute("disabled");
+		}else{
+			document.getElementById("btn").setAttribute("disabled" , true);
+		}
+	}, false);
+</script>
+<script type="text/javascript">
+	function data_input() {
+		var name = document.getElementById("name").value;
+		if (name != ""){
+			document.getElementById("btn").removeAttribute("disabled");
+		}else{
+			document.getElementById("btn").setAttribute("disabled" , true);
+		}
+	}
+</script>
 </head>
 <body>
 	<th:block th:insert="components/part::frag_header"></th:block>
@@ -14,12 +51,12 @@
 	<th:block th:insert="components/part::frag_script"></th:block>
 	<div class="container">
 		<div class="content-box">
-		<p th:text="${errmsg}" style="background-color:#ffcc99;"></p>
+			<p th:text="${errmsg}" style="background-color: #ffcc99;"></p>
 			<h2>ユーザ詳細</h2>
 			<div class="input-form">
 				<form method="post" th:action="@{/user/update}"
-					th:object="${userData}">
-					
+					th:object="${userData}" name = "userDitail">
+
 					<label for="user_id">ユーザID(メールアドレス)</label>
 					<p class="view-mail" th:text="*{user_id}"></p>
 					<input type="hidden" name="user_id" th:value="*{user_id}">
@@ -27,48 +64,56 @@
 					<hr>
 
 					<label for="name">ユーザ名</label>
-					<div class="form-group input-box" th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
+					<div class="form-group input-box"
+						th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
 						<input type="text" class="form-control" name="name"
-							placeholder="情報 太郎" th:field="*{name}">
-							<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">user_id error</span>
+							placeholder="情報 太郎" th:field="*{name}" oninput="data_input()"> <span
+							class="text-danger" th:if="${#fields.hasErrors('name')}"
+							th:errors="*{name}">user_id error</span>
 					</div>
 
 					<label for="classroom">クラス</label>
 					<div class="form-group input-box">
 						<input type="text" class="form-control" name="classroom"
-							placeholder="SXAY" th:field="*{classroom}">
+							placeholder="SXAY" id="dis1" th:field="*{classroom}">
 					</div>
 
 					<label for="class_number">番号</label>
 					<div class="form-group input-box">
 						<input type="text" class="form-control" name="class_number"
-							placeholder="00" th:field="*{class_number}">
+							placeholder="00" id="dis2" th:field="*{class_number}">
 					</div>
 
 					<label for="role">権限設定</label>
-					<div class="form-group input-box" th:classappend="${#fields.hasErrors('role')} ? 'has-error'">
+					<div class="form-group input-box"
+						th:classappend="${#fields.hasErrors('role')} ? 'has-error'">
 						<div>
-							<input type="radio" name="role" th:field="*{role}" value="ROLE_STUDENT" id="role1">学生
+							<input type="radio" name="role" th:field="*{role}"
+								value="ROLE_STUDENT" id="role1" onclick="clickBtn1()">学生
 						</div>
 						<div>
-							<input type="radio" name="role" th:field="*{role}" value="ROLE_TEACHER" id="role2">担任
+							<input type="radio" name="role" th:field="*{role}"
+								value="ROLE_TEACHER" id="role2" onclick="clickBtn2()">担任
 						</div>
 						<div>
-							<input type="radio" name="role" th:field="*{role}" value="ROLE_STAFF" id="role3">事務
+							<input type="radio" name="role" th:field="*{role}"
+								value="ROLE_STAFF" id="role3" onclick="clickBtn2()">事務
 						</div>
 					</div>
-					
+
 					<label for="enabled">アカウント有効性</label>
 					<div class="form-group input-box">
 						<div>
-							<input type="radio" name="enabled" th:field="*{enabled}" value="true" id="true">有効
+							<input type="radio" name="enabled" th:field="*{enabled}"
+								value="true" id="true">有効
 						</div>
 						<div>
-							<input type="radio" name="enabled" th:field="*{enabled}" value="false" id="false">無効
+							<input type="radio" name="enabled" th:field="*{enabled}"
+								value="false" id="false">無効
 						</div>
 					</div>
-					
-					<button class="btn btn-primary" type="submit" name="update">更新</button>
+
+					<button class="btn btn-primary" type="submit" name="update" id="btn" disabled>更新</button>
 				</form>
 				<hr>
 				<form method="post" th:action="@{/user/delete}"
