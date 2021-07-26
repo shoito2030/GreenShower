@@ -107,11 +107,6 @@ public class ReportService {
 	private ReportData refillToReportData(ReportForm form, String register_user_id) {
 		ReportData data = new ReportData();
 
-//		data.setUser_id();
-//		data.setClassroom();
-//		data.setClass_number();
-//		data.setName();
-//		data.setCourse_code();
 		data.setReport_id(form.getReport_id());		
 		data.setCompany_name(form.getCompany_name());
 		data.setCompany_name_kana(form.getCompany_name_kana());

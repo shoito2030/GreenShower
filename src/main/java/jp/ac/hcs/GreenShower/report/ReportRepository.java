@@ -29,18 +29,18 @@ public class ReportRepository {
 	private static final String SQL_SELECT_ONE = "SELECT * FROM report WHERE report_id = ?";
 
 	/** SQL 1件追加 */
-	private static final String SQL_INSERT_ONE = "INSERT INTO report (report_id, user_id, classroom, class_number, name, course_code, company_name,"
-			+ "company_name_kana, datetime, place, entry_section, entry_section_other, venue_section, venue_section_other, test_section,"
-			+ "test_section_other, test_summary, test_summary_other, result_notification, result_notification_day, aptitude_test_detail,"
+	private static final String SQL_INSERT_ONE = "INSERT INTO report (job_number, report_id, user_id, classroom, class_number, name, course_code, company_name,"
+			+ "company_name_kana, datetime, place, entry_section, entry_section_other, venue_section, venue_section_other, test_section, test_final, "
+			+ "test_section_other, test_summary, test_summary_other, result_notification, success_only,  result_notification_day, aptitude_test_detail,"
 			+ "aptitude_test_detail_other, interview_detail, interview_detail_other, interview_number, interviewer_number, interviewer_position,"
 			+ "interview_time, theme, question_contents, request_date, registered_user_id)"
-			+ "VALUES((SELECT MAX(report_id) + 1 FROM report),? , (SELECT classroom FROM users WHERE user_id = ? ), (SELECT class_number FROM users WHERE user_id = ? )"
-			+ ", (SELECT name FROM users WHERE user_id = ?), (SELECT SUBSTRING(classroom, 1)  FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "VALUES(?, (SELECT MAX(report_id) + 1 FROM report),? , (SELECT classroom FROM users WHERE user_id = ? ), (SELECT class_number FROM users WHERE user_id = ? )"
+			+ ", (SELECT name FROM users WHERE user_id = ?), (SELECT SUBSTRING(classroom, 1)  FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	/** SQL 1件更新 */
-	private static final String SQL_UPDATE_ONE = "UPDATE report SET company_name = ?,"
-			+ "company_name_kana = ?, datetime = ?, place = ?, entry_section = ?, entry_section_other = ?, venue_section = ?, venue_section_other = ?, test_section = ?,"
-			+ "test_section_other = ?, test_summary = ?, test_summary_other = ?, result_notification = ?, result_notification_day = ?, aptitude_test_detail = ?,"
+	private static final String SQL_UPDATE_ONE = "UPDATE report SET job_number = ?, company_name = ?,"
+			+ "company_name_kana = ?, datetime = ?, place = ?, entry_section = ?, entry_section_other = ?, venue_section = ?, venue_section_other = ?, test_section = ?,  test_final = ?, "
+			+ "test_section_other = ?, test_summary = ?, test_summary_other = ?, result_notification = ?, success_only, result_notification_day = ?, aptitude_test_detail = ?,"
 			+ "aptitude_test_detail_other = ?, interview_detail = ?, interview_detail_other = ?, interview_number = ?, interviewer_number = ?, interviewer_position = ?,"
 			+ "interview_time = ?, theme = ?, question_contents = ?, request_date = ? WHERE report_id = ?";
 
@@ -89,7 +89,8 @@ public class ReportRepository {
 	 */
 	public int insertOne(ReportData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_INSERT_ONE,
-
+				
+				data.getJob_number(),
 				data.getUser_id(),
 
 				// classroom,class_number,name,class_cordはユーザIDと紐づけてuserテーブルから取得する
@@ -97,8 +98,8 @@ public class ReportRepository {
 
 				data.getCompany_name(), data.getCompany_name_kana(), data.getDatetime(), data.getPlace(),
 				data.getEntry_section().getId(), data.getEntry_section_other(), data.getVenue_section().getId(),
-				data.getVenue_section_other(), data.getTest_section().getId(), data.getTest_section_other(),
-				data.getTest_summary().getId(), data.getTest_summary_other(), data.getResult_notification().getId(),
+				data.getVenue_section_other(), data.getTest_section().getId(),data.isTest_final(), data.getTest_section_other(),
+				data.getTest_summary().getId(), data.getTest_summary_other(), data.getResult_notification().getId(),data.isSuccess_only(),
 				data.getResult_notification_day(), data.getAptitude_test_detail().getId(),
 				data.getAptitude_test_detail_other(), data.getInterview_detail().getId(),
 				data.getInterview_detail_other(), data.getInterview_number(), data.getInterviewer_number(),
@@ -121,7 +122,7 @@ public class ReportRepository {
 			ReportData data = new ReportData();
 
 			data.setReport_id((int) map.get("report_id"));
-			data.setJob_number((int) map.get("job_number"));
+			data.setJob_number((String) map.get("job_number"));
 			data.setUser_id((String) map.get("user_id"));
 			data.setClassroom((String) map.get("classroom"));
 			data.setClass_number((String) map.get("class_number"));
@@ -173,11 +174,11 @@ public class ReportRepository {
 	 * @return
 	 */
 	public int updateReportForStudent(ReportData data) {
-		int rowNumber = jdbc.update(SQL_UPDATE_ONE, data.getCompany_name(), data.getCompany_name_kana(),
+		int rowNumber = jdbc.update(SQL_UPDATE_ONE, data.getJob_number(), data.getCompany_name(), data.getCompany_name_kana(),
 				data.getDatetime(), data.getPlace(), data.getEntry_section().getId(), data.getEntry_section_other(),
-				data.getVenue_section().getId(), data.getVenue_section_other(), data.getTest_section().getId(),
+				data.getVenue_section().getId(), data.getVenue_section_other(), data.getTest_section().getId(),data.isTest_final(),
 				data.getTest_section_other(), data.getTest_summary().getId(), data.getTest_summary_other(),
-				data.getResult_notification().getId(), data.getResult_notification_day(), data.getAptitude_test_detail().getId(),
+				data.getResult_notification().getId(), data.isSuccess_only(), data.getResult_notification_day(), data.getAptitude_test_detail().getId(),
 				data.getAptitude_test_detail_other(), data.getInterview_detail().getId(), data.getInterview_detail_other(),
 				data.getInterview_number(), data.getInterviewer_number(), data.getInterviewer_position(),
 				data.getInterview_time(), data.getTheme(), data.getQuestion_contents(), data.getRequest_date(),

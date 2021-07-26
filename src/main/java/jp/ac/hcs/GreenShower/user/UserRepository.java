@@ -30,19 +30,6 @@ public class UserRepository {
 	/** SQL 1件更新 管理者実行用 */
 	private static final String SQL_UPDATE_ONE_FOR_ADMIN = 
 			"UPDATE users SET name = ?, role = ?, classroom = ?, class_number = ?, enabled = ?, update_date = ?,  update_user_id = ? WHERE user_id = ?";
-
-//	/** SQL 1件更新 管理者 パスワード更新有 */
-//	private static final String SQL_UPDATE_ONE_WITH_PASSWORD = "UPDATE m_user SET encrypted_password = ?, user_name = ?, role = ? WHERE user_id = ?";
-//
-//	/** SQL 1件更新 管理者 パスワード更新無 */
-//	private static final String SQL_UPDATE_ONE = "UPDATE m_user SET user_name = ?, role = ? WHERE user_id = ?";
-//
-//	/** SQL 1件更新 一般ユーザ パスワード更新有 */
-//	private static final String SQL_UPDATE_GENERAL_WITH_PASSWORD = "UPDATE m_user SET encrypted_password = ?, user_name = ?, darkmode = ? WHERE user_id = ?";
-//
-//	/** SQL 1件更新 一般ユーザ パスワード更新無 */
-//	private static final String SQL_UPDATE_GENERAL = "UPDATE m_user SET user_name = ?, darkmode = ? WHERE user_id = ?";
-//
 	/** SQL 1件削除 */
 	private static final String SQL_DELETE_ONE = "DELETE FROM users WHERE user_id = ?";
 
@@ -53,7 +40,7 @@ public class UserRepository {
 	PasswordEncoder passwordEncoder;
 
 	/**
-	 * Userテーブルから全データを取得.
+	 * usersテーブルから全データを取得.
 	 * 
 	 * @return UserEntity
 	 * @throws DataAccessException
@@ -65,7 +52,7 @@ public class UserRepository {
 	}
 
 	/**
-	 * UserテーブルからユーザIDをキーにデータを1件を取得.
+	 * usersテーブルからユーザIDをキーにデータを1件を取得.
 	 * @param user_id 検索するユーザID
 	 * @return UserEntity
 	 * @throws DataAccessException
@@ -79,7 +66,7 @@ public class UserRepository {
 	}
 
 	/**
-	 * Userテーブルから取得したデータをUserEntity形式にマッピングする.
+	 * usersテーブルから取得したデータをUserEntity形式にマッピングする.
 	 * 
 	 * @param resultList Userテーブルから取得したデータ
 	 * @return UserEntity
@@ -108,7 +95,7 @@ public class UserRepository {
 	}
 
 	/**
-	 * Userテーブルにデータを1件追加する.
+	 * usersテーブルにデータを1件追加する.
 	 * 
 	 * @param data 追加するユーザ情報
 	 * @return 追加データ数
@@ -129,7 +116,7 @@ public class UserRepository {
 	
 	
 	/**
-	 * (管理用)Userテーブルのデータを1件更新する(パスワード更新有).
+	 * (管理用)usersテーブルのデータを1件更新する(パスワード更新有).
 	 * @param data 更新するユーザ情報
 	 * @return 更新データ数
 	 * @throws DataAccessException
@@ -148,66 +135,8 @@ public class UserRepository {
 		return rowNumber;
 	}
 
-//	/**
-//	 * (管理用)Userテーブルのデータを1件更新する(パスワード更新有).
-//	 * @param data 更新するユーザ情報
-//	 * @return 更新データ数
-//	 * @throws DataAccessException
-//	 */
-//	public int updateOneWithPassword(UserData data) throws DataAccessException {
-//		int rowNumber = jdbc.update(SQL_UPDATE_ONE_WITH_PASSWORD,
-//				passwordEncoder.encode(data.getPassword()),
-//				data.getUser_name(),
-//				data.getRole().getId(),
-//				data.getUser_id());
-//		return rowNumber;
-//	}
-//
-//	/**
-//	 * (管理用)Userテーブルのデータを1件更新する(パスワード更新無).
-//	 * @param data 更新するユーザ情報
-//	 * @return 更新データ数
-//	 * @throws DataAccessException
-//	 */
-//	public int updateOne(UserData userData) throws DataAccessException {
-//		int rowNumber = jdbc.update(SQL_UPDATE_ONE,
-//				userData.getUser_name(),
-//				userData.getRole().getId(),
-//				userData.getUser_id());
-//		return rowNumber;
-//	}
-//
-//	/**
-//	 * (一般用)Userテーブルのデータを1件更新する(パスワード更新有).
-//	 * @param data 更新するユーザ情報
-//	 * @return 更新データ数
-//	 * @throws DataAccessException
-//	 */
-//	public int updateGeneralWithPassword(UserData data) throws DataAccessException {
-//		int rowNumber = jdbc.update(SQL_UPDATE_GENERAL_WITH_PASSWORD,
-//				passwordEncoder.encode(data.getPassword()),
-//				data.getUser_name(),
-//				data.getDarkmode(),
-//				data.getUser_id());
-//		return rowNumber;
-//	}
-//
-//	/**
-//	 * (一般用)Userテーブルのデータを1件更新する(パスワード更新無).
-//	 * @param data 更新するユーザ情報
-//	 * @return 更新データ数
-//	 * @throws DataAccessException
-//	 */
-//	public int updateGeneral(UserData userData) throws DataAccessException {
-//		int rowNumber = jdbc.update(SQL_UPDATE_GENERAL,
-//				userData.getUser_name(),
-//				userData.getDarkmode(),
-//				userData.getUser_id());
-//		return rowNumber;
-//	}
-
 	/**
-	 * Userテーブルのデータを1件削除する.
+	 * userテーブルのデータを1件削除する.
 	 * @param user_id 削除するユーザID
 	 * @return 削除データ数
 	 * @throws DataAccessException
