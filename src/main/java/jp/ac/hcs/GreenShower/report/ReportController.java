@@ -72,6 +72,7 @@ public class ReportController {
 	@PostMapping("report/insert")
 	public String getReportInsert(@ModelAttribute @Validated ReportForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
+		
 
 		// コメントアウトを外すと、フォームのバリデーション機能でエラーが送出される。原因不明
 //		// 入力チェックに引っかかった場合、前の画面に戻る
@@ -85,6 +86,7 @@ public class ReportController {
 //		}
 		
 		log.info("入力情報（試験区分）：" + form.getTest_section());
+		log.info("最終試験か：" + form.isTest_final());
 
 		// 追加処理実行
 		reportService.insert(form, principal.getName());

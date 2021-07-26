@@ -14,7 +14,7 @@ public class ReportData {
 	/**
 	 * 求人番号
 	 */
-	private int job_number;
+	private String job_number;
 	
 	/**
 	 * ユーザID(メールアドレス)

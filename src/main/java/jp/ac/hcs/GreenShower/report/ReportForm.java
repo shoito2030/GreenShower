@@ -6,22 +6,16 @@ import lombok.Data;
 
 @Data
 public class ReportForm {
-//	/** 受験報告ID */
-//	@NotBlank(message = "{require_check}")
-//	private int report_id;
-	
-//	/**
-//	 * ユーザID(メールアドレス)
-//	 * メールアドレス形式
-//	 */
-//	@NotBlank(message = "{require_check}")
-//	@Email(message = "{email_check}")
-//	private String user_id;
 	
 	/**
 	 * レポートID
 	 */
 	private int report_id;
+	
+	/**
+	 * 求人番号
+	 */
+	private String job_number;
 	
 	/**
 	 * 企業名
@@ -93,6 +87,13 @@ public class ReportForm {
 	private int test_section;
 	
 	/**
+	 * 最終試験
+	 * -true 最終試験である
+	 * -false 最終試験ではない
+	 */
+	private boolean test_final;
+	
+	/**
 	 * 試験区分その他
 	 */
 	private String test_section_other;
@@ -128,6 +129,12 @@ public class ReportForm {
 	 */
 	//@NotBlank(message = "{require_check}")
 	private int result_notification;
+	
+	/**
+	 * -true 合格のみ
+	 * -false 不合格も
+	 */
+	private boolean success_only;
 	
 	/**
 	 * 1-2の数字
