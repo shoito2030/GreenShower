@@ -8,16 +8,28 @@
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
 <script type="text/javascript">
-function clickBtn2(){
-	document.getElementById("dis1").setAttribute("disabled", true);
-	document.getElementById("dis2").setAttribute("disabled", true);
-}
+	function clickBtn2() {
+		document.getElementById("dis1").setAttribute("disabled", true);
+		document.getElementById("dis2").setAttribute("disabled", true);
+	}
 </script>
 <script type="text/javascript">
-function clickBtn1(){
-	document.getElementById("dis1").removeAttribute("disabled");
-	document.getElementById("dis2").removeAttribute("disabled");
-}
+	function clickBtn1() {
+		document.getElementById("dis1").removeAttribute("disabled");
+		document.getElementById("dis2").removeAttribute("disabled");
+	}
+</script>
+<script type="text/javascript">
+	function data_input() {
+		var user_id = document.getElementById("user_id").value;
+		var encrypted_password = document.getElementById("encrypted_password").value;
+		var name = document.getElementById("name").value;
+		if (user_id != "" && encrypted_password != "" && name != ""){
+			document.getElementById("btn").removeAttribute("disabled");
+		}else{
+			document.getElementById("btn").setAttribute("disabled" , true);
+		}
+	}
 </script>
 </head>
 <body>
@@ -26,50 +38,55 @@ function clickBtn1(){
 	<th:block th:insert="components/part::frag_script"></th:block>
 	<div class="container">
 		<div class="content-box">
-		<p th:text="${errmsg}" style="background-color:#ffcc99;"></p>
-			<form method="post" name="userInsert" th:action="@{/user/insert}" th:object="${userFormForInsert}">
+			<p th:text="${errmsg}" style="background-color: #ffcc99;"></p>
+			<form method="post" name="userInsert" th:action="@{/user/insert}"
+				th:object="${userFormForInsert}">
 				<table>
 					<tr>
 						<th>ユーザID（メールアドレス）</th>
-						<td>
-						<input type="text" class="form-control" name="user_id"
-							placeholder="(例)xxx.@xxx.xx" th:field="*{user_id}"/>
-							<span class="text-danger" th:if="${#fields.hasErrors('user_id')}" th:errors="*{user_id}">user_id error</span>
-						</td>
+						<td><input type="text" class="form-control" name="user_id"
+							id="user_id" placeholder="(例)xxx.@xxx.xx" th:field="*{user_id}"
+							oninput="data_input()" /> <span class="text-danger"
+							th:if="${#fields.hasErrors('user_id')}" th:errors="*{user_id}">user_id
+								error</span></td>
 					</tr>
 					<tr>
 						<th>パスワード</th>
 						<td><input type="password" class="form-control"
-							name="encrypted_password" placeholder="4～100文字で入力すること" th:field="*{encrypted_password}"/>
-							<span class="text-danger" th:if="${#fields.hasErrors('encrypted_password')}" th:errors="*{encrypted_password}">encrypted_password error</span>
-							</td>
+							id="encrypted_password" name="encrypted_password"
+							placeholder="4～100文字で入力すること" th:field="*{encrypted_password}"
+							oninput="data_input()" /> <span class="text-danger"
+							th:if="${#fields.hasErrors('encrypted_password')}"
+							th:errors="*{encrypted_password}">encrypted_password error</span>
+						</td>
 					</tr>
 					<tr>
 						<th>氏名</th>
 						<td><input type="text" class="form-control" name="name"
-							placeholder="(例)情報太郎" th:field="*{name}"/>
-							<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</span>
-							</td>
+							id="name" placeholder="(例)情報太郎" th:field="*{name}"
+							oninput="data_input()" /> <span class="text-danger"
+							th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name
+								error</span></td>
 					</tr>
 					<tr>
 						<th>権限</th>
-						<td><select name="role">
-								<option value="ROLE_STUDENT" onclick="clickBtn1();">学生</option>
-								<option value="ROLE_TEACHER" onclick="clickBtn2();">担任</option>
-								<option value="ROLE_STAFF" onclick="clickBtn2();">事務</option>
-						</select></td>
+						<td><input type="radio" name="role" id="role" value="ROLE_STUDENT" onclick="clickBtn1()" checked>学生
+							<input type="radio" name="role" id="role" value="ROLE_TEACHER" onclick="clickBtn2()">担任
+							<input type="radio" name="role" id="role" value="ROLE_STAFF" onclick="clickBtn2()">事務</td>
 					</tr>
 					<tr>
 						<th>クラス番号</th>
-						<td><input type="text" class="form-control" name="classroom"
-							placeholder="SXAY" id="dis1" th:field="*{classroom}"/>
-							<span class="text-danger" th:if="${#fields.hasErrors('classroom')}" th:errors="*{classroom}">name error</span>
-							 <input type="text" class="form-control" name="class_number" placeholder="00" id="dis2" th:field="*{class_number}"/>
-							 <span class="text-danger" th:if="${#fields.hasErrors('class_number')}" th:errors="*{class_number}">name error</span></td>
+						<td><input type="text" class="form-control" name="classroom" placeholder="SXAY" id="dis1" th:field="*{classroom}">
+						<span class="text-danger" th:if="${#fields.hasErrors('classroom')}"
+							th:errors="*{classroom}">name error</span> <input type="text"
+							class="form-control" name="class_number" placeholder="00"
+							id="dis2" th:field="*{class_number}"> <span class="text-danger"
+							th:if="${#fields.hasErrors('class_number')}"
+							th:errors="*{class_number}">name error</span></td>
 					</tr>
 				</table>
 				<hr>
-				<button type="submit" class="btn btn-warning">登録</button>
+				<button type="submit" class="btn btn-warning" id="btn" disabled>登録</button>
 			</form>
 		</div>
 	</div>
