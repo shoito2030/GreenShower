@@ -2,7 +2,6 @@
  共通のCSS設定を記載.
  1ページにしか使わない設定は、各html内で直接styleタグで指定する.
  */
-
 body {
 	font-family: "Open Sans", sans-serif;
 	text-align: center;
@@ -15,9 +14,9 @@ h1 {
 .container {
 	margin-top: 10px;
 }
- 
+
 .content-box {
-	min-width :250px;
+	min-width: 250px;
 	margin: 5px;
 	padding: 10px;
 	border-radius: 3px;
@@ -60,4 +59,27 @@ h1 {
 .mode-dark {
 	color: black;
 	background-color: black;
+}
+
+/* ヘッダー用 */
+.nav-link {
+	position: relative;
+	display: inline-block;
+	transition: .3s;
+	font-weight: 500;
+}
+
+.nav-link::after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	content: '';
+	width: 0;
+	height: 3px;
+	background-color: blue;
+	transition: .3s;
+}
+
+.nav-link:hover::after {
+	width: 100%;
 }
