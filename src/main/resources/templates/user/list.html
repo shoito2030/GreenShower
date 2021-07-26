@@ -2,23 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
+
+    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+    <script>
+        jQuery(function($){
+            $("#user_table").DataTable();
+        });
+    </script>
 <meta charset="UTF-8">
 <title>ユーザ管理</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"
-	integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.min.js"
-	integrity="sha256-p4O2FDM/VsnStiXmXzKW9svZQjxXFufx7GKCmrHtsRI="
-	crossorigin="anonymous"></script>
-<script>
-	(function($) {
-		$(document).ready(function() {
-			$('input#qs').quicksearch('table tbody tr');
-		});
-	})(jQuery.noConflict(true));
-</script>
+
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
@@ -28,13 +25,10 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
+	
 	<div class="container">
 		<div class="content-box">
-			<span th:if="${msg}">
-			</span>
 			
-			<span th:if="${errmsg}"></span>
-			絞り込み：<input id="qs" name="qs" type="text">
 			<div class="table-responsive">
 				<table class="table table-striped table-light" id="user_table">
 					<thead class="thead-dark">
