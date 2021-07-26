@@ -5,22 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>就活ポータルトップ</title>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"
-	integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.min.js"
-	integrity="sha256-p4O2FDM/VsnStiXmXzKW9svZQjxXFufx7GKCmrHtsRI="
-	crossorigin="anonymous"></script>
-<script>
-	(function($) {
-		$(document).ready(function() {
-			$('input#qs').quicksearch('table tbody tr');
-		});
-	})(jQuery.noConflict(true));
-	
-</script>
+    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+    <script>
+        jQuery(function($){
+            $("#report_table").DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Japanese.json"
+                }
+            });
+        });
+    </script>
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
@@ -33,10 +31,8 @@
 	<div class="container">
 		<div class="content-box">
 			</th:block>
-
-			絞り込み：<input id="qs" name="qs" type="text">
 			<div class="resposive">
-				<table class="table table-striped table-light">
+				<table class="table table-striped table-light" id="report_table">
 					<thead class="thead-dark">
 						<tr>
 							<th>企業名</th>
