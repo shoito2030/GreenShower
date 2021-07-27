@@ -84,18 +84,18 @@ public class ReportService {
 		return rowNumber > 0;
 	}
 	
-	public boolean update(ReportForm form) {
-		ReportData reportData = refillToReportData(form, null);
-		int rowNumber = 0;
-		try {
-			
-			rowNumber = reportRepository.updateReportForStudent(reportData);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-		
-		return rowNumber > 0;
-	}
+//	public boolean update(ReportForm form) {
+//		ReportData reportData = refillToReportData(form, null);
+//		int rowNumber = 0;
+//		try {
+//			
+//			rowNumber = reportRepository.updateReportForStudent(reportData);
+//		} catch (DataAccessException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return rowNumber > 0;
+//	}
 	
 	/**
 	 * 入力情報をUserData型に変換する（insert用）
