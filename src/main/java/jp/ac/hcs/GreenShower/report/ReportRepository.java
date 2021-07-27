@@ -167,24 +167,24 @@ public class ReportRepository {
 		return entity;
 	}
 
-	/**
-	 * 学生が報告情報を編集する
-	 * 
-	 * @param data
-	 * @return
-	 */
-	public int updateReportForStudent(ReportData data) {
-		int rowNumber = jdbc.update(SQL_UPDATE_ONE, data.getJob_number(), data.getCompany_name(), data.getCompany_name_kana(),
-				data.getDatetime(), data.getPlace(), data.getEntry_section().getId(), data.getEntry_section_other(),
-				data.getVenue_section().getId(), data.getVenue_section_other(), data.getTest_section().getId(),data.isTest_final(),
-				data.getTest_section_other(), data.getTest_summary().getId(), data.getTest_summary_other(),
-				data.getResult_notification().getId(), data.isSuccess_only(), data.getResult_notification_day(), data.getAptitude_test_detail().getId(),
-				data.getAptitude_test_detail_other(), data.getInterview_detail().getId(), data.getInterview_detail_other(),
-				data.getInterview_number(), data.getInterviewer_number(), data.getInterviewer_position(),
-				data.getInterview_time(), data.getTheme(), data.getQuestion_contents(), data.getRequest_date(),
-				data.getReport_id());
-		return rowNumber;
-	}
+//	/**
+//	 * 学生が報告情報を編集する
+//	 * 
+//	 * @param data
+//	 * @return
+//	 */
+//	public int updateReportForStudent(ReportData data) {
+//		int rowNumber = jdbc.update(SQL_UPDATE_ONE, data.getJob_number(), data.getCompany_name(), data.getCompany_name_kana(),
+//				data.getDatetime(), data.getPlace(), data.getEntry_section().getId(), data.getEntry_section_other(),
+//				data.getVenue_section().getId(), data.getVenue_section_other(), data.getTest_section().getId(),data.isTest_final(),
+//				data.getTest_section_other(), data.getTest_summary().getId(), data.getTest_summary_other(),
+//				data.getResult_notification().getId(), data.isSuccess_only(), data.getResult_notification_day(), data.getAptitude_test_detail().getId(),
+//				data.getAptitude_test_detail_other(), data.getInterview_detail().getId(), data.getInterview_detail_other(),
+//				data.getInterview_number(), data.getInterviewer_number(), data.getInterviewer_position(),
+//				data.getInterview_time(), data.getTheme(), data.getQuestion_contents(), data.getRequest_date(),
+//				data.getReport_id());
+//		return rowNumber;
+//	}
 
 	/**
 	 * 
