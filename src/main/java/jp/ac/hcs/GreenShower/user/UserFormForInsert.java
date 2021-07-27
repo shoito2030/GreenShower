@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import lombok.Data;
 
 /**
- * 1件分のユーザ情報 各項目のデータ仕様も合わせて管理する
+ * 1件分のユーザ情報 各項目のデータ仕様も合わせて管理する（insert用）
  */
 @Data
 public class UserFormForInsert {

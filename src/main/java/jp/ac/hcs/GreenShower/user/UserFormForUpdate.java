@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
- * アップデート用にパスワード、ダークモード、権限のチェックを外したUserForm その他の内容はUserFormに準じる
+ * アップデート用のUserForm
  */
 @Data
 public class UserFormForUpdate {

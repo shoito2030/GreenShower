@@ -8,6 +8,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
+/**
+ *ユーザマスタに関する操作を行う業務クラス
+ */
 public class UserService {
 
 	@Autowired
