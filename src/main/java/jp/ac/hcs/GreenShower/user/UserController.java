@@ -18,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+/**
+ * ユーザ情報に関する処理を行うControllerクラス
+ */
 public class UserController {
 	@Autowired
 	private UserService userService;
