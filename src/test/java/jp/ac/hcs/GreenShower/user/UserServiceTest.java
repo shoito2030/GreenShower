@@ -54,7 +54,7 @@ class UserServiceTest {
 	@Test
 	void selectメソッドの正常系テスト() {
 		// 1.Ready
-		String user_id = "isida@xxx.co.jp";
+		String user_id = "abe@xxx.co.jp";
 		// 2.Do
 		Optional<UserData> userData = userService.select(user_id);
 		// 3.Assert
@@ -152,8 +152,8 @@ class UserServiceTest {
 	void updateForAdminメソッドの正常系テスト() {
 		// 1.Ready
 		UserFormForUpdate userData = new UserFormForUpdate();
-		userData.setUser_id("isida@xxx.co.jp");
-		userData.setName("石田雄介");
+		userData.setUser_id("abe@xxx.co.jp");
+		userData.setName("安部華奈");
 		userData.setRole("ROLE_TEACHER");
 		userData.setClassroom("S2A1");
 		userData.setClass_number("02");
