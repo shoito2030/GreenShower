@@ -21,7 +21,10 @@ import jp.ac.hcs.GreenShower.report.ReportData.Test_section;
 import jp.ac.hcs.GreenShower.report.ReportData.Test_summary;
 import jp.ac.hcs.GreenShower.report.ReportData.Venue_section;
 
-
+/** 
+ * 受験報告に関する処理を行うServiceクラス
+ * 
+ */
 @Service
 public class ReportService {
 

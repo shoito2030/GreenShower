@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jp.ac.hcs.GreenShower.WebConfig;
 import lombok.extern.slf4j.Slf4j;
 
+/** 
+ * 受験報告に関する処理を行うControllerクラス
+ * 
+ */
 @Slf4j
 @Controller
 public class ReportController {
