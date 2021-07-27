@@ -168,7 +168,7 @@ public class ReportController {
 //			log.info("入力情報：" + form.toString());
 //
 //			model.addAttribute("errmsg", "ユーザ情報の登録に失敗しました。入力内容をお確かめください。");
-//
+
 //			return getReportInsert(form, model);
 //		}
 //		
