@@ -206,7 +206,7 @@ public class ReportRepository {
 	public void reportlistCsvOut() throws DataAccessException {
 
 		// CSVファイル出力用設定
-		TaskRowCallbackHandler handler = new TaskRowCallbackHandler();
+		ReportRowCallbackHandler handler = new ReportRowCallbackHandler();
 
 		jdbc.query(SQL_SELECT_ALL, handler);
 	}

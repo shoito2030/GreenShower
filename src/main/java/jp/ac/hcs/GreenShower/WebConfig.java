@@ -14,7 +14,7 @@ public class WebConfig {
 	public static final String OUTPUT_PATH = "target/";
 
 	/** タスク情報のCSVファイル名 */
-	public static final String FILENAME_TASK_CSV = "tasklist.csv";
+	public static final String FILENAME_REPORT_CSV = "report.csv";
 
 	@Bean
 	public MessageSource messageSource() {

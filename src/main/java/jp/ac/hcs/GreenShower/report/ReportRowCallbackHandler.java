@@ -22,7 +22,7 @@ import jp.ac.hcs.GreenShower.report.ReportData.Venue_section;
 /**
  * SQLで取得した結果をCSVファイルとしてサーバに保存する.
  */
-public class TaskRowCallbackHandler implements RowCallbackHandler {
+public class ReportRowCallbackHandler implements RowCallbackHandler {
 
 	@Override
 	public void processRow(ResultSet rs) throws SQLException {
@@ -34,7 +34,7 @@ public class TaskRowCallbackHandler implements RowCallbackHandler {
 				directory.mkdir();
 			}
 
-			File file = new File(WebConfig.OUTPUT_PATH + WebConfig.FILENAME_TASK_CSV);
+			File file = new File(WebConfig.OUTPUT_PATH + WebConfig.FILENAME_REPORT_CSV);
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 
 			BufferedWriter bw = new BufferedWriter(fw);

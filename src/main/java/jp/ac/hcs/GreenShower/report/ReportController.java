@@ -217,7 +217,7 @@ public class ReportController {
 	@PostMapping("/report/csv")
 	public ResponseEntity<byte[]> getReportCsv(Principal principal, Model model) {
 
-		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_TASK_CSV;
+		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_REPORT_CSV;
 
 		log.info("[" + principal.getName() + "]CSVファイル作成:" + OUTPUT_FULLPATH);
 
@@ -237,7 +237,7 @@ public class ReportController {
 		// CSVファイルのダウンロード用ヘッダー情報設定
 		HttpHeaders header = new HttpHeaders();
 		header.add("Content-Type", "text/csv; charset=UTF-8");
-		header.setContentDispositionFormData("filename", WebConfig.FILENAME_TASK_CSV);
+		header.setContentDispositionFormData("filename", WebConfig.FILENAME_REPORT_CSV);
 
 		// CSVファイルを端末へ送信
 		return new ResponseEntity<byte[]>(bytes, header, HttpStatus.OK);
