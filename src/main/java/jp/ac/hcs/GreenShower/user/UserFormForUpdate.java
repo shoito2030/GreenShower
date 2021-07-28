@@ -3,6 +3,8 @@ package jp.ac.hcs.GreenShower.user;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.Length;
+
 import lombok.Data;
 
 /**
@@ -29,11 +31,13 @@ public class UserFormForUpdate {
 	/**
 	 * 所属クラス 固定長文字列(4)
 	 */
+	@Length(min = 0, max = 4, message = "{length_check}")
 	private String classroom;
 
 	/**
 	 * 出席番号 固定長文字列(2)
 	 */
+	@Length(min = 0, max = 2, message = "{length_check}")
 	private String class_number;
 
 	/**
