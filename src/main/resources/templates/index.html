@@ -14,10 +14,10 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 	
 	<div>
-		<input type="button" class="btn btn-primary" value="新規作成">
-		<input type="button" class="btn btn-primary" value="申請一覧">
-		<input type="button" class="btn btn-primary" value="報告一覧">
-		<input type="button" class="btn btn-primary" value="イベント情報 登録">
+		<input type="button" class="btn btn-primary" value="新規作成" th:onclick="'window.location.href = \'' + @{/request/insert} + '\''">
+		<input type="button" class="btn btn-primary" value="申請一覧" th:onclick="'window.location.href = \'' + @{/request/list} + '\''">
+		<input type="button" class="btn btn-primary" value="報告一覧" th:onclick="'window.location.href = \'' + @{/report/list} + '\''">
+		<input type="button" class="btn btn-primary" value="イベント情報 登録" th:onclick="'window.location.href = \'' + @{/event-registration} + '\''">
 		<input type="button" class="btn btn-primary" value="申請一覧 出力" th:onclick="'window.location.href = \'' + @{/csv} + '\''">
 		
 	</div>

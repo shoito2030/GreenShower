@@ -22,6 +22,27 @@ public class JobController {
 	@Autowired
 	private JobRequestServise jobRequestServise;
 	
+	
+//	@GetMapping("/request/insert")
+//	public String hoge1() {
+//		return "job/request/insert";
+//	}
+//	
+//	@GetMapping("/request/list")
+//	public String hoge2() {
+//		return "job/request/list";
+//	}
+//	
+//	@GetMapping("/report/list")
+//	public String hoge3() {
+//		return "job/report/list";
+//	}
+//	
+//	@GetMapping("/event-registration")
+//	public String hoge4() {
+//		return "job/event-registration";
+//	}
+	
 	/**
 	 * ルートアクセス時にメイン画面を表示する
 	 * @return テンプレートファイル（index.html）
@@ -54,4 +75,6 @@ public class JobController {
 		// CSVファイルを端末へ送信
 		return new ResponseEntity<byte[]>(bytes, header, HttpStatus.OK);
 	}
+	
+	
 }
