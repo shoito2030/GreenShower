@@ -25,3 +25,4 @@ VALUES('2',12314444, 'jouhou@xxx.co.jp', 'S3A1', '02', '情報太郎', 'S', 'グ
 
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type)
 VALUES('1', 'isida@xxx.co.jp', '2', '0')
+

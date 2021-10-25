@@ -44,6 +44,37 @@ CREATE TABLE IF NOT EXISTS job_hunting (
               REFERENCES users(user_id) 
 );
 
+/**
+ * 申請マスタ
+ * 定義書参照
+ */
+ CREATE TABLE IF NOT EXISTS requests (
+    apply_id VARCHAR(254) PRIMARY KEY,
+    date_activity_from DATE NOT NULL,
+    date_activity_to DATE NOT NULL,
+    loc VARCHAR(100) NOT NULL,
+    content VARCHAR(2) NOT NULL,
+    company_name VARCHAR(137) NOT NULL,
+    
+    date_absence_from DATE,
+    date_absence_to DATE,
+    leave_early_date DATE,
+    attendance_date DATE,
+    remark VARCHAR(254),
+    
+    register_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    register_user_id VARCHAR(254) NOT NULL,
+    update_date TIMESTAMP,
+    update_user_id VARCHAR(254),
+    
+    FOREIGN KEY (apply_id)
+              REFERENCES job_hunting(apply_id),
+    FOREIGN KEY (register_user_id)
+              REFERENCES users(user_id),
+    FOREIGN KEY (update_user_id)
+              REFERENCES users(user_id) 
+);
+
 
 CREATE TABLE IF NOT EXISTS report (
 	report_id INT PRIMARY KEY,

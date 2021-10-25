@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>就活ポータルトップ</title>
+
+	<meta id="viewport" name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="manifest" href="/css/manifest.json"
+		crossorigin="use-credentials">
+	<meta name="application-name" content="WebPortal">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="WebPortal">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+	<link rel="icon" sizes="192x192"
+		href="/img/favicon.ico">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="apple-touch-icon" href="/img/favicon.ico">
+	<link rel="apple-touch-icon" href="/img/favicon.ico"
+		sizes="192x192">
+	<link rel="apple-touch-icon" href="/img/favicon.ico"
+		sizes="58x58">
+
+	<!-- FontAwesome -->
+	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+		rel="stylesheet">
+
+
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		crossorigin="anonymous">
+	<link rel="stylesheet"
+		href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />
+    
+    <link rel="stylesheet" href="/src/main/resources/static/css/ress.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/common.css">
+</head>
+
+<body>
+	
+		<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+			<a class="navbar-brand title-font" href="/">就活ポータル.com</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav w-100 nav-justified">
+					<li class="nav-item active"><a class="nav-link" href="/">就職活動管理</a>
+					</li>
+					<li class="nav-item active"><a class="nav-link"
+						href="/report/list">受験報告管理</a></li>
+
+					
+
+					
+						<li class="nav-item active"><a class="nav-link"
+							href="/user/list">ユーザ管理</a></li>
+					
+
+
+					<li class="nav-item active"><a class="nav-link" href="/"><i
+							class="fas fa-envelope"></i>メッセージ</a></li>
+					<li class="nav-item active"><a class="nav-link" href="/"><i
+							class="fas fa-cog"></i>設定</a></li>
+					<li class="nav-item active"><a class="nav-link"
+						href="/logout">Log out</a></li>
+				</ul>
+
+			</div>
+		</nav>
+	
+	
+
+
+	<div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8">
+                <div class="card center-block" style="border-radius:75px;">
+                    <div class="card-body">
+                        <h3 class="card-title">就職活動申請</h3>
+                        <div class="btn-group-vertical btn-group-lg w-50" role="group">
+                            <input type="button" class="btn btn-primary mt-5" value="新規作成"
+							onclick="window.location.href = &#39;/request/insert&#39;">
+                            <input type="button" class="btn btn-primary mt-5" value="申請一覧"
+							onclick="window.location.href = &#39;/request/list&#39;">
+                            <input type="button" class="btn btn-primary mt-5" value="報告一覧"
+							onclick="window.location.href = &#39;/report/list&#39;">
+                            <input type="button" class="btn btn-primary mt-5" value="イベント情報 登録"
+							onclick="window.location.href = &#39;/event-registration&#39;">
+                            <input type="button" class="btn btn-primary mt-5 mb-5" value="申請一覧 出力"
+							onclick="window.location.href = &#39;/csv&#39;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+	<script
+			src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		<script
+			src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+		<script
+			src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+		<script
+			src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"></script>
+		
+	
+
+	
+</body>
+</html>
