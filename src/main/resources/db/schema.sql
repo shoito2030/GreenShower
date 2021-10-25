@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS job_hunting (
 	applicant_id VARCHAR(254) NOT NULL,
 	status VARCHAR(2) NOT NULL DEFAULT 3,
 	apply_type CHAR(1) NOT NULL,
-	indicate VARCHAR(254),	
+	indicate VARCHAR(254)
 );
 
 CREATE TABLE IF NOT EXISTS requests (
@@ -109,5 +109,5 @@ CREATE TABLE IF NOT EXISTS requests (
     CONSTRAINT fk_update_user_id
     	FOREIGN KEY (update_user_id)
     	REFERENCES users (user_id)
-    	ON DELETE CASCADE,
+    	ON DELETE CASCADE
 );
