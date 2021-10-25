@@ -48,7 +48,7 @@ public class JobController {
 	 * @param model
 	 * @return 就職活動申請一覧情報のCSVファイル
 	 */
-	@GetMapping("/csv")
+	@GetMapping("/job/csv")
 	public ResponseEntity<byte[]> getJobRequestCsv(Principal principal, Model model) {
 
 		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_JOBREQUEST_CSV;

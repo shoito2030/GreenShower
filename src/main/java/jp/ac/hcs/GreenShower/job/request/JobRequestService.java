@@ -11,35 +11,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-/** 
+/**
  * 就職活動申請に関する処理を行うServiceクラス
  * 
  */
 @Service
 public class JobRequestService {
-	
+
 	@Autowired
 	JobRequestRepository jobRequestRepository;
-	
+
 	/**
 	 * 就職活動申請の申請情報を全件取得する
 	 * 
+	 * @param role アクターの権限
 	 * @return Optional<jobRequestEntity>
 	 */
-	public Optional<JobRequestEntity> selectAll(){
+	public Optional<JobRequestEntity> selectAllRequests() {
 		JobRequestEntity jobRequestEntity;
-		
+
 		try {
-			jobRequestEntity = jobRequestRepository.selectAll();
-		}catch (DataAccessException e) {
+			jobRequestEntity = jobRequestRepository.selectAllRequests();
+		} catch (DataAccessException e) {
 			e.printStackTrace();
 			jobRequestEntity = null;
 		}
 		return Optional.ofNullable(jobRequestEntity);
-		
 	}
+
 	/**
 	 * 就職活動申請一覧情報をCSVファイルとしてサーバに保存する.
+	 * 
 	 * @param user_id ユーザID
 	 * @throws DataAccessException
 	 */
@@ -49,6 +51,7 @@ public class JobRequestService {
 
 	/**
 	 * サーバーに保存されているファイルを取得して、byte配列に変換する.
+	 * 
 	 * @param fileName ファイル名
 	 * @return ファイルのbyte配列
 	 * @throws IOException ファイル取得エラー

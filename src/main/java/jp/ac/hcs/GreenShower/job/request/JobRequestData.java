@@ -2,38 +2,14 @@ package jp.ac.hcs.GreenShower.job.request;
 
 import java.util.Date;
 
+import jp.ac.hcs.GreenShower.job.CommonEnum;
+import jp.ac.hcs.GreenShower.job.JobHuntingData;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class JobRequestData {
-	/**
-	 * 申請ID
-	 */
-	private String apply_id;
-	/**
-	 * 申請者ID
-	 */
-	private String applicant_id;
-	
-	/**
-	 * 状態
-	 */
-	private String status;
-	
-	/**
-	 * 申請種別
-	 */
-	private String apply_type;
-	
-	/**
-	 * 指摘事項
-	 */
-	private String indicate;
-	
-	/**
-	 * 企業名
-	 */
-	private String company_name;
+@EqualsAndHashCode(callSuper=true)
+public class JobRequestData extends JobHuntingData{
 	
 	/**
 	 * 活動開始日時
@@ -45,21 +21,25 @@ public class JobRequestData {
 	 */
 	private Date date_activity_to;
 	
-	
 	/**
 	 * 場所
 	 */
 	private String loc;
 	
-	/**
-	 * 手段
-	 */
-	private String means;
+//	/**
+//	 * 手段
+//	 */
+//	private String means;
 	
 	/**
-	 * メモ
+	 * 内容
 	 */
-	private String remark;
+	private Content content;
+	
+	/**
+	 * 企業名
+	 */
+	private String company_name;
 	
 	/**
 	 * 欠席開始日時
@@ -82,22 +62,56 @@ public class JobRequestData {
 	private Date attendance_date;
 	
 	/**
-	 * 登録日時
+	 * メモ
 	 */
-	private Date register_date;
+	private String remark;
 	
-	/**
-	 * 登録者のユーザID
-	 */
-	private String register_user_id;
+//	/**
+//	 * 登録日時
+//	 */
+//	private Date register_date;
+//	
+//	/**
+//	 * 登録者のユーザID
+//	 */
+//	private String register_user_id;
+//	
+//	/**
+//	 * 更新日時
+//	 */
+//	private Date update_date;
+//	
+//	/**
+//	 * 更新者のユーザID
+//	 */
+//	private String update_user_id;
 	
-	/**
-	 * 更新日時
-	 */
-	private Date update_date;
-	
-	/**
-	 * 更新者のユーザID
-	 */
-	private String update_user_id;
+	public enum Content implements CommonEnum<Content>{
+		MULTIPLE_COMPANY_SESSION("1","合企"),
+		SINGLE_COMPANY_SESSION("2","単独"),
+		TEST("3","試験"),
+		OTHER("99","その他");
+		
+		/** ID */
+		private String id;
+		
+		/** 値 */
+		private String value;
+
+		/** コンストラクタ */
+		Content(String id, String value) {
+			this.id = id;
+			this.value = value;
+		}
+		
+		@Override
+		public String getId() {
+			return this.id;
+		}
+
+		@Override
+		public String getValue() {
+			return this.value;
+		}
+	}
 }

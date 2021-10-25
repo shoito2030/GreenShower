@@ -1,5 +1,6 @@
 package jp.ac.hcs.GreenShower.job.request;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,16 @@ public class JobRequestController {
 	 * @return 就職活動申請申請一覧画面 or トップ画面
 	 */
 	@GetMapping("/job/request/list")
-	public String getReportList(Model model) {
+	public String getReportList(Principal principal, Model model) {
 
 	// 取得できなかった場合は空のOptionalが格納される
-	Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAll();
+	Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllRequests();
 
 		// 処理失敗によりトップ画面へ
 		if (jobRequestEntity.isEmpty()) {
 			return "index";
-		}
-
+		} 
+		
 		model.addAttribute("jobRequestEntity", jobRequestEntity.get());
 		return "job/request/list";
 	}

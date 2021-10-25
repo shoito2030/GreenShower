@@ -23,13 +23,13 @@ import jp.ac.hcs.GreenShower.report.ReportData.Venue_section;
 public class ReportRepository {
 
 	/** SQL 全件取得（クラスと出席番号の昇順） */
-	private static final String SQL_SELECT_ALL = "SELECT * FROM report order by classroom, class_number";
+	private static final String SQL_SELECT_ALL = "SELECT * FROM report_hoge order by classroom, class_number";
 
 	/** SQL 1件取得 */
-	private static final String SQL_SELECT_ONE = "SELECT * FROM report WHERE report_id = ?";
+	private static final String SQL_SELECT_ONE = "SELECT * FROM report_hoge WHERE report_id = ?";
 
 	/** SQL 1件追加 */
-	private static final String SQL_INSERT_ONE = "INSERT INTO report (job_number, report_id, user_id, classroom, class_number, name, course_code, company_name,"
+	private static final String SQL_INSERT_ONE = "INSERT INTO report_hoge (job_number, report_id, user_id, classroom, class_number, name, course_code, company_name,"
 			+ "company_name_kana, datetime, place, entry_section, entry_section_other, venue_section, venue_section_other, test_section, test_final, "
 			+ "test_section_other, test_summary, test_summary_other, result_notification, success_only,  result_notification_day, aptitude_test_detail,"
 			+ "aptitude_test_detail_other, interview_detail, interview_detail_other, interview_number, interviewer_number, interviewer_position,"
@@ -38,14 +38,14 @@ public class ReportRepository {
 			+ ", (SELECT name FROM users WHERE user_id = ?), (SELECT SUBSTRING(classroom, 1)  FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	/** SQL 1件更新 */
-	private static final String SQL_UPDATE_ONE = "UPDATE report SET job_number = ?, company_name = ?,"
+	private static final String SQL_UPDATE_ONE = "UPDATE report_hoge SET job_number = ?, company_name = ?,"
 			+ "company_name_kana = ?, datetime = ?, place = ?, entry_section = ?, entry_section_other = ?, venue_section = ?, venue_section_other = ?, test_section = ?,  test_final = ?, "
 			+ "test_section_other = ?, test_summary = ?, test_summary_other = ?, result_notification = ?, success_only, result_notification_day = ?, aptitude_test_detail = ?,"
 			+ "aptitude_test_detail_other = ?, interview_detail = ?, interview_detail_other = ?, interview_number = ?, interviewer_number = ?, interviewer_position = ?,"
 			+ "interview_time = ?, theme = ?, question_contents = ?, request_date = ? WHERE report_id = ?";
 
 	/** SQL 1件更新 */
-	private static final String SQL_UPDATE_REPORT_STATUS = "UPDATE report SET report_status = ? WHERE report_id = ?";
+	private static final String SQL_UPDATE_REPORT_STATUS = "UPDATE report_hoge SET report_status = ? WHERE report_id = ?";
 
 	@Autowired
 	private JdbcTemplate jdbc;
