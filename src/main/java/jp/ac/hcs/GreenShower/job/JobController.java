@@ -71,7 +71,7 @@ public class JobController {
 		// CSVファイルのダウンロード用ヘッダー情報設定
 		HttpHeaders header = new HttpHeaders();
 		header.add("Content-Type", "text/csv; charset=UTF-8");
-		header.setContentDispositionFormData("filename", WebConfig.FILENAME_REPORT_CSV);
+		header.setContentDispositionFormData("filename", WebConfig.FILENAME_JOBREQUEST_CSV);
 
 		// CSVファイルを端末へ送信
 		return new ResponseEntity<byte[]>(bytes, header, HttpStatus.OK);

@@ -7,9 +7,28 @@ import lombok.Data;
 @Data
 public class JobRequestData {
 	/**
+	 * 申請ID
+	 */
+	private String apply_id;
+	/**
+	 * 申請者ID
+	 */
+	private String applicant_id;
+	
+	/**
+	 * 状態
+	 */
+	private String status;
+	
+	/**
 	 * 申請種別
 	 */
-	private String request_type;
+	private String apply_type;
+	
+	/**
+	 * 指摘事項
+	 */
+	private String indicate;
 	
 	/**
 	 * 企業名
@@ -17,25 +36,20 @@ public class JobRequestData {
 	private String company_name;
 	
 	/**
-	 * 開始日時
+	 * 活動開始日時
 	 */
-	private Date start;
+	private Date date_activity_from;
 	
 	/**
-	 * 終了日時
+	 * 活動終了日時
 	 */
-	private Date end;
+	private Date date_activity_to;
 	
-	/**
-	 * 郵便番号
-	 * 
-	 */
-	private String zipcode;
 	
 	/**
 	 * 場所
 	 */
-	private String place;
+	private String loc;
 	
 	/**
 	 * 手段
@@ -45,5 +59,45 @@ public class JobRequestData {
 	/**
 	 * メモ
 	 */
-	private String memorandum;
+	private String remark;
+	
+	/**
+	 * 欠席開始日時
+	 */
+	private Date date_absence_from;
+	
+	/**
+	 * 欠席終了日時
+	 */
+	private Date date_absence_to;
+	
+	/**
+	 * 早退日時
+	 */
+	private Date leave_early_date;
+	
+	/**
+	 * 出席日時
+	 */
+	private Date attendance_date;
+	
+	/**
+	 * 登録日時
+	 */
+	private Date register_date;
+	
+	/**
+	 * 登録者のユーザID
+	 */
+	private String register_user_id;
+	
+	/**
+	 * 更新日時
+	 */
+	private Date update_date;
+	
+	/**
+	 * 更新者のユーザID
+	 */
+	private String update_user_id;
 }

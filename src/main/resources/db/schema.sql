@@ -116,3 +116,11 @@ CREATE TABLE IF NOT EXISTS report (
     registered_user_id VARCHAR(254),
     remarks VARCHAR(254)
 );
+
+CREATE TABLE IF NOT EXISTS job_hunting (
+	apply_id VARCHAR(254) PRIMARY KEY,
+	applicant_id VARCHAR(254) NOT NULL,
+	status VARCHAR(2) NOT NULL DEFAULT 3,
+	apply_type CHAR(1) NOT NULL,
+	indicate VARCHAR(254)
+);
