@@ -44,17 +44,18 @@ public class JobController {
 //	}
 	
 	/**
-	 * ルートアクセス時にメイン画面を表示する
-	 * @return テンプレートファイル（index.html）
+	 * すべての就職活動申請一覧情報をCSVファイルとしてダウンロードさせる
+	 * @param model
+	 * @return 就職活動申請一覧情報のCSVファイル
 	 */
 	@GetMapping("/csv")
-	public ResponseEntity<byte[]> getReportCsv(Principal principal, Model model) {
+	public ResponseEntity<byte[]> getJobRequestCsv(Principal principal, Model model) {
 
-		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_REPORT_CSV;
+		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_JOBREQUEST_CSV;
 
 		log.info("[" + principal.getName() + "]CSVファイル作成:" + OUTPUT_FULLPATH);
 
-		// CSVファイルをサーバ上に作成
+		//CSVファイルをサーバ上に作成
 //		jobRequestServise.reportListCsvOut();
 
 		// CSVファイルをサーバから読み込み
