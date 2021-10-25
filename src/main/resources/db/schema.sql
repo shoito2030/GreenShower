@@ -70,3 +70,44 @@ CREATE TABLE IF NOT EXISTS report (
     registered_user_id VARCHAR(254),
     remarks VARCHAR(254)
 );
+
+CREATE TABLE IF NOT EXISTS job_hunting (
+	apply_id VARCHAR(254) PRIMARY KEY,
+	applicant_id VARCHAR(254) NOT NULL,
+	status VARCHAR(2) NOT NULL DEFAULT 3,
+	apply_type CHAR(1) NOT NULL,
+	indicate VARCHAR(254),	
+);
+
+CREATE TABLE IF NOT EXISTS requests (
+	apply_id VARCHAR(254) PRIMARY KEY,
+	date_activity_from DATE NOT NULL,
+	date_activity_to DATE NOT NULL,
+	loc VARCHAR(100) NOT NULL,
+	content VARCHAR(2) NOT NULL,
+	company_name VARCHAR(137) NOT NULL,
+	date_absence_from DATE,
+	date_absence_to DATE,
+	leave_early_date DATE,
+	attendance_date DATE,
+	remark VARCHAR(254),
+	register_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	register_user_id NOT NULL,
+	update_date TIMESTAMP,
+	update_user_id VARCHAR(254),
+	
+	CONSTRAINT fk_apply_id
+		FOREIGN KEY(apply_id) 
+	    REFERENCES job_hunting(apply_id)
+	    ON DELETE CASCADE,
+	    
+    CONSTRAINT fk_register_user_id
+    	FOREIGN KEY (register_user_id)
+    	REFERENCES users (user_id)
+    	ON DELETE CASCADE,
+    	
+    CONSTRAINT fk_update_user_id
+    	FOREIGN KEY (update_user_id)
+    	REFERENCES users (user_id)
+    	ON DELETE CASCADE,
+);

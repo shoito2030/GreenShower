@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import jp.ac.hcs.GreenShower.WebConfig;
-import jp.ac.hcs.GreenShower.job.request.JobRequestServise;
+import jp.ac.hcs.GreenShower.job.request.JobRequestService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class JobController {
 	
 	@Autowired
-	private JobRequestServise jobRequestServise;
+	private JobRequestService jobRequestService;
 	
 	
 //	@GetMapping("/request/insert")
@@ -60,7 +60,7 @@ public class JobController {
 		// CSVファイルをサーバから読み込み
 		byte[] bytes = null;
 		try {
-			bytes = jobRequestServise.getFile(OUTPUT_FULLPATH);
+			bytes = jobRequestService.getFile(OUTPUT_FULLPATH);
 			log.info("[" + principal.getName() + "]CSVファイル読み込み成功:" + OUTPUT_FULLPATH);
 		} catch (IOException e) {
 			log.warn("[" + principal.getName() + "]CSVファイル読み込み失敗:" + OUTPUT_FULLPATH);
