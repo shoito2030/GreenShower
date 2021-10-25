@@ -40,10 +40,19 @@
     
     <link rel="stylesheet" href="/src/main/resources/static/css/ress.css">
     <link rel="stylesheet" href="/src/main/resources/static/css/common.css">
+
+    <style>
+        .bg-color-sky {
+            background-color: #DAE8FC;
+        }
+
+        .bg-color-white {
+            background-color: white;
+        }
+    </style>
 </head>
 
-<body>
-	
+<body class="bg-color-sky">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
 			<a class="navbar-brand title-font" href="/">就活ポータル.com</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -79,32 +88,93 @@
 			</div>
 		</nav>
 	
-	
+        
+            <p class="h1">就職活動申請 詳細</p>
 
-
-	<div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col-sm-8">
-                <div class="card center-block" style="border-radius:75px;">
-                    <div class="card-body">
-                        <h3 class="card-title">就職活動申請</h3>
-                        <div class="btn-group-vertical btn-group-lg w-50" role="group">
-                            <input type="button" class="btn btn-primary mt-5" value="新規作成"
-							onclick="window.location.href = &#39;/request/insert&#39;">
-                            <input type="button" class="btn btn-primary mt-5" value="申請一覧"
-							onclick="window.location.href = &#39;/request/list&#39;">
-                            <input type="button" class="btn btn-primary mt-5" value="報告一覧"
-							onclick="window.location.href = &#39;/report/list&#39;">
-                            <input type="button" class="btn btn-primary mt-5" value="イベント情報 登録"
-							onclick="window.location.href = &#39;/event-registration&#39;">
-                            <input type="button" class="btn btn-primary mt-5 mb-5" value="申請一覧 出力"
-							onclick="window.location.href = &#39;/csv&#39;">
-                        </div>
-                    </div>
+            <div class="container">
+                <div class="row justify-content-md-center">
+                  <div class="col-md-2">
+                    <p>クラス</p>
+                  </div>
+                  <div class="col-md-1 offset-md-1">
+                    <p>番号</p>
+                  </div>
+                  <div class="col-md-2 offset-md-1">
+                    <p>氏名</p>
+                  </div>
                 </div>
-            </div>
-        </div>
-    </div>
+              </div>
+        
+
+
+        <form>
+            <div class="container">
+                <div class="row">
+                  <div class="col-md-4 bg-color-white">
+                    <p class="font-weight-bold h4">申請種別</p>
+                  </div>
+                  <div class="col-md-8">
+                    <p>右</p>
+                  </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 bg-color-white">
+                      <p class="font-weight-bold h4">企業名</p>
+                    </div>
+                    <div class="col-md-8">
+                      <p>右</p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4 bg-color-white">
+                      <p class="font-weight-bold h4">郵便番号</p>
+                    </div>
+                    <div class="col-md-8">
+                      <p>右</p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4 bg-color-white">
+                      <p class="font-weight-bold h4">場所</p>
+                    </div>
+                    <div class="col-md-8">
+                      <p>右</p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4 bg-color-white">
+                      <p class="font-weight-bold h4">手段</p>
+                    </div>
+                    <div class="col-md-8">
+                      <p>右</p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4 bg-color-white">
+                      <p class="font-weight-bold h4">メモ</p>
+                    </div>
+                    <div class="col-md-8">
+                      <p>右</p>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      <p>現在の申請状態</p>
+                    </div>
+                    <div class="col-md-7">
+                      <p>指摘事項</p>
+                    </div>
+                  </div>
+
+              </div>
+          </form>
 	
 	
 	<script
