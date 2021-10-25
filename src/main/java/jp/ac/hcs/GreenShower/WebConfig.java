@@ -17,7 +17,7 @@ public class WebConfig {
 	public static final String FILENAME_REPORT_CSV = "report.csv";
 	
 	/** 就職申請一覧情報のCSVファイル名 */
-	public static final String FILENAME_JOBREQUEST_CSV = "就職活動申請一覧.csv";
+	public static final String FILENAME_JOBREQUEST_CSV = "request.csv";
 
 	@Bean
 	public MessageSource messageSource() {
