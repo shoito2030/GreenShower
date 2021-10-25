@@ -26,3 +26,5 @@ VALUES('2',12314444, 'jouhou@xxx.co.jp', 'S3A1', '02', '情報太郎', 'S', 'グ
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type)
 VALUES('1', 'isida@xxx.co.jp', '2', '0')
 
+INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, content, company_name, date_absence_from, date_absence_to, remark, register_date, register_user_id)
+VALUES('1', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', 2, 'グリーンシャワー株式会社', '2021-7-17 9:15', '2021-7-17 15:00', '備考', 'isidaaa@xxx.co.jp')
