@@ -28,6 +28,7 @@ public class JobRequestData {
 	
 	/**
 	 * 郵便番号
+	 * 
 	 */
 	private String zipcode;
 	

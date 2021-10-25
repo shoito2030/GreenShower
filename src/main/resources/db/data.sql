@@ -23,3 +23,7 @@ VALUES('1',12121111, 'isida@xxx.co.jp', 'S3A1', '01', '石田悠介', 'S', 'グ�
 INSERT INTO report (report_id,job_number, user_id, classroom, class_number, name, course_code, company_name, company_name_kana, datetime, place, entry_section, venue_section, test_section, test_summary, result_notification, result_notification_day, interview_detail, interview_number, interviewer_number, interviewer_position, interview_time, question_contents, report_status, registered_date, request_date, registered_user_id, remarks,aptitude_test_detail)
 VALUES('2',12314444, 'jouhou@xxx.co.jp', 'S3A1', '02', '情報太郎', 'S', 'グリーンシャワー株式会社', 'グリー', '2021-7-10', '受験場所', 1, 1, 1, 6, 4,'2', 2, 3, 3, '課長', 60, '出題内容', 1, '2021-7-17', '2021-7-15', 'isida@xxx.co.jp', '備考', 1);
 
+INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type)
+VALUES(1, 'isida@xxx.co.jp', 2, 0)
+
+INSERT INTO requests ()
