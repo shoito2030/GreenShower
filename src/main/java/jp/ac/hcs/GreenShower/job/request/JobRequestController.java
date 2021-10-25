@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import jp.ac.hcs.GreenShower.report.ReportEntity;
 import lombok.extern.slf4j.Slf4j;
 
 /** 
@@ -17,27 +16,29 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class JobRequestController {
+
 	@Autowired
 	private JobRequestService jobRequestService;
-	
+
 	/**
-	 * 就職活動申請一覧画面を表示する - 処理失敗時：トップ画面を表示
+	 * 就職活動申請申請一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
 	 * @param model
-	 * @return 就職活動申請一覧画面 or トップ画面
+	 * @return 就職活動申請申請一覧画面 or トップ画面
 	 */
 	@GetMapping("/job/request/list")
-	public String getJobRequestList(Model model) {
+	public String getReportList(Model model) {
 
 	// 取得できなかった場合は空のOptionalが格納される
-	Optional<ReportEntity> jobRequesttEntity = jobRequestService.selectAll();
+	Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAll();
 
 		// 処理失敗によりトップ画面へ
-		if (jobRequesttEntity.isEmpty()) {
+		if (jobRequestEntity.isEmpty()) {
 			return "index";
 		}
 
-		model.addAttribute("jobRequesttEntity", jobRequesttEntity.get());
+		model.addAttribute("jobRequestEntity", jobRequestEntity.get());
 		return "job/request/list";
 	}
+
 }

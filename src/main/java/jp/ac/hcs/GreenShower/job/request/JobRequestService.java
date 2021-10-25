@@ -5,12 +5,11 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-
-import jp.ac.hcs.GreenShower.report.ReportRepository;
 
 /** 
  * 就職活動申請に関する処理を行うServiceクラス
@@ -20,8 +19,25 @@ import jp.ac.hcs.GreenShower.report.ReportRepository;
 public class JobRequestService {
 	
 	@Autowired
-	ReportRepository reportRepository;
+	JobRequestRepository jobRequestRepository;
 	
+	/**
+	 * 就職活動申請の申請情報を全件取得する
+	 * 
+	 * @return Optional<jobRequestEntity>
+	 */
+	public Optional<JobRequestEntity> selectAll(){
+		JobRequestEntity jobRequestEntity;
+		
+		try {
+			jobRequestEntity = jobRequestRepository.selectAll();
+		}catch (DataAccessException e) {
+			e.printStackTrace();
+			jobRequestEntity = null;
+		}
+		return Optional.ofNullable(jobRequestEntity);
+		
+	}
 	/**
 	 * タスク情報をCSVファイルとしてサーバに保存する.
 	 * @param user_id ユーザID

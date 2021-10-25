@@ -1,5 +1,9 @@
 package jp.ac.hcs.GreenShower.job.request;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,5 +33,32 @@ public class JobRequestRepository {
 		ReportRowCallbackHandler handler = new ReportRowCallbackHandler();
 
 		jdbc.query(SQL_SELECT_ALL, handler);
+	}
+
+
+	public JobRequestEntity selectAll() throws DataAccessException {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL);
+		JobRequestEntity jobRequestEntity = mappingSelectResult(resultList);
+		return jobRequestEntity;
+	}
+
+
+	private JobRequestEntity mappingSelectResult(List<Map<String, Object>> resultList) {
+		JobRequestEntity entity = new JobRequestEntity();
+		
+		for (Map<String, Object> map : resultList) {
+			JobRequestData data = new JobRequestData();
+			
+			data.setRequest_type((String) map.get("request_type"));
+			data.setCompany_name((String) map.get("company_name"));
+			data.setStart((Date) map.get("start"));
+			data.setEnd((Date) map.get("end"));
+			data.setZipcode((String) map.get("zipcode"));
+			data.setPlace((String) map.get("place"));
+			data.setMeans((String) map.get("means"));
+			data.setMemorandum((String) map.get("memorandum"));
+			
+		}
+		return null;
 	}
 }
