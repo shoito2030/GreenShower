@@ -56,7 +56,7 @@ public class JobController {
 		log.info("[" + principal.getName() + "]CSVファイル作成:" + OUTPUT_FULLPATH);
 
 		//CSVファイルをサーバ上に作成
-//		jobRequestServise.reportListCsvOut();
+		jobRequestService.jobRequestListCsvOut();
 
 		// CSVファイルをサーバから読み込み
 		byte[] bytes = null;

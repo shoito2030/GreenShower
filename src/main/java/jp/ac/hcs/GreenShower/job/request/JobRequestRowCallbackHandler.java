@@ -32,14 +32,17 @@ public class JobRequestRowCallbackHandler implements RowCallbackHandler {
 				BufferedWriter bw = new BufferedWriter(fw);
 				do {
 					// 申請一覧テーブルのデータ構造
-					String str =rs.getString("request_type") + ","
-					+ rs.getString("company_name") + ","
-					+ rs.getDate("start") + ","
-					+ rs.getDate("end") + "," 
-					+ rs.getString("zipcode")
-					+ rs.getString("place") + ","
-					+ rs.getString("means") + ","
-					+ rs.getString("memorandum");
+					String str =rs.getString("apply_id") + ","
+					+ rs.getDate("date_activity_from") + ","
+					+ rs.getDate("date_activity_to") + ","
+					+ rs.getString("loc") + ","
+					+ rs.getString("content") + ","
+					+ rs.getString("company_name")
+					+ rs.getDate("date_absence_from") + ","
+					+ rs.getDate("date_absence_to") + ","
+					+ rs.getDate("leave_early_date") + ","
+					+ rs.getDate("attendance_date") + ","
+					+ rs.getString("remark");
 
 					bw.write(str);
 					bw.newLine();
