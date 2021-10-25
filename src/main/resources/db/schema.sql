@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS users (
  * 定義書の内容を参照
  * */
 CREATE TABLE IF NOT EXISTS job_hunting (
-	apply_id VARCHAR(254) PRIMARY KEY,
+	apply_id VARCHAR(254) PRIMARY KEY AUTO_INCREMENT,
 	applicant_id VARCHAR(254) NOT NULL,
 	status VARCHAR(2) NOT NULL DEFAULT '3',
 	apply_type CHAR(1) NOT NULL,
@@ -50,16 +50,16 @@ CREATE TABLE IF NOT EXISTS job_hunting (
  */
  CREATE TABLE IF NOT EXISTS requests (
     apply_id VARCHAR(254) PRIMARY KEY,
-    date_activity_from DATE NOT NULL,
-    date_activity_to DATE NOT NULL,
+    date_activity_from DATETIME NOT NULL,
+    date_activity_to DATETIME NOT NULL,
     loc VARCHAR(100) NOT NULL,
     content VARCHAR(2) NOT NULL,
     company_name VARCHAR(137) NOT NULL,
     
-    date_absence_from DATE,
-    date_absence_to DATE,
-    leave_early_date DATE,
-    attendance_date DATE,
+    date_absence_from DATETIME,
+    date_absence_to DATETIME,
+    leave_early_date DATETIME,
+    attendance_date DATETIME,
     remark VARCHAR(254),
     
     register_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
