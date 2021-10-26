@@ -64,10 +64,10 @@
 
 								<td><span th:text="*{jobRequest.status.value}"></span></td>
 
-								<td><a class="btn btn-success" href="">詳細</a></td>
+								<td><a class="btn btn-info" href="/job/request/detail">詳細</a></td>
 
-								<td><a class="btn btn-success" href="/">報告</a></td>
-								<td><a class="btn btn-success" href="/">修正</a></td>
+								<td><a class="btn btn-primary" href="/job/report/insert">報告</a></td>
+								<td><a class="btn btn-secondary" href="/job/request/fix">修正</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -106,11 +106,11 @@
 
 								<td><span th:text="*{jobRequest.status.value}"></span></td>
 
-								<td><a class="btn btn-success" href="">詳細</a></td>
+								<td><a class="btn btn-info" href="/job/request/detail">詳細</a></td>
 
-								<td><a class="btn btn-success" href="/">報告</a></td>
-								<td><a class="btn btn-success" href="/">修正</a></td>
-								<td><a class="btn btn-success" href="/">状態変更</a></td>
+								<td><a class="btn btn-primary" href="/job/report/insert">報告</a></td>
+								<td><a class="btn btn-success" href="/job/request/fix">修正</a></td>
+								<td><a class="btn btn-secondary" href="/job/request/detail/status-change">状態変更</a></td>
 							</tr>
 						</tbody>
 					</table>
