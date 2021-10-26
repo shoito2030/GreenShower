@@ -1,4 +1,4 @@
-package jp.ac.hcs.GreenShower.job;
+package jp.ac.hcs.GreenShower.job.csv;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class JobController {
+public class JobCsvController {
 	
 	@Autowired
 	private JobRequestService jobRequestService;
@@ -48,7 +48,7 @@ public class JobController {
 	 * @param model
 	 * @return 就職活動申請一覧情報のCSVファイル
 	 */
-	@GetMapping("/csv")
+	@GetMapping("/job/csv")
 	public ResponseEntity<byte[]> getJobRequestCsv(Principal principal, Model model) {
 
 		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_JOBREQUEST_CSV;
@@ -56,7 +56,7 @@ public class JobController {
 		log.info("[" + principal.getName() + "]CSVファイル作成:" + OUTPUT_FULLPATH);
 
 		//CSVファイルをサーバ上に作成
-//		jobRequestServise.reportListCsvOut();
+		jobRequestService.jobRequestListCsvOut();
 
 		// CSVファイルをサーバから読み込み
 		byte[] bytes = null;

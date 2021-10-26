@@ -76,7 +76,34 @@ CREATE TABLE IF NOT EXISTS job_hunting (
 );
 
 
-CREATE TABLE IF NOT EXISTS report (
+/* 報告マスタ
+ * 定義書の内容を参照
+ * */
+CREATE TABLE IF NOT EXISTS reports (
+	apply_id VARCHAR(254) PRIMARY KEY,
+	advance_or_retreat BOOLEAN NOT NULL ,
+	remark VARCHAR(254),	
+	
+	register_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    register_user_id VARCHAR(254) NOT NULL,
+    update_date TIMESTAMP,
+    update_user_id VARCHAR(254),
+	
+	FOREIGN KEY (apply_id)
+              REFERENCES job_hunting(apply_id),
+    FOREIGN KEY (register_user_id)
+              REFERENCES users(user_id),
+    FOREIGN KEY (update_user_id)
+              REFERENCES users(user_id) 
+);
+
+
+
+
+/**
+ * 前回のやつ
+ */
+CREATE TABLE IF NOT EXISTS report_hoge (
 	report_id INT PRIMARY KEY,
 	job_number VARCHAR(13),
     user_id VARCHAR(254),
@@ -115,12 +142,4 @@ CREATE TABLE IF NOT EXISTS report (
     request_date DATE,
     registered_user_id VARCHAR(254),
     remarks VARCHAR(254)
-);
-
-CREATE TABLE IF NOT EXISTS job_hunting (
-	apply_id VARCHAR(254) PRIMARY KEY,
-	applicant_id VARCHAR(254) NOT NULL,
-	status VARCHAR(2) NOT NULL DEFAULT 3,
-	apply_type CHAR(1) NOT NULL,
-	indicate VARCHAR(254)
 );
