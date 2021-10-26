@@ -2,10 +2,13 @@ package jp.ac.hcs.GreenShower.job.report;
 
 import java.util.Date;
 
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class JobReportData {
+@EqualsAndHashCode(callSuper=true)
+public class JobReportData extends JobHuntingData {
 	
 	/**
 	 * 申請ID
@@ -41,4 +44,11 @@ public class JobReportData {
 	 * 更新者のユーザID
 	 */
 	private Date update_user_id;
+
+	@Override
+	public String toString() {
+		return "JobReportData [apply_id=" + apply_id + ", advance_or_retreat=" + advance_or_retreat + ", remark="
+				+ remark + ", register_date=" + register_date + ", register_user_id=" + register_user_id
+				+ ", update_date=" + update_date + ", update_user_id=" + update_user_id + "]";
+	}
 }
