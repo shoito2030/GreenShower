@@ -59,9 +59,9 @@ public class JobReportRepository {
 			data.setIndicate((String) map.get("indicate"));
 			
 			
-			// JobRequestDataクラスのフィールドを補完
+			// JobReportDataクラスのフィールドを補完
 			data.setRemark((String) map.get("remark"));
-			
+			data.setAdvance_or_retreat((String) map.get("advance_or_retreat"));
 			
 			// システム内で使用しないので取得する必要ないかも（応相談）
 //			data.setRegister_date((Date) map.get("register_date"));
