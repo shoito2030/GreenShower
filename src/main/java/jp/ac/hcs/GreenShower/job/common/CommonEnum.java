@@ -1,4 +1,4 @@
-package jp.ac.hcs.GreenShower.job;
+package jp.ac.hcs.GreenShower.job.common;
 
 import java.util.Arrays;
 

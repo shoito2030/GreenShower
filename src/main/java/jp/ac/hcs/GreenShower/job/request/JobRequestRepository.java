@@ -9,8 +9,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import jp.ac.hcs.GreenShower.job.CommonEnum;
-import jp.ac.hcs.GreenShower.job.JobHuntingData;
+import jp.ac.hcs.GreenShower.job.common.CommonEnum;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import jp.ac.hcs.GreenShower.job.request.JobRequestData.Content;
 
 @Repository
@@ -67,16 +67,16 @@ public class JobRequestRepository {
 		for (Map<String, Object> map : resultList) {
 			JobRequestData data = new JobRequestData();
 			
-			// JobHuntingDataクラスのフィールドを補完（アクセスできないメンバ変数）
+			// JobHuntingDataクラスのフィールドを補完（protectedなフィールド）
 			data.setClassroom((String) map.get("classroom"));
 			data.setClass_number((String) map.get("class_number"));
 			data.setName((String) map.get("name"));
-			
 			data.setApply_id((String) map.get("apply_id"));
 			data.setApplicant_id((String) map.get("applicant_id"));
 			data.setStatus(CommonEnum.getEnum(JobHuntingData.Status.class,(String) map.get("status")));
 			data.setApply_type(CommonEnum.getEnum(JobHuntingData.Apply_type.class, (String) map.get("apply_type")));
 			data.setIndicate((String) map.get("indicate"));
+			
 			
 			// JobRequestDataクラスのフィールドを補完
 			data.setDate_activity_from((Date) map.get("date_activity_from"));

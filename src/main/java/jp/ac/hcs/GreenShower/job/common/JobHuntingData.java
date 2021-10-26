@@ -1,4 +1,4 @@
-package jp.ac.hcs.GreenShower.job;
+package jp.ac.hcs.GreenShower.job.common;
 
 import lombok.Data;
 
@@ -12,39 +12,39 @@ public class JobHuntingData {
 	/**
 	 * クラス
 	 */
-	private String classroom;
+	protected String classroom;
 	
 	/**
 	 * 出席番号
 	 */
-	private String class_number;
+	protected String class_number;
 	
 	/**
 	 * 氏名
 	 */
-	private String name;
+	protected String name;
 	
 	// 下記は共通
 	
 	/**
 	 * 申請ID
 	 */
-	private String apply_id;
+	protected String apply_id;
 	
 	/**
 	 * 申請者ID
 	 */
-	private String applicant_id;
+	protected String applicant_id;
 	
 	/**
 	 * 状態
 	 */
-	private Status status;
+	protected Status status;
 	
 	/**
 	 * 申請種別
 	 */
-	private Apply_type apply_type;
+	protected Apply_type apply_type;
 	
 	/**
 	 * 指摘事項

@@ -2,8 +2,8 @@ package jp.ac.hcs.GreenShower.job.request;
 
 import java.util.Date;
 
-import jp.ac.hcs.GreenShower.job.CommonEnum;
-import jp.ac.hcs.GreenShower.job.JobHuntingData;
+import jp.ac.hcs.GreenShower.job.common.CommonEnum;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -113,5 +113,15 @@ public class JobRequestData extends JobHuntingData{
 		public String getValue() {
 			return this.value;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "JobRequestData [date_activity_from=" + date_activity_from + ", date_activity_to=" + date_activity_to
+				+ ", loc=" + loc + ", content=" + content + ", company_name=" + company_name + ", date_absence_from="
+				+ date_absence_from + ", date_absence_to=" + date_absence_to + ", leave_early_date=" + leave_early_date
+				+ ", attendance_date=" + attendance_date + ", remark=" + remark + ", classroom=" + classroom
+				+ ", class_number=" + class_number + ", name=" + name + ", apply_id=" + apply_id + ", applicant_id="
+				+ applicant_id + ", status=" + status + ", apply_type=" + apply_type + "]";
 	}
 }

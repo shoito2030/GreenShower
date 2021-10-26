@@ -1,4 +1,4 @@
-package jp.ac.hcs.GreenShower.job;
+package jp.ac.hcs.GreenShower.job.csv;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class JobController {
+public class JobCsvController {
 	
 	@Autowired
 	private JobRequestService jobRequestService;
