@@ -57,15 +57,6 @@ public class JobRequestService {
 		return Optional.ofNullable(jobRequestEntity);
 	}
 
-	/**
-	 * 就職活動申請一覧情報をCSVファイルとしてサーバに保存する.
-	 * 
-	 * @param user_id ユーザID
-	 * @throws DataAccessException
-	 */
-	public void jobRequestListCsvOut() throws DataAccessException {
-		jobRequestRepository.requestlistCsvOut();
-	}
 
 	/**
 	 * サーバーに保存されているファイルを取得して、byte配列に変換する.
