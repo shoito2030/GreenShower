@@ -21,31 +21,17 @@ public class JobRequestRepository {
 	private static final String SQL_SELECT_ALL = "SELECT * FROM REQUESTS;";
 	
 	/** SQL 申請情報全件取得 */
-	private static final String SQL_SELECT_ALL_REQUESTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID;";
+	private static final String SQL_SELECT_ALL_REQUESTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID AND JH.APPLY_ID  NOT IN(SELECT REP2.APPLY_ID  FROM REPORTS REP2 WHERE JH.APPLY_ID  = REP2.APPLY_ID) ORDER BY JH.STATUS;";
 	
 	/* ユーザIDからクラス・番号・名前を取得するSQL */
 	private static final String SQL_SELECT_PERSONAL_INFO ="SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID = ?;";
 
 	/* 特定のユーザ一人分の申請情報取得 */
-	private static final String SQL_SELECT_STUDENT_REQUESTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID AND JH.APPLICANT_ID = ?;";
+	private static final String SQL_SELECT_STUDENT_REQUESTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID AND JH.APPLICANT_ID = ? AND JH.APPLY_ID  NOT IN(SELECT REP2.APPLY_ID  FROM REPORTS REP2 WHERE JH.APPLY_ID  = REP2.APPLY_ID) ORDER BY JH.STATUS;;";
 	
 	@Autowired
 	private JdbcTemplate jdbc;
 	
-	
-	/**
-	 * TaskテーブルからユーザIDをキーにデータを全件取得し、CSVファイルとしてサーバに保存する.
-	 * 
-	 * @param user_id 検索するユーザID
-	 * @throws DataAccessException
-	 */
-	public void requestlistCsvOut() throws DataAccessException {
-
-		// CSVファイル出力用設定
-		JobRequestRowCallbackHandler handler = new JobRequestRowCallbackHandler();
-
-		jdbc.query(SQL_SELECT_ALL, handler);
-	}
 
 	/**
 	 * job_huntingテーブルとrequestsテーブルに問い合わせ申請情報を全件取得する
