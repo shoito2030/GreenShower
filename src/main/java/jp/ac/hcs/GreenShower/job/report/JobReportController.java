@@ -1,7 +1,9 @@
 package jp.ac.hcs.GreenShower.job.report;
 
 import java.security.Principal;
+import java.util.Optional;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,14 +28,21 @@ public class JobReportController {
 	public String getReportList(Principal principal, Model model) {
 
 //	// 取得できなかった場合は空のOptionalが格納される
-//	Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllRequests();
-//
-//		// 処理失敗によりトップ画面へ
-//		if (jobRequestEntity.isEmpty()) {
-//			return "index";
-//		} 
-//		
-//		model.addAttribute("jobRequestEntity", jobRequestEntity.get());
+		Optional<JobReportEntity> jobReportEntity;
+		String role = ((Authentication)principal).getAuthorities().toString().replace("[","").replace("]", "");
+		// 取得できなかった場合は空のOptionalが格納される
+		if (role.equals("ROLE_STUDENT")) {
+			jobReportEntity = jobReportService.selectStudentReports(principal.getName());
+		} else {
+			jobReportEntity = jobReporttService.selectAllReports();
+		}
+		
+		// 処理失敗によりトップ画面へ
+		if (jobReportEntity.isEmpty()) {
+			return "index";
+		} 
+		
+		model.addAttribute("jobReportEntity", jobReportEntity.get());
 		return "job/report/list";
 	}
 }
