@@ -57,15 +57,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="jobRequest : ${jobRequestEntity.jobRequestList}">
-								<td><span th:text="*{jobRequest.company_name}"></span></td>
+							<tr th:each="jobReport : ${jobReportEntity.jobReportList}">
+								<td><span th:text="*{jobReport.company_name}"></span></td>
 
-								<td><span th:text="*{jobRequest.content.value}"></span></td>
+								<td><span th:text="*{jobReport.content.value}"></span></td>
 
-								<td><span th:text="*{jobRequest.status.value}"></span></td>
+								<td><span th:text="*{jobReport.status.value}"></span></td>
 
-								<td><a class="btn btn-info" href="/job/request/detail">詳細</a></td>
-								<td><a class="btn btn-secondary" href="/job/request/fix">修正</a></td>
+								<td><a class="btn btn-info" href="/job/report/detail">詳細</a></td>
+								<td><a class="btn btn-secondary" href="/job/report/fix">修正</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -91,22 +91,22 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="jobRequest : ${jobRequestEntity.jobRequestList}">
-								<td><span th:text="*{jobRequest.company_name}"></span></td>
+							<tr th:each="jobReport : ${jobReportEntity.jobReportList}">
+								<td><span th:text="*{jobReport.company_name}"></span></td>
 
-								<td><span th:text="*{jobRequest.content.value}"></span></td>
+								<td><span th:text="*{jobReport.content.value}"></span></td>
 
-								<td><span th:text="*{jobRequest.classroom}"></span></td>
+								<td><span th:text="*{jobReport.classroom}"></span></td>
 
-								<td><span th:text="*{jobRequest.class_number}"></span></td>
+								<td><span th:text="*{jobReport.class_number}"></span></td>
 
-								<td><span th:text="*{jobRequest.name}"></span></td>
+								<td><span th:text="*{jobReport.name}"></span></td>
 
-								<td><span th:text="*{jobRequest.status.value}"></span></td>
+								<td><span th:text="*{jobReport.status.value}"></span></td>
 
-								<td><a class="btn btn-info" href="/job/request/detail">詳細</a></td>
-								<td><a class="btn btn-success" href="/job/request/fix">修正</a></td>
-								<td><a class="btn btn-secondary" href="/job/request/detail/status-change">状態変更</a></td>
+								<td><a class="btn btn-info" href="/job/report/detail">詳細</a></td>
+								<td><a class="btn btn-success" href="/job/report/fix">修正</a></td>
+								<td><a class="btn btn-secondary" href="/job/report/detail/status-change">状態変更</a></td>
 							</tr>
 						</tbody>
 					</table>
