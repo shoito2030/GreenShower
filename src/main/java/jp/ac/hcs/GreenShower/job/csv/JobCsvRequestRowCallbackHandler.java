@@ -29,6 +29,10 @@ public class JobCsvRequestRowCallbackHandler implements RowCallbackHandler{
 			BufferedWriter bw = new BufferedWriter(fw);
 			do {
 				// 申請一覧テーブルのデータ構造
+				/** 申請ID、活動開始日時、活動終了日時、場所、内容、
+				 * 企業名、欠席開始日時、欠席終了日時、早退日時、出席日時、
+				 * メモ、申請種別、指摘事項
+				 * */
 				String str =rs.getString("apply_id") + ","
 				+ rs.getDate("date_activity_from") + ","
 				+ rs.getDate("date_activity_to") + ","
