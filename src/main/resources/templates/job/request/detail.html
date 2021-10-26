@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>就職活動申請詳細画面</title>
+    
+    
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
 </head>
+
 <body>
 
+	<th:block th:insert="components/part::frag_header"></th:block>
+	
+	<!-- 作成中 -->
+	就職活動申請詳細画面
+	<th:block th:insert="components/part::frag_script"></th:block>
+	
 </body>
 </html>
