@@ -18,9 +18,7 @@ public class JobCsvRequestRepository {
 	private JdbcTemplate jdbc;
 	
 	/**
-	 * requestsテーブルからデータを全件取得し、CSVファイルとしてサーバに保存する.
-	 * 
-	 * @param user_id 検索するユーザID
+	 * requestsテーブル、job_huntingテーブルから報告完了した申請データを全件取得し、CSVファイルとしてサーバに保存する.
 	 * @throws DataAccessException
 	 */
 	public void requestListCsvOut() throws DataAccessException {

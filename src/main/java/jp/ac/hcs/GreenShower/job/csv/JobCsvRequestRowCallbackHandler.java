@@ -31,7 +31,7 @@ public class JobCsvRequestRowCallbackHandler implements RowCallbackHandler{
 				// 申請一覧テーブルのデータ構造
 				/** 申請ID、活動開始日時、活動終了日時、場所、内容、
 				 * 企業名、欠席開始日時、欠席終了日時、早退日時、出席日時、
-				 * メモ、申請種別、指摘事項
+				 * メモ、申請種別、備考、指摘事項
 				 * */
 				String str =rs.getString("apply_id") + ","
 				+ rs.getDate("date_activity_from") + ","
@@ -43,7 +43,8 @@ public class JobCsvRequestRowCallbackHandler implements RowCallbackHandler{
 				+ rs.getDate("date_absence_to") + ","
 				+ rs.getDate("leave_early_date") + ","
 				+ rs.getDate("attendance_date") + ","
-				+ rs.getString("remark");
+				+ rs.getString("remark") + ","
+				+ rs.getString("indicate");
 
 				bw.write(str);
 				bw.newLine();
