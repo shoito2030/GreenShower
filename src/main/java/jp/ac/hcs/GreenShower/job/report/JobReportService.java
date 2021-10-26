@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class jobReportService {
+public class JobReportService {
 
 	@Autowired
 	JobReportRepository jobReportRepository;
@@ -57,15 +57,6 @@ public class jobReportService {
 		return Optional.ofNullable(jobReportEntity);
 	}
 
-	/**
-	 * 就職活動申請一覧情報をCSVファイルとしてサーバに保存する.
-	 * 
-	 * @param user_id ユーザID
-	 * @throws DataAccessException
-	 */
-	public void jobReportListCsvOut() throws DataAccessException {
-		jobReportRepository.requestlistCsvOut();
-	}
 
 	/**
 	 * サーバーに保存されているファイルを取得して、byte配列に変換する.

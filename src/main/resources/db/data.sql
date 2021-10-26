@@ -27,7 +27,7 @@ VALUES('2',12314444, 'jouhou@xxx.co.jp', 'S3A1', '02', '情報太郎', 'S', 'グ
 
 /* 就職活動申請マスタ用データ */
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type)
-VALUES('1', 'isida@xxx.co.jp', '4', '0');
+VALUES('1', 'isida@xxx.co.jp', '2', '0');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type)
 VALUES('2', 'isida@xxx.co.jp', '2', '0');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type)
@@ -42,4 +42,5 @@ INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, conte
 VALUES('3', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '2', 'レッドシャワー株式会社', '2021-7-17 9:15', '2021-7-17 15:00', '備考', 'yamada@xxx.co.jp');
 
 /* 報告マスタ用データ */
-INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('1', TRUE, 'テスト報告', 'isida@xxx.co.jp');
+INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) 
+VALUES('1', TRUE, 'テスト報告', 'isida@xxx.co.jp');

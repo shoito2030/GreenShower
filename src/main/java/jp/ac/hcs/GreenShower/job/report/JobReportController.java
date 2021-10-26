@@ -3,6 +3,7 @@ package jp.ac.hcs.GreenShower.job.report;
 import java.security.Principal;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class JobReportController {
-	
+	@Autowired
+	private JobReportService jobReportService;
 	/**
 	 * 就職活動申請報告一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
@@ -34,7 +36,7 @@ public class JobReportController {
 		if (role.equals("ROLE_STUDENT")) {
 			jobReportEntity = jobReportService.selectStudentReports(principal.getName());
 		} else {
-			jobReportEntity = jobReporttService.selectAllReports();
+			jobReportEntity = jobReportService.selectAllReports();
 		}
 		
 		// 処理失敗によりトップ画面へ
