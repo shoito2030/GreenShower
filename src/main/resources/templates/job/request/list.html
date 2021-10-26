@@ -4,8 +4,28 @@
 
 <head>
 <meta charset="UTF-8">
-<title>就職活動申請一覧画</title>
+<title>就職活動申請一覧画面</title>
 
+<script
+	src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script
+	src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+<script>
+	jQuery(function($) {
+		$(".table")
+				.DataTable(
+						{
+							"language" : {
+								"url" : "//cdn.datatables.net/plug-ins/1.10.16/i18n/Japanese.json"
+							}
+						});
+	});
+</script>
 
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
@@ -17,86 +37,91 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<!-- 作成中  -->
-	就職活動申請一覧画
+	就職活動申請一覧画面
+	<div class="container">
+		<div class="content-box">
+			<div class="resposive">
 
-	
-	<!-- 生徒画面 -->
-	<th:block role="presentation" sec:authorize="hasRole('ROLE_STUDENT')">
-		<table class="table table-striped table-light">
-		<thead class="thead-dark">
-			<tr>
-				<th>企業名</th>
-				<th>内容</th>
-				<th>状態</th>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="jobRequest : ${jobRequestEntity.jobRequestList}">
-				<td><span th:text="*{jobRequest.company_name}"></span></td>
+				<!-- 生徒画面 -->
+				<th:block role="presentation"
+					sec:authorize="hasRole('ROLE_STUDENT')">
+					<table class="table table-striped table-light">
+						<thead class="thead-dark">
+							<tr>
+								<th>企業名</th>
+								<th>内容</th>
+								<th>状態</th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="jobRequest : ${jobRequestEntity.jobRequestList}">
+								<td><span th:text="*{jobRequest.company_name}"></span></td>
 
-				<td><span th:text="*{jobRequest.content.value}"></span></td>
+								<td><span th:text="*{jobRequest.content.value}"></span></td>
 
-				<td><span th:text="*{jobRequest.status.value}"></span></td>
+								<td><span th:text="*{jobRequest.status.value}"></span></td>
 
-				<td><a class="btn btn-success" href="">詳細</a></td>
+								<td><a class="btn btn-success" href="">詳細</a></td>
 
-				<td><a class="btn btn-success" href="/">報告</a></td>
-				<td><a class="btn btn-success" href="/">修正</a></td>
-			</tr>
-		</tbody>
-	</table>
+								<td><a class="btn btn-success" href="/">報告</a></td>
+								<td><a class="btn btn-success" href="/">修正</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</th:block>
+
+
+				<!-- 教師画面 -->
+				<th:block role="presentation"
+					sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
+					<table class="table table-striped table-light">
+						<thead class="thead-dark">
+							<tr>
+								<th>企業名</th>
+								<th>内容</th>
+								<th>クラス</th>
+								<th>番号</th>
+								<th>氏名</th>
+								<th>状態</th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="jobRequest : ${jobRequestEntity.jobRequestList}">
+								<td><span th:text="*{jobRequest.company_name}"></span></td>
+
+								<td><span th:text="*{jobRequest.content.value}"></span></td>
+
+								<td><span th:text="*{jobRequest.classroom}"></span></td>
+
+								<td><span th:text="*{jobRequest.class_number}"></span></td>
+
+								<td><span th:text="*{jobRequest.name}"></span></td>
+
+								<td><span th:text="*{jobRequest.status.value}"></span></td>
+
+								<td><a class="btn btn-success" href="">詳細</a></td>
+
+								<td><a class="btn btn-success" href="/">報告</a></td>
+								<td><a class="btn btn-success" href="/">修正</a></td>
+								<td><a class="btn btn-success" href="/">状態変更</a></td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</div>
+	</div>
 	</th:block>
 
 
-	<!-- 教師画面 -->
-	<th:block role="presentation"
-		sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
-		<table class="table table-striped table-light">
-		<thead class="thead-dark">
-			<tr>
-				<th>企業名</th>
-				<th>内容</th>
-				<th>クラス</th>
-				<th>番号</th>
-				<th>氏名</th>
-				<th>状態</th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="jobRequest : ${jobRequestEntity.jobRequestList}">
-				<td><span th:text="*{jobRequest.company_name}"></span></td>
 
-				<td><span th:text="*{jobRequest.content.value}"></span></td>
-				
-				<td><span th:text="*{jobRequest.classroom}"></span></td>
-				
-				<td><span th:text="*{jobRequest.class_number}"></span></td>
-				
-				<td><span th:text="*{jobRequest.name}"></span></td>
-
-				<td><span th:text="*{jobRequest.status.value}"></span></td>
-
-				<td><a class="btn btn-success" href="">詳細</a></td>
-
-				<td><a class="btn btn-success" href="/">報告</a></td>
-				<td><a class="btn btn-success" href="/">修正</a></td>
-				<td><a class="btn btn-success" href="/">状態変更</a></td>
-			</tr>
-		</tbody>
-	</table>
-	</th:block>
-
-
-	
 
 	<th:block th:insert="components/part::frag_script"></th:block>
-
 </body>
 </html>
