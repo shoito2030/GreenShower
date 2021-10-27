@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
 
 @Repository
 public class JobRequestRepository {
