@@ -64,7 +64,7 @@
 
 								<td><span th:text="*{jobRequest.status.value}"></span></td>
 
-								<td><a class="btn btn-info" href="/job/request/detail">詳細</a></td>
+								<td><a class="btn btn-info" th:href="@{'/job/request/detail/'+ *{jobRequest.apply_id}}">詳細</a></td>
 
 								<td><a class="btn btn-primary" href="/job/report/insert">報告</a></td>
 								<td><a class="btn btn-secondary" href="/job/request/fix">修正</a></td>
@@ -106,7 +106,7 @@
 
 								<td><span th:text="*{jobRequest.status.value}"></span></td>
 
-								<td><a class="btn btn-info" href="/job/request/detail">詳細</a></td>
+								<td><a class="btn btn-info" th:href="@{'/job/request/detail/'+ *{jobRequest.apply_id}}">詳細</a></td>
 
 								<td><a class="btn btn-primary" href="/job/report/insert">報告</a></td>
 								<td><a class="btn btn-success" href="/job/request/fix">修正</a></td>

@@ -1,10 +1,5 @@
 package jp.ac.hcs.GreenShower.job.request;
 
-import java.io.IOException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +19,6 @@ public class JobRequestService {
 	/**
 	 * 就職活動申請の申請情報を全件取得する
 	 * 
-	 * @param role アクターの権限
 	 * @return Optional<jobRequestEntity>
 	 */
 	public Optional<JobRequestEntity> selectAllRequests() {
@@ -42,36 +36,19 @@ public class JobRequestService {
 	/**
 	 * 就職活動申請の申請情報を自分の分取得する
 	 * 
-	 * @param role アクターの権限
+	 * @param user_id ユーザID
 	 * @return Optional<jobRequestEntity>
 	 */
-	public Optional<JobRequestEntity> selectStudentRequests(String name) {
+	public Optional<JobRequestEntity> selectStudentRequests(String user_id) {
 		JobRequestEntity jobRequestEntity;
 
 		try {
-			jobRequestEntity = jobRequestRepository.selectStudentRequests(name);
+			jobRequestEntity = jobRequestRepository.selectStudentRequests(user_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			jobRequestEntity = null;
 		}
 		return Optional.ofNullable(jobRequestEntity);
 	}
-
-
-	/**
-	 * サーバーに保存されているファイルを取得して、byte配列に変換する.
-	 * 
-	 * @param fileName ファイル名
-	 * @return ファイルのbyte配列
-	 * @throws IOException ファイル取得エラー
-	 */
-	public byte[] getFile(String fileName) throws IOException {
-		FileSystem fs = FileSystems.getDefault();
-		Path p = fs.getPath(fileName);
-		byte[] bytes = Files.readAllBytes(p);
-		return bytes;
-	}
-
-
 
 }
