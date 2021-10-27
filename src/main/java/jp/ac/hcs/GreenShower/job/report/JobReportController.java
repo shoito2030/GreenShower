@@ -47,4 +47,16 @@ public class JobReportController {
 		model.addAttribute("jobReportEntity", jobReportEntity.get());
 		return "job/report/list";
 	}
+	
+	/**
+	 * 就職活動報告新規作成画面を表示する - 処理失敗時：トップ画面を表示
+	 * 
+	 * @param model
+	 * @return 就職活動報告新規作成画面 or トップ画面
+	 */
+	@GetMapping("/job/report/insert")
+	public String insertReportList(Principal principal, Model model) {
+		System.out.println("報告新規作成画面");
+		return "job/report/insert";
+	}
 }

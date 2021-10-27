@@ -56,7 +56,25 @@ public class JobReportService {
 		}
 		return Optional.ofNullable(jobReportEntity);
 	}
-
+	
+	/**
+	 * 報告マスタに新たな報告情報を1件追加する
+	 * 
+	 * @param form             検証済み入力情報
+	 * @param register_user_id 登録処理を実行したユーザのID
+	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
+	 */
+//	public boolean insert(ReportForm form, String register_user_id) {
+//		int rowNumber = 0;
+//
+//		try {
+//			// 追加処理を行い、追加できた件数を取得
+//			rowNumber = reportRepository.insertOne(refillToReportData(form, register_user_id));
+//		} catch (DataAccessException e) {
+//			e.printStackTrace();
+//		}
+//		return rowNumber > 0;
+//	}
 
 	/**
 	 * サーバーに保存されているファイルを取得して、byte配列に変換する.
