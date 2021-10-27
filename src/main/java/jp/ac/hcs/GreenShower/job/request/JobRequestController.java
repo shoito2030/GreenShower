@@ -96,7 +96,7 @@ public class JobRequestController {
 		session.setAttribute("jobRequestEntity", jobRequestEntity);
 		session.setAttribute(jobRequestData.get().getApply_id(), jobRequestData.get());
 		
-		model.addAttribute("jobRequestData", jobRequestData.get());
+		model.addAttribute("jobHuntingData", jobRequestData.get());
 		return "job/request/detail";
 	}
 
