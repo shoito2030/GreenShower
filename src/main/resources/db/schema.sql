@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS job_hunting (
 	apply_id VARCHAR(254) PRIMARY KEY AUTO_INCREMENT,
 	applicant_id VARCHAR(254) NOT NULL,
+	content VARCHAR(2) NOT NULL,
+    company_name VARCHAR(137) NOT NULL,
 	status VARCHAR(2) NOT NULL DEFAULT '3',
 	apply_type CHAR(1) NOT NULL,
 	indicate VARCHAR(254),	
@@ -53,8 +55,6 @@ CREATE TABLE IF NOT EXISTS job_hunting (
     date_activity_from DATETIME NOT NULL,
     date_activity_to DATETIME NOT NULL,
     loc VARCHAR(100) NOT NULL,
-    content VARCHAR(2) NOT NULL,
-    company_name VARCHAR(137) NOT NULL,
     
     date_absence_from DATETIME,
     date_absence_to DATETIME,

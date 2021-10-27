@@ -26,20 +26,20 @@ INSERT INTO report_hoge (report_id,job_number, user_id, classroom, class_number,
 VALUES('2',12314444, 'jouhou@xxx.co.jp', 'S3A1', '02', '情報太郎', 'S', 'グリーンシャワー株式会社', 'グリー', '2021-7-10', '受験場所', 1, 1, 1, 6, 4,'2', 2, 3, 3, '課長', 60, '出題内容', 1, '2021-7-17', '2021-7-15', 'isida@xxx.co.jp', '備考', 1);
 
 /* 就職活動申請マスタ用データ */
-INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type)
-VALUES('1', 'isida@xxx.co.jp', '4', '0');
-INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type)
-VALUES('2', 'isida@xxx.co.jp', '2', '0');
-INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type)
-VALUES('3', 'yamada@xxx.co.jp', '2', '0');
+INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
+VALUES('1', 'isida@xxx.co.jp', '4', '0', '2', 'グリーンシャワー株式会社');
+INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
+VALUES('2', 'isida@xxx.co.jp', '2', '0', '2', 'ブルーシャワー株式会社');
+INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
+VALUES('3', 'yamada@xxx.co.jp', '2', '0', '2', 'レッドシャワー株式会社');
 
 /* 申請マスタ用データ */
-INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, content, company_name, date_absence_from, date_absence_to, remark, register_user_id)
-VALUES('1', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '2', 'グリーンシャワー株式会社', '2021-7-17 9:15', '2021-7-17 15:00', '備考', 'isida@xxx.co.jp');
-INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, content, company_name, date_absence_from, date_absence_to, remark, register_user_id)
-VALUES('2', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '2', 'ブルーシャワー株式会社', '2021-7-17 9:15', '2021-7-17 15:00', '備考', 'isida@xxx.co.jp');
-INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, content, company_name, date_absence_from, date_absence_to, remark, register_user_id)
-VALUES('3', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '2', 'レッドシャワー株式会社', '2021-7-17 9:15', '2021-7-17 15:00', '備考', 'yamada@xxx.co.jp');
+INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc,  date_absence_from, date_absence_to, remark, register_user_id)
+VALUES('1', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '2021-7-17 9:15', '2021-7-17 15:00', '備考', 'isida@xxx.co.jp');
+INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, date_absence_from, date_absence_to, remark, register_user_id)
+VALUES('2', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校',  '2021-7-17 9:15', '2021-7-17 15:00', '備考', 'isida@xxx.co.jp');
+INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, date_absence_from, date_absence_to, remark, register_user_id)
+VALUES('3', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校',  '2021-7-17 9:15', '2021-7-17 15:00', '備考', 'yamada@xxx.co.jp');
 
 /* 報告マスタ用データ */
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('1', TRUE, 'テスト報告', 'isida@xxx.co.jp');
