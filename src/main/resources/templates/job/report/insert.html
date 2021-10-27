@@ -53,14 +53,14 @@
 	<br>
 
 	<div class="input-form">
-		<form method="post" th:action="@{/report/insert}">
+		<form method="post" th:action="@{/job/report/insert}">
 
 			<label for="entry_section">進退</label>
 			<div class="form-group input-box">
 				<nobr>
-					<input type="radio" name="advance_or_retreat" value="1"
+					<input type="radio" name="advance_or_retreat" value="TRUE"
 						onclick="not_ES_other()">進める&emsp;&emsp;&emsp; <input
-						type="radio" name="advance_or_retreat" value="2"
+						type="radio" name="advance_or_retreat" value="FALSE"
 						onclick="not_ES_other()">進めない
 				</nobr>
 			</div>
@@ -69,10 +69,10 @@
 			<br>
 			
 			
-			<label for="user_name">備考</label>
+			<label for="remark">備考</label>
 			<div class="form-group input-box">
 
-				<textarea class="form-control" name="job_number" rows="5"></textarea>
+				<textarea class="form-control" name="remark" rows="5"></textarea>
 			</div>
 			
 			<br>

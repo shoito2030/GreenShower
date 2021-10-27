@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,10 @@ public class JobReportRepository {
 	
 	/** 特定のユーザ一人分の報告情報取得 */
 	private static final String SQL_SELECT_STUDENT_REPORTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, REPORTS REP, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLY_ID = REP.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID AND JH.APPLICANT_ID = ? ORDER BY JH.STATUS;";
+	
+	/** SQL 報告情報一件追加 */
+	private static final String SQL_INSERT_ONE_REPORTS = "INSERT INTO reports (APPLY_ID, ADVANCE_OR_RETREAT, REMARK, REGISTER_DATE, REGISTER_USER_ID, UPDATE_DATE, UPDATE_USER_ID) VALUES((SELECT MAX(apply_id) + 1 FROM reports),?,?,?,?,?,?);";
+	
 	@Autowired
 	private JdbcTemplate jdbc;
 	
@@ -44,24 +49,19 @@ public class JobReportRepository {
 	 * @return 追加データ数
 	 * @throws DataAccessException
 	 */
-//	public int insertOne(JobReportData data) throws DataAccessException {
-//		int rowNumber = jdbc.update(SQL_INSERT_ONE,
-//				
-//				data.getUser_id(),
-//
-//				// classroom,class_number,name,class_cordはユーザIDと紐づけてuserテーブルから取得する
-//				data.getUser_id(), data.getUser_id(), data.getUser_id(), data.getUser_id(),
-//
-//				data.getApply_id(),
-//				data.getAdvance_or_retreat(),
-//				data.getRemark(),
-//				data.getRegister_date(),
-//				data.getRegister_user_id(),
-//				data.getUpdate_date(),
-//				data.getUpdate_user_id());
-//		
-//		return rowNumber;
-//	}
+	public int insertOne(JobReportData data) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_INSERT_ONE_REPORTS,
+
+				data.getApply_id(),
+				data.isAdvance_or_retreat(),
+				data.getRemark(),
+				data.getRegister_date(),
+				data.getRegister_user_id(),
+				data.getUpdate_date(),
+				data.getUpdate_user_id());
+		
+		return rowNumber;
+	}
 	
 	/**
 	 * job_huntingテーブルとrequestsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.

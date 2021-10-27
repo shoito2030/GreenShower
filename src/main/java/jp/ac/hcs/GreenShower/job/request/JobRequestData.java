@@ -2,6 +2,7 @@ package jp.ac.hcs.GreenShower.job.request;
 
 import java.util.Date;
 
+import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,10 +26,10 @@ public class JobRequestData extends JobHuntingData{
 	 */
 	private String loc;
 	
-//	/**
-//	 * 手段
-//	 */
-//	private String means;
+	/**
+	 * 手段
+	 */
+	private Way way;
 	
 	/**
 	 * 欠席開始日時
@@ -55,35 +56,43 @@ public class JobRequestData extends JobHuntingData{
 	 */
 	private String remark;
 	
-//	/**
-//	 * 登録日時
-//	 */
-//	private Date register_date;
-//	
-//	/**
-//	 * 登録者のユーザID
-//	 */
-//	private String register_user_id;
-//	
-//	/**
-//	 * 更新日時
-//	 */
-//	private Date update_date;
-//	
-//	/**
-//	 * 更新者のユーザID
-//	 */
-//	private String update_user_id;
-	
+	public enum Way implements CommonEnum<Way>{
+		ABSENCE("1","欠席"),
+		LEAVE("2","早退"),
+		LATE("3","遅刻"),
+		LEAVE_AND_LATE("4","遅刻及び早退");
+		
+		/** ID */
+		private String id;
+		
+		/** 値 */
+		private String value;
 
+		/** コンストラクタ */
+		Way(String id, String value) {
+			this.id = id;
+			this.value = value;
+		}
+		
+		@Override
+		public String getId() {
+			return this.id;
+		}
+
+		@Override
+		public String getValue() {
+			return this.value;
+		}
+	}
 
 	@Override
 	public String toString() {
 		return "JobRequestData [date_activity_from=" + date_activity_from + ", date_activity_to=" + date_activity_to
-				+ ", loc=" + loc + ", date_absence_from=" + date_absence_from + ", date_absence_to=" + date_absence_to
-				+ ", leave_early_date=" + leave_early_date + ", attendance_date=" + attendance_date + ", remark="
-				+ remark + "]";
-	}
-
+				+ ", loc=" + loc + ", way=" + way + ", date_absence_from=" + date_absence_from + ", date_absence_to="
+				+ date_absence_to + ", leave_early_date=" + leave_early_date + ", attendance_date=" + attendance_date
+				+ ", remark=" + remark + ", classroom=" + classroom + ", class_number=" + class_number + ", name="
+				+ name + ", company_name=" + company_name + ", content=" + content + ", apply_id=" + apply_id
+				+ ", applicant_id=" + applicant_id + ", status=" + status + ", apply_type=" + apply_type + "]";
+	} 
 
 }

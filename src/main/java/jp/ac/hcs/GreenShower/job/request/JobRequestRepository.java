@@ -10,8 +10,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import jp.ac.hcs.GreenShower.job.common.CommonEnum;
-import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Apply_type;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Status;
+import jp.ac.hcs.GreenShower.job.request.JobRequestData.Way;
 
 @Repository
 public class JobRequestRepository {
@@ -21,7 +23,7 @@ public class JobRequestRepository {
 	private static final String SQL_SELECT_ALL = "SELECT * FROM REQUESTS;";
 	
 	/** SQL 申請情報全件取得 */
-	private static final String SQL_SELECT_ALL_REQUESTS = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REQ.DATE_ACTIVITY_FROM, REQ.DATE_ACTIVITY_TO, REQ.LOC,  REQ.DATE_ABSENCE_FROM, REQ.DATE_ABSENCE_TO, REQ.LEAVE_EARLY_DATE, REQ.ATTENDANCE_DATE, REQ.REMARK \n"
+	private static final String SQL_SELECT_ALL_REQUESTS = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REQ.DATE_ACTIVITY_FROM, REQ.DATE_ACTIVITY_TO, REQ.LOC, REQ.WAY, REQ.DATE_ABSENCE_FROM, REQ.DATE_ABSENCE_TO, REQ.LEAVE_EARLY_DATE, REQ.ATTENDANCE_DATE, REQ.REMARK \n"
 			+ "FROM JOB_HUNTING JH\n"
 			+ "LEFT JOIN REQUESTS REQ ON REQ.APPLY_ID  =  JH.APPLY_ID\n"
 			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \n"
@@ -31,7 +33,7 @@ public class JobRequestRepository {
 	private static final String SQL_SELECT_PERSONAL_INFO ="SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID = ?;";
 
 	/* 特定のユーザ一人分の申請情報取得 */
-	private static final String SQL_SELECT_STUDENT_REQUESTS = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REQ.DATE_ACTIVITY_FROM, REQ.DATE_ACTIVITY_TO, REQ.LOC,  REQ.DATE_ABSENCE_FROM, REQ.DATE_ABSENCE_TO, REQ.LEAVE_EARLY_DATE, REQ.ATTENDANCE_DATE, REQ.REMARK \n"
+	private static final String SQL_SELECT_STUDENT_REQUESTS = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REQ.DATE_ACTIVITY_FROM, REQ.DATE_ACTIVITY_TO, REQ.LOC, REQ.WAY, REQ.DATE_ABSENCE_FROM, REQ.DATE_ABSENCE_TO, REQ.LEAVE_EARLY_DATE, REQ.ATTENDANCE_DATE, REQ.REMARK \n"
 			+ "FROM JOB_HUNTING JH\n"
 			+ "LEFT JOIN REQUESTS REQ ON REQ.APPLY_ID  =  JH.APPLY_ID\n"
 			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \n"
@@ -85,11 +87,12 @@ public class JobRequestRepository {
 			data.setApplicant_id((String) map.get("applicant_id"));
 			data.setContent(CommonEnum.getEnum(Content.class, (String) map.get("content")));
 			data.setCompany_name((String) map.get("company_name"));
-			data.setStatus(CommonEnum.getEnum(JobHuntingData.Status.class,(String) map.get("status")));
-			data.setApply_type(CommonEnum.getEnum(JobHuntingData.Apply_type.class, (String) map.get("apply_type")));
+			data.setStatus(CommonEnum.getEnum(Status.class,(String) map.get("status")));
+			data.setApply_type(CommonEnum.getEnum(Apply_type.class, (String) map.get("apply_type")));
 			data.setIndicate((String) map.get("indicate"));
 			
 			// JobRequestDataクラスのフィールドを補完
+			data.setWay(CommonEnum.getEnum(Way.class,(String) map.get("way")));
 			data.setDate_activity_from((Date) map.get("date_activity_from"));
 			data.setDate_activity_to((Date) map.get("date_activity_to"));
 			data.setLoc((String) map.get("loc"));

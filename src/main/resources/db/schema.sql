@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS job_hunting (
     date_activity_to DATETIME NOT NULL,
     loc VARCHAR(100) NOT NULL,
     
+    way CHAR(1) NOT NULL,
     date_absence_from DATETIME,
     date_absence_to DATETIME,
     leave_early_date DATETIME,
