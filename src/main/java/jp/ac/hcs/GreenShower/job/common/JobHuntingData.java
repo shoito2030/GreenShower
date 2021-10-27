@@ -28,12 +28,12 @@ public class JobHuntingData {
 	/**
 	 * 企業名
 	 */
-	private String company_name;
+	protected String company_name;
 	
 	/**
 	 * 内容
 	 */
-	private Content content;
+	protected Content content;
 	
 	/**
 	 * 申請ID
