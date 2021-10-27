@@ -1,10 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>就職活動申請詳細画面</title>
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
 </head>
 <body>
+	<th:block th:insert="components/part::frag_header"></th:block>
 
+	<p class="h1">就職活動申請 詳細</p>
+
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-2">
+        <p>クラス</p>
+      </div>
+      <div class="col-md-1 offset-md-1">
+        <p>番号</p>
+      </div>
+      <div class="col-md-2 offset-md-1">
+        <p>氏名</p>
+      </div>
+    </div>
+  </div>
+
+
+
+    <div class="container">
+
+      <div class="row mt-md-5">
+        <div class="col-md-4 bg-color-white">
+          <p class="font-weight-bold h4">申請種別</p>
+        </div>
+        <div class="col-md-8">
+          <p class="h4 text-center text-md-left pl-md-5">とりまとめ</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 bg-color-white pt-md-4">
+          <p class="font-weight-bold h4">企業名</p>
+        </div>
+        <div class="col-md-8 pt-md-4">
+          <p class="h4 text-center text-md-left pl-md-5">グリーン株式会社</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 bg-color-white pt-md-5">
+          <p class="font-weight-bold h4">開始日時・終了日時</p>
+        </div>
+        <div class="col-md-8 pt-md-4">
+
+          <div class="row">
+            <div class="col-md-5">
+              <label class="" for="date_activity_from">開始</label>
+              <p class="h4 text-center text-md-left pl-md-5"id="date_activity_from">2021年10月19日10:00</p>
+            </div> 
+            <div class="col-md-2 mt-md-4">
+              <p class="h4 text-center text-md-left pl-md-5">~</p>
+            </div>
+            <div class="col-md-5">
+              <label class="" for="date_activity_to">終了</label>
+              <p class="h4 text-center text-md-left pl-md-5" id="date_activity_to">2021年10月19日10:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 bg-color-white pt-md-4">
+          <p class="font-weight-bold h4">郵便番号</p>
+        </div>
+        <div class="col-md-8 pt-md-4">
+          <p class="h4 text-center text-md-left pl-md-5">右</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 bg-color-white pt-md-4">
+          <p class="font-weight-bold h4">場所</p>
+        </div>
+        <div class="col-md-8 pt-md-4">
+          <p class="h4 text-center text-md-left pl-md-5">右</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 bg-color-white pt-md-5">
+          <p class="font-weight-bold h4">手段</p>
+        </div>
+        <div class="col-md-8 pt-md-4">
+
+          <div class="row">
+            <div class="col-md-5">
+              <label class="" for="date_activity_from">開始</label>
+              <p class="h4 text-center text-md-left pl-md-5"id="date_activity_from">2021年10月19日10:00</p>
+            </div> 
+            <div class="col-md-2 mt-md-4">
+              <p class="h4 text-center text-md-left pl-md-5">~</p>
+            </div>
+            <div class="col-md-5">
+              <label class="" for="date_activity_to">終了</label>
+              <p class="h4 text-center text-md-left pl-md-5" id="date_activity_to">2021年10月19日10:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 bg-color-white pt-md-4">
+          <p class="font-weight-bold h4">メモ</p>
+        </div>
+        <div class="col-md-8 pt-md-4">
+          <p class="h4 text-center text-md-left pl-md-5">
+          This is some text within a card body.
+            This is some text within a card body.
+            This is some text within a card body.
+            This is some text within a card body.
+            This is some text within a card body.
+            This is some text within a card body.
+            This is some text within a card body.
+            This is some text within a card body.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="row mt-md-5">
+        <div class="col-md-5 ">
+          <p class="font-weight-bold h4">現在の申請状態</p>
+          <div class="card">
+            <div class="card-body">
+
+              <p>報告承認待</p>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <p class="font-weight-bold h4">指摘事項</p>
+          <div class="card">
+            <div class="card-body">
+              <p>This is some text within a card body.
+                This is some text within a card body.
+                This is some text within a card body.
+                This is some text within a card body.
+                This is some text within a card body.
+                This is some text within a card body.
+                This is some text within a card body.
+                This is some text within a card body.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+    <th:block th:insert="components/part::frag_script"></th:block>
 </body>
 </html>

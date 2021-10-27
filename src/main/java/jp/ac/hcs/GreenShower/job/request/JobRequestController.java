@@ -3,6 +3,8 @@ package jp.ac.hcs.GreenShower.job.request;
 import java.security.Principal;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class JobRequestController {
 
 	@Autowired
 	private JobRequestService jobRequestService;
+	
+	@Autowired
+	 private HttpSession session;
 
 	/**
 	 * 就職活動申請申請一覧画面を表示する - 処理失敗時：トップ画面を表示
@@ -45,8 +50,16 @@ public class JobRequestController {
 			return "index";
 		} 
 		
+		session.setAttribute("jobRequestEntity", jobRequestEntity.get());
 		model.addAttribute("jobRequestEntity", jobRequestEntity.get());
 		return "job/request/list";
+	}
+	
+	
+	@GetMapping("/job/request/detail")
+	public String getRequestDetail(Model model) {
+		System.out.println(session.getAttribute("jobRequestEntity"));
+		return "job/request/detail";
 	}
 
 }
