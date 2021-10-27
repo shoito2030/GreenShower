@@ -8,21 +8,21 @@
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
 </head>
-<body>
+<body th:object="${jobRequestData}">
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<p class="h1">就職活動申請 詳細</p>
 
-  <div class="container">
-    <div class="row justify-content-md-center">
+  <div class="container mt-md-5">
+    <div class="row justify-content-md-center mt-md-4">
       <div class="col-md-2">
-        <p>クラス</p>
+        <span><small>クラス</small><span class="float-md-right mt-md-1 font-weight-bold h4" th:text="${jobRequestData.classroom}"></span></span>
       </div>
       <div class="col-md-1 offset-md-1">
-        <p>番号</p>
+        <span><small>番号</small><span class="float-md-right mt-md-1 font-weight-bold h4" th:text="${jobRequestData.class_number}"></span></span>
       </div>
       <div class="col-md-2 offset-md-1">
-        <p>氏名</p>
+        <span><small>氏名</small><span class="float-md-right mt-md-1 font-weight-bold h4" th:text="${jobRequestData.name}"></span></span>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
           <p class="font-weight-bold h4">申請種別</p>
         </div>
         <div class="col-md-8">
-          <p class="h4 text-center text-md-left pl-md-5">とりまとめ</p>
+          <p class="h4 text-center text-md-left pl-md-5" th:text="${jobRequestData.content.value}"></p>
         </div>
       </div>
 
@@ -45,7 +45,7 @@
           <p class="font-weight-bold h4">企業名</p>
         </div>
         <div class="col-md-8 pt-md-4">
-          <p class="h4 text-center text-md-left pl-md-5">グリーン株式会社</p>
+          <p class="h4 text-center text-md-left pl-md-5" th:text="${jobRequestData.company_name}"></p>
         </div>
       </div>
 
@@ -58,25 +58,16 @@
           <div class="row">
             <div class="col-md-5">
               <label class="" for="date_activity_from">開始</label>
-              <p class="h4 text-center text-md-left pl-md-5"id="date_activity_from">2021年10月19日10:00</p>
+              <p class="h4 text-center text-md-left pl-md-5"id="date_activity_from" th:text="${jobRequestData.date_activity_from}"></p>
             </div> 
             <div class="col-md-2 mt-md-4">
               <p class="h4 text-center text-md-left pl-md-5">~</p>
             </div>
             <div class="col-md-5">
               <label class="" for="date_activity_to">終了</label>
-              <p class="h4 text-center text-md-left pl-md-5" id="date_activity_to">2021年10月19日10:00</p>
+              <p class="h4 text-center text-md-left pl-md-5" id="date_activity_to" th:text="${jobRequestData.date_activity_to}"></p>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4 bg-color-white pt-md-4">
-          <p class="font-weight-bold h4">郵便番号</p>
-        </div>
-        <div class="col-md-8 pt-md-4">
-          <p class="h4 text-center text-md-left pl-md-5">右</p>
         </div>
       </div>
 
@@ -85,27 +76,24 @@
           <p class="font-weight-bold h4">場所</p>
         </div>
         <div class="col-md-8 pt-md-4">
-          <p class="h4 text-center text-md-left pl-md-5">右</p>
+          <p class="h4 text-center text-md-left pl-md-5" th:text="${jobRequestData.loc}"></p>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-4 bg-color-white pt-md-5">
-          <p class="font-weight-bold h4">手段</p>
+        <div class="col-md-4 bg-color-white pt-md-4">
+          <p class="font-weight-bold h4" th:text="'手段(' + ${jobRequestData.way.value} + ')'"></p>
         </div>
         <div class="col-md-8 pt-md-4">
-
           <div class="row">
             <div class="col-md-5">
-              <label class="" for="date_activity_from">開始</label>
-              <p class="h4 text-center text-md-left pl-md-5"id="date_activity_from">2021年10月19日10:00</p>
+              <p class="h4 text-center text-md-left pl-md-5">2021年10月19日10:00</p>
             </div> 
-            <div class="col-md-2 mt-md-4">
+            <div class="col-md-2">
               <p class="h4 text-center text-md-left pl-md-5">~</p>
             </div>
             <div class="col-md-5">
-              <label class="" for="date_activity_to">終了</label>
-              <p class="h4 text-center text-md-left pl-md-5" id="date_activity_to">2021年10月19日10:00</p>
+              <p class="h4 text-center text-md-left pl-md-5">2021年10月19日10:00</p>
             </div>
           </div>
         </div>
@@ -116,15 +104,8 @@
           <p class="font-weight-bold h4">メモ</p>
         </div>
         <div class="col-md-8 pt-md-4">
-          <p class="h4 text-center text-md-left pl-md-5">
-          This is some text within a card body.
-            This is some text within a card body.
-            This is some text within a card body.
-            This is some text within a card body.
-            This is some text within a card body.
-            This is some text within a card body.
-            This is some text within a card body.
-            This is some text within a card body.
+          <p class="h4 text-center text-md-left pl-md-5" th:text="${jobRequestData.remark}">
+
           </p>
         </div>
       </div>
@@ -133,10 +114,10 @@
       <div class="row mt-md-5">
         <div class="col-md-5 ">
           <p class="font-weight-bold h4">現在の申請状態</p>
-          <div class="card">
+          <div class="card center-block w-50" style="border-radius:75px;">
             <div class="card-body">
 
-              <p>報告承認待</p>
+              <p th:text="${jobRequestData.status.value}"></p>
 
             </div>
           </div>
@@ -145,18 +126,12 @@
           <p class="font-weight-bold h4">指摘事項</p>
           <div class="card">
             <div class="card-body">
-              <p>This is some text within a card body.
-                This is some text within a card body.
-                This is some text within a card body.
-                This is some text within a card body.
-                This is some text within a card body.
-                This is some text within a card body.
-                This is some text within a card body.
-                This is some text within a card body.</p>
+              <p th:text="${jobRequestData.indicate}"></p>
             </div>
           </div>
         </div>
       </div>
+
 
     </div>
     
