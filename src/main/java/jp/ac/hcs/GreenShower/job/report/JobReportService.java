@@ -64,17 +64,33 @@ public class JobReportService {
 	 * @param register_user_id 登録処理を実行したユーザのID
 	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
-//	public boolean insert(ReportForm form, String register_user_id) {
-//		int rowNumber = 0;
-//
-//		try {
-//			// 追加処理を行い、追加できた件数を取得
-//			rowNumber = reportRepository.insertOne(refillToReportData(form, register_user_id));
-//		} catch (DataAccessException e) {
-//			e.printStackTrace();
-//		}
-//		return rowNumber > 0;
-//	}
+	public boolean insert(JobReportForm form, String register_user_id) {
+		int rowNumber = 0;
+
+		try {
+			// 追加処理を行い、追加できた件数を取得
+			rowNumber = jobReportRepository.insertOne(refillToJobReportData(form, register_user_id));
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return rowNumber > 0;
+	}
+	/**
+	 * 入力情報をJobReportData型に変換する（insert用）
+	 * 
+	 * @param form    検証済み入力データ
+	 * @param user_id 登録処理を実行したユーザのID
+	 * @return JobReportData
+	 */
+	private JobReportData refillToJobReportData(JobReportForm form, String register_user_id) {
+		JobReportData data = new JobReportData();
+
+		data.setApply_id(form.getApply_id());
+		data.setAdvance_or_retreat(true);
+		data.setRemark(form.getRemark());
+		
+		return data;
+	}
 
 	/**
 	 * サーバーに保存されているファイルを取得して、byte配列に変換する.
