@@ -5,20 +5,86 @@
 <head>
 <meta charset="UTF-8">
 <title>就職活動報告新規登録画面</title>
-    
-    
+
+
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
+
+<script type="text/javascript">
+		function not_ES_other() {
+			document.getElementById("entry_section_other").setAttribute(
+					"disabled", true);
+			var textForm = document.getElementById("entry_section_other");
+			  textForm.value = '';
+		}
+	</script>
 </head>
 
 <body>
 
 	<th:block th:insert="components/part::frag_header"></th:block>
-	
-	<!-- 作成中 -->
-	就職活動報告新規登録画面
+
 	<th:block th:insert="components/part::frag_script"></th:block>
+
+
+
+	<h2 align="left">受験報告 新規登録</h2>
+	<br>
+	<br>
+	<br>
+
+	<div class="container">
+		<div align="left">
+			<div class="col-md-2">
+				<p>クラス&emsp;&emsp;S3A1</p>
+			</div>
+			<div class="col-md-1 offset-md-1">
+				<p>番号&emsp;01</p>
+			</div>
+			<div class="col-md-2 offset-md-1">
+				<p>氏名&emsp;&emsp;情報太郎</p>
+			</div>
+		</div>
+	</div>
 	
+	<br>
+	<br>
+	<br>
+
+	<div class="input-form">
+		<form method="post" th:action="@{/report/insert}">
+
+			<label for="entry_section">進退</label>
+			<div class="form-group input-box">
+				<nobr>
+					<input type="radio" name="advance_or_retreat" value="1"
+						onclick="not_ES_other()">進める&emsp;&emsp;&emsp; <input
+						type="radio" name="advance_or_retreat" value="2"
+						onclick="not_ES_other()">進めない
+				</nobr>
+			</div>
+			
+			<br>
+			<br>
+			
+			
+			<label for="user_name">備考</label>
+			<div class="form-group input-box">
+
+				<textarea class="form-control" name="job_number" rows="5"></textarea>
+			</div>
+			
+			<br>
+			<br>
+			
+			<button type="submit" class="btn btn-primary" style= " -webkit-appearance: none; width:200px;height:50px; font-size:23px;">登録</button>
+		</form>
+		<br>
+			<br>
+			<br>
+			<br>
+	</div>
+
 </body>
 </html>
