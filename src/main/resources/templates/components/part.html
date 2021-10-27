@@ -97,9 +97,9 @@
 	</th:block>
 	
 	<!-- 詳細画面共通部品 -->
-	<th:block th:fragment="frag_detail">
+	<th:block th:fragment="frag_detail(page_title)">
 	<th:block th:object="${jobHuntingData}">
-		<p class="h1">就職活動申請 詳細</p>
+		<p class="h1" th:text="${page_title}"></p>
 
 	<div class="container mt-md-5">
 		<div class="row justify-content-md-center mt-md-4">
