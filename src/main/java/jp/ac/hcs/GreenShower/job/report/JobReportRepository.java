@@ -37,6 +37,32 @@ public class JobReportRepository {
 	}
 	
 	/**
+	 * reportsテーブルにデータを1件追加する.
+	 * 
+	 * @param data 追加するユーザ情報
+	 * @return 追加データ数
+	 * @throws DataAccessException
+	 */
+//	public int insertOne(JobReportData data) throws DataAccessException {
+//		int rowNumber = jdbc.update(SQL_INSERT_ONE,
+//				
+//				data.getUser_id(),
+//
+//				// classroom,class_number,name,class_cordはユーザIDと紐づけてuserテーブルから取得する
+//				data.getUser_id(), data.getUser_id(), data.getUser_id(), data.getUser_id(),
+//
+//				data.getApply_id(),
+//				data.getAdvance_or_retreat(),
+//				data.getRemark(),
+//				data.getRegister_date(),
+//				data.getRegister_user_id(),
+//				data.getUpdate_date(),
+//				data.getUpdate_user_id());
+//		
+//		return rowNumber;
+//	}
+	
+	/**
 	 * job_huntingテーブルとrequestsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
 	 * 
 	 * @param resultList report job_huntingテーブルとrequestsテーブルから取得したデータ
