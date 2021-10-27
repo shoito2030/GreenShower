@@ -17,8 +17,63 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 	
 	<!-- 作成中 -->
-	就職活動申請新規登録画面
 	<th:block th:insert="components/part::frag_script"></th:block>
-	
+	<div class="container">
+		<div class="content-box">
+			<h2>就職活動申請新規登録</h2>
+
+			<div class="input-form">
+				<form method="post" th:action="@{/report/insert}">
+				
+					<label for="apply_type">申請種別</label>
+					<div class="form-group input-box">
+						<input type="radio" name="apply_type" value="0">個人
+						<input type="radio" name="apply_type" value="1">とりまとめ
+					</div>
+
+					<label for="company_name">企業名</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="company_name">
+					</div>
+					
+					<label for="date_activity">開始時刻・終了日時</label>
+					<div class="form-group input-box">
+						<input type="datetime-local" class="form-control" name="date_activity_from">
+						<input type="datetime-local" class="form-control" name="date_activity_to">
+					</div>
+					
+					<label for="post">郵便番号</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="post">
+					</div>
+					
+					<label for="loc">郵便番号</label>
+					<div class="form-group input-box">
+						<input type="text" class="form-control" name="loc">
+					</div>
+					
+					<label for="way">手段</label>
+					<div class="form-group input-box">
+						<input type="checkbox" name="way" value="0">欠席
+						開始<input type="datetime-local" class="form-control" name="date_absence_from">
+						終了<input type="datetime-local" class="form-control" name="date_absence_to">
+						<input type="checkbox" name="way" value="1">早退
+						<input type="datetime-local" class="form-control" name="leave_eary_date">
+						<input type="checkbox" name="way" value="2">遅刻
+						<input type="datetime-local" class="form-control" name="attendance_date">
+					</div>
+					
+					
+					<label for="remark">メモ</label>
+					<div class="form-group input-box">
+						<textarea rows="10" cols="60" class="form-control" name="remark"></textarea>
+					</div>
+
+
+					<button type="submit" class="btn btn-warning">登録</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

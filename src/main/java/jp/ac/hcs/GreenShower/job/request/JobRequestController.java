@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
+import jp.ac.hcs.GreenShower.report.ReportForm;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -97,6 +98,17 @@ public class JobRequestController {
 		
 		model.addAttribute("jobRequestData", jobRequestData.get());
 		return "job/request/detail";
+	}
+	
+	/**
+	 * 就職活動申請登録画面を表示する
+	 * 
+	 * @param model
+	 * @return 就職活動申請登録画面
+	 */
+	@GetMapping("/job/request/insert")
+	public String getReportInsert(ReportForm form, Model model) {
+		return "job/request/insert";
 	}
 
 }
