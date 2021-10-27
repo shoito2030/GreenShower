@@ -100,4 +100,5 @@ public class JobRequestController {
 		return "job/request/detail";
 	}
 
+	
 }
