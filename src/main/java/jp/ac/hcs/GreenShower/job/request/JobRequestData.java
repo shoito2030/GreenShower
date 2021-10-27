@@ -2,7 +2,6 @@ package jp.ac.hcs.GreenShower.job.request;
 
 import java.util.Date;
 
-import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,16 +29,6 @@ public class JobRequestData extends JobHuntingData{
 //	 * 手段
 //	 */
 //	private String means;
-	
-	/**
-	 * 内容
-	 */
-	private Content content;
-	
-	/**
-	 * 企業名
-	 */
-	private String company_name;
 	
 	/**
 	 * 欠席開始日時
@@ -86,42 +75,15 @@ public class JobRequestData extends JobHuntingData{
 //	 */
 //	private String update_user_id;
 	
-	public enum Content implements CommonEnum<Content>{
-		MULTIPLE_COMPANY_SESSION("1","合企"),
-		SINGLE_COMPANY_SESSION("2","単独"),
-		TEST("3","試験"),
-		OTHER("99","その他");
-		
-		/** ID */
-		private String id;
-		
-		/** 値 */
-		private String value;
 
-		/** コンストラクタ */
-		Content(String id, String value) {
-			this.id = id;
-			this.value = value;
-		}
-		
-		@Override
-		public String getId() {
-			return this.id;
-		}
-
-		@Override
-		public String getValue() {
-			return this.value;
-		}
-	}
 
 	@Override
 	public String toString() {
 		return "JobRequestData [date_activity_from=" + date_activity_from + ", date_activity_to=" + date_activity_to
-				+ ", loc=" + loc + ", content=" + content + ", company_name=" + company_name + ", date_absence_from="
-				+ date_absence_from + ", date_absence_to=" + date_absence_to + ", leave_early_date=" + leave_early_date
-				+ ", attendance_date=" + attendance_date + ", remark=" + remark + ", classroom=" + classroom
-				+ ", class_number=" + class_number + ", name=" + name + ", apply_id=" + apply_id + ", applicant_id="
-				+ applicant_id + ", status=" + status + ", apply_type=" + apply_type + "]";
+				+ ", loc=" + loc + ", date_absence_from=" + date_absence_from + ", date_absence_to=" + date_absence_to
+				+ ", leave_early_date=" + leave_early_date + ", attendance_date=" + attendance_date + ", remark="
+				+ remark + "]";
 	}
+
+
 }

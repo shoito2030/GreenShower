@@ -18,7 +18,7 @@ public class JobReportData extends JobHuntingData {
 	/**
 	 * 進退
 	 */
-	private String advance_or_retreat;
+	private boolean advance_or_retreat;
 	
 	/**
 	 * 備考

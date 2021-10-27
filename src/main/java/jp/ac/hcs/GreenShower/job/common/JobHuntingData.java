@@ -25,6 +25,15 @@ public class JobHuntingData {
 	protected String name;
 	
 	// 下記は共通
+	/**
+	 * 企業名
+	 */
+	private String company_name;
+	
+	/**
+	 * 内容
+	 */
+	private Content content;
 	
 	/**
 	 * 申請ID
@@ -98,6 +107,35 @@ public class JobHuntingData {
 
 		/** コンストラクタ */
 		Apply_type(String id, String value) {
+			this.id = id;
+			this.value = value;
+		}
+		
+		@Override
+		public String getId() {
+			return this.id;
+		}
+
+		@Override
+		public String getValue() {
+			return this.value;
+		}
+	}
+	
+	public enum Content implements CommonEnum<Content>{
+		MULTIPLE_COMPANY_SESSION("1","合企"),
+		SINGLE_COMPANY_SESSION("2","単独"),
+		TEST("3","試験"),
+		OTHER("99","その他");
+		
+		/** ID */
+		private String id;
+		
+		/** 値 */
+		private String value;
+
+		/** コンストラクタ */
+		Content(String id, String value) {
 			this.id = id;
 			this.value = value;
 		}

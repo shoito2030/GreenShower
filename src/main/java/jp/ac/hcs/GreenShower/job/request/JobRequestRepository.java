@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
-import jp.ac.hcs.GreenShower.job.request.JobRequestData.Content;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
 
 @Repository
 public class JobRequestRepository {
@@ -63,6 +63,7 @@ public class JobRequestRepository {
 			data.setName((String) map.get("name"));
 			data.setApply_id((String) map.get("apply_id"));
 			data.setApplicant_id((String) map.get("applicant_id"));
+			data.setCompany_name((String) map.get("company_name"));
 			data.setStatus(CommonEnum.getEnum(JobHuntingData.Status.class,(String) map.get("status")));
 			data.setApply_type(CommonEnum.getEnum(JobHuntingData.Apply_type.class, (String) map.get("apply_type")));
 			data.setIndicate((String) map.get("indicate"));
@@ -73,7 +74,7 @@ public class JobRequestRepository {
 			data.setDate_activity_to((Date) map.get("date_activity_to"));
 			data.setLoc((String) map.get("loc"));
 			data.setContent(CommonEnum.getEnum(Content.class, (String) map.get("content")));
-			data.setCompany_name((String) map.get("company_name"));
+
 //			data.setMeans((String) map.get("means"));
 			data.setDate_absence_from((Date) map.get("date_absence_from"));
 			data.setDate_absence_to((Date) map.get("date_absence_to"));

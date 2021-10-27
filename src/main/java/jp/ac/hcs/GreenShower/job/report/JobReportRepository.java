@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
 
 @Repository
 public class JobReportRepository {
@@ -49,6 +50,8 @@ public class JobReportRepository {
 			JobReportData data = new JobReportData();
 
 			// JobHuntingDataクラスのフィールドを補完（protectedなフィールド）
+			data.setCompany_name((String) map.get("company_name"));	
+			data.setContent(CommonEnum.getEnum(Content.class, (String) map.get("content")));			
 			data.setClassroom((String) map.get("classroom"));
 			data.setClass_number((String) map.get("class_number"));
 			data.setName((String) map.get("name"));
@@ -61,7 +64,7 @@ public class JobReportRepository {
 			
 			// JobReportDataクラスのフィールドを補完
 			data.setRemark((String) map.get("remark"));
-			data.setAdvance_or_retreat((String) map.get("advance_or_retreat"));
+			data.setAdvance_or_retreat((boolean) map.get("advance_or_retreat"));
 			
 			// システム内で使用しないので取得する必要ないかも（応相談）
 //			data.setRegister_date((Date) map.get("register_date"));
