@@ -1,24 +1,177 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
 <head>
 <meta charset="UTF-8">
 <title>就職活動申請状態変更画面</title>
-    
-    
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
 </head>
-
 <body>
-
 	<th:block th:insert="components/part::frag_header"></th:block>
-	
-	<!-- 作成中 -->
-	就職活動申請状態変更画面
+
+	<p class="h1">就職活動申請状態変更画面</p>
+
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-md-2">
+				<p>クラス</p>
+			</div>
+			<div class="col-md-1 offset-md-1">
+				<p>番号</p>
+			</div>
+			<div class="col-md-2 offset-md-1">
+				<p>氏名</p>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="container">
+
+		<hr>
+
+		<div class="row mt-md-5">
+			<div class="col-md-4 bg-color-white">
+				<p class="font-weight-bold h4">申請種別</p>
+			</div>
+			<div class="col-md-8">
+				<p class="h4 text-center text-md-left pl-md-5">とりまとめ</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="font-weight-bold h4">企業名</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5">グリーン株式会社</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-5">
+				<p class="font-weight-bold h4">開始日時・終了日時</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+
+				<div class="row">
+					<div class="col-md-5">
+						<label class="" for="date_activity_from">開始</label>
+						<p class="h4 text-center text-md-left pl-md-5"
+							id="date_activity_from">2021年10月19日10:00</p>
+					</div>
+
+					<div class="col-md-2 mt-md-4">
+						<p class="h4 text-center text-md-left pl-md-5">~</p>
+					</div>
+
+					<div class="col-md-5">
+						<label class="" for="date_activity_to">終了</label>
+						<p class="h4 text-center text-md-left pl-md-5"
+							id="date_activity_to">2021年10月19日10:00</p>
+					</div>
+
+					<hr>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="font-weight-bold h4">郵便番号</p>
+			</div>
+
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5">右</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="font-weight-bold h4">場所</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5">右</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-5">
+				<p class="font-weight-bold h4">手段</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+
+				<hr>
+
+				<div class="row">
+					<div class="col-md-5">
+						<label class="" for="date_activity_from">開始</label>
+						<p class="h4 text-center text-md-left pl-md-5"
+							id="date_activity_from">2021年10月19日10:00</p>
+					</div>
+					<div class="col-md-2 mt-md-4">
+						<p class="h4 text-center text-md-left pl-md-5">~</p>
+					</div>
+					<div class="col-md-5">
+						<label class="" for="date_activity_to">終了</label>
+						<p class="h4 text-center text-md-left pl-md-5"
+							id="date_activity_to">2021年10月19日10:00</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="font-weight-bold h4">メモ</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5">This is some text
+					within a card body. This is some text within a card body. This is
+					some text within a card body. This is some text within a card body.
+					This is some text within a card body. This is some text within a
+					card body. This is some text within a card body. This is some text
+					within a card body.</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<form method="post" th:action="@{/job/request/status-change}">
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="font-weight-bold h4">変更</p>
+				</div>
+				<select name="status">
+					<option value="4">承認</option>
+					<option value="1">差し戻し</option>
+					<option value="99">取消し</option>
+				</select>
+			</div>
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="font-weight-bold h4">指摘欄</p>
+				</div>
+				<textarea class="form-control" name="theme" rows="7" cols="50"></textarea>
+			</div>
+
+			<button type="submit" class="btn btn-primary">登録</button>
+		</form>
+	</div>
 	<th:block th:insert="components/part::frag_script"></th:block>
-	
 </body>
 </html>
