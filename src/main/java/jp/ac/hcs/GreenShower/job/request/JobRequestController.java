@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
-import jp.ac.hcs.GreenShower.job.report.JobReportData;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -72,7 +71,7 @@ public class JobRequestController {
 	 */
 	@GetMapping("/job/request/detail/{apply_id}")
 	public String getRequestDetail(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-		JobReportData sessionData = (JobReportData) session.getAttribute(apply_id);
+		JobRequestData sessionData = (JobRequestData) session.getAttribute(apply_id);
 		
 		// sessionに既に個人の申請情報が保存されているなら後続の処理は実行しない
 		if(sessionData != null) {
@@ -174,4 +173,17 @@ public class JobRequestController {
 		return "job/request/status-change";
 	}
 	
+//	/**
+//	 * 就職活動申請状態変更処理を行う
+//	 * 
+//	 * @param principal ログイン情報
+//	 * @param apply_id 申請ID 
+//	 * @param model 
+//	 * @return 就職活動申請状態一覧画面
+//	 */
+//	@PostMapping("/job/request/ststus-change/{apply_id}")
+//	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id,JobRequestForm form,Principal principal,Model model) {
+//		jobRequestService.updateJobStatus(apply_id,form);
+//		return "job/request/list";
+//	}
 }
