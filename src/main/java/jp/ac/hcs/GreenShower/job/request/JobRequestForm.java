@@ -55,4 +55,14 @@ public class JobRequestForm {
 	 * メモ
 	 */
 	private String remark;
+	
+	/**
+	 * 変更
+	 */
+	private String status;
+	
+	/**
+	 * 指摘欄
+	 */
+	private String indicate;
 }
