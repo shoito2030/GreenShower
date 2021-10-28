@@ -97,8 +97,7 @@
 	</th:block>
 	
 	<!-- 詳細画面共通部品 -->
-	<th:block th:fragment="frag_detail(page_title)">
-	<th:block th:object="${jobHuntingData}">
+	<th:block th:fragment="frag_detail(page_title, jobHuntingData)" th:object="${jobHuntingData}">
 		<p class="h1" th:text="${page_title}"></p>
 
 	<div class="container mt-md-5">
@@ -106,17 +105,17 @@
 			<div class="col-md-2">
 				<span><small>クラス</small><span
 					class="float-md-right mt-md-1 font-weight-bold h4"
-					th:text="${jobHuntingData.classroom}"></span></span>
+					th:text="*{classroom}"></span></span>
 			</div>
 			<div class="col-md-1 offset-md-1">
 				<span><small>番号</small><span
 					class="float-md-right mt-md-1 font-weight-bold h4"
-					th:text="${jobHuntingData.class_number}"></span></span>
+					th:text="*{class_number}"></span></span>
 			</div>
 			<div class="col-md-2 offset-md-1">
 				<span><small>氏名</small><span
 					class="float-md-right mt-md-1 font-weight-bold h4"
-					th:text="${jobHuntingData.name}"></span></span>
+					th:text="*{name}"></span></span>
 			</div>
 		</div>
 
@@ -128,7 +127,7 @@
 			</div>
 			<div class="col-md-8">
 				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="${jobHuntingData.content.value}"></p>
+					th:text="*{content.value}"></p>
 			</div>
 		</div>
 
@@ -138,7 +137,7 @@
 			</div>
 			<div class="col-md-8 pt-md-4">
 				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="${jobHuntingData.company_name}"></p>
+					th:text="*{company_name}"></p>
 			</div>
 		</div>
 
@@ -153,7 +152,7 @@
 						<label class="" for="date_activity_from">開始</label>
 						<p class="h4 text-center text-md-left pl-md-5"
 							id="date_activity_from"
-							th:text="${jobHuntingData.date_activity_from}"></p>
+							th:text="${#dates.format(jobHuntingData.date_activity_from, 'yyyy年MM月dd日 HH時mm分')}"></p>
 					</div>
 					<div class="col-md-2 mt-md-4">
 						<p class="h4 text-center text-md-left pl-md-5">~</p>
@@ -162,7 +161,7 @@
 						<label class="" for="date_activity_to">終了</label>
 						<p class="h4 text-center text-md-left pl-md-5"
 							id="date_activity_to"
-							th:text="${jobHuntingData.date_activity_to}"></p>
+							th:text="${#dates.format(jobHuntingData.date_activity_to, 'yyyy年MM月dd日 HH時mm分')}"></p>
 					</div>
 				</div>
 			</div>
@@ -174,14 +173,14 @@
 			</div>
 			<div class="col-md-8 pt-md-4">
 				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="${jobHuntingData.loc}"></p>
+					th:text="*{loc}"></p>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-4 bg-color-white pt-md-4">
 				<p class="font-weight-bold h4"
-					th:text="'手段(' + ${jobHuntingData.way.value} + ')'"></p>
+					th:text="'手段(' + *{way.value} + ')'"></p>
 			</div>
 			<div class="col-md-8 pt-md-4">
 
@@ -217,7 +216,7 @@
 			</div>
 			<div class="col-md-8 pt-md-4">
 				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="${jobHuntingData.remark}"></p>
+					th:text="*{remark}"></p>
 			</div>
 		</div>
 
@@ -228,7 +227,7 @@
 				<div class="card center-block w-50" style="border-radius: 75px;">
 					<div class="card-body">
 
-						<p th:text="${jobHuntingData.status.value}"></p>
+						<p th:text="*{status.value}"></p>
 
 					</div>
 				</div>
@@ -237,7 +236,7 @@
 				<p class="font-weight-bold h4">指摘事項</p>
 				<div class="card">
 					<div class="card-body">
-						<p th:text="${jobHuntingData.indicate}"></p>
+						<p th:text="*{indicate}"></p>
 					</div>
 				</div>
 			</div>
@@ -245,7 +244,6 @@
 
 
 	</div>
-	</th:block>
 	</th:block>
 
 	<!-- 共通スクリプト -->
