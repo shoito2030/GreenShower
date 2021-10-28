@@ -68,7 +68,7 @@ public class JobRequestController {
 	 */
 	@GetMapping("/job/request/detail/{apply_id}")
 	public String getRequestDetail(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-		JobRequestData sessionData = (JobRequestData) session.getAttribute(apply_id);
+		JobReportData sessionData = (JobReportData) session.getAttribute(apply_id);
 		
 		// sessionに既に個人の申請情報が保存されているなら後続の処理は実行しない
 		if(sessionData != null) {
@@ -122,7 +122,7 @@ public class JobRequestController {
 	 */
 	@GetMapping("/job/request/status_change/{apply_id}")
 	public String getRequestStatusChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-		JobRequestData sessionData = (JobRequestData) session.getAttribute(apply_id);
+		JobReportData sessionData = (JobReportData) session.getAttribute(apply_id);
 		
 		// sessionに既に個人の申請情報が保存されているなら後続の処理は実行しない
 		if(sessionData != null) {

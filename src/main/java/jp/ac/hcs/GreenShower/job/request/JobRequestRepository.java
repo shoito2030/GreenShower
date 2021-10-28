@@ -13,7 +13,7 @@ import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Apply_type;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Status;
-import jp.ac.hcs.GreenShower.job.request.JobRequestData.Way;
+import jp.ac.hcs.GreenShower.job.request.JobReportData.Way;
 
 @Repository
 public class JobRequestRepository {
@@ -77,7 +77,7 @@ public class JobRequestRepository {
 		JobRequestEntity entity = new JobRequestEntity();
 		
 		for (Map<String, Object> map : resultList) {
-			JobRequestData data = new JobRequestData();
+			JobReportData data = new JobReportData();
 
 			// JobHuntingDataクラスのフィールドを補完（protectedなフィールド）
 			data.setClassroom((String) map.get("classroom"));
