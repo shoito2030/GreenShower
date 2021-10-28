@@ -58,8 +58,42 @@ public class JobReportController {
 			return "index";
 		} 
 		
+		System.out.println(jobReportEntity.get());
+		session.setAttribute("jobReportEntity", jobReportEntity.get());
 		model.addAttribute("jobReportEntity", jobReportEntity.get());
 		return "job/report/list";
+	}
+	
+	/**
+	 * 個人の申請情報を取得し就職活動申請詳細画面を表示する
+	 * 
+	 * @param principal ログイン情報
+	 * @param apply_id 申請ID
+	 * @param model
+	 * @return 就職活動申請詳細画面
+	 */
+	@GetMapping("/job/report/detail/{apply_id}")
+	public String getReportDetail(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
+		
+		// sessionから申請情報の一覧を取得
+		JobReportEntity jobReportEntity = (JobReportEntity) session.getAttribute("jobReportEntity");
+
+		// sessionになければDBに問い合わせる(URL直貼り)
+		if (jobReportEntity == null) {
+			jobReportEntity = jobReportService.selectAllReports().get();
+			log.warn("[" + principal.getName() + "]：URL直貼りアクセス");
+		}
+
+		// 合致する申請IDを持つ申請情報を取得
+		Optional<JobHuntingData> jobReportData = jobReportEntity.getJobReportList().stream()
+				.filter(request -> request.getApply_id().equals(apply_id)).findAny();
+
+		if(jobReportData.isEmpty()) {
+			return "index";
+		}
+
+		model.addAttribute("JobReportData", jobReportData.get());
+		return "job/report/detail";
 	}
 	
 	/**
