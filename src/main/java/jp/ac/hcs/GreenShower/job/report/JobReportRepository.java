@@ -73,10 +73,8 @@ public class JobReportRepository {
 	 * @return 追加データ数
 	 * @throws DataAccessException
 	 */
-	public int updateStatusOne(JobReportData data) throws DataAccessException {
-		int rowNumber = jdbc.update(SQL_UPDATE_JOB_HUNTING,
-
-				data.getApply_id());
+	public int updateStatusOne(String register_user_id) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_UPDATE_JOB_HUNTING,register_user_id);
 		
 		return rowNumber;
 	}

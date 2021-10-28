@@ -71,7 +71,7 @@ public class JobReportService {
 		try {
 			// 追加処理を行い、追加できた件数を取得
 			rowNumber = jobReportRepository.insertOne(refillToJobReportData(form, register_user_id));
-//			jobReportRepository.updateStatusOne(form.getApply_id());
+			jobReportRepository.updateStatusOne(register_user_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -90,7 +90,7 @@ public class JobReportService {
 		data.setApply_id(form.getApply_id());
 		data.setAdvance_or_retreat(true);
 		data.setRemark(form.getRemark());
-		data.setRegister_user_id(form.getRegister_user_id());
+		data.setRegister_user_id(register_user_id);
 		
 		return data;
 	}

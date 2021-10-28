@@ -33,7 +33,7 @@ public class JobReportData extends JobHuntingData {
 	/**
 	 * 登録者のユーザID
 	 */
-	private Date register_user_id;
+	private String register_user_id;
 	
 	/**
 	 * 更新日時
@@ -43,7 +43,7 @@ public class JobReportData extends JobHuntingData {
 	/**
 	 * 更新者のユーザID
 	 */
-	private Date update_user_id;
+	private String update_user_id;
 
 	@Override
 	public String toString() {
