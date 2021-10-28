@@ -40,7 +40,7 @@ public class JobRequestRepository {
 			+ "WHERE NOT EXISTS(SELECT *  FROM REPORTS REP2 WHERE JH.APPLY_ID  = REP2.APPLY_ID) AND U.USER_ID = ? ORDER BY JH.STATUS, U.CLASSROOM, U.CLASS_NUMBER;";
 	
 	/** 申請一件追加*/
-	private static final String SQL_INSERT_ONE = "";
+	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE job_hunting SET status=?,indicate=?";
 	@Autowired
 	private JdbcTemplate jdbc;
 	
@@ -110,7 +110,12 @@ public class JobRequestRepository {
 		return entity;
 
 	}
-
+	
+	public int updateJobStatus(String apply_id,JobRequestForm form) {
+		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS,apply_id,form.getStatus(),form.getIndicate());
+		return rowNumber;
+	}
+	
 	public int insertOne(JobRequestData refillToJobReportData) {
 		// TODO 自動生成されたメソッド・スタブ
 		return 0;

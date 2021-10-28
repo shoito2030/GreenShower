@@ -84,22 +84,22 @@ public class JobRequestService {
 	}
 
 
-//	
-//	/**
-//	 * 就職活動申請の状態変更処理を行う
-//	 * 
-//	 * @param user_id ユーザID
-//	 * @return Optional<jobRequestEntity>
-//	 */
-//	public boolean updateJobStatus(String apply_id,JobRequestForm form){
-//		boolean success=false;
-//		try {
-//			success = jobRequestRepository.updateJobStatus(report_id,form);
-//		}catch (DataAccessException e) {
-//			e.printStackTrace();
-//		}
-//		return success;
-//		
-//	}
+	
+	/**
+	 * 就職活動申請の状態変更処理を行う
+	 * 
+	 * @param user_id ユーザID
+	 * @return Optional<jobRequestEntity>
+	 */
+	public int updateJobStatus(String apply_id,JobRequestForm form){
+		int rowNumber=0;
+		try {
+			rowNumber = jobRequestRepository.updateJobStatus(apply_id,form);
+		}catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return rowNumber;
+		
+	}
 
 }

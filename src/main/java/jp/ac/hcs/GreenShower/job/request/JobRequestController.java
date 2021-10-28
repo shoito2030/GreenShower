@@ -173,17 +173,17 @@ public class JobRequestController {
 		return "job/request/status-change";
 	}
 	
-//	/**
-//	 * 就職活動申請状態変更処理を行う
-//	 * 
-//	 * @param principal ログイン情報
-//	 * @param apply_id 申請ID 
-//	 * @param model 
-//	 * @return 就職活動申請状態一覧画面
-//	 */
-//	@PostMapping("/job/request/ststus-change/{apply_id}")
-//	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id,JobRequestForm form,Principal principal,Model model) {
-//		jobRequestService.updateJobStatus(apply_id,form);
-//		return "job/request/list";
-//	}
+	/**
+	 * 就職活動申請状態変更処理を行う
+	 * 
+	 * @param principal ログイン情報
+	 * @param apply_id 申請ID 
+	 * @param model 
+	 * @return 就職活動申請状態一覧画面
+	 */
+	@PostMapping("/job/request/ststus-change")
+	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id,JobRequestForm form,Principal principal,Model model) {
+		jobRequestService.updateJobStatus(apply_id,form);
+		return "job/request/list";
+	}
 }
