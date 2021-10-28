@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import jp.ac.hcs.GreenShower.job.report.JobReportData;
-import jp.ac.hcs.GreenShower.report.ReportForm;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -109,10 +112,25 @@ public class JobRequestController {
 	 * @return 就職活動申請登録画面
 	 */
 	@GetMapping("/job/request/insert")
-	public String getReportInsert(ReportForm form, Model model) {
+	public String getRequestInsert(JobRequestForm form, Model model) {
 		return "job/request/insert";
 	}
-
+	
+	/**
+	 * 新たに受験報告情報を登録する
+	 * 
+	 * @param form          登録時の入力チェック用JobRequestForm
+	 * @param bindingResult 入力情報の検証結果
+	 * @param principal     ログイン情報
+	 * @param model
+	 * @return 受験報告情報一覧画面
+	 */
+	@PostMapping("/job/request/insert")
+	public String getJobRequestInsert(@ModelAttribute @Validated JobRequestForm form, BindingResult bindingResult,
+			Principal principal, Model model) {
+		jobRequestService.insert(form, principal.getName());
+		return "index";
+	}
 	/**
 	 * 個人の申請情報を取得し就職活動申請状態変更画面を表示する
 	 * 

@@ -51,4 +51,36 @@ public class JobRequestService {
 		return Optional.ofNullable(jobRequestEntity);
 	}
 
+	/**
+	 * 申請マスタに新たな報告情報を1件追加する
+	 * 
+	 * @param form             検証済み入力情報
+	 * @param register_user_id 登録処理を実行したユーザのID
+	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
+	 */
+	public boolean insert(JobRequestForm form, String register_user_id) {
+		int rowNumber = 0;
+
+		try {
+			// 追加処理を行い、追加できた件数を取得
+			rowNumber = jobRequestRepository.insertOne(refillToJobReportData(form, register_user_id));
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return rowNumber > 0;
+		
+	}
+
+	/**
+	 * 入力情報をJobReportData型に変換する（insert用）
+	 * 
+	 * @param form    検証済み入力データ
+	 * @param user_id 登録処理を実行したユーザのID
+	 * @return JobReportData
+	 */
+	private JobRequestData refillToJobReportData(JobRequestForm form, String register_user_id) {
+		JobRequestData data = new JobRequestData();
+		return data;
+	}
+
 }
