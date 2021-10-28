@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper=true)
-public class JobRequestData extends JobHuntingData{
+public class JobReportData extends JobHuntingData{
 	
 	/**
 	 * 活動開始日時
