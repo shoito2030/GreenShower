@@ -39,6 +39,8 @@ public class JobRequestRepository {
 			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \n"
 			+ "WHERE NOT EXISTS(SELECT *  FROM REPORTS REP2 WHERE JH.APPLY_ID  = REP2.APPLY_ID) AND U.USER_ID = ? ORDER BY JH.STATUS, U.CLASSROOM, U.CLASS_NUMBER;";
 	
+	/** 申請一件追加*/
+	private static final String SQL_INSERT_ONE = "";
 	@Autowired
 	private JdbcTemplate jdbc;
 	
