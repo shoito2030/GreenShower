@@ -11,11 +11,6 @@ import lombok.EqualsAndHashCode;
 public class JobReportData extends JobHuntingData {
 	
 	/**
-	 * 申請ID
-	 */
-	private String apply_id;
-	
-	/**
 	 * 進退
 	 */
 	private boolean advance_or_retreat;
