@@ -37,13 +37,16 @@
 	<div class="container" th:each="user : ${jobRequestData}">
 		<div align="left">
 			<div class="col-md-2">
-				<p>クラス</p><span th:text="*{user.classroom}"></span>
+			<label>クラス&emsp;</label>
+			<span th:text="*{user.classroom}"></span>
 			</div>
 			<div class="col-md-1 offset-md-1">
-				<p>番号</p><span th:text="*{user.class_number}"></span>
+			<label>番号</label>
+			<span th:text="*{user.class_number}"></span>
 			</div>
 			<div class="col-md-2 offset-md-1">
-				<p>氏名</p><span th:text="*{user.name}"></span>
+			<label>氏名&emsp;</label>
+			<span th:text="*{user.name}"></span>
 			</div>
 		</div>
 	</div>
@@ -58,12 +61,15 @@
 		<input type="hidden" name="apply_id" th:value="${jobRequestData.apply_id}">
 		<input type="hidden" name="register_user_id" th:value="${jobRequestData.applicant_id}">
 		
-			<label for="entry_section">進退</label>
-			<div class="form-group input-box">
+			
+			
+			
+			<div class="form-group input-box" align="left">
+			<label for="entry_section">進退&emsp;&emsp;&emsp;&emsp;</label>
 				<nobr>
-					<input type="radio" name="advance_or_retreat" value="TRUE"
+					<input type="radio" name="advance_or_retreat" value="true"
 						onclick="not_ES_other()">進める&emsp;&emsp;&emsp; <input
-						type="radio" name="advance_or_retreat" value="FALSE"
+						type="radio" name="advance_or_retreat" value="false"
 						onclick="not_ES_other()">進めない
 				</nobr>
 			</div>
@@ -72,9 +78,8 @@
 			<br>
 			
 			
+			<div class="form-group input-box" align="left">
 			<label for="remark">備考</label>
-			<div class="form-group input-box">
-
 				<textarea class="form-control" name="remark" rows="5"></textarea>
 			</div>
 			

@@ -110,11 +110,10 @@ public class JobReportController {
 		Optional<JobHuntingData> jobRequestData = jobRequestEntity.getJobRequestList().stream()
 				.filter(request -> request.getApply_id().equals(apply_id)).findAny();
 		
-		System.out.println("報告新規作成画面" + jobRequestData.get().getApply_id() + ", " +  jobRequestData.get().getClassroom() + ", " +  jobRequestData.get().getClass_number()
-				+ ", " +  jobRequestData.get().getName());
+//		System.out.println("報告新規作成画面" + jobRequestData.get().getApply_id() + ", " +  jobRequestData.get().getClassroom() + ", " +  jobRequestData.get().getClass_number()
+//				+ ", " +  jobRequestData.get().getName());
 		
 		session.setAttribute(jobRequestData.get().getApply_id(), jobRequestData.get());
-		System.out.println(jobRequestData.get());
 		
 		model.addAttribute("jobRequestData", jobRequestData.get());
 		
@@ -138,8 +137,7 @@ public class JobReportController {
 		// 追加処理実行
 		jobReportService.insert(form, principal.getName());
 		
-		
-		System.out.println("報告新規作成処理");
+		log.info("報告新規作成処理：" + form.toString());
 
 		return getReportList(principal, model);
 	}
