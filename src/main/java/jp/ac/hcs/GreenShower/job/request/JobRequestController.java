@@ -100,5 +100,47 @@ public class JobRequestController {
 		return "job/request/detail";
 	}
 
+	/**
+	 * 個人の申請情報を取得し就職活動申請状態変更画面を表示する
+	 * 
+	 * @param principal ログイン情報
+	 * @param apply_id 申請ID
+	 * @param model
+	 * @return 就職活動申請状態変更画面
+	 */
+	@GetMapping("/job/request/status_change/{apply_id}")
+	public String getRequestStatusChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
+		JobRequestData sessionData = (JobRequestData) session.getAttribute(apply_id);
+		
+		// sessionに既に個人の申請情報が保存されているなら後続の処理は実行しない
+		if(sessionData != null) {
+			model.addAttribute("jobRequestData", sessionData);
+			log.info("[" + sessionData.getApplicant_id() + " 申請ID:" + sessionData.getApply_id() + "]の申請情報取得済み");
+			return "job/request/detail";
+		}
+
+		// sessionから申請情報の一覧を取得
+		JobRequestEntity jobRequestEntity = (JobRequestEntity) session.getAttribute("jobRequestEntity");
+
+		// sessionになければDBに問い合わせる(URL直貼り)
+		if (jobRequestEntity == null) {
+			jobRequestEntity = jobRequestService.selectAllRequests().get();
+			log.warn("[" + principal.getName() + "]：URL直貼りアクセス");
+		}
+
+		// 合致する申請IDを持つ申請情報を取得
+		Optional<JobHuntingData> jobRequestData = jobRequestEntity.getJobRequestList().stream()
+				.filter(request -> request.getApply_id().equals(apply_id)).findAny();
+		
+		if(jobRequestData.isEmpty()) {
+			return "index";
+		}
+		
+		session.setAttribute("jobRequestEntity", jobRequestEntity);
+		session.setAttribute(jobRequestData.get().getApply_id(), jobRequestData.get());
+		
+		model.addAttribute("jobHuntingData", jobRequestData.get());
+		return "job/request/status-change";
+	}
 	
 }
