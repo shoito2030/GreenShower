@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class JobReportController {
 	@Autowired
 	private JobReportService jobReportService;
+	
 	/**
 	 * 就職活動申請報告一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
@@ -58,9 +60,13 @@ public class JobReportController {
 	 * @param model
 	 * @return 就職活動報告新規作成画面
 	 */
-	@GetMapping("/job/report/insert")
-	public String insertReportList(Principal principal, Model model) {
-		System.out.println("報告新規作成画面");
+	@GetMapping("/job/report/insert/{classroom}/{class_number}/{name}")
+	public String insertReportList(@PathVariable("classroom") String classroom,@PathVariable("class_number") String class_number,@PathVariable("name") String name,
+			Principal principal, Model model) {
+		
+		
+		System.out.println("報告新規作成画面" + classroom + class_number + name);
+		
 		return "job/report/insert";
 	}
 	
