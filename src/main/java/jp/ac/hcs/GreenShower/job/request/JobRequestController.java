@@ -142,7 +142,7 @@ public class JobRequestController {
 	public String getRequestStatusChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
 		JobRequestData sessionData = (JobRequestData) session.getAttribute(apply_id);
 		
-		// sessionに既に個人の申請情報が保存されているなら後続の処理は実行しない
+		// sessionに既に個人の申請情報が保存されているなら後続の処理は実行しない 
 		if(sessionData != null) {
 			model.addAttribute("jobRequestData", sessionData);
 			log.info("[" + sessionData.getApplicant_id() + " 申請ID:" + sessionData.getApply_id() + "]の申請情報取得済み");
