@@ -95,160 +95,184 @@
 			</div>
 		</nav>
 	</th:block>
-	
+
 	<!-- 詳細画面共通部品 -->
-	<th:block th:fragment="frag_detail(page_title, jobHuntingData)" th:object="${jobHuntingData}">
+	<th:block th:fragment="frag_detail(page_title, jobHuntingData)"
+		th:object="${jobHuntingData}">
 		<p class="h1" th:text="${page_title}"></p>
 
-	<div class="container mt-md-5">
-		<div class="row justify-content-md-center mt-md-4">
-			<div class="col-md-2">
-				<span><small>クラス</small><span
-					class="float-md-right mt-md-1 font-weight-bold h4"
-					th:text="*{classroom}"></span></span>
-			</div>
-			<div class="col-md-1 offset-md-1">
-				<span><small>番号</small><span
-					class="float-md-right mt-md-1 font-weight-bold h4"
-					th:text="*{class_number}"></span></span>
-			</div>
-			<div class="col-md-2 offset-md-1">
-				<span><small>氏名</small><span
-					class="float-md-right mt-md-1 font-weight-bold h4"
-					th:text="*{name}"></span></span>
-			</div>
-		</div>
-
-
-
-		<div class="row mt-md-5">
-			<div class="col-md-4 bg-color-white">
-				<p class="font-weight-bold h4">申請種別</p>
-			</div>
-			<div class="col-md-8">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{content.value}"></p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="font-weight-bold h4">企業名</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{company_name}"></p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-5">
-				<p class="font-weight-bold h4">開始日時・終了日時</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-
-				<div class="row">
-					<div class="col-md-5">
-						<label class="" for="date_activity_from">開始</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_from"
-							th:text="${#dates.format(jobHuntingData.date_activity_from, 'yyyy年MM月dd日 HH時mm分')}"></p>
-					</div>
-					<div class="col-md-2 mt-md-4">
-						<p class="h4 text-center text-md-left pl-md-5">~</p>
-					</div>
-					<div class="col-md-5">
-						<label class="" for="date_activity_to">終了</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_to"
-							th:text="${#dates.format(jobHuntingData.date_activity_to, 'yyyy年MM月dd日 HH時mm分')}"></p>
-					</div>
+		<div class="container mt-md-5">
+			<div class="row justify-content-md-center mt-md-4">
+				<div class="col-md-2">
+					<span><small>クラス</small><span
+						class="float-md-right mt-md-1 font-weight-bold h4"
+						th:text="*{classroom}"></span></span>
+				</div>
+				<div class="col-md-1 offset-md-1">
+					<span><small>番号</small><span
+						class="float-md-right mt-md-1 font-weight-bold h4"
+						th:text="*{class_number}"></span></span>
+				</div>
+				<div class="col-md-2 offset-md-1">
+					<span><small>氏名</small><span
+						class="float-md-right mt-md-1 font-weight-bold h4"
+						th:text="*{name}"></span></span>
 				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="font-weight-bold h4">場所</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{loc}"></p>
-			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="font-weight-bold h4"
-					th:text="'手段(' + *{way.value} + ')'"></p>
-			</div>
-			<div class="col-md-8 pt-md-4">
 
-				<th:block th:switch="${jobHuntingData.way.id}">
-					<div class="row" th:case="1">
+			<div class="row mt-md-5">
+				<div class="col-md-4 bg-color-white">
+					<p class="font-weight-bold h4">申請種別</p>
+				</div>
+				<div class="col-md-8">
+					<p class="h4 text-center text-md-left pl-md-5"
+						th:text="*{content.value}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="font-weight-bold h4">企業名</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+					<p class="h4 text-center text-md-left pl-md-5"
+						th:text="*{company_name}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-5">
+					<p class="font-weight-bold h4">開始日時・終了日時</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+
+					<div class="row">
 						<div class="col-md-5">
-							<p class="h4 text-center text-md-left pl-md-5" th:text="${#dates.format(jobHuntingData.date_absence_from, 'yyyy年MM月dd日 HH時mm分')}"></p>
+							<label class="" for="date_activity_from">開始</label>
+							<p class="h4 text-center text-md-left pl-md-5"
+								id="date_activity_from"
+								th:text="${#dates.format(jobHuntingData.date_activity_from, 'yyyy年MM月dd日 HH時mm分')}"></p>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2 mt-md-4">
 							<p class="h4 text-center text-md-left pl-md-5">~</p>
 						</div>
 						<div class="col-md-5">
-							<p class="h4 text-center text-md-left pl-md-5" th:text="${#dates.format(jobHuntingData.date_absence_to, 'yyyy年MM月dd日 HH時mm分')}"></p>
+							<label class="" for="date_activity_to">終了</label>
+							<p class="h4 text-center text-md-left pl-md-5"
+								id="date_activity_to"
+								th:text="${#dates.format(jobHuntingData.date_activity_to, 'yyyy年MM月dd日 HH時mm分')}"></p>
 						</div>
 					</div>
-					
-					<p class="h4 text-center text-md-left pl-md-5" th:case="2" th:text="${#dates.format(jobHuntingData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'"></p>
-					<p class="h4 text-center text-md-left pl-md-5" th:case="3" th:text="${#dates.format(jobHuntingData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'"></p>
-					
-					<th:block th:case="4">
-						<p class="h4 text-center text-md-left pl-md-5" th:text="${#dates.format(jobHuntingData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'から出席し、'"></p>
-						<p class="h4 text-center text-md-left pl-md-5" th:text="${#dates.format(jobHuntingData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="font-weight-bold h4">場所</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+					<p class="h4 text-center text-md-left pl-md-5" th:text="*{loc}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="font-weight-bold h4" th:text="'手段(' + *{way.value} + ')'"></p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+
+					<th:block th:switch="${jobHuntingData.way.id}">
+						<div class="row" th:case="1">
+							<div class="col-md-5">
+								<p class="h4 text-center text-md-left pl-md-5"
+									th:text="${#dates.format(jobHuntingData.date_absence_from, 'yyyy年MM月dd日 HH時mm分')}"></p>
+							</div>
+							<div class="col-md-2">
+								<p class="h4 text-center text-md-left pl-md-5">~</p>
+							</div>
+							<div class="col-md-5">
+								<p class="h4 text-center text-md-left pl-md-5"
+									th:text="${#dates.format(jobHuntingData.date_absence_to, 'yyyy年MM月dd日 HH時mm分')}"></p>
+							</div>
+						</div>
+
+						<p class="h4 text-center text-md-left pl-md-5" th:case="2"
+							th:text="${#dates.format(jobHuntingData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'"></p>
+						<p class="h4 text-center text-md-left pl-md-5" th:case="3"
+							th:text="${#dates.format(jobHuntingData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'"></p>
+
+						<th:block th:case="4">
+							<p class="h4 text-center text-md-left pl-md-5"
+								th:text="${#dates.format(jobHuntingData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'から出席し、'"></p>
+							<p class="h4 text-center text-md-left pl-md-5"
+								th:text="${#dates.format(jobHuntingData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'"></p>
+						</th:block>
+
 					</th:block>
 
-				</th:block>
-
+				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="font-weight-bold h4">メモ</p>
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="font-weight-bold h4">メモ</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+					<p class="h4 text-center text-md-left pl-md-5" th:text="*{remark}"></p>
+				</div>
 			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{remark}"></p>
-			</div>
-		</div>
+
+			<!-- 報告詳細画面用 -->
+			<th:block th:if="${jobHuntingData.status.id > '4'}">
+				<div class="row">
+					<div class="col-md-4 bg-color-white pt-md-4">
+						<p class="font-weight-bold h4">進退</p>
+					</div>
+					<div class="col-md-8 pt-md-4">
+						<p class="h4 text-center text-md-left pl-md-5">進める</p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 bg-color-white pt-md-4">
+						<p class="font-weight-bold h4">備考</p>
+					</div>
+					<div class="col-md-8 pt-md-4">
+						<p class="h4 text-center text-md-left pl-md-5">履歴書が必要になります</p>
+					</div>
+				</div>
+			</th:block>
 
 
-		<div class="row mt-md-5">
-			<div class="col-md-5 ">
-				<p class="font-weight-bold h4">現在の申請状態</p>
-				<div class="card center-block w-50" style="border-radius: 75px;">
-					<div class="card-body">
+			<div class="row mt-md-5">
+				<div class="col-md-5 ">
+					<p class="font-weight-bold h4">現在の申請状態</p>
+					<div class="card center-block w-50" style="border-radius: 75px;">
+						<div class="card-body">
 
-						<p th:text="*{status.value}"></p>
+							<p th:text="*{status.value}"></p>
 
+						</div>
+					</div>
+				</div>
+				<div class="col-md-7">
+					<p class="font-weight-bold h4">指摘事項</p>
+					<div class="card">
+						<div class="card-body">
+							<p th:text="*{indicate}"></p>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-7">
-				<p class="font-weight-bold h4">指摘事項</p>
-				<div class="card">
-					<div class="card-body">
-						<p th:text="*{indicate}"></p>
-					</div>
-				</div>
-			</div>
+
 		</div>
-
-
-	</div>
 	</th:block>
 
 	<!-- 共通スクリプト -->
 	<th:block th:fragment="frag_script">
-	<script
+		<script
 			src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 		<script
@@ -268,7 +292,7 @@
 			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 			crossorigin="anonymous"></script>
-		
+
 	</th:block>
 </body>
 </html>
