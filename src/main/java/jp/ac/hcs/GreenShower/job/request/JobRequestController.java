@@ -117,7 +117,7 @@ public class JobRequestController {
 	 * 
 	 * @param principal ログイン情報
 	 * @param apply_id 申請ID
-	 * @param model
+	 * @param model 
 	 * @return 就職活動申請状態変更画面
 	 */
 	@GetMapping("/job/request/status_change/{apply_id}")
