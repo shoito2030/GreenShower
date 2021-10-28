@@ -34,16 +34,16 @@
 	<br>
 	<br>
 
-	<div class="container">
+	<div class="container" th:each="user : ${jobRequestData}">
 		<div align="left">
 			<div class="col-md-2">
-				<p>クラス</p>
+				<p>クラス</p><span th:text="*{user.classroom}"></span>
 			</div>
 			<div class="col-md-1 offset-md-1">
-				<p>番号</p>
+				<p>番号</p><span th:text="*{user.class_number}"></span>
 			</div>
 			<div class="col-md-2 offset-md-1">
-				<p>氏名</p>
+				<p>氏名</p><span th:text="*{user.name}"></span>
 			</div>
 		</div>
 	</div>
@@ -54,7 +54,10 @@
 
 	<div class="input-form">
 		<form method="post" th:action="@{/job/report/insert}">
-
+		
+		<input type="hidden" name="apply_id" th:value="${jobRequestData.apply_id}">
+		<input type="hidden" name="register_user_id" th:value="${jobRequestData.applicant_id}">
+		
 			<label for="entry_section">進退</label>
 			<div class="form-group input-box">
 				<nobr>

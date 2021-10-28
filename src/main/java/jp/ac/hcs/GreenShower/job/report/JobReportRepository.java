@@ -22,7 +22,13 @@ public class JobReportRepository {
 	private static final String SQL_SELECT_STUDENT_REPORTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, REPORTS REP, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLY_ID = REP.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID AND JH.APPLICANT_ID = ? ORDER BY JH.STATUS;";
 	
 	/** SQL 報告情報一件追加 */
-	private static final String SQL_INSERT_ONE_REPORTS = "INSERT INTO reports (APPLY_ID, ADVANCE_OR_RETREAT, REMARK, REGISTER_DATE, REGISTER_USER_ID, UPDATE_DATE, UPDATE_USER_ID) VALUES((SELECT MAX(apply_id) + 1 FROM reports),?,?,?,?,?,?);";
+	private static final String SQL_INSERT_ONE_REPORTS = "INSERT INTO REPORTS(APPLY_ID, ADVANCE_OR_RETREAT, REMARK, REGISTER_USER_ID) VALUES(?, ?, ?, ?);";
+	
+	/** 報告情報状態更新 */
+	private static final String SQL_UPDATE_JOB_HUNTING = "UPDATE JOB_HUNTING SET STATUS = '6' WHERE APPLY_ID = ?;";
+	
+	/** ユーザIDからクラス・番号・名前を取得するSQL */
+	private static final String SQL_SELECT_PERSONAL_INFO ="SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID = ?;";
 	
 	@Autowired
 	private JdbcTemplate jdbc;
@@ -55,10 +61,22 @@ public class JobReportRepository {
 				data.getApply_id(),
 				data.isAdvance_or_retreat(),
 				data.getRemark(),
-				data.getRegister_date(),
-				data.getRegister_user_id(),
-				data.getUpdate_date(),
-				data.getUpdate_user_id());
+				data.getRegister_user_id());
+		
+		return rowNumber;
+	}
+	
+	/**
+	 * job_huntingテーブルの状態を更新する
+	 * 
+	 * @param data 追加するユーザ情報
+	 * @return 追加データ数
+	 * @throws DataAccessException
+	 */
+	public int updateStatusOne(JobReportData data) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_UPDATE_JOB_HUNTING,
+
+				data.getApply_id());
 		
 		return rowNumber;
 	}
@@ -103,5 +121,6 @@ public class JobReportRepository {
 		return entity;
 
 	}
+
 
 }

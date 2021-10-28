@@ -57,6 +57,7 @@ public class JobReportService {
 		return Optional.ofNullable(jobReportEntity);
 	}
 	
+	
 	/**
 	 * 報告マスタに新たな報告情報を1件追加する
 	 * 
@@ -70,6 +71,7 @@ public class JobReportService {
 		try {
 			// 追加処理を行い、追加できた件数を取得
 			rowNumber = jobReportRepository.insertOne(refillToJobReportData(form, register_user_id));
+//			jobReportRepository.updateStatusOne(form.getApply_id());
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -88,6 +90,7 @@ public class JobReportService {
 		data.setApply_id(form.getApply_id());
 		data.setAdvance_or_retreat(true);
 		data.setRemark(form.getRemark());
+		data.setRegister_user_id(form.getRegister_user_id());
 		
 		return data;
 	}
@@ -105,6 +108,9 @@ public class JobReportService {
 		byte[] bytes = Files.readAllBytes(p);
 		return bytes;
 	}
+
+
+	
 
 
 
