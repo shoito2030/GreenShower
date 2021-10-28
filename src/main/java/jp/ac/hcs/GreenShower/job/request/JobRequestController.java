@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
-import jp.ac.hcs.GreenShower.job.report.JobReportData;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -72,7 +71,7 @@ public class JobRequestController {
 	 */
 	@GetMapping("/job/request/detail/{apply_id}")
 	public String getRequestDetail(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-		JobReportData sessionData = (JobReportData) session.getAttribute(apply_id);
+		JobRequestData sessionData = (JobRequestData) session.getAttribute(apply_id);
 		
 		// sessionに既に個人の申請情報が保存されているなら後続の処理は実行しない
 		if(sessionData != null) {
