@@ -121,7 +121,6 @@ public class JobRequestRepository {
 
 	public int insertOne(JobRequestData data) {
 		int rowNumber = jdbc.update(SQL_INSERT_JOB_HUNTING,
-				data.getApply_id(),
 				data.getApplicant_id(),
 				data.getContent(),
 				data.getCompany_name(),
@@ -130,7 +129,6 @@ public class JobRequestRepository {
 				);
 		
 		jdbc.update(SQL_INSERT_JOB_REQUESTS,
-			data.getApply_id(),
 			data.getDate_activity_from(),
 			data.getDate_activity_to(),
 			data.getLoc(),
