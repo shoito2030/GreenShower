@@ -132,11 +132,12 @@ public class JobReportController {
 	@PostMapping("job/report/insert")
 	public String getJobReportInsert(@ModelAttribute @Validated JobReportForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
+
 		
 
 		// 追加処理実行
 		jobReportService.insert(form, principal.getName());
-		
+
 		log.info("報告新規作成処理：" + form.toString());
 
 		return getReportList(principal, model);

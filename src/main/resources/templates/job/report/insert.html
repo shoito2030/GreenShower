@@ -12,13 +12,13 @@
 <th:block th:insert="components/part::frag_style"></th:block>
 
 <script type="text/javascript">
-		function not_ES_other() {
-			document.getElementById("entry_section_other").setAttribute(
-					"disabled", true);
-			var textForm = document.getElementById("entry_section_other");
-			  textForm.value = '';
-		}
-	</script>
+	function not_ES_other() {
+		document.getElementById("entry_section_other").setAttribute("disabled",
+				true);
+		var textForm = document.getElementById("entry_section_other");
+		textForm.value = '';
+	}
+</script>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
 
 
 
-	<h2 align="left">受験報告 新規登録</h2>
+	<h2 align="left">&emsp;&emsp;受験報告 新規登録</h2>
 	<br>
 	<br>
 	<br>
@@ -37,61 +37,72 @@
 	<div class="container" th:each="user : ${jobRequestData}">
 		<div align="left">
 			<div class="col-md-2">
-			<label>クラス&emsp;</label>
-			<span th:text="*{user.classroom}"></span>
-			</div>
-			<div class="col-md-1 offset-md-1">
-			<label>番号</label>
-			<span th:text="*{user.class_number}"></span>
+				<label>クラス&emsp;</label> <span th:text="*{user.classroom}"></span>
 			</div>
 			<div class="col-md-2 offset-md-1">
-			<label>氏名&emsp;</label>
-			<span th:text="*{user.name}"></span>
+				<label>番号&emsp;</label> <span th:text="*{user.class_number}"></span>
+			</div>
+			<div class="col-md-2 offset-md-1">
+				<label>氏名&emsp;</label> <span th:text="*{user.name}"></span>
 			</div>
 		</div>
 	</div>
-	
+
 	<br>
 	<br>
 	<br>
 
 	<div class="input-form">
 		<form method="post" th:action="@{/job/report/insert}">
-		
-		<input type="hidden" name="apply_id" th:value="${jobRequestData.apply_id}">
-		<input type="hidden" name="register_user_id" th:value="${jobRequestData.applicant_id}">
-		
-			
-			
-			
-			<div class="form-group input-box" align="left">
-			<label for="entry_section">進退&emsp;&emsp;&emsp;&emsp;</label>
-				<nobr>
-					<input type="radio" name="advance_or_retreat" value="true"
-						onclick="not_ES_other()">進める&emsp;&emsp;&emsp; <input
-						type="radio" name="advance_or_retreat" value="false"
-						onclick="not_ES_other()">進めない
-				</nobr>
+
+			<input type="hidden" name="apply_id"
+				th:value="${jobRequestData.apply_id}"> <input type="hidden"
+				name="register_user_id" th:value="${jobRequestData.applicant_id}">
+
+
+			<div align="left">
+				<table>
+					<tr>
+
+
+						<th><label for="entry_section">進退&emsp;&emsp;&emsp;&emsp;</label></th>
+						<td><nobr>
+								<input type="radio" name="advance_or_retreat" value="true"
+									onclick="not_ES_other()">進める&emsp;&emsp;&emsp; <input
+									type="radio" name="advance_or_retreat" value="false"
+									onclick="not_ES_other()">進めない
+							</nobr></td>
+					</tr>
+
+				</table>
+				<p th:text="${errmsg}" style="background-color: #ffcc99;"></p>
+				<br>
+		<br>
+		<br>
+		<br>
+
+
+				<table>
+					<tr>
+
+
+						<th><label for="remark">備考</label></th>
+						<td><textarea class="form-control" name="remark" rows="5"
+								cols="50"></textarea></td>
+
+
+					</tr>
+
+				</table>
 			</div>
-			
-			<br>
-			<br>
-			
-			
-			<div class="form-group input-box" align="left">
-			<label for="remark">備考</label>
-				<textarea class="form-control" name="remark" rows="5"></textarea>
-			</div>
-			
-			<br>
-			<br>
-			
-			<button type="submit" class="btn btn-primary" style= " -webkit-appearance: none; width:200px;height:50px; font-size:23px;">登録</button>
+			<br> <br> <br>
+			<button type="submit" class="btn btn-primary"
+				style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
 		</form>
 		<br>
-			<br>
-			<br>
-			<br>
+		<br>
+		<br>
+		<br>
 	</div>
 
 </body>
