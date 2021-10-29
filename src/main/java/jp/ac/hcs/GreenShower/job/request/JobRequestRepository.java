@@ -54,7 +54,7 @@ public class JobRequestRepository {
 
 	/**
 	 * [V103]就職活動申請一覧画面_教師を表示するために必要なデータを取得する
-	 * @return  jobRequestEntity
+	 * @return  jobRequestEntity 
 	 * @throws DataAccessException
 	 */
 	public JobRequestEntity selectAllRequests() throws DataAccessException {
