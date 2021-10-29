@@ -99,8 +99,9 @@
 	<!-- 詳細画面共通部品 -->
 	<th:block th:fragment="frag_detail(page_title, jobHuntingData)"
 		th:object="${jobHuntingData}">
+		
 		<p class="h1" th:text="${page_title}"></p>
-
+	
 		<div class="container mt-md-5">
 			<div class="row justify-content-md-center mt-md-4">
 				<div class="col-md-2">
@@ -124,7 +125,7 @@
 
 			<div class="row mt-md-5">
 				<div class="col-md-4 bg-color-white">
-					<p class="font-weight-bold h4">申請種別</p>
+					<p class="font-weight-bold h4" style="background-color: white;">申請種別</p>
 				</div>
 				<div class="col-md-8">
 					<p class="h4 text-center text-md-left pl-md-5"
@@ -133,7 +134,7 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-4 bg-color-white pt-md-4">
+				<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
 					<p class="font-weight-bold h4">企業名</p>
 				</div>
 				<div class="col-md-8 pt-md-4">
@@ -143,7 +144,7 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-md-4 bg-color-white pt-md-4">
+				<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
 					<p class="font-weight-bold h4">内容</p>
 				</div>
 				<div class="col-md-8 pt-md-4">
@@ -155,7 +156,7 @@
 			<!-- 報告詳細画面では表示しない -->
 			<th:block th:unless="${page_title == '就職活動報告 詳細'}">
 				<div class="row">
-					<div class="col-md-4 bg-color-white pt-md-5">
+					<div class="col-md-4 bg-color-white pt-md-5" style="background-color: white;">
 						<p class="font-weight-bold h4">開始日時・終了日時</p>
 					</div>
 					<div class="col-md-8 pt-md-4">
@@ -181,7 +182,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-4 bg-color-white pt-md-4">
+					<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
 						<p class="font-weight-bold h4">場所</p>
 					</div>
 					<div class="col-md-8 pt-md-4">
@@ -190,7 +191,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-4 bg-color-white pt-md-4">
+					<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
 						<p class="font-weight-bold h4"
 							th:text="'手段(' + *{way.value} + ')'"></p>
 					</div>
@@ -229,7 +230,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-4 bg-color-white pt-md-4">
+					<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
 						<p class="font-weight-bold h4">メモ</p>
 					</div>
 					<div class="col-md-8 pt-md-4">
@@ -241,7 +242,7 @@
 			<!-- 報告詳細画面用 -->
 			<th:block th:if="${page_title == '就職活動報告 詳細'}">
 				<div class="row">
-					<div class="col-md-4 bg-color-white pt-md-4">
+					<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
 						<p class="font-weight-bold h4">進退</p>
 					</div>
 					<div class="col-md-8 pt-md-4">
@@ -250,7 +251,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-4 bg-color-white pt-md-4">
+					<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
 						<p class="font-weight-bold h4">備考</p>
 					</div>
 					<div class="col-md-8 pt-md-4">
@@ -286,8 +287,8 @@
 			<!-- 報告詳細用 -->
 			<th:block th:if="${page_title == '就職活動報告 詳細'}">
 				<div class="row pt-md-2">
-					<div class="col-md-12 bg-color-white pt-md-5">
-						<p class="h">申請時の情報は<a class="h4" href="/">こちら</a></p>
+					<div class="col-md-12 bg-color-white pt-md-5" style="background-color: #DAE8FC;">
+						<p class="h">申請時の情報は<a class="h4" th:href="@{'/job/request/detail/'+ *{apply_id}}">こちら</a></p>
 					</div>
 				</div>
 			</th:block>
