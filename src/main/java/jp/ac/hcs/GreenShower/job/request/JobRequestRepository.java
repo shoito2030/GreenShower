@@ -40,10 +40,14 @@ public class JobRequestRepository {
 			+ "WHERE NOT EXISTS(SELECT *  FROM REPORTS REP2 WHERE JH.APPLY_ID  = REP2.APPLY_ID) AND U.USER_ID = ? ORDER BY JH.STATUS, U.CLASSROOM, U.CLASS_NUMBER;";
 	
 	/** 申請一件追加*/
+
 	private static final String SQL_INSERT_JOB_HUNTING = "INSERT INTO JOB_HUNTING(APPLY_ID, APPLICANT_ID, CONTENT, COMPANY_NAME, APPLY_TYPE, INDICATE) VALUES(?, ?, ?, ?, ?, ?);";
 	private static final String SQL_INSERT_JOB_REQUESTS = "INSERT INTO REQUESTS(APPLY_ID, DATE_ACTIVITY_FROM, DATE_ACTIVITY_TO, LOC, WAY, DATE_ABSENCE_FROM, DATE_ABSENCE_TO, LEAVE_EARLY_DATE, ATTENDANCE_DATE, REMARK, REGISTER_USER_ID)\n"
 			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	
+
+	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE job_hunting SET status=?,indicate=?";
+
 	@Autowired
 	private JdbcTemplate jdbc;
 	
@@ -114,6 +118,7 @@ public class JobRequestRepository {
 
 	}
 
+
 	public int insertOne(JobRequestData data) {
 		int rowNumber = jdbc.update(SQL_INSERT_JOB_HUNTING,
 				data.getApply_id(),
@@ -139,4 +144,10 @@ public class JobRequestRepository {
 			);
 		return rowNumber;
 	}
+	
+	public int updateJobStatus(String apply_id,JobRequestForm form) {
+		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS,apply_id,form.getStatus(),form.getIndicate());
+		return rowNumber;
+	}
+	
 }

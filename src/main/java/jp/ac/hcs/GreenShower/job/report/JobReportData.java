@@ -11,11 +11,6 @@ import lombok.EqualsAndHashCode;
 public class JobReportData extends JobHuntingData {
 	
 	/**
-	 * 申請ID
-	 */
-	private String apply_id;
-	
-	/**
 	 * 進退
 	 */
 	private boolean advance_or_retreat;
@@ -33,7 +28,7 @@ public class JobReportData extends JobHuntingData {
 	/**
 	 * 登録者のユーザID
 	 */
-	private Date register_user_id;
+	private String register_user_id;
 	
 	/**
 	 * 更新日時
@@ -43,12 +38,17 @@ public class JobReportData extends JobHuntingData {
 	/**
 	 * 更新者のユーザID
 	 */
-	private Date update_user_id;
+	private String update_user_id;
 
 	@Override
 	public String toString() {
 		return "JobReportData [apply_id=" + apply_id + ", advance_or_retreat=" + advance_or_retreat + ", remark="
 				+ remark + ", register_date=" + register_date + ", register_user_id=" + register_user_id
-				+ ", update_date=" + update_date + ", update_user_id=" + update_user_id + "]";
+				+ ", update_date=" + update_date + ", update_user_id=" + update_user_id + ", classroom=" + classroom
+				+ ", class_number=" + class_number + ", name=" + name + ", company_name=" + company_name + ", content="
+				+ content + ", applicant_id=" + applicant_id + ", status=" + status + ", apply_type=" + apply_type
+				+ "]";
 	}
+
+	
 }

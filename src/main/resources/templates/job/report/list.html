@@ -63,7 +63,7 @@
 
 								<td><span th:text="*{jobReport.status.value}"></span></td>
 
-								<td><a class="btn btn-info" href="@{'/job/report/detail/'+ *{jobReport.apply_id}}">詳細</a></td>
+								<td><a class="btn btn-info" th:href="@{'/job/report/detail/'+ *{jobReport.apply_id}}">詳細</a></td>
 								<td><a class="btn btn-secondary" href="/job/report/fix">修正</a></td>
 							</tr>
 						</tbody>
