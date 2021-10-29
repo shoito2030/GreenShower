@@ -140,14 +140,7 @@ public class JobRequestController {
 	 */
 	@GetMapping("/job/request/status_change/{apply_id}")
 	public String getRequestStatusChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-		JobRequestData sessionData = (JobRequestData) session.getAttribute(apply_id);
 		
-		// sessionに既に個人の申請情報が保存されているなら後続の処理は実行しない 
-		if(sessionData != null) {
-			model.addAttribute("jobRequestData", sessionData);
-			log.info("[" + sessionData.getApplicant_id() + " 申請ID:" + sessionData.getApply_id() + "]の申請情報取得済み");
-			return "job/request/detail";
-		}
 
 		// sessionから申請情報の一覧を取得
 		JobRequestEntity jobRequestEntity = (JobRequestEntity) session.getAttribute("jobRequestEntity");
@@ -169,7 +162,7 @@ public class JobRequestController {
 		session.setAttribute("jobRequestEntity", jobRequestEntity);
 		session.setAttribute(jobRequestData.get().getApply_id(), jobRequestData.get());
 		
-		model.addAttribute("jobHuntingData", jobRequestData.get());
+		model.addAttribute("jobRequestData", jobRequestData.get());
 		return "job/request/status-change";
 	}
 	
