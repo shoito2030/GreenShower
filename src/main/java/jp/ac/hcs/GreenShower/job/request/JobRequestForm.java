@@ -2,6 +2,7 @@ package jp.ac.hcs.GreenShower.job.request;
 
 import java.util.Date;
 
+import jp.ac.hcs.GreenShower.job.request.JobRequestData.Way;
 import lombok.Data;
 
 @Data
@@ -19,7 +20,9 @@ public class JobRequestForm {
 	/**
 	 * 開始時刻・終了日時
 	 */
-	private Date date_activity;
+	private Date date_activity_from;
+	
+	private Date date_activity_to;
 	
 	/**
 	 * 場所
@@ -29,7 +32,7 @@ public class JobRequestForm {
 	/**
 	 * 手段
 	 */
-	private int way;
+	private Way way;
 	
 	/**
 	 * 欠席開始日時

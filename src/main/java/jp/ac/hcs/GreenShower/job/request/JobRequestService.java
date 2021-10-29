@@ -80,6 +80,21 @@ public class JobRequestService {
 	 */
 	private JobRequestData refillToJobReportData(JobRequestForm form, String register_user_id) {
 		JobRequestData data = new JobRequestData();
+		
+		data.setApplicant_id(register_user_id);
+		data.setContent(form.getContent());
+		data.setCompany_name(form.getCompany_name());
+		data.setIndicate(form.getIndicate());
+		data.setDate_activity_from(form.getDate_activity_from());
+		data.setDate_activity_to(form.getDate_activity_to());
+		data.setLoc(form.getLoc());
+		data.setWay(form.getWay());
+		data.setDate_absence_from(form.getDate_activity_from());
+		data.setDate_absence_from(form.getDate_activity_to());
+		data.setLeave_early_date(form.getLeave_eary_date());
+		data.setAttendance_date(form.getAttendance_date());
+		data.setRemark(form.getRemark());
+		data.setRegister_user_id(register_user_id);
 		return data;
 	}
 

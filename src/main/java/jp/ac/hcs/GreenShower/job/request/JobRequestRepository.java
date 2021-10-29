@@ -40,7 +40,10 @@ public class JobRequestRepository {
 			+ "WHERE NOT EXISTS(SELECT *  FROM REPORTS REP2 WHERE JH.APPLY_ID  = REP2.APPLY_ID) AND U.USER_ID = ? ORDER BY JH.STATUS, U.CLASSROOM, U.CLASS_NUMBER;";
 	
 	/** 申請一件追加*/
-	private static final String SQL_INSERT_ONE = "";
+	private static final String SQL_INSERT_JOB_HUNTING = "INSERT INTO JOB_HUNTING(APPLY_ID, APPLICANT_ID, CONTENT, COMPANY_NAME, APPLY_TYPE, INDICATE) VALUES(?, ?, ?, ?, ?, ?);";
+	private static final String SQL_INSERT_JOB_REQUESTS = "INSERT INTO REQUESTS(APPLY_ID, DATE_ACTIVITY_FROM, DATE_ACTIVITY_TO, LOC, WAY, DATE_ABSENCE_FROM, DATE_ABSENCE_TO, LEAVE_EARLY_DATE, ATTENDANCE_DATE, REMARK, REGISTER_USER_ID)\n"
+			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	
 	@Autowired
 	private JdbcTemplate jdbc;
 	
@@ -111,8 +114,29 @@ public class JobRequestRepository {
 
 	}
 
-	public int insertOne(JobRequestData refillToJobReportData) {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
+	public int insertOne(JobRequestData data) {
+		int rowNumber = jdbc.update(SQL_INSERT_JOB_HUNTING,
+				data.getApply_id(),
+				data.getApplicant_id(),
+				data.getContent(),
+				data.getCompany_name(),
+				data.getApply_type(),
+				data.getIndicate()
+				);
+		
+		jdbc.update(SQL_INSERT_JOB_REQUESTS,
+			data.getApply_id(),
+			data.getDate_activity_from(),
+			data.getDate_activity_to(),
+			data.getLoc(),
+			data.getWay(),
+			data.getDate_absence_from(),
+			data.getDate_absence_from(),
+			data.getLeave_early_date(),
+			data.getAttendance_date(),
+			data.getRemark(),
+			data.getRegister_user_id()
+			);
+		return rowNumber;
 	}
 }
