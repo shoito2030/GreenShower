@@ -141,6 +141,16 @@
 						th:text="*{company_name}"></p>
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="font-weight-bold h4">内容</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+					<p class="h4 text-center text-md-left pl-md-5"
+						th:text="*{content.value}"></p>
+				</div>
+			</div>
 
 			<!-- 報告詳細画面では表示しない -->
 			<th:block th:unless="${page_title == '就職活動報告 詳細'}">
@@ -204,7 +214,7 @@
 							<p class="h4 text-center text-md-left pl-md-5" th:case="2"
 								th:text="${#dates.format(jobHuntingData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'"></p>
 							<p class="h4 text-center text-md-left pl-md-5" th:case="3"
-								th:text="${#dates.format(jobHuntingData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'"></p>
+								th:text="${#dates.format(jobHuntingData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'に出席します'"></p>
 
 							<th:block th:case="4">
 								<p class="h4 text-center text-md-left pl-md-5"
@@ -275,8 +285,8 @@
 			
 			<!-- 報告詳細用 -->
 			<th:block th:if="${page_title == '就職活動報告 詳細'}">
-				<div class="row">
-					<div class="col-md-12 bg-color-white pt-md-4">
+				<div class="row pt-md-2">
+					<div class="col-md-12 bg-color-white pt-md-5">
 						<p class="h">申請時の情報は<a class="h4" href="/">こちら</a></p>
 					</div>
 				</div>
