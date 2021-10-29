@@ -92,7 +92,7 @@ public class JobReportController {
 			return "index";
 		}
 
-		model.addAttribute("JobReportData", jobReportData.get());
+		model.addAttribute("jobReportData", jobReportData.get());
 		return "job/report/detail";
 	}
 	
