@@ -41,9 +41,9 @@ public class JobRequestRepository {
 	
 	/** 申請一件追加*/
 
-	private static final String SQL_INSERT_JOB_HUNTING = "INSERT INTO JOB_HUNTING(APPLY_ID, APPLICANT_ID, CONTENT, COMPANY_NAME, APPLY_TYPE, INDICATE) VALUES(?, ?, ?, ?, ?, ?);";
+	private static final String SQL_INSERT_JOB_HUNTING = "INSERT INTO JOB_HUNTING(APPLY_ID, APPLICANT_ID, CONTENT, COMPANY_NAME, APPLY_TYPE, INDICATE) VALUES(SELECT MAX(apply_id) + 1 FROM JOB_HUNTING, ?, ?, ?, ?, ?);";
 	private static final String SQL_INSERT_JOB_REQUESTS = "INSERT INTO REQUESTS(APPLY_ID, DATE_ACTIVITY_FROM, DATE_ACTIVITY_TO, LOC, WAY, DATE_ABSENCE_FROM, DATE_ABSENCE_TO, LEAVE_EARLY_DATE, ATTENDANCE_DATE, REMARK, REGISTER_USER_ID)\n"
-			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			+ "VALUES(SELECT MAX(apply_id) FROM JOB_HUNTING, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	
 
 	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE job_hunting SET status=?,indicate=?";

@@ -116,7 +116,7 @@ public class JobRequestController {
 	}
 	
 	/**
-	 * 新たに受験報告情報を登録する
+	 * 新たに就職活動申請情報を登録する
 	 * 
 	 * @param form          登録時の入力チェック用JobRequestForm
 	 * @param bindingResult 入力情報の検証結果
