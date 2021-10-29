@@ -46,7 +46,7 @@ public class JobRequestRepository {
 			+ "VALUES(SELECT MAX(apply_id) FROM JOB_HUNTING, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	
 
-	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE job_hunting SET status=?,indicate=?";
+	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE job_hunting SET status=?,indicate=? WHERE apply_id=?";
 
 	@Autowired
 	private JdbcTemplate jdbc;
@@ -54,7 +54,7 @@ public class JobRequestRepository {
 
 	/**
 	 * [V103]就職活動申請一覧画面_教師を表示するために必要なデータを取得する
-	 * @return  jobRequestEntity
+	 * @return  jobRequestEntity 
 	 * @throws DataAccessException
 	 */
 	public JobRequestEntity selectAllRequests() throws DataAccessException {
@@ -144,7 +144,7 @@ public class JobRequestRepository {
 	}
 	
 	public int updateJobStatus(String apply_id,JobRequestForm form) {
-		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS,apply_id,form.getStatus(),form.getIndicate());
+		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS,form.getStatus(),form.getIndicate(),apply_id);
 		return rowNumber;
 	}
 	

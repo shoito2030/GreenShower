@@ -13,7 +13,7 @@
 	<th:block th:insert="components/part::frag_detail ('就職活動申請 状態変更', ${jobRequestData})"></th:block>
 	<hr>
 	<div class="container">
-		<form method="post" th:action="@{/job/request/status-change}">
+		<form method="post" th:action="@{'/job/request/status-change/' + ${jobRequestData.apply_id}}">
 			<div class="row">
 				<div class="col-md-4 bg-color-white pt-md-4">
 					<p class="font-weight-bold h4">変更</p>
