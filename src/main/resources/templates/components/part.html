@@ -246,7 +246,13 @@
 						<p class="font-weight-bold h4">進退</p>
 					</div>
 					<div class="col-md-8 pt-md-4">
-						<p class="h4 text-center text-md-left pl-md-5">進める</p>
+						<th:block th:if="${jobHuntingData.advance_or_retreat}">
+							<p class="h4 text-center text-md-left pl-md-5">進める</p>
+						</th:block>
+						
+						<th:block th:unless="${jobHuntingData.advance_or_retreat}">
+							<p class="h4 text-center text-md-left pl-md-5">進めない</p>
+						</th:block>
 					</div>
 				</div>
 
@@ -255,7 +261,7 @@
 						<p class="font-weight-bold h4">備考</p>
 					</div>
 					<div class="col-md-8 pt-md-4">
-						<p class="h4 text-center text-md-left pl-md-5">履歴書が必要になります</p>
+						<p class="h4 text-center text-md-left pl-md-5" th:text="*{remark}"></p>
 					</div>
 				</div>
 				

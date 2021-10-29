@@ -27,9 +27,9 @@ VALUES('2',12314444, 'jouhou@xxx.co.jp', 'S3A1', '02', '情報太郎', 'S', 'グ
 
 /* 就職活動申請マスタ用データ */
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
-VALUES('1', 'isida@xxx.co.jp', '4', '0', '2', 'グリーンシャワー株式会社');
+VALUES('1', 'isida@xxx.co.jp', '6', '0', '2', 'グリーンシャワー株式会社');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
-VALUES('2', 'isida@xxx.co.jp', '2', '0', '2', 'ブルーシャワー株式会社');
+VALUES('2', 'isida@xxx.co.jp', '6', '0', '2', 'ブルーシャワー株式会社');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
 VALUES('3', 'yamada@xxx.co.jp', '2', '0', '2', 'レッドシャワー株式会社');
 
@@ -43,3 +43,4 @@ VALUES('3', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校',
 
 /* 報告マスタ用データ */
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('1', TRUE, 'テスト報告', 'isida@xxx.co.jp');
+INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('2', TRUE, '報告詳細から申請詳細に遷移できるかテスト', 'isida@xxx.co.jp');
