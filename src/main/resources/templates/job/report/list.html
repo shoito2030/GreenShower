@@ -36,6 +36,14 @@
 
 	<th:block th:insert="components/part::frag_header"></th:block>
 
+	<div th:if="${msg}" class="alert alert-success" role="alert">
+		<span th:text="${msg}"></span>
+	</div>
+
+	<div th:if="${errmsg}" class="alert alert-warning" role="alert">
+		<span th:text="${errmsg}"></span>
+	</div>
+
 	<!-- 作成中  -->
 	就職活動報告一覧画面
 	<div class="container">
@@ -63,8 +71,10 @@
 
 								<td><span th:text="*{jobReport.status.value}"></span></td>
 
-								<td><a class="btn btn-info" th:href="@{'/job/report/detail/'+ *{jobReport.apply_id}}">詳細</a></td>
-								<td><a class="btn btn-secondary" href="/job/report/fix">修正</a></td>
+								<td><a class="btn btn-info"
+									th:href="@{'/job/report/detail/'+ *{jobReport.apply_id}}">詳細</a></td>
+								<td><a class="btn btn-secondary"
+									th:href="@{'/job/report/fix/'+ *{jobReport.apply_id}}">修正</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -102,9 +112,12 @@
 
 								<td><span th:text="*{jobReport.status.value}"></span></td>
 
-								<td><a class="btn btn-info" th:href="@{'/job/report/detail/'+ *{jobReport.apply_id}}">詳細</a></td>
-								<td><a class="btn btn-success" href="/job/report/fix">修正</a></td>
-								<td><a class="btn btn-secondary" href="/job/report/detail/status-change">状態変更</a></td>
+								<td><a class="btn btn-info"
+									th:href="@{'/job/report/detail/'+ *{jobReport.apply_id}}">詳細</a></td>
+								<td><a class="btn btn-success"
+									th:href="@{'/job/report/fix/'+ *{jobReport.apply_id}}">修正</a></td>
+								<td><a class="btn btn-secondary"
+									href="/job/report/detail/status-change">状態変更</a></td>
 							</tr>
 						</tbody>
 					</table>

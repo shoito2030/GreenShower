@@ -1,15 +1,22 @@
 package jp.ac.hcs.GreenShower.job.report;
 
+import static java.util.stream.Collectors.*;
+
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
+import jp.ac.hcs.GreenShower.user.UserData;
 
 /**
  * 就職活動申請報告に関する処理を行うServiceクラス
@@ -24,40 +31,68 @@ public class JobReportService {
 	/**
 	 * 就職活動申請の報告情報を全件取得する
 	 * 
-	 * @param role アクターの権限
+	 * @param principal ユーザのログイン情報
 	 * @return Optional<jobReportEntity>
 	 */
-	public Optional<JobReportEntity> selectAllReports() {
+	public Optional<JobReportEntity> selectAllReports(Principal principal) {
 		JobReportEntity jobReportEntity;
+
+		// アクターの権限を取得
+		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
 		try {
 			jobReportEntity = jobReportRepository.selectAllReports();
+
+			// ユーザが生徒の場合は、ユーザ自身の申請情報のみを抽出する
+			if (role.equals("ROLE_STUDENT")) {
+				jobReportEntity.setJobReportList( jobReportEntity.getJobReportList().stream()
+						.filter(report -> report.getApplicant_id().equals(principal.getName()))
+						.collect(toList()));
+			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			jobReportEntity = null;
 		}
+
 		return Optional.ofNullable(jobReportEntity);
 	}
-	
+
 	/**
-	 * 就職活動申請の申請情報を自分の分取得する
+	 * 就職活動申請の報告情報を1件取得する
 	 * 
-	 * @param role アクターの権限
-	 * @return Optional<jobReportEntity>
+	 * @param apply_id
+	 * @return Optional<jobJobReportData>
 	 */
-	public Optional<JobReportEntity> selectStudentReports(String name) {
-		JobReportEntity jobReportEntity;
+	public Optional<JobHuntingData> selectOne(String apply_id) {
+		JobHuntingData jobReportData;
 
 		try {
-			jobReportEntity = jobReportRepository.selectStudentReports(name);
+			jobReportData = jobReportRepository.selectOne(apply_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			jobReportEntity = null;
+			jobReportData = null;
 		}
-		return Optional.ofNullable(jobReportEntity);
+		return Optional.ofNullable(jobReportData);
 	}
-	
-	
+
+	/**
+	 * ユーザの個人情報を1件取得
+	 * 
+	 * @param apply_id 申請ID
+	 * @return Optional<userData>
+	 */
+	public Optional<UserData> selectPersonalInfo(String apply_id) {
+		UserData userData;
+
+		try {
+			userData = jobReportRepository.selectPersonalInfo(apply_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			userData = null;
+		}
+		return Optional.ofNullable(userData);
+	}
+
 	/**
 	 * 報告マスタに新たな報告情報を1件追加する
 	 * 
@@ -71,13 +106,14 @@ public class JobReportService {
 		try {
 			// 追加処理を行い、追加できた件数を取得
 			rowNumber = jobReportRepository.insertOne(refillToJobReportData(form, register_user_id));
-			//就職活動申請マスタの状態を6:報告承認待に変更する
+			// 就職活動申請マスタの状態を6:報告承認待に変更する
 			jobReportRepository.updateStatusOne(form.getApply_id());
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
 		return rowNumber > 0;
 	}
+
 	/**
 	 * 入力情報をJobReportData型に変換する（insert用）
 	 * 
@@ -92,7 +128,7 @@ public class JobReportService {
 		data.setAdvance_or_retreat(form.isAdvance_or_retreat());
 		data.setRemark(form.getRemark());
 		data.setRegister_user_id(register_user_id);
-		
+
 		return data;
 	}
 
@@ -109,10 +145,5 @@ public class JobReportService {
 		byte[] bytes = Files.readAllBytes(p);
 		return bytes;
 	}
-
-
-	
-
-
 
 }

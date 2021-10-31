@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
+import jp.ac.hcs.GreenShower.user.UserData;
 
 @Repository
 public class JobReportRepository {
@@ -18,8 +19,13 @@ public class JobReportRepository {
 	/** SQL 報告情報全件取得 */
 	private static final String SQL_SELECT_ALL_REPORTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, REPORTS REP, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLY_ID = REP.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID ORDER BY JH.STATUS;";
 	
-	/** 特定のユーザ一人分の報告情報取得 */
-	private static final String SQL_SELECT_STUDENT_REPORTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, REPORTS REP, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLY_ID = REP.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID AND JH.APPLICANT_ID = ? ORDER BY JH.STATUS;";
+	/* 特定の1件の報告情報を取得 */
+	private static final String SQL_SELECT_ONE = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REP.ADVANCE_OR_RETREAT, REP.REMARK\r\n"
+			+ "FROM JOB_HUNTING JH\r\n"
+			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \r\n"
+			+ "LEFT JOIN REPORTS REP ON REP.APPLY_ID = JH.APPLY_ID \r\n"
+			+ "WHERE JH.APPLY_ID  = ?\r\n"
+			+ "LIMIT 1;";
 	
 	/** SQL 報告情報一件追加 */
 	private static final String SQL_INSERT_ONE_REPORTS = "INSERT INTO REPORTS(APPLY_ID, ADVANCE_OR_RETREAT, REMARK, REGISTER_USER_ID) VALUES(?, ?, ?, ?);";
@@ -28,7 +34,7 @@ public class JobReportRepository {
 	private static final String SQL_UPDATE_JOB_HUNTING = "UPDATE JOB_HUNTING SET STATUS = '6' WHERE APPLY_ID = ?;";
 	
 	/** ユーザIDからクラス・番号・名前を取得するSQL */
-	private static final String SQL_SELECT_PERSONAL_INFO ="SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID = ?;";
+	private static final String SQL_SELECT_PERSONAL_INFO ="SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS U LEFT JOIN JOB_HUNTING JH ON U.USER_ID = JH.APPLICANT_ID WHERE JH.APPLY_ID = ?;";
 	
 	@Autowired
 	private JdbcTemplate jdbc;
@@ -40,13 +46,30 @@ public class JobReportRepository {
 
 		return jobReportEntity;
 	}
-
-	public JobReportEntity selectStudentReports(String name) {
-		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_STUDENT_REPORTS, name);
+	
+	/**
+	 * 特定の1件を取得
+	 * @param apply_id 申請ID
+	 * @return JobHuntingData 1件の報告情報
+	 */
+	public JobHuntingData selectOne(String apply_id) {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, apply_id);
 		JobReportEntity jobReportEntity = mappingSelectResult(resultList);
-
-		return jobReportEntity;
+		return jobReportEntity.getJobReportList().get(0);
 	}
+	
+	
+	/**
+	 * 特定のユーザ一人の情報を取得
+	 * @param user_id ユーザID
+	 * @return UserData ユーザ情報
+	 */
+	public UserData selectPersonalInfo(String apply_id) {
+		Map<String, Object> result = jdbc.queryForList(SQL_SELECT_PERSONAL_INFO, apply_id).get(0);
+		UserData data = mappingSelectResult(result);
+		return data;
+	}
+
 	
 	/**
 	 * reportsテーブルにデータを1件追加する.
@@ -79,6 +102,22 @@ public class JobReportRepository {
 		return rowNumber;
 	}
 	
+	
+	/**
+	 * usersテーブルから取得したデータをUserData形式にマッピングする.
+	 * 
+	 * @param result report usersテーブルから取得したデータ
+	 * @return UserData
+	 */
+	private UserData mappingSelectResult(Map<String, Object> result) {
+		UserData data = new UserData();
+		data.setClass_number((String)result.get("class_number"));
+		data.setClassroom((String)result.get("classroom"));
+		data.setName((String)result.get("name"));
+		
+		return data;
+	}
+	
 	/**
 	 * job_huntingテーブルとrequestsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
 	 * 
@@ -108,17 +147,11 @@ public class JobReportRepository {
 			data.setRemark((String) map.get("remark"));
 			data.setAdvance_or_retreat((boolean) map.get("advance_or_retreat"));
 			
-			// システム内で使用しないので取得する必要ないかも（応相談）
-//			data.setRegister_date((Date) map.get("register_date"));
-//			data.setRegister_user_id((String) map.get("register_user_id"));
-//			data.setUpdate_date((Date) map.get("update_date"));
-//			data.setUpdate_user_id((String) map.get("update_user_id"));
 			entity.getJobReportList().add(data);
 		}
 		
 		return entity;
 
 	}
-
 
 }

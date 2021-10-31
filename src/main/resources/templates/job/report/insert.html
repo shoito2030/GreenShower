@@ -34,16 +34,16 @@
 	<br>
 	<br>
 
-	<div class="container" th:each="user : ${jobRequestData}">
+	<div class="container" th:object="${userData}">
 		<div align="left">
 			<div class="col-md-2">
-				<label>クラス&emsp;</label> <span th:text="*{user.classroom}"></span>
+				<label>クラス&emsp;</label> <span th:text="*{classroom}"></span>
 			</div>
 			<div class="col-md-2 offset-md-1">
-				<label>番号&emsp;</label> <span th:text="*{user.class_number}"></span>
+				<label>番号&emsp;</label> <span th:text="*{class_number}"></span>
 			</div>
 			<div class="col-md-2 offset-md-1">
-				<label>氏名&emsp;</label> <span th:text="*{user.name}"></span>
+				<label>氏名&emsp;</label> <span th:text="*{name}"></span>
 			</div>
 		</div>
 	</div>
@@ -54,11 +54,6 @@
 
 	<div class="input-form">
 		<form method="post" th:action="@{/job/report/insert}">
-
-			<input type="hidden" name="apply_id"
-				th:value="${jobRequestData.apply_id}"> <input type="hidden"
-				name="register_user_id" th:value="${jobRequestData.applicant_id}">
-
 
 			<div align="left">
 				<table>
@@ -76,10 +71,7 @@
 
 				</table>
 				<p th:text="${errmsg}" style="background-color: #ffcc99;"></p>
-				<br>
-		<br>
-		<br>
-		<br>
+				<br> <br> <br> <br>
 
 
 				<table>
@@ -99,10 +91,7 @@
 			<button type="submit" class="btn btn-primary"
 				style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
 		</form>
-		<br>
-		<br>
-		<br>
-		<br>
+		<br> <br> <br> <br>
 	</div>
 
 </body>
