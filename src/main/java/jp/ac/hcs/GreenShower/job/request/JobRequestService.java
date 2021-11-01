@@ -1,7 +1,5 @@
 package jp.ac.hcs.GreenShower.job.request;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,21 +91,16 @@ public class JobRequestService {
 		data.setApplicant_id(register_user_id);
 		data.setContent(CommonEnum.getEnum(Content.class, form.getContent()));
 		data.setCompany_name(form.getCompany_name());
-		LocalDateTime date_activity_from = LocalDateTime.parse(form.getDate_activity_from(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-		data.setDate_activity_from(date_activity_from);
-		LocalDateTime date_activity_to = LocalDateTime.parse(form.getDate_activity_to(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-		data.setDate_activity_to(date_activity_to);
+		data.setIndicate(form.getIndicate());
+		data.setDate_activity_from(form.getDate_activity_from());
+		data.setDate_activity_to(form.getDate_activity_to());
 		data.setLoc(form.getLoc());
 		data.setWay(CommonEnum.getEnum(Way.class,form.getWay()));
 		data.setApply_type(CommonEnum.getEnum(Apply_type.class,form.getApply_type()));
-		LocalDateTime date_absence_from = LocalDateTime.parse(form.getDate_absence_from(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-		data.setDate_absence_from(date_absence_from);
-		LocalDateTime date_absence_to = LocalDateTime.parse(form.getDate_absence_to(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-		data.setDate_absence_to(date_absence_to);
-		LocalDateTime leave_early_date = LocalDateTime.parse(form.getLeave_eary_date(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-		data.setLeave_early_date(leave_early_date);
-		LocalDateTime attendance_date = LocalDateTime.parse(form.getAttendance_date(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-		data.setAttendance_date(attendance_date);
+		data.setDate_absence_from(form.getDate_activity_from());
+		data.setDate_absence_from(form.getDate_activity_to());
+		data.setLeave_early_date(form.getLeave_eary_date());
+		data.setAttendance_date(form.getAttendance_date());
 		data.setRemark(form.getRemark());
 		data.setRegister_user_id(register_user_id);
 		return data;
