@@ -117,7 +117,7 @@
 								<td><a class="btn btn-success"
 									th:href="@{'/job/report/fix/'+ *{jobReport.apply_id}}">修正</a></td>
 								<td><a class="btn btn-secondary"
-									href="/job/report/detail/status-change">状態変更</a></td>
+									th:href="@{'/job/report/status-change/'+ *{jobReport.apply_id}}">状態変更</a></td>
 							</tr>
 						</tbody>
 					</table>
