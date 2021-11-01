@@ -32,6 +32,8 @@ INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, co
 VALUES('2', 'isida@xxx.co.jp', '6', '0', '2', 'ブルーシャワー株式会社');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
 VALUES('3', 'yamada@xxx.co.jp', '2', '0', '2', 'レッドシャワー株式会社');
+INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
+VALUES('4', 'yamada@xxx.co.jp', '4', '1', '2', 'ブラックシャワー株式会社');
 
 /* 申請マスタ用データ */
 INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, date_absence_from, date_absence_to, remark, register_user_id)
@@ -40,6 +42,8 @@ INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, 
 VALUES('2', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '2',  '2021-7-18 12:15', '早退君', 'isida@xxx.co.jp');
 INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, attendance_date, remark, register_user_id)
 VALUES('3', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '3',  '2021-7-17 11:00', '遅刻君', 'yamada@xxx.co.jp');
+INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, attendance_date, remark, register_user_id)
+VALUES('4', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '3',  '2021-7-17 12:00', '阿部先生が代わりに申請しました。', 'abe@xxx.co.jp');
 
 /* 報告マスタ用データ */
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('1', TRUE, 'テスト報告', 'isida@xxx.co.jp');
