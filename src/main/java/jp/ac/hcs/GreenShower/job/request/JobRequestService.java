@@ -1,5 +1,10 @@
 package jp.ac.hcs.GreenShower.job.request;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,15 +97,15 @@ public class JobRequestService {
 		data.setContent(CommonEnum.getEnum(Content.class, form.getContent()));
 		data.setCompany_name(form.getCompany_name());
 		data.setIndicate(form.getIndicate());
-		data.setDate_activity_from(form.getDate_activity_from());
-		data.setDate_activity_to(form.getDate_activity_to());
+		data.setDate_activity_from(strLocalDateTimeToDate(form.getDate_activity_from()));
+		data.setDate_activity_to(strLocalDateTimeToDate(form.getDate_activity_to()));
 		data.setLoc(form.getLoc());
 		data.setWay(CommonEnum.getEnum(Way.class,form.getWay()));
 		data.setApply_type(CommonEnum.getEnum(Apply_type.class,form.getApply_type()));
-		data.setDate_absence_from(form.getDate_activity_from());
-		data.setDate_absence_from(form.getDate_activity_to());
-		data.setLeave_early_date(form.getLeave_eary_date());
-		data.setAttendance_date(form.getAttendance_date());
+		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_from()));
+		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_to()));
+		data.setLeave_early_date(strLocalDateTimeToDate(form.getLeave_eary_date()));
+		data.setAttendance_date(strLocalDateTimeToDate(form.getAttendance_date()));
 		data.setRemark(form.getRemark());
 		data.setRegister_user_id(register_user_id);
 		return data;
@@ -122,6 +127,24 @@ public class JobRequestService {
 		}
 		return rowNumber;
 		
+	}
+	
+	/**
+	 * LocalDateTime形式の文字列をDate型に変換する
+	 * @param strDate LocalDateTime形式の文字列
+	 * @return date
+	 */
+	public Date strLocalDateTimeToDate(String strDate) {
+		Date date;
+		
+		if(strDate.equals("")) {
+			return null;
+		} else {
+			LocalDateTime localDateTime = LocalDateTime.parse(strDate.replace("T", " "), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+	        date = Date.from(ZonedDateTime.of(localDateTime, ZoneId.systemDefault()).toInstant());
+		}
+        
+		return date;
 	}
 
 }
