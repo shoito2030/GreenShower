@@ -10,6 +10,28 @@
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
+
+<style>
+	h1.title {
+		font-size: 24px;
+	}
+
+	@media only screen and (min-width:651px) {
+
+		/* 中画面用 */
+		h1.title {
+			font-size: 26px;
+		}
+	}
+
+	@media only screen and (min-width:961px) {
+
+		/* 大画面用 */
+		h1.title {
+			font-size: 28px;
+		}
+	}
+</style>
 </head>
 
 <body>
@@ -17,7 +39,8 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 	
 	<!-- 作成中 -->
-	就職活動報告修正画面
+	<h1 class="title">就職活動報告 修正</h1>
+
 	<th:block th:insert="components/part::frag_script"></th:block>
 	
 </body>

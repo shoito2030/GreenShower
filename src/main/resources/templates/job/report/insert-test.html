@@ -40,6 +40,28 @@
             textForm.value = '';
         }
     </script>
+
+    <style>
+        h1.title {
+            font-size: 20px;
+        }
+
+        @media only screen and (min-width:651px) {
+
+            /* 中画面用 */
+            h1.title {
+                font-size: 24px;
+            }
+        }
+
+        @media only screen and (min-width:961px) {
+
+            /* 大画面用 */
+            h1.title {
+                font-size: 26px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -75,19 +97,19 @@
 
 
 
-    <p class="h1 ml-md-5 text-sm-center text-md-left">就職活動報告 新規登録</p>
+    <h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動報告 新規登録</h1>
 
     <form class="container mt-md-5">
 
-        <div class="row justify-content-md-center mt-md-4">
-            <div class="col-md-2">
-                <span><small>クラス</small><span class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
+        <div class="row mt-md-4 pr-md-5">
+            <div class="col-md-2 pr-md-5">
+                <span><small class="text-muted">クラス</small><span class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
             </div>
             <div class="col-md-1 offset-md-1">
-                <span><small>番号</small><span class="float-md-right mt-md-1 font-weight-bold h4">01</span></span>
+                <span><small class="text-muted">番号</small><span class="float-md-right mt-md-1 font-weight-bold h4 ">01</span></span>
             </div>
-            <div class="col-md-2 offset-md-1">
-                <span><small>氏名</small><span class="float-md-right mt-md-1 font-weight-bold h4">情報太郎</span></span>
+            <div class="col-md-2 offset-md-1 pr-md-5">
+                <span><small class="text-muted">氏名</small><span class="float-md-right mt-md-1 font-weight-bold h4">情報太郎</span></span>
             </div>
         </div>
 
@@ -96,16 +118,16 @@
 
         <div class="form-group row mt-md-5">
             <div class="col-md-3">
-                <p>進退</p>
+                <p class="font-weight-bold h5">進退</p>
             </div>
             <div class="col-md-4 mr-md-5">
-                <div class="radio-inline">
+                <div class="radio-inline mr-md-5 mt-md-3">
                     <input type="radio" name="advance_or_retreat" value="true" onclick="not_ES_other()">
                     <label>進める</label>
                 </div>
 
-                <div class="radio-inline">
-                    <input type="radio" name="advance_or_retreat" value="true" onclick="not_ES_other()">
+                <div class="radio-inline mr-md-5 mt-md-3">
+                    <input type="radio" name="advance_or_retreat" value="false" onclick="not_ES_other()" checked>
                     <label>進まない</label>
                 </div>
             </div>
@@ -116,63 +138,20 @@
 
         <div class="form-group row mt-md-4">
             <div class="col-md-3 mt-md-5">
-                <p>備考</p>
+                <p class="font-weight-bold h5">備考</p>
             </div>
-            <div class="col-md-4 mb-md-3">
+            <div class="col-md-6 mb-md-3">
                 <textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
             </div>
         </div>
 
+        <br>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary"
+            style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
+
     </form>
-
-
-
-
-    <br>
-    <br>
-    <br>
-
-    <div class="input-form">
-        <form method="post" action="/job/report/insert">
-
-            <div align="left">
-                <table>
-                    <tr>
-
-
-                        <th><label for="entry_section">進退&emsp;&emsp;&emsp;&emsp;</label></th>
-                        <td>
-                            <nobr>
-                                <input type="radio" name="advance_or_retreat" value="true"
-                                    onclick="not_ES_other()">進める&emsp;&emsp;&emsp; <input type="radio"
-                                    name="advance_or_retreat" value="false" onclick="not_ES_other()">進めない
-                            </nobr>
-                        </td>
-                    </tr>
-
-                </table>
-                <p style="background-color: #ffcc99;"></p>
-                <br> <br> <br> <br>
-
-
-                <table>
-                    <tr>
-
-
-                        <th><label for="remark">備考</label></th>
-                        <td><textarea class="form-control" name="remark" rows="5" cols="50"></textarea></td>
-
-
-                    </tr>
-
-                </table>
-            </div>
-            <br> <br> <br>
-            <button type="submit" class="btn btn-primary"
-                style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
-        </form>
-        <br> <br> <br> <br>
-    </div>
 
 
     <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>

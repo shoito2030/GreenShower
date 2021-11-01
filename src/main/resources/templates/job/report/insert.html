@@ -1,97 +1,112 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-<meta charset="UTF-8">
-<title>就職活動報告新規登録画面</title>
+	<meta charset="UTF-8">
+	<title>就職活動報告新規登録画面</title>
 
 
-<th:block th:insert="components/part::frag_mobile"></th:block>
-<th:block th:insert="components/part::frag_icon"></th:block>
-<th:block th:insert="components/part::frag_style"></th:block>
+	<th:block th:insert="components/part::frag_mobile"></th:block>
+	<th:block th:insert="components/part::frag_icon"></th:block>
+	<th:block th:insert="components/part::frag_style"></th:block>
 
-<script type="text/javascript">
-	function not_ES_other() {
-		document.getElementById("entry_section_other").setAttribute("disabled",
+	<script type="text/javascript">
+		function not_ES_other() {
+			document.getElementById("entry_section_other").setAttribute("disabled",
 				true);
-		var textForm = document.getElementById("entry_section_other");
-		textForm.value = '';
-	}
-</script>
+			var textForm = document.getElementById("entry_section_other");
+			textForm.value = '';
+		}
+	</script>
 </head>
+
+<style>
+	h1.title {
+		font-size: 24px;
+	}
+
+	@media only screen and (min-width:651px) {
+
+		/* 中画面用 */
+		h1.title {
+			font-size: 26px;
+		}
+	}
+
+	@media only screen and (min-width:961px) {
+
+		/* 大画面用 */
+		h1.title {
+			font-size: 28px;
+		}
+	}
+</style>
 
 <body>
 
 	<th:block th:insert="components/part::frag_header"></th:block>
 
+	<h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動報告 新規登録</h1>
 
+	<form class="container mt-md-5" method="post" th:action="@{/job/report/insert}">
 
-	<h2 align="left">&emsp;&emsp;受験報告 新規登録</h2>
-	<br>
-	<br>
-	<br>
-
-	<div class="container" th:object="${userData}">
-		<div align="left">
-			<div class="col-md-2">
-				<label>クラス&emsp;</label> <span th:text="*{classroom}"></span>
+		<div class="row mt-md-4 pr-md-5">
+			<div class="col-md-2 pr-md-5">
+				<span><small class="text-muted">クラス</small><span
+						class="float-md-right mt-md-1 font-weight-bold h4" th:text="${userData.classroom}"></span></span>
 			</div>
-			<div class="col-md-2 offset-md-1">
-				<label>番号&emsp;</label> <span th:text="*{class_number}"></span>
+			<div class="col-md-1 offset-md-1">
+				<span><small class="text-muted">番号</small><span
+						class="float-md-right mt-md-1 font-weight-bold h4 "  th:text="${userData.class_number}"></span></span>
 			</div>
-			<div class="col-md-2 offset-md-1">
-				<label>氏名&emsp;</label> <span th:text="*{name}"></span>
+			<div class="col-md-2 offset-md-1 pr-md-5">
+				<span><small class="text-muted">氏名</small><span
+						class="float-md-right mt-md-1 font-weight-bold h4"  th:text="${userData.name}"></span></span>
 			</div>
 		</div>
-	</div>
 
-	<br>
-	<br>
-	<br>
+		<br>
+		<br>
 
-	<div class="input-form">
-		<form method="post" th:action="@{/job/report/insert}">
-
-			<div align="left">
-				<table>
-					<tr>
-
-
-						<th><label for="entry_section">進退&emsp;&emsp;&emsp;&emsp;</label></th>
-						<td><nobr>
-								<input type="radio" name="advance_or_retreat" value="true"
-									onclick="not_ES_other()">進める&emsp;&emsp;&emsp; <input
-									type="radio" name="advance_or_retreat" value="false"
-									onclick="not_ES_other()">進めない
-							</nobr></td>
-					</tr>
-
-				</table>
-				<p th:text="${errmsg}" style="background-color: #ffcc99;"></p>
-				<br> <br> <br> <br>
-
-
-				<table>
-					<tr>
-
-
-						<th><label for="remark">備考</label></th>
-						<td><textarea class="form-control" name="remark" rows="5"
-								cols="50"></textarea></td>
-
-
-					</tr>
-
-				</table>
+		<div class="form-group row mt-md-5">
+			<div class="col-md-3">
+				<p class="font-weight-bold h5">進退</p>
 			</div>
-			<br> <br> <br>
-			<button type="submit" class="btn btn-primary"
-				style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
-		</form>
-		<br> <br> <br> <br>
-	</div>
+			<div class="col-md-4 mr-md-5">
+				<div class="radio-inline mr-md-5 mt-md-3">
+					<input type="radio" name="advance_or_retreat" value="true" onclick="not_ES_other()">
+					<label>進める</label>
+				</div>
 
-<th:block th:insert="components/part::frag_script"></th:block>
+				<div class="radio-inline mr-md-5 mt-md-3">
+					<input type="radio" name="advance_or_retreat" value="false" onclick="not_ES_other()" checked>
+					<label>進まない</label>
+				</div>
+				<p th:text="${errmsg}" style="background-color: #ffcc99;"></p>
+			</div>
+		</div>
+
+		<br>
+		<br>
+
+		<div class="form-group row mt-md-4">
+			<div class="col-md-3 mt-md-5">
+				<p class="font-weight-bold h5">備考</p>
+			</div>
+			<div class="col-md-6 mb-md-3">
+				<textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
+			</div>
+		</div>
+
+		<br>
+		<br>
+		<br>
+		<button type="submit" class="btn btn-primary"
+			style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
+
+	</form>
+
+	<th:block th:insert="components/part::frag_script"></th:block>
 </body>
+
 </html>
