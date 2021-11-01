@@ -21,7 +21,17 @@ public class AiSample {
 		String json = getResult(String.format(URL, KEY, SENTENCE));
 		
 		Map<String, Object> result = jsonStringToMap(json);
-		System.out.println(result);
+		String status = String.valueOf(result.get("status"));
+		
+		if(status.equals("0")) {
+			System.out.println("指摘なし");
+		} else if(status.equals("1")) {
+			System.out.println("指摘あり");
+			String checkedSentence = (String) result.get("checkedSentence");
+			checkedSentence = toHtml(checkedSentence);
+			System.out.println(checkedSentence);
+		}
+		
 
 	}
 
@@ -45,7 +55,7 @@ public class AiSample {
 	}
 	
 	/**
-	 * JSON文字列をMapに
+	 * JSON文字列をMapに変換
 	 * @param json json文字列
 	 * @return json文字列を読み込んだMapオブジェクト。失敗した場合はnull
 	 */
@@ -61,5 +71,11 @@ public class AiSample {
 		}
 
 		return map;
+	}
+	
+	public static String toHtml(String checkedSentence) {
+		checkedSentence.replace("<<", "<span class='mark font-weight-bold text-danger' style='background-color:yellow'>");
+		checkedSentence.replace(">>", "</span>");
+		return checkedSentence;
 	}
 }
