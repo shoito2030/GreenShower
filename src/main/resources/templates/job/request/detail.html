@@ -10,8 +10,36 @@
 </head>
 <body style="background-color: #DAE8FC;">
 	<th:block th:insert="components/part::frag_header"></th:block>
+	
+	<p class="h1">就職活動申請 詳細</p>
+	
+		<div class="container mt-md-5">
+			
+			<!-- 共通部品挿入（メモまで） -->
+			<th:block th:insert="components/part::frag_detail (${jobRequestData})"></th:block>
+			
+			<!-- メモ以降追加 -->
+			<div class="row mt-md-5">
+				<div class="col-md-5 ">
+					<p class="font-weight-bold h4">現在の申請状態</p>
+					<div class="card center-block w-50" style="border-radius: 75px;">
+						<div class="card-body">
 
-	<th:block th:insert="components/part::frag_detail ('就職活動申請 詳細', ${jobRequestData})"></th:block>
+							<p th:text="${jobRequestData.status.value}"></p>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-7">
+					<p class="font-weight-bold h4">指摘事項</p>
+					<div class="card">
+						<div class="card-body">
+							<p th:text="${jobRequestData.indicate}"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
 </body>
