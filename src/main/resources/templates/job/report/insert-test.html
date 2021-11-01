@@ -1,186 +1,196 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>就職活動報告新規登録画面</title>
+    <meta charset="UTF-8">
+    <title>就職活動報告新規登録画面</title>
+    <meta id="viewport" name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="manifest" href="/css/manifest.json" crossorigin="use-credentials">
+    <meta name="application-name" content="WebPortal">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WebPortal">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 
+    <link rel="icon" sizes="192x192" href="/img/favicon.ico">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/favicon.ico" sizes="192x192">
+    <link rel="apple-touch-icon" href="/img/favicon.ico" sizes="58x58">
 
-	<meta id="viewport" name="viewport"
-		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="manifest" href="/css/manifest.json"
-		crossorigin="use-credentials">
-	<meta name="application-name" content="WebPortal">
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-title" content="WebPortal">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- FontAwesome -->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
 
-	<link rel="icon" sizes="192x192"
-		href="/img/favicon.ico">
-	<link rel="shortcut icon" href="/img/favicon.ico">
-	<link rel="apple-touch-icon" href="/img/favicon.ico">
-	<link rel="apple-touch-icon" href="/img/favicon.ico"
-		sizes="192x192">
-	<link rel="apple-touch-icon" href="/img/favicon.ico"
-		sizes="58x58">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />
 
-	<!-- FontAwesome -->
-	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-		rel="stylesheet">
+    <link rel="stylesheet" href="/src/main/resources/static/css/ress.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/common.css">
 
 
-	<link rel="stylesheet"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-		crossorigin="anonymous">
-	<link rel="stylesheet"
-		href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />
-	<link rel="stylesheet" href="/css/ress.css">
-	<link rel="stylesheet" href="/css/common.css">
-
-
-<script type="text/javascript">
-	function not_ES_other() {
-		document.getElementById("entry_section_other").setAttribute("disabled",
-				true);
-		var textForm = document.getElementById("entry_section_other");
-		textForm.value = '';
-	}
-</script>
+    <script type="text/javascript">
+        function not_ES_other() {
+            document.getElementById("entry_section_other").setAttribute("disabled",
+                true);
+            var textForm = document.getElementById("entry_section_other");
+            textForm.value = '';
+        }
+    </script>
 </head>
 
 <body>
 
-	
-		<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
-			<a class="navbar-brand title-font" href="/">就活ポータル.com</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
 
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav w-100 nav-justified">
-					<li class="nav-item active"><a class="nav-link" href="/">就職活動管理</a>
-					</li>
-					<li class="nav-item active"><a class="nav-link"
-						href="/report/list">受験報告管理</a></li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+        <a class="navbar-brand title-font" href="/">就活ポータル.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-					
-						<li class="nav-item active"><a class="nav-link"
-							href="/">証明書管理</a></li>
-					
-
-					
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav w-100 nav-justified">
+                <li class="nav-item active"><a class="nav-link" href="/">就職活動管理</a>
+                </li>
+                <li class="nav-item active"><a class="nav-link" href="/report/list">受験報告管理</a></li>
 
 
-					<li class="nav-item active"><a class="nav-link" href="/"><i
-							class="fas fa-envelope"></i>メッセージ</a></li>
-					<li class="nav-item active"><a class="nav-link" href="/"><i
-							class="fas fa-cog"></i>設定</a></li>
-					<li class="nav-item active"><a class="nav-link"
-						href="/logout">Log out</a></li>
-				</ul>
-
-			</div>
-		</nav>
-	
-        
-	
+                <li class="nav-item active"><a class="nav-link" href="/">証明書管理</a></li>
 
 
 
-	<p class="h1 ml-md-5 text-sm-center text-md-left">就職活動報告 新規登録</p>
 
-    <div class="container mt-md-5">
+
+                <li class="nav-item active"><a class="nav-link" href="/"><i class="fas fa-envelope"></i>メッセージ</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/"><i class="fas fa-cog"></i>設定</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/logout">Log out</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+
+    <p class="h1 ml-md-5 text-sm-center text-md-left">就職活動報告 新規登録</p>
+
+    <form class="container mt-md-5">
+
         <div class="row justify-content-md-center mt-md-4">
             <div class="col-md-2">
-              <span><small>クラス</small><span class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
+                <span><small>クラス</small><span class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
             </div>
             <div class="col-md-1 offset-md-1">
-              <span><small>番号</small><span class="float-md-right mt-md-1 font-weight-bold h4">01</span></span>
+                <span><small>番号</small><span class="float-md-right mt-md-1 font-weight-bold h4">01</span></span>
             </div>
             <div class="col-md-2 offset-md-1">
-              <span><small>氏名</small><span class="float-md-right mt-md-1 font-weight-bold h4">情報太郎</span></span>
+                <span><small>氏名</small><span class="float-md-right mt-md-1 font-weight-bold h4">情報太郎</span></span>
             </div>
-          </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row mt-md-5">
+            <div class="col-md-3">
+                <p>進退</p>
+            </div>
+            <div class="col-md-4 mr-md-5">
+                <div class="radio-inline">
+                    <input type="radio" name="advance_or_retreat" value="true" onclick="not_ES_other()">
+                    <label>進める</label>
+                </div>
+
+                <div class="radio-inline">
+                    <input type="radio" name="advance_or_retreat" value="true" onclick="not_ES_other()">
+                    <label>進まない</label>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row mt-md-4">
+            <div class="col-md-3 mt-md-5">
+                <p>備考</p>
+            </div>
+            <div class="col-md-4 mb-md-3">
+                <textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
+            </div>
+        </div>
+
+    </form>
+
+
+
+
+    <br>
+    <br>
+    <br>
+
+    <div class="input-form">
+        <form method="post" action="/job/report/insert">
+
+            <div align="left">
+                <table>
+                    <tr>
+
+
+                        <th><label for="entry_section">進退&emsp;&emsp;&emsp;&emsp;</label></th>
+                        <td>
+                            <nobr>
+                                <input type="radio" name="advance_or_retreat" value="true"
+                                    onclick="not_ES_other()">進める&emsp;&emsp;&emsp; <input type="radio"
+                                    name="advance_or_retreat" value="false" onclick="not_ES_other()">進めない
+                            </nobr>
+                        </td>
+                    </tr>
+
+                </table>
+                <p style="background-color: #ffcc99;"></p>
+                <br> <br> <br> <br>
+
+
+                <table>
+                    <tr>
+
+
+                        <th><label for="remark">備考</label></th>
+                        <td><textarea class="form-control" name="remark" rows="5" cols="50"></textarea></td>
+
+
+                    </tr>
+
+                </table>
+            </div>
+            <br> <br> <br>
+            <button type="submit" class="btn btn-primary"
+                style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
+        </form>
+        <br> <br> <br> <br>
     </div>
-	
-
-	<br>
-	<br>
-	<br>
-
-	<div class="input-form">
-		<form method="post" action="/job/report/insert">
-
-			<div align="left">
-				<table>
-					<tr>
 
 
-						<th><label for="entry_section">進退&emsp;&emsp;&emsp;&emsp;</label></th>
-						<td><nobr>
-								<input type="radio" name="advance_or_retreat" value="true"
-									onclick="not_ES_other()">進める&emsp;&emsp;&emsp; <input
-									type="radio" name="advance_or_retreat" value="false"
-									onclick="not_ES_other()">進めない
-							</nobr></td>
-					</tr>
-
-				</table>
-				<p style="background-color: #ffcc99;"></p>
-				<br> <br> <br> <br>
-
-
-				<table>
-					<tr>
-
-
-						<th><label for="remark">備考</label></th>
-						<td><textarea class="form-control" name="remark" rows="5"
-								cols="50"></textarea></td>
-
-
-					</tr>
-
-				</table>
-			</div>
-			<br> <br> <br>
-			<button type="submit" class="btn btn-primary"
-				style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
-		</form>
-		<br> <br> <br> <br>
-	</div>
-
-
-    <script
-			src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-		<script
-			src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-		<script
-			src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-		<script
-			src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-			crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 
 </body>
+
 </html>
