@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,24 +16,31 @@ public class AiSample {
 	public static void main(String[] args) {
 
 		// ** 郵便番号検索API リクエストURL */
-		String URL = "https://api.a3rt.recruit.co.jp/proofreading/v2/typo?apikey=%s&sentence=%s";
-		String KEY = "";
-		String SENTENCE = "私の得意分野は画像処利と自然言語処理です。";
+//		String URL = "https://api.a3rt.recruit.co.jp/proofreading/v2/typo?apikey=%s&sentence=%s";
+//		String KEY = "";
+//		String SENTENCE = "私の得意分野は画像処利と自然言語処理です。";
+//		
+//		String json = getResult(String.format(URL, KEY, SENTENCE));
+//		
+//		Map<String, Object> result = jsonStringToMap(json);
+//		String status = String.valueOf(result.get("status"));
+//		
+//		if(status.equals("0")) {
+//			System.out.println("指摘なし");
+//		} else if(status.equals("1")) {
+//			System.out.println("指摘あり");
+//			String checkedSentence = (String) result.get("checkedSentence");
+//			checkedSentence = toHtml(checkedSentence);
+//			System.out.println(checkedSentence);
+//		}
 		
-		String json = getResult(String.format(URL, KEY, SENTENCE));
-		
-		Map<String, Object> result = jsonStringToMap(json);
-		String status = String.valueOf(result.get("status"));
-		
-		if(status.equals("0")) {
-			System.out.println("指摘なし");
-		} else if(status.equals("1")) {
-			System.out.println("指摘あり");
-			String checkedSentence = (String) result.get("checkedSentence");
-			checkedSentence = toHtml(checkedSentence);
-			System.out.println(checkedSentence);
-		}
-		
+		//現在日時を取得
+        LocalDateTime now = LocalDateTime.now();  
+        System.out.println(now.toString()); 
+
+        //フォーマットを指定
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        System.out.println(now.format(f));
 
 	}
 

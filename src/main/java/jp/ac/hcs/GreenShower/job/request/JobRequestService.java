@@ -1,10 +1,17 @@
 package jp.ac.hcs.GreenShower.job.request;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import jp.ac.hcs.GreenShower.job.common.CommonEnum;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Apply_type;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
+import jp.ac.hcs.GreenShower.job.request.JobRequestData.Way;
 
 /**
  * 就職活動申請に関する処理を行うServiceクラス
@@ -72,32 +79,39 @@ public class JobRequestService {
 	}
 
 	/**
-	 * 入力情報をJobReportData型に変換する（insert用）
+	 * 入力情報をJobRequestData型に変換する（insert用）
 	 * 
 	 * @param form    検証済み入力データ
 	 * @param user_id 登録処理を実行したユーザのID
-	 * @return JobReportData
+	 * @return JobRequestData
 	 */
 	private JobRequestData refillToJobReportData(JobRequestForm form, String register_user_id) {
 		JobRequestData data = new JobRequestData();
 		
+		int apply_id = jobRequestRepository.apply_id_get() + 1;
+		data.setApply_id(String.valueOf(apply_id));
 		data.setApplicant_id(register_user_id);
-		data.setContent(form.getContent());
+		data.setContent(CommonEnum.getEnum(Content.class, form.getContent()));
 		data.setCompany_name(form.getCompany_name());
-		data.setIndicate(form.getIndicate());
-		data.setDate_activity_from(form.getDate_activity_from());
-		data.setDate_activity_to(form.getDate_activity_to());
+		LocalDateTime date_activity_from = LocalDateTime.parse(form.getDate_activity_from(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+		data.setDate_activity_from(date_activity_from);
+		LocalDateTime date_activity_to = LocalDateTime.parse(form.getDate_activity_to(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+		data.setDate_activity_to(date_activity_to);
 		data.setLoc(form.getLoc());
-		data.setWay(form.getWay());
-		data.setDate_absence_from(form.getDate_activity_from());
-		data.setDate_absence_from(form.getDate_activity_to());
-		data.setLeave_early_date(form.getLeave_eary_date());
-		data.setAttendance_date(form.getAttendance_date());
+		data.setWay(CommonEnum.getEnum(Way.class,form.getWay()));
+		data.setApply_type(CommonEnum.getEnum(Apply_type.class,form.getApply_type()));
+		LocalDateTime date_absence_from = LocalDateTime.parse(form.getDate_absence_from(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+		data.setDate_absence_from(date_absence_from);
+		LocalDateTime date_absence_to = LocalDateTime.parse(form.getDate_absence_to(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+		data.setDate_absence_to(date_absence_to);
+		LocalDateTime leave_early_date = LocalDateTime.parse(form.getLeave_eary_date(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+		data.setLeave_early_date(leave_early_date);
+		LocalDateTime attendance_date = LocalDateTime.parse(form.getAttendance_date(), DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+		data.setAttendance_date(attendance_date);
 		data.setRemark(form.getRemark());
 		data.setRegister_user_id(register_user_id);
 		return data;
 	}
-
 
 	
 	/**

@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS users (
  * 定義書の内容を参照
  * */
 CREATE TABLE IF NOT EXISTS job_hunting (
-	apply_id VARCHAR(254) PRIMARY KEY AUTO_INCREMENT,
+	apply_id VARCHAR(254) PRIMARY KEY,
 	applicant_id VARCHAR(254) NOT NULL,
 	content VARCHAR(2) NOT NULL,
     company_name VARCHAR(137) NOT NULL,

@@ -1,6 +1,6 @@
 package jp.ac.hcs.GreenShower.job.request;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -41,13 +41,15 @@ public class JobRequestRepository {
 	
 	/** 申請一件追加*/
 
-	private static final String SQL_INSERT_JOB_HUNTING = "INSERT INTO JOB_HUNTING(APPLY_ID, APPLICANT_ID, CONTENT, COMPANY_NAME, APPLY_TYPE, INDICATE) VALUES(SELECT MAX(apply_id) + 1 FROM JOB_HUNTING, ?, ?, ?, ?, ?);";
-	private static final String SQL_INSERT_JOB_REQUESTS = "INSERT INTO REQUESTS(APPLY_ID, DATE_ACTIVITY_FROM, DATE_ACTIVITY_TO, LOC, WAY, DATE_ABSENCE_FROM, DATE_ABSENCE_TO, LEAVE_EARLY_DATE, ATTENDANCE_DATE, REMARK, REGISTER_USER_ID)\n"
-			+ "VALUES(SELECT MAX(apply_id) FROM JOB_HUNTING, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	private static final String SQL_INSERT_JOB_HUNTING = "INSERT INTO JOB_HUNTING(APPLY_ID, APPLICANT_ID, CONTENT, COMPANY_NAME, APPLY_TYPE) VALUES(?, ?, ?, ?, ?);";
+	private static final String SQL_INSERT_JOB_REQUESTS = "INSERT INTO REQUESTS(APPLY_ID, DATE_ACTIVITY_FROM, DATE_ACTIVITY_TO, LOC, WAY, DATE_ABSENCE_FROM, DATE_ABSENCE_TO, LEAVE_EARLY_DATE, ATTENDANCE_DATE, REMARK, REGISTER_USER_ID) VALUES"
+			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	
 
 	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE job_hunting SET status=?,indicate=? WHERE apply_id=?";
-
+	
+	private static final String SQL_MAX_APPLY_ID = "SELECT MAX(apply_id) FROM JOB_HUNTING";
+	
 	@Autowired
 	private JdbcTemplate jdbc;
 	
@@ -102,13 +104,13 @@ public class JobRequestRepository {
 			
 			// JobRequestDataクラスのフィールドを補完
 			data.setWay(CommonEnum.getEnum(Way.class,(String) map.get("way")));
-			data.setDate_activity_from((Date) map.get("date_activity_from"));
-			data.setDate_activity_to((Date) map.get("date_activity_to"));
+			data.setDate_activity_from((LocalDateTime) map.get("date_activity_from"));
+			data.setDate_activity_to((LocalDateTime) map.get("date_activity_to"));
 			data.setLoc((String) map.get("loc"));
-			data.setDate_absence_from((Date) map.get("date_absence_from"));
-			data.setDate_absence_to((Date) map.get("date_absence_to"));
-			data.setLeave_early_date((Date) map.get("leave_early_date"));
-			data.setAttendance_date((Date) map.get("attendance_date"));
+			data.setDate_absence_from((LocalDateTime) map.get("date_absence_from"));
+			data.setDate_absence_to((LocalDateTime) map.get("date_absence_to"));
+			data.setLeave_early_date((LocalDateTime) map.get("leave_early_date"));
+			data.setAttendance_date((LocalDateTime) map.get("attendance_date"));
 			data.setRemark((String) map.get("remark"));
 			
 			entity.getJobRequestList().add(data);
@@ -121,26 +123,35 @@ public class JobRequestRepository {
 
 	public int insertOne(JobRequestData data) {
 		int rowNumber = jdbc.update(SQL_INSERT_JOB_HUNTING,
+				data.getApply_id(),
 				data.getApplicant_id(),
-				data.getContent(),
+				data.getContent().getId(),
 				data.getCompany_name(),
-				data.getApply_type(),
-				data.getIndicate()
+				data.getApply_type().getId()
 				);
 		
 		jdbc.update(SQL_INSERT_JOB_REQUESTS,
+			data.getApply_id(),
 			data.getDate_activity_from(),
 			data.getDate_activity_to(),
 			data.getLoc(),
-			data.getWay(),
+			data.getWay().getId(),
 			data.getDate_absence_from(),
-			data.getDate_absence_from(),
+			data.getDate_absence_to(),
 			data.getLeave_early_date(),
 			data.getAttendance_date(),
 			data.getRemark(),
 			data.getRegister_user_id()
 			);
 		return rowNumber;
+	}
+	
+	
+	
+	public int apply_id_get() {
+		int apply_id = jdbc.queryForObject(SQL_MAX_APPLY_ID, int.class);
+		return apply_id;
+		
 	}
 	
 	public int updateJobStatus(String apply_id,JobRequestForm form) {

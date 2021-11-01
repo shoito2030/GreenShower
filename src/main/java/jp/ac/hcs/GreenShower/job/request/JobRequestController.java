@@ -127,6 +127,7 @@ public class JobRequestController {
 	@PostMapping("/job/request/insert")
 	public String getJobRequestInsert(@ModelAttribute @Validated JobRequestForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
+		System.out.println(form);
 		jobRequestService.insert(form, principal.getName());
 		return "index";
 	}
