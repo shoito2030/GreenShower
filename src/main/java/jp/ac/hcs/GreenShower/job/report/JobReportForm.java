@@ -42,4 +42,14 @@ public class JobReportForm {
 	 * 更新者のユーザID
 	 */
 	private String update_user_id;
+	
+	/**
+	 * 状態
+	 */
+	protected String status;
+	
+	/**
+	 * 指摘事項
+	 */
+	private String indicate;
 }

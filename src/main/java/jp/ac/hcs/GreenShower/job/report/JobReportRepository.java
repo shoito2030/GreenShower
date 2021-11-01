@@ -30,8 +30,11 @@ public class JobReportRepository {
 	/** SQL 報告情報一件追加 */
 	private static final String SQL_INSERT_ONE_REPORTS = "INSERT INTO REPORTS(APPLY_ID, ADVANCE_OR_RETREAT, REMARK, REGISTER_USER_ID) VALUES(?, ?, ?, ?);";
 	
-	/** 報告情報状態更新 */
+	/** 報告情報状態更新(insert用) */
 	private static final String SQL_UPDATE_JOB_HUNTING = "UPDATE JOB_HUNTING SET STATUS = '6' WHERE APPLY_ID = ?;";
+	
+	/** 報告情報状態更新(状態変更用) */
+	private static final String SQL_UPDATE_STATUS = "UPDATE JOB_HUNTING SET STATUS = ?, INDICATE = ? WHERE APPLY_ID = ?;";
 	
 	/** ユーザIDからクラス・番号・名前を取得するSQL */
 	private static final String SQL_SELECT_PERSONAL_INFO ="SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS U LEFT JOIN JOB_HUNTING JH ON U.USER_ID = JH.APPLICANT_ID WHERE JH.APPLY_ID = ?;";
@@ -96,8 +99,25 @@ public class JobReportRepository {
 	 * @return 追加データ数
 	 * @throws DataAccessException
 	 */
-	public int updateStatusOne(String register_user_id) throws DataAccessException {
-		int rowNumber = jdbc.update(SQL_UPDATE_JOB_HUNTING,register_user_id);
+	public int updateStatusOne(String apply_id) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_UPDATE_JOB_HUNTING,apply_id);
+		
+		return rowNumber;
+	}
+	
+	/**
+	 * job_huntingテーブルの状態を任意の状態に更新する
+	 * 
+	 * @param data 追加するユーザ情報
+	 * @return 追加データ数
+	 * @throws DataAccessException
+	 */
+	public int updateStatus(JobHuntingData data) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_UPDATE_STATUS,
+				
+				data.getStatus(),
+				data.getIndicate(),
+				data.getIndicate());
 		
 		return rowNumber;
 	}

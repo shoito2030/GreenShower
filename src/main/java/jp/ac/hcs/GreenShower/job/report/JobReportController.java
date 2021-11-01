@@ -166,4 +166,52 @@ public class JobReportController {
 		
 		return getReportList(principal, model);
 	}
+	
+
+	/**
+	 * 就職活動報告承認画面を表示する
+	 * 
+	 * @param model
+	 * @return 就職活動報告修正画面
+	 */
+	@GetMapping("/job/report/status-change/{apply_id}")
+	public String getReportStatus(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
+		Optional<UserData> userData;
+		String id = (String)session.getAttribute("apply_id");
+		
+		// sessionに申請IDを保存
+		session.setAttribute("apply_id", apply_id);
+		
+		return "/job/report/status-change";
+	}
+	
+	/**
+	 * 報告の状態を任意の状態に変更する
+	 * 
+	 * @param form          登録時の入力チェック用JobReportForm
+	 * @param bindingResult 入力情報の検証結果
+	 * @param principal     ログイン情報
+	 * @param model
+	 * @return 受験報告情報一覧画面
+	 */
+	@PostMapping("job/report/status-change")
+	public String getJobReportStatus(@ModelAttribute @Validated JobReportForm form, BindingResult bindingResult,
+			Principal principal, Model model) {
+		
+		// sessionから申請ID取得しセット
+		form.setApply_id((String)session.getAttribute("apply_id"));
+		
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("errmsg", "報告状態変更処理に失敗しました。");
+			return getReportList(principal, model);
+		}
+
+		// 報告状態変更処理実行
+		jobReportService.updateStatus(form, principal.getName());
+
+		log.info("報告状態変更処理：" + form.getStatus() + "," + form.getIndicate());
+		model.addAttribute("msg", "状態変更が完了しました。");
+
+		return getReportList(principal, model);
+	}
 }
