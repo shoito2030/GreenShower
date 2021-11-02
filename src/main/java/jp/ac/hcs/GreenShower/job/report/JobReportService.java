@@ -15,9 +15,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
-import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Status;
 import jp.ac.hcs.GreenShower.user.UserData;
 
 /**
@@ -120,15 +118,13 @@ public class JobReportService {
 	 * 報告マスタの状態を任意の状態に変更する
 	 * 
 	 * @param form             検証済み入力情報
-	 * @param register_user_id 登録処理を実行したユーザのID
-	 * @return 
 	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
-	public boolean updateStatus(JobReportForm form, String update_user_id) {
+	public boolean updateStatus(JobReportForm form) {
 		int rowNumber = 0;
 		try {
-			// 追加処理を行い、追加できた件数を取得
-			rowNumber = jobReportRepository.updateStatus(refillToJobHuntingData(form));
+			// 変更処理を行い、変更できた件数を取得
+			rowNumber = jobReportRepository.updateStatus(form);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -154,22 +150,6 @@ public class JobReportService {
 		return data;
 	}
 	
-	/**
-	 * 入力情報をJobHuntingData型に変換する（状態変更用）
-	 * 
-	 * @param form    検証済み入力データ
-	 * @param user_id 登録処理を実行したユーザのID
-	 * @return JobReportData
-	 */
-	private JobHuntingData refillToJobHuntingData(JobReportForm form) {
-		JobHuntingData data = new JobHuntingData();
-
-		data.setApply_id(form.getApply_id());
-		data.setStatus(CommonEnum.getEnum(Status.class,form.getStatus()));
-		data.setIndicate(form.getIndicate());
-
-		return data;
-	}
 
 	/**
 	 * サーバーに保存されているファイルを取得して、byte配列に変換する.

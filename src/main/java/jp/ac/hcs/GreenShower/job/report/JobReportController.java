@@ -174,7 +174,7 @@ public class JobReportController {
 	 * @param model
 	 * @return 就職活動報告修正画面
 	 */
-	@GetMapping("/job/report/status-change/{apply_id}")
+	@GetMapping("/job/report/status_change/{apply_id}")
 	public String getReportStatus(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
 		Optional<UserData> userData;
 		String id = (String)session.getAttribute("apply_id");
@@ -194,7 +194,7 @@ public class JobReportController {
 	 * @param model
 	 * @return 受験報告情報一覧画面
 	 */
-	@PostMapping("job/report/status-change")
+	@PostMapping("job/report/status_change")
 	public String getJobReportStatus(@ModelAttribute @Validated JobReportForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
 		
@@ -209,7 +209,7 @@ public class JobReportController {
 		// 報告状態変更処理実行
 		jobReportService.updateStatus(form);
 
-		log.info("報告状態変更処理：" + form.getStatus() + "," + form.getIndicate() + "," + form.getApply_id());
+		log.info("報告状態変更処理： [申請ID:"+ form.getApply_id() + "・状態:" + form.getStatus() + "・備考:" + form.getIndicate() + "]");
 		model.addAttribute("msg", "状態変更が完了しました。");
 
 		return getReportList(principal, model);
