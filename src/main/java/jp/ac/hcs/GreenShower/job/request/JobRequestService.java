@@ -147,4 +147,8 @@ public class JobRequestService {
 		return date;
 	}
 
+	public String searchUserId(String classi, String number) {
+		return jobRequestRepository.searchUserId(classi, number);
+	}
+
 }

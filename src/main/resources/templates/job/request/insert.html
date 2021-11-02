@@ -25,6 +25,31 @@
 			<div class="input-form">
 				<form method="post" th:action="@{/job/request/insert}">
 				
+					<th:block role="presentation"
+					sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
+					
+					<div class="form-group input-box">
+					<label for="class">クラス</label>
+					<select name="class" id="classi">
+						<option value="S3A1">S3A1</option>
+						<option value="S3A2">S3A2</option>
+						<option value="S3A3">S3A3</option>
+					</select>
+					
+					<label for="number" id="number">番号</label>
+					<select name="number">
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+					</select>
+					
+					<input type="button" value="検索" onclick="getUserId();" />
+					
+					<span id="userId"></span>
+					</div>
+					
+					</th:block>
+				
 					<label for="apply_type">申請種別</label>
 					<div class="form-group input-box">
 						<input type="radio" name="apply_type" value="0">個人
@@ -83,5 +108,39 @@
 			</div>
 		</div>
 	</div>
+<script>
+function getUserId(){
+    const classi = document.getElementById('classi').value;
+    const number = document.getElementById('number').value;
+ 
+    // AjaxにてDemoControllerクラスのsearchメソッドを呼び出す
+    let request = new XMLHttpRequest();
+    request.open("get", "/search?classi=" + classi + "?number=" + number, true);
+    request.send(null);
+    request.onload = function (event) {
+       // Ajaxが正常終了した場合
+       if (request.readyState === 4 && request.status === 200) {
+          // 該当するデータが無かった場合
+          if(!request.responseText){
+              alert("該当するデータはありませんでした");
+              return;
+          }
+          // 該当するデータがあった場合は、取得したUserDataオブジェクトの内容を画面に
+          // 表示する。その際、名前・性別・メモはデコードする
+          const userId = request.responseText;
+          document.getElementById('userId').textContent = userId;
+       // Ajaxが異常終了した場合
+       }else{
+          alert("エラーが発生し、データが取得できませんでした");
+       }
+    };
+    // Ajaxが異常終了した場合
+    request.onerror = function (event) {
+       alert("エラーが発生し、データが取得できませんでした");
+    }
+}
+
+</script>
 </body>
+
 </html>

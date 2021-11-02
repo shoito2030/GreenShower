@@ -45,6 +45,8 @@ public class JobRequestRepository {
 	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE job_hunting SET status=?,indicate=? WHERE apply_id=?";
 
 	private static final String SQL_MAX_APPLY_ID = "SELECT MAX(apply_id) FROM JOB_HUNTING";
+	
+	private static final String SQL_SEARCH_USERID = "SELECT USER_ID FROM USERS WHERE CLASSROOM = ? AND CLASS_NUMBER = ?";
 
 	@Autowired
 	private JdbcTemplate jdbc;
@@ -137,6 +139,11 @@ public class JobRequestRepository {
 	public int updateJobStatus(String apply_id, JobRequestForm form) {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS, form.getStatus(), form.getIndicate(), apply_id);
 		return rowNumber;
+	}
+
+	public String searchUserId(String classi, String number) {
+		String userId = jdbc.queryForObject(SQL_SEARCH_USERID, String.class, classi, number);
+		return userId;
 	}
 
 }
