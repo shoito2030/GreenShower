@@ -207,9 +207,9 @@ public class JobReportController {
 		}
 
 		// 報告状態変更処理実行
-		jobReportService.updateStatus(form, principal.getName());
+		jobReportService.updateStatus(form);
 
-		log.info("報告状態変更処理：" + form.getStatus() + "," + form.getIndicate());
+		log.info("報告状態変更処理：" + form.getStatus() + "," + form.getIndicate() + "," + form.getApply_id());
 		model.addAttribute("msg", "状態変更が完了しました。");
 
 		return getReportList(principal, model);
