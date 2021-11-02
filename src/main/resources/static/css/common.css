@@ -92,3 +92,8 @@ h1 {
   .bg-color-white {
 	background-color: white;
   }
+  
+select {
+  -moz-appearance: menulist;
+  -webkit-appearance: menulist;
+}
