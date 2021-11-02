@@ -2,11 +2,6 @@ package jp.ac.hcs.GreenShower.job.report;
 
 import static java.util.stream.Collectors.*;
 
-import java.io.IOException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.security.Principal;
 import java.util.Optional;
 
@@ -45,9 +40,8 @@ public class JobReportService {
 
 			// ユーザが生徒の場合は、ユーザ自身の申請情報のみを抽出する
 			if (role.equals("ROLE_STUDENT")) {
-				jobReportEntity.setJobReportList( jobReportEntity.getJobReportList().stream()
-						.filter(report -> report.getApplicant_id().equals(principal.getName()))
-						.collect(toList()));
+				jobReportEntity.setJobReportList(jobReportEntity.getJobReportList().stream()
+						.filter(report -> report.getApplicant_id().equals(principal.getName())).collect(toList()));
 			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -113,11 +107,11 @@ public class JobReportService {
 		}
 		return rowNumber > 0;
 	}
-	
+
 	/**
 	 * 報告マスタの状態を任意の状態に変更する
 	 * 
-	 * @param form             検証済み入力情報
+	 * @param form 検証済み入力情報
 	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
 	public boolean updateStatus(JobReportForm form) {
@@ -129,7 +123,7 @@ public class JobReportService {
 			e.printStackTrace();
 		}
 		return rowNumber > 0;
-		
+
 	}
 
 	/**
@@ -149,20 +143,24 @@ public class JobReportService {
 
 		return data;
 	}
-	
+
 
 	/**
-	 * サーバーに保存されているファイルを取得して、byte配列に変換する.
+	 * 1件の報告内容を変更する
 	 * 
-	 * @param fileName ファイル名
-	 * @return ファイルのbyte配列
-	 * @throws IOException ファイル取得エラー
+	 * @param form     検証済み入力情報
+	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
-	public byte[] getFile(String fileName) throws IOException {
-		FileSystem fs = FileSystems.getDefault();
-		Path p = fs.getPath(fileName);
-		byte[] bytes = Files.readAllBytes(p);
-		return bytes;
+	public boolean updateContent(JobReportForm form) {
+		int rowNumber = 0;
+		try {
+			// 変更処理を行い、変更できた件数を取得
+			rowNumber = jobReportRepository.updateContent(form);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return rowNumber > 0;
+
 	}
 
 }

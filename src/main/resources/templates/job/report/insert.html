@@ -50,6 +50,9 @@
 
 	<form class="container mt-md-5" method="post" th:action="@{/job/report/insert}">
 		<th:block th:insert="components/part::flag_report_form"></th:block>
+		
+		<button type="submit" class="btn btn-primary"
+			style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
 	</form>
 
 	<th:block th:insert="components/part::frag_script"></th:block>

@@ -19,7 +19,7 @@ import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import jp.ac.hcs.GreenShower.user.UserData;
 import lombok.extern.slf4j.Slf4j;
 
-/** 
+/**
  * 就職活動報告に関する処理を行うControllerクラス
  * 
  */
@@ -28,11 +28,10 @@ import lombok.extern.slf4j.Slf4j;
 public class JobReportController {
 	@Autowired
 	private JobReportService jobReportService;
-	
+
 	@Autowired
 	private HttpSession session;
-	
-	
+
 	/**
 	 * 就職活動申請報告一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
@@ -44,41 +43,40 @@ public class JobReportController {
 
 //	// 取得できなかった場合は空のOptionalが格納される
 		Optional<JobReportEntity> jobReportEntity;
-		
+
 		jobReportEntity = jobReportService.selectAllReports(principal);
-		
-		
+
 		// 処理失敗によりトップ画面へ
 		if (jobReportEntity.isEmpty()) {
 			return "index";
-		} 
+		}
 
 		model.addAttribute("jobReportEntity", jobReportEntity.get());
 		return "job/report/list";
 	}
-	
+
 	/**
 	 * 個人の申請情報を取得し就職活動申請詳細画面を表示する
 	 * 
 	 * @param principal ログイン情報
-	 * @param apply_id 申請ID
+	 * @param apply_id  申請ID
 	 * @param model
 	 * @return 就職活動申請詳細画面
 	 */
 	@GetMapping("/job/report/detail/{apply_id}")
 	public String getReportDetail(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
 		Optional<JobHuntingData> jobReportData;
-		
-		jobReportData =  jobReportService.selectOne(apply_id);
-		
-		if(jobReportData.isEmpty()) {
+
+		jobReportData = jobReportService.selectOne(apply_id);
+
+		if (jobReportData.isEmpty()) {
 			return getReportList(principal, model);
 		}
 
 		model.addAttribute("jobReportData", jobReportData.get());
 		return "job/report/detail";
 	}
-	
+
 	/**
 	 * 就職活動報告新規作成画面を表示する
 	 * 
@@ -86,23 +84,23 @@ public class JobReportController {
 	 * @return 就職活動報告新規作成画面
 	 */
 	@GetMapping("/job/report/insert/{apply_id}")
-	public String insertReportList(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
+	public String getReportInert(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
 		Optional<UserData> userData;
-		
+
 		userData = jobReportService.selectPersonalInfo(apply_id);
-		
-		if(userData.isEmpty()) {
+
+		if (userData.isEmpty()) {
 			return getReportList(principal, model);
 		}
-		
+
 		// sessionに申請IDを保存
 		session.setAttribute("apply_id", apply_id);
 		
 		model.addAttribute("userData", userData.get());
-		
+
 		return "job/report/insert";
 	}
-	
+
 	/**
 	 * 新たに受験報告情報を登録する
 	 * 
@@ -115,11 +113,13 @@ public class JobReportController {
 	@PostMapping("job/report/insert")
 	public String getJobReportInsert(@ModelAttribute @Validated JobReportForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
-		
+
 		// sessionから申請ID取得しセット
-		form.setApply_id((String)session.getAttribute("apply_id"));
-		
-		if(bindingResult.hasErrors()) {
+		form.setApply_id((String) session.getAttribute("apply_id"));
+
+		session.removeAttribute("apply_id");
+
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("errmsg", "報告処理に失敗しました。");
 			return getReportList(principal, model);
 		}
@@ -127,13 +127,12 @@ public class JobReportController {
 		// 追加処理実行
 		jobReportService.insert(form, principal.getName());
 
-		log.info("報告新規作成処理：" + form.toString());
+		log.info("[" + "申請ID：" + session.getAttribute("apply_id") + "]" +" 報告新規登録実行");
 		model.addAttribute("msg", "報告が完了しました。");
 
 		return getReportList(principal, model);
 	}
-	
-	
+
 	/**
 	 * 就職活動報告修正画面を表示する
 	 * 
@@ -143,27 +142,40 @@ public class JobReportController {
 	@GetMapping("/job/report/fix/{apply_id}")
 	public String getReportFix(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
 		Optional<UserData> userData;
-		String id = (String)session.getAttribute("apply_id");
-		
+		userData = jobReportService.selectPersonalInfo(apply_id);
+
+		if (userData.isEmpty()) {
+			return getReportList(principal, model);
+		}
+
 		// sessionに申請IDを保存
 		session.setAttribute("apply_id", apply_id);
-		
+
+		model.addAttribute("userData", userData.get());
+
 		return "/job/report/fix";
 	}
-	
-	
+
 	/**
 	 * 就職活動報告を修正する
 	 * 
 	 * @param model
-	 * @return 
+	 * @return
 	 */
-	@GetMapping("/job/report/fix/")
-	public String changeReportContent(Principal principal, Model model) {
-		Optional<UserData> userData;
-		String id = (String)session.getAttribute("apply_id");
-		System.out.println("報告内容変更機能実行");
+	@PostMapping("/job/report/fix")
+	public String fixReportContent(Principal principal, Model model, @ModelAttribute @Validated JobReportForm form, BindingResult bindingResult) {
+		String apply_id = (String) session.getAttribute("apply_id");
+		form.setApply_id(apply_id);
 		
+		session.removeAttribute("apply_id");
+		
+		log.info("報告内容変更機能実行： formの中身 → " + form.toString());
+		
+		// TODO 報告内容変更処理　山下
+		jobReportService.updateContent(form);
+		
+		log.info("[" + "申請ID：" + apply_id + "]" +" 報告内容変更機能実行");
+
 		return getReportList(principal, model);
 	}
 	

@@ -15,43 +15,40 @@ import jp.ac.hcs.GreenShower.user.UserData;
 
 @Repository
 public class JobReportRepository {
-	
+
 	/** SQL 報告情報全件取得 */
 	private static final String SQL_SELECT_ALL_REPORTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, REPORTS REP, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLY_ID = REP.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID ORDER BY JH.STATUS;";
-	
+
 	/* 特定の1件の報告情報を取得 */
 	private static final String SQL_SELECT_ONE = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REP.ADVANCE_OR_RETREAT, REP.REMARK\r\n"
-			+ "FROM JOB_HUNTING JH\r\n"
-			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \r\n"
-			+ "LEFT JOIN REPORTS REP ON REP.APPLY_ID = JH.APPLY_ID \r\n"
-			+ "WHERE JH.APPLY_ID  = ?\r\n"
-			+ "LIMIT 1;";
-	
+			+ "FROM JOB_HUNTING JH\r\n" + "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \r\n"
+			+ "LEFT JOIN REPORTS REP ON REP.APPLY_ID = JH.APPLY_ID \r\n" + "WHERE JH.APPLY_ID  = ?\r\n" + "LIMIT 1;";
+
 	/** SQL 報告情報一件追加 */
 	private static final String SQL_INSERT_ONE_REPORTS = "INSERT INTO REPORTS(APPLY_ID, ADVANCE_OR_RETREAT, REMARK, REGISTER_USER_ID) VALUES(?, ?, ?, ?);";
-	
+
 	/** 報告情報状態更新(insert用) */
 	private static final String SQL_UPDATE_JOB_HUNTING = "UPDATE JOB_HUNTING SET STATUS = '6' WHERE APPLY_ID = ?;";
-	
+
 	/** 報告情報状態更新(状態変更用) */
 	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE JOB_HUNTING SET STATUS = ?, INDICATE = ? WHERE APPLY_ID = ?;";
-	
+
 	/** ユーザIDからクラス・番号・名前を取得するSQL */
-	private static final String SQL_SELECT_PERSONAL_INFO ="SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS U LEFT JOIN JOB_HUNTING JH ON U.USER_ID = JH.APPLICANT_ID WHERE JH.APPLY_ID = ?;";
-	
+	private static final String SQL_SELECT_PERSONAL_INFO = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS U LEFT JOIN JOB_HUNTING JH ON U.USER_ID = JH.APPLICANT_ID WHERE JH.APPLY_ID = ?;";
+
 	@Autowired
 	private JdbcTemplate jdbc;
-	
-	
+
 	public JobReportEntity selectAllReports() {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_REPORTS);
 		JobReportEntity jobReportEntity = mappingSelectResult(resultList);
 
 		return jobReportEntity;
 	}
-	
+
 	/**
 	 * 特定の1件を取得
+	 * 
 	 * @param apply_id 申請ID
 	 * @return JobHuntingData 1件の報告情報
 	 */
@@ -60,10 +57,10 @@ public class JobReportRepository {
 		JobReportEntity jobReportEntity = mappingSelectResult(resultList);
 		return jobReportEntity.getJobReportList().get(0);
 	}
-	
-	
+
 	/**
 	 * 特定のユーザ一人の情報を取得
+	 * 
 	 * @param user_id ユーザID
 	 * @return UserData ユーザ情報
 	 */
@@ -73,7 +70,6 @@ public class JobReportRepository {
 		return data;
 	}
 
-	
 	/**
 	 * reportsテーブルにデータを1件追加する.
 	 * 
@@ -84,14 +80,22 @@ public class JobReportRepository {
 	public int insertOne(JobReportData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_INSERT_ONE_REPORTS,
 
-				data.getApply_id(),
-				data.isAdvance_or_retreat(),
-				data.getRemark(),
-				data.getRegister_user_id());
-		
+				data.getApply_id(), data.isAdvance_or_retreat(), data.getRemark(), data.getRegister_user_id());
+
 		return rowNumber;
 	}
-	
+
+	/**
+	 * 
+	 * @param apply_id
+	 * @param form
+	 * @return
+	 */
+	public int updateContent(JobReportForm form) {
+
+		return 0;
+	}
+
 	/**
 	 * job_huntingテーブルの状態を6:報告承認待に変更する
 	 * 
@@ -101,10 +105,10 @@ public class JobReportRepository {
 	 */
 	public int updateStatusOne(String apply_id) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOB_HUNTING, apply_id);
-		
+
 		return rowNumber;
 	}
-	
+
 	/**
 	 * job_huntingテーブルの状態を任意の状態に更新する
 	 * 
@@ -114,15 +118,12 @@ public class JobReportRepository {
 	 */
 	public int updateStatus(JobReportForm form) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS,
-				
-				form.getStatus(),
-				form.getIndicate(),
-				form.getApply_id());
-		
+
+				form.getStatus(), form.getIndicate(), form.getApply_id());
+
 		return rowNumber;
 	}
-	
-	
+
 	/**
 	 * usersテーブルから取得したデータをUserData形式にマッピングする.
 	 * 
@@ -131,13 +132,13 @@ public class JobReportRepository {
 	 */
 	private UserData mappingSelectResult(Map<String, Object> result) {
 		UserData data = new UserData();
-		data.setClass_number((String)result.get("class_number"));
-		data.setClassroom((String)result.get("classroom"));
-		data.setName((String)result.get("name"));
-		
+		data.setClass_number((String) result.get("class_number"));
+		data.setClassroom((String) result.get("classroom"));
+		data.setName((String) result.get("name"));
+
 		return data;
 	}
-	
+
 	/**
 	 * job_huntingテーブルとrequestsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
 	 * 
@@ -146,30 +147,29 @@ public class JobReportRepository {
 	 */
 	private JobReportEntity mappingSelectResult(List<Map<String, Object>> resultList) {
 		JobReportEntity entity = new JobReportEntity();
-		
+
 		for (Map<String, Object> map : resultList) {
 			JobReportData data = new JobReportData();
 
 			// JobHuntingDataクラスのフィールドを補完（protectedなフィールド）
-			data.setCompany_name((String) map.get("company_name"));	
-			data.setContent(CommonEnum.getEnum(Content.class, (String) map.get("content")));			
+			data.setCompany_name((String) map.get("company_name"));
+			data.setContent(CommonEnum.getEnum(Content.class, (String) map.get("content")));
 			data.setClassroom((String) map.get("classroom"));
 			data.setClass_number((String) map.get("class_number"));
 			data.setName((String) map.get("name"));
 			data.setApply_id((String) map.get("apply_id"));
 			data.setApplicant_id((String) map.get("applicant_id"));
-			data.setStatus(CommonEnum.getEnum(JobHuntingData.Status.class,(String) map.get("status")));
+			data.setStatus(CommonEnum.getEnum(JobHuntingData.Status.class, (String) map.get("status")));
 			data.setApply_type(CommonEnum.getEnum(JobHuntingData.Apply_type.class, (String) map.get("apply_type")));
 			data.setIndicate((String) map.get("indicate"));
-			
-			
+
 			// JobReportDataクラスのフィールドを補完
 			data.setRemark((String) map.get("remark"));
 			data.setAdvance_or_retreat((boolean) map.get("advance_or_retreat"));
-			
+
 			entity.getJobReportList().add(data);
 		}
-		
+
 		return entity;
 
 	}
