@@ -36,6 +36,15 @@ public class JobReportRepository {
 	/** ユーザIDからクラス・番号・名前を取得するSQL */
 	private static final String SQL_SELECT_PERSONAL_INFO = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS U LEFT JOIN JOB_HUNTING JH ON U.USER_ID = JH.APPLICANT_ID WHERE JH.APPLY_ID = ?;";
 
+	/** 報告情報内容更新（進退用） */
+	private static final String SQL_UPDATE_ADVANCE_OR_RETREAT_TO_TRUE = "UPDATE REPORTS  SET ADVANCE_OR_RETREAT  = TRUE WHERE APPLY_ID = ?;";
+
+	/** 報告情報内容更新（進退用） */
+	private static final String SQL_UPDATE_ADVANCE_OR_RETREAT_TO_FALSE = "UPDATE REPORTS  SET ADVANCE_OR_RETREAT  = FALSE WHERE APPLY_ID = ?;";
+	
+	/** 報告情報内容更新（メモ用） */
+	private static final String SQL_UPDATE_REMARK = "UPDATE REPORTS  SET REMARK = ? WHERE APPLY_ID = ?;";
+	
 	@Autowired
 	private JdbcTemplate jdbc;
 
@@ -52,7 +61,7 @@ public class JobReportRepository {
 	 * @param apply_id 申請ID
 	 * @return JobHuntingData 1件の報告情報
 	 */
-	public JobHuntingData selectOne(String apply_id) {
+	public JobReportData selectOne(String apply_id) {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, apply_id);
 		JobReportEntity jobReportEntity = mappingSelectResult(resultList);
 		return jobReportEntity.getJobReportList().get(0);
@@ -86,14 +95,40 @@ public class JobReportRepository {
 	}
 
 	/**
+	 * reportsテーブルの進退を『進めない』に変更する
 	 * 
 	 * @param apply_id
-	 * @param form
-	 * @return
+	 * @return 追加データ数
+	 * @throws DataAccessException
 	 */
-	public int updateContent(JobReportForm form) {
+	public int updateAdvance_or_retreat_to_false(String apply_id) {
+		int rowNumber = jdbc.update(SQL_UPDATE_ADVANCE_OR_RETREAT_TO_FALSE, apply_id);
+		return rowNumber;
+	}
 
-		return 0;
+	/**
+	 * reportsテーブルの進退を『進める』に変更する
+	 * 
+	 * @param apply_id
+	 * @return 追加データ数
+	 * @throws DataAccessException
+	 */
+	public int updateAdvance_or_retreat_to_true(String apply_id) {
+		int rowNumber = jdbc.update(SQL_UPDATE_ADVANCE_OR_RETREAT_TO_TRUE, apply_id);
+		return rowNumber;
+	}
+
+	/**
+	 * reportsテーブルのメモを変更する
+	 * 
+	 * @param apply_id
+	 * @param remark
+	 * @return 修正データ数
+	 * @throws DataAccessException
+	 */
+	public int updateRemark(String apply_id, String remark) {
+		int rowNumber = jdbc.update(SQL_UPDATE_REMARK, remark, apply_id);
+		return rowNumber;
 	}
 
 	/**

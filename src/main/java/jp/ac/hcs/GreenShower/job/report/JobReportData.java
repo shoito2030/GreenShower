@@ -42,13 +42,12 @@ public class JobReportData extends JobHuntingData {
 
 	@Override
 	public String toString() {
-		return "JobReportData [apply_id=" + apply_id + ", advance_or_retreat=" + advance_or_retreat + ", remark="
-				+ remark + ", register_date=" + register_date + ", register_user_id=" + register_user_id
-				+ ", update_date=" + update_date + ", update_user_id=" + update_user_id + ", classroom=" + classroom
-				+ ", class_number=" + class_number + ", name=" + name + ", company_name=" + company_name + ", content="
-				+ content + ", applicant_id=" + applicant_id + ", status=" + status + ", apply_type=" + apply_type
-				+ "]";
+		return "JobReportData [advance_or_retreat=" + advance_or_retreat + ", remark=" + remark + ", register_date="
+				+ register_date + ", register_user_id=" + register_user_id + ", update_date=" + update_date
+				+ ", update_user_id=" + update_user_id + ", classroom=" + classroom + ", class_number=" + class_number
+				+ ", name=" + name + ", company_name=" + company_name + ", content=" + content + ", apply_id="
+				+ apply_id + ", applicant_id=" + applicant_id + ", status=" + status + ", apply_type=" + apply_type
+				+ ", indicate=" + indicate + "]";
 	}
-
 	
 }

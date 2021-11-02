@@ -10,7 +10,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import jp.ac.hcs.GreenShower.user.UserData;
 
 /**
@@ -57,8 +56,8 @@ public class JobReportService {
 	 * @param apply_id
 	 * @return Optional<jobJobReportData>
 	 */
-	public Optional<JobHuntingData> selectOne(String apply_id) {
-		JobHuntingData jobReportData;
+	public Optional<JobReportData> selectOne(String apply_id) {
+		JobReportData jobReportData;
 
 		try {
 			jobReportData = jobReportRepository.selectOne(apply_id);
@@ -145,17 +144,43 @@ public class JobReportService {
 	}
 
 
+	
 	/**
-	 * 1件の報告内容を変更する
+	 * 報告マスタの進退を変更する
 	 * 
 	 * @param form     検証済み入力情報
 	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
-	public boolean updateContent(JobReportForm form) {
+	public boolean updateAdvance_or_retreat(JobReportForm form) {
+		
 		int rowNumber = 0;
 		try {
 			// 変更処理を行い、変更できた件数を取得
-			rowNumber = jobReportRepository.updateContent(form);
+			if(form.isAdvance_or_retreat()) {
+				
+			} else {
+				rowNumber = jobReportRepository.updateAdvance_or_retreat_to_false(form.getApply_id());
+			}
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return rowNumber > 0;
+
+	}
+	
+	
+	/**
+	 * 報告マスタの備考を変更する
+	 * 
+	 * @param form     検証済み入力情報
+	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
+	 */
+	public boolean updateRemark(JobReportForm form) {
+		
+		int rowNumber = 0;
+		try {
+			// 変更処理を行い、変更できた件数を取得
+			rowNumber = jobReportRepository.updateRemark(form.getApply_id(), form.getRemark());
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}

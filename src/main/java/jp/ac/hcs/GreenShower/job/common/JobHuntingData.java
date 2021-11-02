@@ -58,7 +58,7 @@ public class JobHuntingData {
 	/**
 	 * 指摘事項
 	 */
-	private String indicate;
+	protected String indicate;
 	
 	public enum Status implements CommonEnum<Status> {
 		
