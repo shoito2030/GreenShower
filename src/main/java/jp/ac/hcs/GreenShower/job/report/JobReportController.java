@@ -184,12 +184,20 @@ public class JobReportController {
 	 * 就職活動報告承認画面を表示する
 	 * 
 	 * @param model
-	 * @return 就職活動報告修正画面
+	 * @return 就職活動報告承認画面
 	 */
 	@GetMapping("/job/report/status_change/{apply_id}")
 	public String getReportStatus(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
-		Optional<UserData> userData;
-		String id = (String)session.getAttribute("apply_id");
+		
+		Optional<JobHuntingData> jobReportData;
+
+		jobReportData = jobReportService.selectOne(apply_id);
+
+		if (jobReportData.isEmpty()) {
+			return getReportList(principal, model);
+		}
+
+		model.addAttribute("jobReportData", jobReportData.get());
 		
 		// sessionに申請IDを保存
 		session.setAttribute("apply_id", apply_id);
@@ -217,7 +225,12 @@ public class JobReportController {
 			model.addAttribute("errmsg", "報告状態変更処理に失敗しました。");
 			return getReportList(principal, model);
 		}
-
+		
+//		if(form.getStatus().equals("5") && form.getIndicate().equals("")) {
+//			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
+//			return getReportStatus(form.getApply_id(), principal, model);
+//		}
+		
 		// 報告状態変更処理実行
 		jobReportService.updateStatus(form);
 
