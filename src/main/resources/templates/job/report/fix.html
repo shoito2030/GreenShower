@@ -38,8 +38,11 @@
 
 	<th:block th:insert="components/part::frag_header"></th:block>
 	
-	<!-- 作成中 -->
-	<h1 class="title">就職活動報告 修正</h1>
+	<h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動報告 修正</h1>
+
+	<form class="container mt-md-5" method="post" th:action="@{/job/report/fix}">
+		<th:block th:insert="components/part::flag_report_form"></th:block>
+	</form>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
 	

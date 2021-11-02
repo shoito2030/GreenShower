@@ -49,61 +49,7 @@
 	<h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動報告 新規登録</h1>
 
 	<form class="container mt-md-5" method="post" th:action="@{/job/report/insert}">
-
-		<div class="row mt-md-4 pr-md-5">
-			<div class="col-md-2 pr-md-5">
-				<span><small class="text-muted">クラス</small><span
-						class="float-md-right mt-md-1 font-weight-bold h4" th:text="${userData.classroom}"></span></span>
-			</div>
-			<div class="col-md-1 offset-md-1">
-				<span><small class="text-muted">番号</small><span
-						class="float-md-right mt-md-1 font-weight-bold h4 "  th:text="${userData.class_number}"></span></span>
-			</div>
-			<div class="col-md-2 offset-md-1 pr-md-5">
-				<span><small class="text-muted">氏名</small><span
-						class="float-md-right mt-md-1 font-weight-bold h4"  th:text="${userData.name}"></span></span>
-			</div>
-		</div>
-
-		<br>
-		<br>
-
-		<div class="form-group row mt-md-5">
-			<div class="col-md-3">
-				<p class="font-weight-bold h5">進退</p>
-			</div>
-			<div class="col-md-4 mr-md-5">
-				<div class="radio-inline mr-md-5 mt-md-3">
-					<input type="radio" name="advance_or_retreat" value="true" onclick="not_ES_other()">
-					<label>進める</label>
-				</div>
-
-				<div class="radio-inline mr-md-5 mt-md-3">
-					<input type="radio" name="advance_or_retreat" value="false" onclick="not_ES_other()" checked>
-					<label>進まない</label>
-				</div>
-				<p th:text="${errmsg}" style="background-color: #ffcc99;"></p>
-			</div>
-		</div>
-
-		<br>
-		<br>
-
-		<div class="form-group row mt-md-4">
-			<div class="col-md-3 mt-md-5">
-				<p class="font-weight-bold h5">備考</p>
-			</div>
-			<div class="col-md-6 mb-md-3">
-				<textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
-			</div>
-		</div>
-
-		<br>
-		<br>
-		<br>
-		<button type="submit" class="btn btn-primary"
-			style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
-
+		<th:block th:insert="components/part::flag_report_form"></th:block>
 	</form>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
