@@ -45,13 +45,56 @@
 					<p class="font-weight-bold h4">指摘欄</p>
 				</div>
 			</div>
-			
+
 			<div class="row">
-				<textarea class="form-control bg-color-white pt-md-4 mx-auto" style="width: 600px;" name="indicate"></textarea>
+				<textarea class="form-control bg-color-white pt-md-4 mx-auto"
+					style="width: 600px;" name="indicate"></textarea>
 			</div>
 			<br>
 			<button type="submit" class="btn btn-primary">登録</button>
 		</form>
+		<hr>
+		<details>
+			<summary>とりまとめ企業について</summary>
+			<br>
+			<p class="font-weight-bold h5">学生の名簿登録</p>
+			<br>
+			<button class="btn btn-warning">登録完了</button>
+			<br>
+			<p class="font-weight-bold h5">必要書類の受取</p>
+			<div class="row justify-content-md-center mt-md-4">
+				<div class="col-md-6">
+					<span><input type="checkbox">履歴書<span
+						class="float-md-right mt-md-1 font-weight-bold h4"></span></span> <span><input
+						type="checkbox">大学成績証明書<span
+						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+				</div>
+				<div class="col-md-6">
+					<span><input type="checkbox">大学（卒業・卒業見込）証明書<span
+						class="float-md-right mt-md-1 font-weight-bold h4"></span></span> <span><input
+						type="checkbox">HCS成績証明書<span
+						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+				</div>
+				<div class="col-md-6">
+					<span><input type="checkbox">HCS卒業見込証明書<span
+						class="float-md-right mt-md-1 font-weight-bold h4"></span></span> <span><input
+						type="checkbox">健康診断証明書<span
+						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+				</div>
+				<div class="col-md-6">
+					<span><input type="checkbox">出身高校成績証明書<span
+						class="float-md-right mt-md-1 font-weight-bold h4"></span></span> <span><input
+						type="checkbox">推薦書<span
+						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+				</div>
+				<div class="col-md-6">
+					<span><input type="checkbox">個人情報等同意書<span
+						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+				</div>
+
+			</div>
+			<button class="btn btn-info">書類の受取完了</button>
+		</details>
 	</div>
 	<th:block th:insert="components/part::frag_script"></th:block>
 </body>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import lombok.extern.slf4j.Slf4j;
@@ -184,6 +185,7 @@ public class JobRequestController {
 	}
 	
 	@GetMapping("/search")
+	@ResponseBody
 	public String search(@RequestParam("classi") String classi, @RequestParam("number") String number){
 		String userId = jobRequestService.searchUserId(classi, number);
 		return userId;

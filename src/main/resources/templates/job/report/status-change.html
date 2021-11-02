@@ -8,172 +8,77 @@
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
 </head>
-<body>
+<body style="background-color: #DAE8FC;">
 	<th:block th:insert="components/part::frag_header"></th:block>
+	<p class="h1">就職活動報告 承認</p>
+	<div class="container mt-md-5">
 
-	<p class="h1">就職活動報告承認画面</p>
+		<!-- 共通部品挿入（メモまで） -->
+		<th:block th:insert="components/part::frag_detail (${jobReportData})"></th:block>
 
-	<div class="container">
-		<div class="row justify-content-md-center">
-			<div class="col-md-2">
-				<p>クラス</p>
-			</div>
-			<div class="col-md-1 offset-md-1">
-				<p>番号</p>
-			</div>
-			<div class="col-md-2 offset-md-1">
-				<p>氏名</p>
-			</div>
-		</div>
-	</div>
-
-
-
-	<div class="container">
-
+		<!-- メモ以降追加 -->
 		<hr>
-
-		<div class="row mt-md-5">
-			<div class="col-md-4 bg-color-white">
-				<p class="font-weight-bold h4">申請種別</p>
-			</div>
-			<div class="col-md-8">
-				<p class="h4 text-center text-md-left pl-md-5">とりまとめ</p>
-			</div>
-		</div>
-
-		<hr>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="font-weight-bold h4">企業名</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5">グリーン株式会社</p>
-			</div>
-		</div>
-
-		<hr>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-5">
-				<p class="font-weight-bold h4">開始日時・終了日時</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-
-				<div class="row">
-					<div class="col-md-5">
-						<label class="" for="date_activity_from">開始</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_from">2021年10月19日10:00</p>
-					</div>
-
-					<div class="col-md-2 mt-md-4">
-						<p class="h4 text-center text-md-left pl-md-5">~</p>
-					</div>
-
-					<div class="col-md-5">
-						<label class="" for="date_activity_to">終了</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_to">2021年10月19日10:00</p>
-					</div>
-
-					<hr>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="font-weight-bold h4">郵便番号</p>
-			</div>
-
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5">右</p>
-			</div>
-		</div>
-
-		<hr>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="font-weight-bold h4">場所</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5">右</p>
-			</div>
-		</div>
-
-		<hr>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-5">
-				<p class="font-weight-bold h4">手段</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-
-				<hr>
-
-				<div class="row">
-					<div class="col-md-5">
-						<label class="" for="date_activity_from">開始</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_from">2021年10月19日10:00</p>
-					</div>
-					<div class="col-md-2 mt-md-4">
-						<p class="h4 text-center text-md-left pl-md-5">~</p>
-					</div>
-					<div class="col-md-5">
-						<label class="" for="date_activity_to">終了</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_to">2021年10月19日10:00</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<hr>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="font-weight-bold h4">メモ</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5">This is some text
-					within a card body. This is some text within a card body. This is
-					some text within a card body. This is some text within a card body.
-					This is some text within a card body. This is some text within a
-					card body. This is some text within a card body. This is some text
-					within a card body.</p>
-			</div>
-		</div>
-
-		<hr>
-
-		<!-- 以上共通部 -->
-		
-		<form method="post" th:action="@{/job/report/status_change}">
+		<form method="post"
+			th:action="@{/job/report/status_change}">
 			<div class="row">
-				<div class="col-md-4 bg-color-white pt-md-4">
-					<p class="font-weight-bold h4">変更</p>
+				<div class="col">
+					<p class="font-weight-bold h4">現在の報告状態</p>
+					<div class="card center-block w-50" style="border-radius: 75px;">
+						<div class="card-body">
+							<p th:text="${jobReportData.status.value}"></p>
+						</div>
+					</div>
 				</div>
-				<select name="status">
-					<option value="7">承認</option>
-					<option value="5">差し戻し</option>
-					<option value="99">取消し</option>
-				</select>
+				<div class="col">
+					<div class="pt-md-4 mx-auto" style="width: 90px;">
+						<p class="font-weight-bold h4">変更</p>
+						<select id="status" class="form-control" style="width: 105px;" name="status">
+							<option value="7">承認</option>
+							<option value="5">差し戻し</option>
+							<option value="99">取消し</option>
+						</select>
+					</div>
+				</div>
 			</div>
+			
+			<div id="indicate" style="display:none;">
+			
 			<div class="row">
-				<div class="col-md-4 bg-color-white pt-md-4">
+				<div class="pt-md-4 mx-auto" style="width: 200px;">
 					<p class="font-weight-bold h4">指摘欄</p>
 				</div>
-				<textarea class="form-control" name="indicate" rows="7" cols="50"></textarea>
 			</div>
-
-			<button type="submit" class="btn btn-primary">登録</button>
+			
+			<div class="row">
+				<textarea class="form-control bg-color-white pt-md-4 mx-auto" style="width: 600px; height: 130px;" placeholder="指摘コメントを入力してください" name="indicate"></textarea>
+			</div>
+			<div th:if="${errmsg}">
+				<span th:text="${errmsg}" style="color: red;"></span>
+			</div>
+			
+			</div>
+			<br>
+			<br>
+			<button type="submit" class="btn btn-primary" style="-webkit-appearance: none; width: 200px; height: 45px; font-size: 23px;">登録</button>
 		</form>
+		<br>
+		<br>
+		<br>
+		<br>
 	</div>
 	<th:block th:insert="components/part::frag_script"></th:block>
+<script type="text/javascript">
+document.getElementById("status").addEventListener("change", function(){
+	var age_elem = document.getElementById("status");
+	var s_value = age_elem.options[age_elem.selectedIndex].value;
+	var box_div_elem = document.getElementById("indicate");
+	
+	if(s_value != "5"){
+		box_div_elem.style.display = 'none';
+	}else{
+		box_div_elem.style.display = 'block';
+	}
+}, false);
+</script>
 </body>
 </html>
