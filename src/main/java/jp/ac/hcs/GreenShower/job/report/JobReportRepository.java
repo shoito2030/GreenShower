@@ -17,12 +17,12 @@ import jp.ac.hcs.GreenShower.user.UserData;
 public class JobReportRepository {
 
 	/** SQL 報告情報全件取得 */
-	private static final String SQL_SELECT_ALL_REPORTS = "SELECT * FROM JOB_HUNTING JH, REQUESTS REQ, REPORTS REP, USERS U WHERE JH.APPLY_ID = REQ.APPLY_ID AND JH.APPLY_ID = REP.APPLY_ID AND JH.APPLICANT_ID  = U.USER_ID ORDER BY JH.STATUS;";
+	private static final String SQL_SELECT_ALL_REPORTS = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS  FROM JOB_HUNTING JH LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID ORDER BY JH.STATUS DESC;";
 
 	/* 特定の1件の報告情報を取得 */
-	private static final String SQL_SELECT_ONE = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REP.ADVANCE_OR_RETREAT, REP.REMARK\r\n"
+	private static final String SQL_SELECT_ONE = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLICANT_ID, JH.APPLY_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REP.ADVANCE_OR_RETREAT, REP.REMARK\r\n"
 			+ "FROM JOB_HUNTING JH\r\n" + "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \r\n"
-			+ "LEFT JOIN REPORTS REP ON REP.APPLY_ID = JH.APPLY_ID \r\n" + "WHERE JH.APPLY_ID  = ?\r\n" + "LIMIT 1;";
+			+ "LEFT JOIN REPORTS REP ON REP.APPLY_ID = JH.APPLY_ID \r\n" + "WHERE JH.APPLY_ID  = ?;";
 
 	/** SQL 報告情報一件追加 */
 	private static final String SQL_INSERT_ONE_REPORTS = "INSERT INTO REPORTS(APPLY_ID, ADVANCE_OR_RETREAT, REMARK, REGISTER_USER_ID) VALUES(?, ?, ?, ?);";
@@ -62,9 +62,10 @@ public class JobReportRepository {
 	 * @return JobHuntingData 1件の報告情報
 	 */
 	public JobReportData selectOne(String apply_id) {
-		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, apply_id);
-		JobReportEntity jobReportEntity = mappingSelectResult(resultList);
-		return jobReportEntity.getJobReportList().get(0);
+		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_ONE, apply_id);
+		JobReportData jobReportData = mappingSelectResult(result);
+		
+		return jobReportData;
 	}
 
 	/**
@@ -74,8 +75,8 @@ public class JobReportRepository {
 	 * @return UserData ユーザ情報
 	 */
 	public UserData selectPersonalInfo(String apply_id) {
-		Map<String, Object> result = jdbc.queryForList(SQL_SELECT_PERSONAL_INFO, apply_id).get(0);
-		UserData data = mappingSelectResult(result);
+		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO, apply_id);
+		UserData data = mappingSelectPersonalInfoResult(result);
 		return data;
 	}
 
@@ -165,7 +166,7 @@ public class JobReportRepository {
 	 * @param result report usersテーブルから取得したデータ
 	 * @return UserData
 	 */
-	private UserData mappingSelectResult(Map<String, Object> result) {
+	private UserData mappingSelectPersonalInfoResult(Map<String, Object> result) {
 		UserData data = new UserData();
 		data.setClass_number((String) result.get("class_number"));
 		data.setClassroom((String) result.get("classroom"));
@@ -173,9 +174,37 @@ public class JobReportRepository {
 
 		return data;
 	}
+	
+	
+	/**
+	 * job_huntingテーブルとreportsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
+	 * 
+	 * @param result  job_huntingテーブルとreportsテーブルから取得したデータ
+	 * @return JobRequestEntity
+	 */
+	private JobReportData mappingSelectResult(Map<String, Object> result) {
+		JobReportData data = new JobReportData();
+
+		// JobHuntingDataクラスのフィールドを補完（protectedなフィールド）
+		data.setCompany_name((String) result.get("company_name"));
+		data.setContent(CommonEnum.getEnum(Content.class, (String) result.get("content")));
+		data.setClassroom((String) result.get("classroom"));
+		data.setClass_number((String) result.get("class_number"));
+		data.setName((String) result.get("name"));
+		data.setApply_id((String) result.get("apply_id"));
+		data.setApplicant_id((String) result.get("applicant_id"));
+		data.setStatus(CommonEnum.getEnum(JobHuntingData.Status.class, (String) result.get("status")));
+		data.setApply_type(CommonEnum.getEnum(JobHuntingData.Apply_type.class, (String) result.get("apply_type")));
+		data.setIndicate((String) result.get("indicate"));
+
+		// JobReportDataクラスのフィールドを補完
+		data.setRemark((String) result.get("remark"));
+		data.setAdvance_or_retreat((boolean) result.get("advance_or_retreat"));
+		return data;
+	}
 
 	/**
-	 * job_huntingテーブルとrequestsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
+	 *  job_huntingテーブルとreportsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
 	 * 
 	 * @param resultList report job_huntingテーブルとrequestsテーブルから取得したデータ
 	 * @return JobRequestEntity
@@ -196,11 +225,6 @@ public class JobReportRepository {
 			data.setApplicant_id((String) map.get("applicant_id"));
 			data.setStatus(CommonEnum.getEnum(JobHuntingData.Status.class, (String) map.get("status")));
 			data.setApply_type(CommonEnum.getEnum(JobHuntingData.Apply_type.class, (String) map.get("apply_type")));
-			data.setIndicate((String) map.get("indicate"));
-
-			// JobReportDataクラスのフィールドを補完
-			data.setRemark((String) map.get("remark"));
-			data.setAdvance_or_retreat((boolean) map.get("advance_or_retreat"));
 
 			entity.getJobReportList().add(data);
 		}

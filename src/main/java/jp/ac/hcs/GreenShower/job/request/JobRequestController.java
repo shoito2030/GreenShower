@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -46,19 +45,15 @@ public class JobRequestController {
 
 		Optional<JobRequestEntity> jobRequestEntity;
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
-		// 取得できなかった場合は空のOptionalが格納される
-		if (role.equals("ROLE_STUDENT")) {
-			jobRequestEntity = jobRequestService.selectStudentRequests(principal.getName());
-		} else {
-			jobRequestEntity = jobRequestService.selectAllRequests();
-		}
+		
+		jobRequestEntity = jobRequestService.selectAllRequests(principal.getName(), role);
+		
 
 		// 処理失敗によりトップ画面へ
 		if (jobRequestEntity.isEmpty()) {
 			return "index";
 		}
 
-		session.setAttribute("jobRequestEntity", jobRequestEntity.get());
 		model.addAttribute("jobRequestEntity", jobRequestEntity.get());
 		return "job/request/list";
 	}
@@ -67,45 +62,26 @@ public class JobRequestController {
 	 * 個人の申請情報を取得し就職活動申請詳細画面を表示する
 	 * 
 	 * @param principal ログイン情報
-	 * @param apply_id 申請ID
+	 * @param apply_id  申請ID
 	 * @param model
 	 * @return 就職活動申請詳細画面
 	 */
 	@GetMapping("/job/request/detail/{apply_id}")
 	public String getRequestDetail(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-		JobRequestData sessionData = (JobRequestData) session.getAttribute(apply_id);
-		
-		// sessionに既に個人の申請情報が保存されているなら後続の処理は実行しない
-		if(sessionData != null) {
-			model.addAttribute("jobRequestData", sessionData);
-			log.info("[" + sessionData.getApplicant_id() + " 申請ID:" + sessionData.getApply_id() + "]の申請情報取得済み");
-			return "job/request/detail";
-		}
 
 		// sessionから申請情報の一覧を取得
-		JobRequestEntity jobRequestEntity = (JobRequestEntity) session.getAttribute("jobRequestEntity");
+		Optional<JobRequestData> jobRequestData;
 
-		// sessionになければDBに問い合わせる(URL直貼り)
-		if (jobRequestEntity == null) {
-			jobRequestEntity = jobRequestService.selectAllRequests().get();
-			log.warn("[" + principal.getName() + "]：URL直貼りアクセス");
-		}
+		jobRequestData = jobRequestService.selectOne(apply_id);
 
-		// 合致する申請IDを持つ申請情報を取得
-		Optional<JobHuntingData> jobRequestData = jobRequestEntity.getJobRequestList().stream()
-				.filter(request -> request.getApply_id().equals(apply_id)).findAny();
-		
-		if(jobRequestData.isEmpty()) {
+		if (jobRequestData.isEmpty()) {
 			return "index";
 		}
-		
-		session.setAttribute("jobRequestEntity", jobRequestEntity);
-		session.setAttribute(jobRequestData.get().getApply_id(), jobRequestData.get());
-		
+
 		model.addAttribute("jobRequestData", jobRequestData.get());
 		return "job/request/detail";
 	}
-	
+
 	/**
 	 * 就職活動申請登録画面を表示する
 	 * 
@@ -116,7 +92,7 @@ public class JobRequestController {
 	public String getRequestInsert(JobRequestForm form, Model model) {
 		return "job/request/insert";
 	}
-	
+
 	/**
 	 * 新たに就職活動申請情報を登録する
 	 * 
@@ -133,60 +109,50 @@ public class JobRequestController {
 		jobRequestService.insert(form, principal.getName());
 		return "index";
 	}
+
 	/**
 	 * 個人の申請情報を取得し就職活動申請状態変更画面を表示する
 	 * 
 	 * @param principal ログイン情報
-	 * @param apply_id 申請ID
-	 * @param model 
+	 * @param apply_id  申請ID
+	 * @param model
 	 * @return 就職活動申請状態変更画面
 	 */
 	@GetMapping("/job/request/status_change/{apply_id}")
 	public String getRequestStatusChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-		
 
 		// sessionから申請情報の一覧を取得
-		JobRequestEntity jobRequestEntity = (JobRequestEntity) session.getAttribute("jobRequestEntity");
+		Optional<JobRequestData> jobRequestData;
 
-		// sessionになければDBに問い合わせる(URL直貼り)
-		if (jobRequestEntity == null) {
-			jobRequestEntity = jobRequestService.selectAllRequests().get();
-			log.warn("[" + principal.getName() + "]：URL直貼りアクセス");
-		}
+		jobRequestData = jobRequestService.selectOne(apply_id);
 
-		// 合致する申請IDを持つ申請情報を取得
-		Optional<JobHuntingData> jobRequestData = jobRequestEntity.getJobRequestList().stream()
-				.filter(request -> request.getApply_id().equals(apply_id)).findAny();
-		
-		if(jobRequestData.isEmpty()) {
+		if (jobRequestData.isEmpty()) {
 			return "index";
 		}
-		
-		session.setAttribute("jobRequestEntity", jobRequestEntity);
-		session.setAttribute(jobRequestData.get().getApply_id(), jobRequestData.get());
-		
+
 		model.addAttribute("jobRequestData", jobRequestData.get());
 		return "job/request/status-change";
 	}
-	
+
 	/**
 	 * 就職活動申請状態変更処理を行う
 	 * 
 	 * @param principal ログイン情報
-	 * @param apply_id 申請ID 
-	 * @param model 
+	 * @param apply_id  申請ID
+	 * @param model
 	 * @return トップ画面
 	 */
 	@PostMapping("/job/request/status-change/{apply_id}")
-	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id,JobRequestForm form,Principal principal,Model model) {
+	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
+			Principal principal, Model model) {
 		System.out.println(apply_id);
-		jobRequestService.updateJobStatus(apply_id,form);
+		jobRequestService.updateJobStatus(apply_id, form);
 		return "index";
 	}
-	
+
 	@GetMapping("/search")
 	@ResponseBody
-	public String search(@RequestParam("classi") String classi, @RequestParam("number") String number){
+	public String search(@RequestParam("classi") String classi, @RequestParam("number") String number) {
 		String userId = jobRequestService.searchUserId(classi, number);
 		return userId;
 	}

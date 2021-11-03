@@ -2,12 +2,10 @@ package jp.ac.hcs.GreenShower.job.report;
 
 import static java.util.stream.Collectors.*;
 
-import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import jp.ac.hcs.GreenShower.user.UserData;
@@ -25,14 +23,12 @@ public class JobReportService {
 	/**
 	 * 就職活動申請の報告情報を全件取得する
 	 * 
-	 * @param principal ユーザのログイン情報
+	 * @param user_id ユーザID
+	 * @param role アクターの権限
 	 * @return Optional<jobReportEntity>
 	 */
-	public Optional<JobReportEntity> selectAllReports(Principal principal) {
+	public Optional<JobReportEntity> selectAllReports(String user_id, String role) {
 		JobReportEntity jobReportEntity;
-
-		// アクターの権限を取得
-		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
 		try {
 			jobReportEntity = jobReportRepository.selectAllReports();
@@ -40,7 +36,7 @@ public class JobReportService {
 			// ユーザが生徒の場合は、ユーザ自身の申請情報のみを抽出する
 			if (role.equals("ROLE_STUDENT")) {
 				jobReportEntity.setJobReportList(jobReportEntity.getJobReportList().stream()
-						.filter(report -> report.getApplicant_id().equals(principal.getName())).collect(toList()));
+						.filter(report -> report.getApplicant_id().equals(user_id)).collect(toList()));
 			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -157,7 +153,7 @@ public class JobReportService {
 		try {
 			// 変更処理を行い、変更できた件数を取得
 			if(form.isAdvance_or_retreat()) {
-				
+				rowNumber = jobReportRepository.updateAdvance_or_retreat_to_true(form.getApply_id());
 			} else {
 				rowNumber = jobReportRepository.updateAdvance_or_retreat_to_false(form.getApply_id());
 			}
