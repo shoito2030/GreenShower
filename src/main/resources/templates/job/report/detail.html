@@ -7,30 +7,9 @@
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
-
-<style>
-	h1.title {
-		font-size: 24px;
-	}
-
-	@media only screen and (min-width:651px) {
-
-		/* 中画面用 */
-		h1.title {
-			font-size: 26px;
-		}
-	}
-
-	@media only screen and (min-width:961px) {
-
-		/* 大画面用 */
-		h1.title {
-			font-size: 28px;
-		}
-	}
-</style>
 </head>
-<body style="background-color: #DAE8FC;">
+
+<body class="bg-color-sky">
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<h1 class="title">就職活動報告 詳細</h1>
