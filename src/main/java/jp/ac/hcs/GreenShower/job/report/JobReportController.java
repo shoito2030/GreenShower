@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,8 +43,11 @@ public class JobReportController {
 
 //	// 取得できなかった場合は空のOptionalが格納される
 		Optional<JobReportEntity> jobReportEntity;
+		
+		// アクターの権限を取得
+		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
-		jobReportEntity = jobReportService.selectAllReports(principal);
+		jobReportEntity = jobReportService.selectAllReports(principal.getName(), role);
 
 		// 処理失敗によりトップ画面へ
 		if (jobReportEntity.isEmpty()) {
@@ -71,6 +75,9 @@ public class JobReportController {
 		if (jobReportData.isEmpty()) {
 			return getReportList(principal, model);
 		}
+		
+		session.setAttribute("apply_id", apply_id);
+		log.info("申請報告詳細画面 jobReportData: " + jobReportData.get().toString());
 
 		model.addAttribute("jobReportData", jobReportData.get());
 		return "job/report/detail";
@@ -167,6 +174,12 @@ public class JobReportController {
 	@PostMapping("/job/report/fix")
 	public String fixReportContent(Principal principal, Model model, @ModelAttribute @Validated JobReportForm form,
 			BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("msg", "報告内容の変更に失敗しました。");
+			return getReportList(principal, model);
+		}
+		
 		String apply_id = (String) session.getAttribute("apply_id");
 		form.setApply_id(apply_id);
 
@@ -182,14 +195,11 @@ public class JobReportController {
 		// 入力内容がDBの情報と変わらない場合は実行しない
 		if (jobReportData.get().isAdvance_or_retreat() != form.isAdvance_or_retreat()) {
 			jobReportService.updateAdvance_or_retreat(form);
-			
 		} 
 		
 		if(!(jobReportData.get().getRemark().equals(form.getRemark()))) {
 			jobReportService.updateRemark(form);
 		}
-		
-		
 
 		session.removeAttribute("apply_id");
 
