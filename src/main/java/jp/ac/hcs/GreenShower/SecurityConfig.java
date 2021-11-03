@@ -36,8 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 
 		// 静的リソースへのアクセスには、セキュリティを適用しない
-		web.ignoring().antMatchers("/css/∗∗", "/h2-console/∗∗");
-
+		web.ignoring().antMatchers("/css/**", "/h2-console/**", "/js/**", "/img/**");
+//		web
+//	      .debug(false)
+//	      .ignoring()
+//	      .antMatchers("/img/**", "/js/**", "/css/**");
 	}
 
 	@Override
@@ -45,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// ログイン不要ページの設定
 		http.authorizeRequests().antMatchers("/css/**").permitAll() // cssへアクセス許可
+				.antMatchers("/js/**").permitAll() 
+				.antMatchers("/img/**").permitAll() 
 				.antMatchers("/login").permitAll() // ログインページは直リンクOK
 				.antMatchers("/signup").permitAll() // 新規ユーザー登録画面は直リンクOK
 				//.antMatchers("/user/**").hasAuthority("ROLE_ADMIN") // ユーザ管理機能は管理権限ユーザに許可

@@ -73,7 +73,7 @@ public class JobRequestController {
 		Optional<JobRequestData> jobRequestData;
 
 		jobRequestData = jobRequestService.selectOne(apply_id);
-
+		System.out.println("就職活動申請 詳細画面表示: " + apply_id);
 		if (jobRequestData.isEmpty()) {
 			return "index";
 		}
