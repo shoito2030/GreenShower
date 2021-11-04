@@ -32,11 +32,15 @@
 				<div class="col">
 					<div class="pt-md-4 mx-auto" style="width: 90px;">
 						<p class="font-weight-bold h4">変更</p>
-						<select id="status" class="form-control" style="width: 105px;" name="status">
+						<select id="status" class="form-control" style="width: 105px;"
+							name="status">
 							<option value="7">承認</option>
 							<option value="5">差し戻し</option>
 							<option value="99">取消し</option>
 						</select>
+					</div>
+					<div th:if="${errmsg}">
+						<span th:text="${errmsg}" style="color: red;"></span>
 					</div>
 				</div>
 			</div>
@@ -51,9 +55,6 @@
 			
 			<div class="row">
 				<textarea class="form-control bg-color-white pt-md-4 mx-auto" style="width: 600px; height: 130px;" placeholder="指摘コメントを入力してください" name="indicate"></textarea>
-			</div>
-			<div th:if="${errmsg}">
-				<span th:text="${errmsg}" style="color: red;"></span>
 			</div>
 			
 			</div>

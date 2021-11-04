@@ -255,10 +255,10 @@ public class JobReportController {
 			return getReportList(principal, model);
 		}
 
-//		if(form.getStatus().equals("5") && form.getIndicate().equals("")) {
-//			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
-//			return getReportStatus(form.getApply_id(), principal, model);
-//		}
+		if(form.getStatus().equals("5") && form.getIndicate().equals("")) {
+			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
+			return getReportStatus(form.getApply_id(), principal, model);
+		}
 
 		// 報告状態変更処理実行
 		jobReportService.updateStatus(form);

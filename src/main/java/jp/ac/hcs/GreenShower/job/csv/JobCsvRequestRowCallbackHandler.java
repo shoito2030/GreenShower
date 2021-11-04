@@ -27,24 +27,32 @@ public class JobCsvRequestRowCallbackHandler implements RowCallbackHandler{
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 
 			BufferedWriter bw = new BufferedWriter(fw);
+			
+			String name = "申請ID,名前,クラス,番号,活動開始日時,活動終了日時,場所,内容,企業名,欠席開始日時,欠席終了日時,早退日時,出席日時,メモ,申請種別";
+			bw.write(name);
+			bw.newLine();
+			
 			do {
 				// 申請一覧テーブルのデータ構造
-				/** 申請ID、活動開始日時、活動終了日時、場所、内容、
+				/** 申請ID、名前、クラス、番号、活動開始日時、活動終了日時、場所、内容、
 				 * 企業名、欠席開始日時、欠席終了日時、早退日時、出席日時、
-				 * メモ、申請種別、備考、指摘事項
+				 * メモ、申請種別
 				 * */
-				String str =rs.getString("apply_id") + ","
+				String str = rs.getString("apply_id") + ","
+				+ rs.getString("name") + ","
+				+ rs.getString("classroom") + ","
+				+ rs.getString("class_number") + ","
 				+ rs.getDate("date_activity_from") + ","
 				+ rs.getDate("date_activity_to") + ","
 				+ rs.getString("loc") + ","
 				+ rs.getString("content") + ","
-				+ rs.getString("company_name")
+				+ rs.getString("company_name") + ","
 				+ rs.getDate("date_absence_from") + ","
 				+ rs.getDate("date_absence_to") + ","
 				+ rs.getDate("leave_early_date") + ","
 				+ rs.getDate("attendance_date") + ","
 				+ rs.getString("remark") + ","
-				+ rs.getString("indicate");
+				+ rs.getString("apply_type");
 
 				bw.write(str);
 				bw.newLine();
