@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>就職活動報告修正画面</title>
+
+
+
+    <meta id="viewport" name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="manifest" href="../../../static/css/manifest.json" crossorigin="use-credentials">
+    <meta name="application-name" content="WebPortal">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="WebPortal">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+    <link rel="icon" sizes="192x192" href="/img/favicon.ico">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/favicon.ico" sizes="192x192">
+    <link rel="apple-touch-icon" href="/img/favicon.ico" sizes="58x58">
+
+    <!-- FontAwesome -->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />
+    <link rel="stylesheet" href="../../../static/css/common.css">
+    <link rel="stylesheet" href="../../../static/css/ress.css">
+
+
+    <style>
+        h1.title {
+            font-size: 24px;
+        }
+
+        @media only screen and (min-width:651px) {
+
+            /* 中画面用 */
+            h1.title {
+                font-size: 26px;
+            }
+        }
+
+        @media only screen and (min-width:961px) {
+
+            /* 大画面用 */
+            h1.title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand title-font" href="/"><img src=”../../static/img/bootstrap-solid.svg” width="30"
+                height="30" class="d-inline-block align-top" alt="">
+            就活ポータル.com</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav w-100 nav-justified" id="navbar-main">
+                <a class="nav-item nav-link active" href="/">就職活動管理</a>
+                <a class="nav-item nav-link active" href="/report/list">受験報告管理</a>
+
+
+                <a class="nav-item nav-link active" href="/">証明書管理</a>
+
+
+
+
+                <a class="nav-item nav-link active" href="/"><i class="fas fa-envelope"></i>メッセージ</a>
+                <a class="nav-item nav-link active" href="/"><i class="fas fa-cog"></i>設定</a>
+                <a class="nav-item nav-link active" href="/logout">Log out</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動申請 新規登録</h1>
+
+    <form class="container mt-md-5" method="post" action="/job/report/fix">
+        <div class="row mt-md-4 pr-md-5">
+            <div class="col-md-2 pr-md-5">
+                <span><small class="text-muted">クラス</small><span
+                        class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
+            </div>
+            <div class="col-md-1 offset-md-1">
+                <span><small class="text-muted">番号</small><span
+                        class="float-md-right mt-md-1 font-weight-bold h4 ">01</span></span>
+            </div>
+            <div class="col-md-2 offset-md-1 pr-md-5">
+                <span><small class="text-muted">氏名</small><span
+                        class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row mt-md-5">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5">申請種別</p>
+                <small class="text-danger">※必須</small>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group input-box">
+                    <div class="checkbox-inline">
+                        <input type="radio" name="content" value="1">
+                        <label>合企</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input type="radio" name="content" value="2">
+                        <label>単独</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input type="radio" name="content" value="3">
+                        <label>試験</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input type="radio" name="content" value="4">
+                        <label>その他</label>
+                    </div>
+
+                    <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">企業名</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control">
+                <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">内容</label>
+            <div class="col-md-6">
+                <div class="form-group input-box">
+                    <div class="checkbox-inline">
+                        <input type="radio" name="content" value="1">
+                        <label>合企</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input type="radio" name="content" value="2">
+                        <label>単独</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input type="radio" name="content" value="3">
+                        <label>試験</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input type="radio" name="content" value="4">
+                        <label>その他</label>
+                    </div>
+
+                    <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row mt-md-4">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5">開始時刻・終了日時</p>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="datetime-local" class="form-control mr-md-5" name="date_activity_from">
+                        <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="datetime-local" class="form-control mr-md-5" name="date_activity_to">
+                        <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+        <br>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">郵便番号</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="zipcode">
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label">場所</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="loc" name="loc">
+                <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+            </div>
+        </div>
+
+        <div class="form-group row mt-md-4">
+            <div class="col-md-3 mt-md-5">
+                <p class="font-weight-bold h5">備考</p>
+            </div>
+            <div class="col-md-6 mb-md-3">
+                <textarea class="form-control" id="remark" name="remark" rows="5" cols="50">テスト報告</textarea>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-success"
+            style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">編集</button>
+    </form>
+
+
+    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- オリジナルスクリプト -->
+    <script src="/js/common.js"></script>
+
+
+
+</body>
+
+</html>
