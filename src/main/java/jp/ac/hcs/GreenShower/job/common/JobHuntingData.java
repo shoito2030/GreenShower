@@ -70,7 +70,7 @@ public class JobHuntingData {
 		FIVE("5","報告作成中"),
 		SIX("6","報告承認待"),
 		SEVEN("7","報告完了"),
-		OTHER("99","その他");
+		OTHER("99","取消済");
 		
 		/** ID */
 		private String id;
