@@ -250,13 +250,12 @@ public class JobReportController {
 		// sessionから申請ID取得しセット
 		form.setApply_id((String) session.getAttribute("apply_id"));
 
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("errmsg", "報告状態変更処理に失敗しました。");
-			return getReportList(principal, model);
-		}
 
 		if(form.getStatus().equals("5") && form.getIndicate().equals("")) {
 			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
+			return getReportStatus(form.getApply_id(), principal, model);
+		}else if(form.getStatus().isEmpty()){
+			model.addAttribute("errmsg", "状態を選択してください");
 			return getReportStatus(form.getApply_id(), principal, model);
 		}
 
