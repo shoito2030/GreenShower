@@ -1,24 +1,189 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html>
 
 <head>
-<meta charset="UTF-8">
-<title>就職活動申請修正画面</title>
-    
-    
-<th:block th:insert="components/part::frag_mobile"></th:block>
-<th:block th:insert="components/part::frag_icon"></th:block>
-<th:block th:insert="components/part::frag_style"></th:block>
+	<meta charset="UTF-8">
+	<title>就活ポータルトップ</title>
+
+	<meta id="viewport" name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="manifest" href="/css/manifest.json" crossorigin="use-credentials">
+	<meta name="application-name" content="WebPortal">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="WebPortal">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+	<link rel="icon" sizes="192x192" href="/img/favicon.ico">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="apple-touch-icon" href="/img/favicon.ico">
+	<link rel="apple-touch-icon" href="/img/favicon.ico" sizes="192x192">
+	<link rel="apple-touch-icon" href="/img/favicon.ico" sizes="58x58">
+
+	<!-- FontAwesome -->
+	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />
+
+	<link rel="stylesheet" href="/src/main/resources/static/css/ress.css">
+	<link rel="stylesheet" href="/src/main/resources/static/css/common.css">
+
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+		<a class="navbar-brand title-font" href="/">就活ポータル.com</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-	<th:block th:insert="components/part::frag_header"></th:block>
-	
-	<!-- 作成中 -->
-	就職活動申請修正画面
-	<th:block th:insert="components/part::frag_script"></th:block>
-	
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav w-100 nav-justified">
+				<li class="nav-item active"><a class="nav-link" href="/">就職活動管理</a>
+				</li>
+				<li class="nav-item active"><a class="nav-link" href="/report/list">受験報告管理</a></li>
+
+
+
+
+				<li class="nav-item active"><a class="nav-link" href="/user/list">ユーザ管理</a></li>
+
+
+
+				<li class="nav-item active"><a class="nav-link" href="/"><i class="fas fa-envelope"></i>メッセージ</a></li>
+				<li class="nav-item active"><a class="nav-link" href="/"><i class="fas fa-cog"></i>設定</a></li>
+				<li class="nav-item active"><a class="nav-link" href="/logout">Log out</a></li>
+			</ul>
+
+		</div>
+	</nav>
+
+
+	<p class="h1">就職活動申請 修正</p>
+<form method="post" th:action="@{'/job/request/fix/' + ${jobRequestData.apply_id}}">
+	<div class="row justify-content-md-center mt-md-4">
+		<div class="col-md-2">
+			<span><small class="text-muted">クラス</small><span
+					class="float-md-right mt-md-1 font-weight-bold h4" th:text="*{jobRequestData.classroom}"></span></span>
+		</div>
+		<div class="col-md-1 offset-md-1">
+			<span><small class="text-muted">番号</small><span
+					class="float-md-right mt-md-1 font-weight-bold h4" th:text="*{jobRequestData.class_number}"></span></span>
+		</div>
+		<div class="col-md-2 offset-md-1">
+			<span><small class="text-muted">氏名</small><span
+					class="float-md-right mt-md-1 font-weight-bold h4" th:text="*{jobRequestData.name}"></span></span>
+		</div>
+	</div>
+
+
+
+	<div class="row mt-md-5">
+		<div class="col-md-4 bg-color-white">
+			<p class="font-weight-bold h4" style="background-color: white;">申請種別</p>
+		</div>
+		<div class="col-md-8">
+			<input type="radio" name="apply_type" th:checked="*{jobRequestData.apply_type.id==1}" value="1">とりまとめ
+			<input type="radio" name="apply_type" th:checked="*{jobRequestData.apply_type.id==0}" value="0">外部
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
+			<p class="font-weight-bold h4">企業名</p>
+		</div>
+		<div class="col-md-8 pt-md-4">
+			<input type="text" class="form-control pt-md-4 mx-auto" style="width: 600px;" th:field="*{jobRequestData.company_name}">
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
+			<p class="font-weight-bold h4">内容</p>
+		</div>
+		<div class="col-md-8 pt-md-4">
+			<input type="radio" name="content" th:checked="*{jobRequestData.content.id==1}" value="1">合企
+			<input type="radio" name="content" th:checked="*{jobRequestData.content.id==2}" value="2">単独
+			<input type="radio" name="content" th:checked="*{jobRequestData.content.id==3}" value="3">試験
+			<input type="radio" name="content" th:checked="*{jobRequestData.content.id==99}" value="99">その他
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
+			<p class="font-weight-bold h4">開始日時・終了日時</p>
+		</div>
+		<div class="col-md-8 pt-md-4">
+			<label class="" for="date_activity_from">開始
+			<input type="datetime-local" class="form-control pt-md-4 mx-auto" style="width: 300px;" th:field="*{jobRequestData.date_activity_from}"></label>
+			<label class="" for="date_activity_from">終了
+			<input type="datetime-local" class="form-control pt-md-4 mx-auto" style="width: 300px;" th:field="*{jobRequestData.date_activity_to}"></label>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
+			<p class="font-weight-bold h4">場所</p>
+		</div>
+		<div class="col-md-8 pt-md-4">
+			<input type="text" class="form-control pt-md-4 mx-auto" style="width: 450px;" th:field="*{jobRequestData.loc}">
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
+			<p class="font-weight-bold h4">手段</p>
+		</div>
+		<div class="col-md-8 pt-md-4">
+			<input type="checkbox" name="way" th:checked="*{jobRequestData.way.id==1}" value="1">欠席<label class="" for="date_activity_from">開始
+				<input type="datetime-local" class="form-control pt-md-4 mx-auto" style="width: 300px;" th:field="*{jobRequestData.date_absence_from}"></label>
+				<label class="" for="date_activity_from">終了
+				<input type="datetime-local" class="form-control pt-md-4 mx-auto" style="width: 300px;" th:field="*{jobRequestData.date_absence_to}"></label><br>
+			<input type="checkbox" name="way" th:checked="*{jobRequestData.way.id==2}" value="2">早退<label class="" for="date_activity_from">早退日時
+				<input type="datetime-local" class="form-control pt-md-4 mx-auto" style="width: 300px;" th:field="*{jobRequestData.leave_early_date}"></label><br>
+				
+			<input type="checkbox" name="way" th:checked="*{jobRequestData.way.id==3}" value="3">遅刻<label class="" for="date_activity_from">遅刻日時
+				<input type="datetime-local" class="form-control pt-md-4 mx-auto" style="width: 300px;" th:field="*{jobRequestData.attendance_date}"></label>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-4 bg-color-white pt-md-4" style="background-color: white;">
+			<p class="font-weight-bold h4">メモ</p>
+		</div>
+		<div class="col-md-8 pt-md-4">
+			<textarea class="form-control pt-md-4 mx-auto" style="width: 600px;" th:field="*{jobRequestData.remark}"></textarea>
+
+<input type="submit">
+	</div>
+	</div>
+</form>
+
+
+	<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+
+
+
 </body>
+
 </html>

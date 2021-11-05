@@ -113,7 +113,7 @@ public class JobRequestService {
 		data.setApply_type(CommonEnum.getEnum(Apply_type.class, form.getApply_type()));
 		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_from()));
 		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_to()));
-		data.setLeave_early_date(strLocalDateTimeToDate(form.getLeave_eary_date()));
+		data.setLeave_early_date(strLocalDateTimeToDate(form.getLeave_early_date()));
 		data.setAttendance_date(strLocalDateTimeToDate(form.getAttendance_date()));
 		data.setRemark(form.getRemark());
 		data.setRegister_user_id(register_user_id);
@@ -136,7 +136,50 @@ public class JobRequestService {
 		return rowNumber;
 
 	}
+	
+	/**
+	 * 就職活動申請の内容変更処理を行う
+	 * 
+	 * @param user_id ユーザID
+	 * @return Optional<jobRequestEntity>
+	 */
+	public int updateJobContent(String apply_id, JobRequestForm form) {
+		int rowNumber = 0;
+		try {
+			rowNumber = jobRequestRepository.updateJobContent(refillToJobReportDataUpdate(form,apply_id),apply_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return rowNumber;
 
+	}
+
+	/**
+	 * 入力情報をJobRequestData型に変換する（内容変更用）
+	 * 
+	 * @param form    検証済み入力データ
+	 * @param user_id 登録処理を実行したユーザのID
+	 * @return JobRequestData
+	 */
+	private JobRequestData refillToJobReportDataUpdate(JobRequestForm form,String apply_id) {
+		JobRequestData data = new JobRequestData();
+
+		data.setApply_id(String.valueOf(apply_id));
+		data.setApply_type(CommonEnum.getEnum(Apply_type.class, form.getApply_type()));
+		data.setCompany_name(form.getCompany_name());
+		data.setContent(CommonEnum.getEnum(Content.class, form.getContent()));
+		data.setDate_activity_from(strLocalDateTimeToDate(form.getDate_activity_from()));
+		data.setDate_activity_to(strLocalDateTimeToDate(form.getDate_activity_to()));
+		data.setLoc(form.getLoc());
+		data.setWay(CommonEnum.getEnum(Way.class, form.getWay()));
+		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_from()));
+		data.setDate_absence_to(strLocalDateTimeToDate(form.getDate_activity_to()));
+		data.setLeave_early_date(strLocalDateTimeToDate(form.getLeave_early_date()));
+		data.setAttendance_date(strLocalDateTimeToDate(form.getAttendance_date()));
+		data.setRemark(form.getRemark());
+		return data;
+	}
+	
 	/**
 	 * LocalDateTime形式の文字列をDate型に変換する
 	 * 

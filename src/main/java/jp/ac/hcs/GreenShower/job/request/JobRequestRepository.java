@@ -35,7 +35,8 @@ public class JobRequestRepository {
 			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE job_hunting SET status=?,indicate=? WHERE apply_id=?";
-
+	private static final String SQL_UPDATE_JOBCONTENT_REQUESTS = "UPDATE requests SET date_activity_from=?,date_activity_to=?,loc=?,way=?,date_absence_from=?,date_absence_to=?,leave_early_date=?,attendance_date=?,remark=? WHERE apply_id=?";
+	private static final String SQL_UPDATE_JOBCONTENT_JOB_HUNTING = "UPDATE job_hunting SET apply_type=?,company_name=?,content=? WHERE apply_id=?";
 	private static final String SQL_MAX_APPLY_ID = "SELECT MAX(apply_id) FROM JOB_HUNTING";
 	
 	private static final String SQL_SEARCH_USERID = "SELECT USER_ID FROM USERS WHERE CLASSROOM = ? AND CLASS_NUMBER = ?";
@@ -165,6 +166,12 @@ public class JobRequestRepository {
 
 	public int updateJobStatus(String apply_id, JobRequestForm form) {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS, form.getStatus(), form.getIndicate(), apply_id);
+		return rowNumber;
+	}
+
+	public int updateJobContent(JobRequestData data, String apply_id) {
+		int rowNumber = jdbc.update(SQL_UPDATE_JOBCONTENT_REQUESTS, data.getDate_activity_from(), data.getDate_activity_to(),data.getLoc(),data.getWay().getId(),data.getDate_absence_from(),data.getDate_absence_to(),data.getLeave_early_date(),data.getAttendance_date(),data.getRemark(),apply_id);
+		rowNumber = jdbc.update(SQL_UPDATE_JOBCONTENT_JOB_HUNTING,data.getApply_type().getId(),data.getCompany_name(),data.getContent().getId(),apply_id);
 		return rowNumber;
 	}
 

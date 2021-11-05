@@ -57,7 +57,7 @@ public class JobRequestForm {
 	/**
 	 * 早退日時
 	 */
-	private String leave_eary_date;
+	private String leave_early_date;
 	
 	/**
 	 * 遅刻日時
