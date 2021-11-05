@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="../../../static/css/ress.css">
 
 
-    
+
 
 
     <style>
@@ -109,11 +109,17 @@
             </div>
             <div class="col-md-1 offset-md-1">
                 <label class="my-1 mr-2"><small class="text-muted">番号</small></label>
-                <select id="targetSelect" size="1" class="selectpicker"></select>
+                <select name="class_number" id="class_number" class="float-md-right mt-md-1 font-weight-bold h4">
+                    <option value="S3A1">00</option>
+                    <option value="S3A2">01</option>
+                    <option value="S3A3">02</option>
+                </select>
+                
+
             </div>
             <div class="col-md-2 offset-md-1 pr-md-5">
                 <span><small class="text-muted">氏名</small><span
-                    class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
+                        class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
 
             </div>
         </div>
@@ -205,16 +211,18 @@
 
         <div class="form-group row">
             <div class="col-md-3">
-                <p class="font-weight-bold h5 ">開始時刻・終了日時</p>
+                <p class="font-weight-bold h5 mt-md-5">開始時刻・終了日時</p>
                 <small class="text-danger">※必須</small>
             </div>
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-6">
+                        <label>開始</label>
                         <input type="datetime-local" class="form-control mr-md-5" name="date_activity_from">
                         <small class="form-text text-md-left text-danger">エラーメッセージ</small>
                     </div>
                     <div class="col-md-6">
+                        <label>終了</label>
                         <input type="datetime-local" class="form-control mr-md-5" name="date_activity_to">
                         <small class="form-text text-md-left text-danger">エラーメッセージ</small>
                     </div>
@@ -256,28 +264,30 @@
 
         <div class="form-group row">
             <div class="col-md-3">
-                <p class="font-weight-bold h5" style="margin-top: 50px;">手段</p>
+                <p class="font-weight-bold h5" style="margin-top: 90px;">手段</p>
                 <small class="text-danger">※必須</small>
             </div>
             <div class="col-md-6">
                 <div class="form-group input-box pull-left">
                     <div class="row">
-                        <div class="col-md-2 mt-md-1">
+                        <div class="col-md-2 mt-md-5">
                             <input type="checkbox" name="way" value="0">
                             <label>欠席</label>
                         </div>
                         <div class="col-md-5">
+                            <label>開始</label>
                             <input type="datetime-local" class="form-control" name="date_absence_from">
                             <small class="form-text text-md-left text-danger">エラーメッセージ</small>
                         </div>
                         <div class="col-md-5">
+                            <label>終了</label>
                             <input type="datetime-local" class="form-control" name="date_absence_to">
                             <small class="form-text text-md-left text-danger">エラーメッセージ</small>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2 mt-md-1">
+                        <div class="col-md-2 mt-md-2">
                             <input type="checkbox" name="way" value="1">
                             <label>早退</label>
                         </div>
@@ -288,7 +298,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2 mt-md-1">
+                        <div class="col-md-2 mt-md-2">
                             <input type="checkbox" name="way" value="2">
                             <label>遅刻</label>
                         </div>
@@ -340,29 +350,20 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css"
+        integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"
+        integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- オリジナルスクリプト -->
     <script src="/js/common.js"></script>
 
 
     <script>
-        var selectOptionCount = 3;
 
-$(window).on('load', function() {
-    createSelectOption();
-});
-
-function createSelectOption() {
-    var selectObj = $('#targetSelect');
-
-    for (var i = 0; i < selectOptionCount; i++) {
-        var option = $('<option>');
-        option.html(i);
-        selectObj.append(option);
-    }
-}
     </script>
 </body>
 

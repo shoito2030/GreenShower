@@ -14,100 +14,247 @@
 
 <body>
 
-	<th:block th:insert="components/part::frag_header"></th:block>
-	
-	<!-- 作成中 -->
-	<th:block th:insert="components/part::frag_script"></th:block>
-	<div class="container">
-		<div class="content-box">
-			<h2>就職活動申請新規登録</h2>
+	<h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動申請 新規登録</h1>
 
-			<div class="input-form">
-				<form method="post" th:action="@{/job/request/insert}">
-				
-					<th:block role="presentation"
+    <form class="container mt-md-5" method="post" th:action="@{/job/request/insert}">
+
+
+        <th:block role="presentation"
 					sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
-					
-					<div class="form-group input-box">
-					<label for="class">クラス</label>
-					<select name="class" id="classi">
-						<option value="S3A1">S3A1</option>
-						<option value="S3A2">S3A2</option>
-						<option value="S3A3">S3A3</option>
-					</select>
-					
-					<label for="number" id="number">番号</label>
-					<select name="number">
-						<option value="01">01</option>
-						<option value="02">02</option>
-						<option value="03">03</option>
-					</select>
-					
-					<input type="button" value="検索" onclick="getUserId();" />
-					
-					<span id="userId"></span>
-					</div>
-					
-					</th:block>
-				
-					<label for="apply_type">申請種別</label>
-					<div class="form-group input-box">
-						<input type="radio" name="apply_type" value="0">個人
-						<input type="radio" name="apply_type" value="1">とりまとめ
-					</div>
+        <div class="row mt-md-4 pr-md-5">
+            <div class="col-md-2 pr-md-5">
+                <span><small class="text-muted">クラス</small><span
+                        class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
+            </div>
+            <div class="col-md-1 offset-md-1">
+                <label class="my-1 mr-2"><small class="text-muted">番号</small></label>
+                <select name="class_number" id="class_number" class="float-md-right mt-md-1 font-weight-bold h4">
+                    <option value="S3A1">00</option>
+                    <option value="S3A2">01</option>
+                    <option value="S3A3">02</option>
+                </select>
+                
 
-					<label for="company_name">企業名</label>
-					<div class="form-group input-box">
-						<input type="text" class="form-control" name="company_name">
-					</div>
-					
-					<label for="content">内容</label>
-					<div class="form-group input-box">
-						<input type="radio" name="content" value="1">合企
-						<input type="radio" name="content" value="2">単独
-						<input type="radio" name="content" value="3">試験
-						<input type="radio" name="content" value="99">その他
-					</div>
-					
-					<label for="date_activity">開始時刻・終了日時</label>
-					<div class="form-group input-box">
-						<input type="datetime-local" class="form-control" name="date_activity_from">
-						<input type="datetime-local" class="form-control" name="date_activity_to">
-					</div>
-					
-					<label for="post">郵便番号</label>
-					<div class="form-group input-box">
-						<input type="text" class="form-control" name="post">
-					</div>
-					
-					<label for="loc">場所</label>
-					<div class="form-group input-box">
-						<input type="text" class="form-control" name="loc">
-					</div>
-					
-					<label for="way">手段</label>
-					<div class="form-group input-box">
-						<input type="checkbox" name="way" value="0">欠席
-						開始<input type="datetime-local" class="form-control" name="date_absence_from">
-						終了<input type="datetime-local" class="form-control" name="date_absence_to">
-						<input type="checkbox" name="way" value="1">早退
-						<input type="datetime-local" class="form-control" name="leave_eary_date">
-						<input type="checkbox" name="way" value="2">遅刻
-						<input type="datetime-local" class="form-control" name="attendance_date">
-					</div>
-					
-					
-					<label for="remark">メモ</label>
-					<div class="form-group input-box">
-						<textarea rows="10" cols="60" class="form-control" name="remark"></textarea>
-					</div>
+            </div>
+            <div class="col-md-2 offset-md-1 pr-md-5">
+                <span><small class="text-muted">氏名</small><span
+                        class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
+
+            </div>
+        </div>
+    </th:block>
 
 
-					<button type="submit" class="btn btn-warning">登録</button>
-				</form>
-			</div>
-		</div>
-	</div>
+
+
+        <div class="row mt-md-4 pr-md-5">
+            <div class="col-md-2 pr-md-5">
+                <span><small class="text-muted">クラス</small><span
+                        class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
+            </div>
+            <div class="col-md-1 offset-md-1">
+                <span><small class="text-muted">番号</small><span
+                        class="float-md-right mt-md-1 font-weight-bold h4 ">01</span></span>
+            </div>
+            <div class="col-md-2 offset-md-1 pr-md-5">
+                <span><small class="text-muted">氏名</small><span
+                        class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row mt-md-5">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5 mt-md-1">申請種別</p>
+                <small class="text-danger">※必須</small>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group input-box">
+                    <div class="checkbox-inline" style="margin-right:10%;">
+                        <input type="radio" name="apply_type" value="0">
+                        <label>個人</label>
+                    </div>
+                    <div class="checkbox-inline" style="margin-left:10%;">
+                        <input type="radio" name="apply_type" value="1">
+                        <label>とりまとめ</label>
+                    </div>
+
+                    <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5 ">企業名</p>
+                <small class="text-danger">※必須</small>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="company_name">
+                <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+            </div>
+        </div>
+
+
+        <div class="form-group row mt-md-5">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5 ">内容</p>
+                <small class="text-danger">※必須</small>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group input-box">
+                    <div class="checkbox-inline" style="margin-right:5%;">
+                        <input type="radio" name="content" value="1">
+                        <label>合企</label>
+                    </div>
+                    <div class="checkbox-inline" style="margin-right:5%;">
+                        <input type="radio" name="content" value="2">
+                        <label>単独</label>
+                    </div>
+                    <div class="checkbox-inline" style="margin-right:5%;">
+                        <input type="radio" name="content" value="3">
+                        <label>試験</label>
+                    </div>
+                    <div class="checkbox-inline" style="margin-right:5%;">
+                        <input type="radio" name="content" value="99">
+                        <label>その他</label>
+                    </div>
+
+                    <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5 mt-md-5">開始時刻・終了日時</p>
+                <small class="text-danger">※必須</small>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>開始</label>
+                        <input type="datetime-local" class="form-control mr-md-5" name="date_activity_from">
+                        <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                    </div>
+                    <div class="col-md-6">
+                        <label>終了</label>
+                        <input type="datetime-local" class="form-control mr-md-5" name="date_activity_to">
+                        <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+        <br>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5 ">郵便番号</p>
+            </div>
+            <div class="col-md-4 form-inline justify-content-center justify-content-md-start">
+                <input type="text" class="form-control w-50" id="zipcode">
+                <button class="btn btn-primary" type="button">検索</button>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5 ">場所</p>
+                <small class="text-danger">※必須</small>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="loc" name="loc">
+                <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+            </div>
+        </div>
+
+
+        <br>
+        <br>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5" style="margin-top: 90px;">手段</p>
+                <small class="text-danger">※必須</small>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group input-box pull-left">
+                    <div class="row">
+                        <div class="col-md-2 mt-md-5">
+                            <input type="checkbox" name="way" value="0">
+                            <label>欠席</label>
+                        </div>
+                        <div class="col-md-5">
+                            <label>開始</label>
+                            <input type="datetime-local" class="form-control" name="date_absence_from">
+                            <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                        </div>
+                        <div class="col-md-5">
+                            <label>終了</label>
+                            <input type="datetime-local" class="form-control" name="date_absence_to">
+                            <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2 mt-md-2">
+                            <input type="checkbox" name="way" value="1">
+                            <label>早退</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="datetime-local" class="form-control" name="leave_eary_date">
+                            <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2 mt-md-2">
+                            <input type="checkbox" name="way" value="2">
+                            <label>遅刻</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="datetime-local" class="form-control" name="attendance_date">
+                            <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                        </div>
+                    </div>
+
+
+                    <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <p class="font-weight-bold h5 mt-md-5">メモ</p>
+            </div>
+            <div class="col-md-6">
+                <textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-primary"
+            style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
+    </form>
+
+	<th:block th:insert="components/part::frag_script"></th:block>
 <script type="text/javascript" th:inline="javascript">
 function getUserId(){
     const classi = document.getElementById('classi').value;
