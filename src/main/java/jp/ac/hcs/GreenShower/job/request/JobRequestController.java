@@ -91,19 +91,16 @@ public class JobRequestController {
 	 * @param model
 	 * @return 就職活動申請登録画面
 	 */
-	@GetMapping("/job/request/insert/{apply_id}")
-	public String getRequestInsert(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
+	@GetMapping("/job/request/insert/")
+	public String getRequestInsert(Principal principal, Model model) {
 		Optional<UserData> userData = null;
 
 		// TODO 山下作業予定
-//		userData = jobRequestService.selectPersonalInfo(apply_id);
+//		userData = jobRequestService.selectPersonalInfo(principal.getName());
 //
 //		if (userData.isEmpty()) {
 //			return getRequestList(principal, model);
 //		}
-//
-//		// sessionに申請IDを保存
-//		session.setAttribute("apply_id", apply_id);
 
 		model.addAttribute("userData", userData.get());
 		return "job/request/insert";
