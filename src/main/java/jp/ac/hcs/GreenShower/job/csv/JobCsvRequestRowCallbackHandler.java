@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
 import jp.ac.hcs.GreenShower.WebConfig;
+import jp.ac.hcs.GreenShower.job.common.CommonEnum;
+import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 
 public class JobCsvRequestRowCallbackHandler implements RowCallbackHandler{
 	
@@ -28,31 +30,31 @@ public class JobCsvRequestRowCallbackHandler implements RowCallbackHandler{
 
 			BufferedWriter bw = new BufferedWriter(fw);
 			
-			String name = "申請ID,名前,クラス,番号,活動開始日時,活動終了日時,場所,内容,企業名,欠席開始日時,欠席終了日時,早退日時,出席日時,メモ,申請種別";
+			String name = "申請ID,申請種別,名前,クラス,番号,活動開始日時,活動終了日時,場所,内容,企業名,欠席開始日時,欠席終了日時,早退日時,出席日時,メモ";
 			bw.write(name);
 			bw.newLine();
 			
 			do {
 				// 申請一覧テーブルのデータ構造
-				/** 申請ID、名前、クラス、番号、活動開始日時、活動終了日時、場所、内容、
+				/** 申請ID、申請種別、名前、クラス、番号、活動開始日時、活動終了日時、場所、内容、
 				 * 企業名、欠席開始日時、欠席終了日時、早退日時、出席日時、
-				 * メモ、申請種別
+				 * メモ
 				 * */
 				String str = rs.getString("apply_id") + ","
+				+ CommonEnum.getEnum(JobHuntingData.Apply_type.class, (String) rs.getString("apply_type")).getValue() + ","
 				+ rs.getString("name") + ","
 				+ rs.getString("classroom") + ","
 				+ rs.getString("class_number") + ","
 				+ rs.getDate("date_activity_from") + ","
 				+ rs.getDate("date_activity_to") + ","
 				+ rs.getString("loc") + ","
-				+ rs.getString("content") + ","
+				+ CommonEnum.getEnum(JobHuntingData.Content.class, (String) rs.getString("content")).getValue() + ","
 				+ rs.getString("company_name") + ","
 				+ rs.getDate("date_absence_from") + ","
 				+ rs.getDate("date_absence_to") + ","
 				+ rs.getDate("leave_early_date") + ","
 				+ rs.getDate("attendance_date") + ","
-				+ rs.getString("remark") + ","
-				+ rs.getString("apply_type");
+				+ rs.getString("remark");
 
 				bw.write(str);
 				bw.newLine();
