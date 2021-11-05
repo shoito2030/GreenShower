@@ -258,11 +258,11 @@
 
     <!-- オリジナルスクリプト -->
     <script type="text/javascript" th:inline="javascript">
-        const url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=';
-        const zipcode = document.getElementById("zipcode");
-        const loc = document.getElementById("loc");
 
         $('#zip-btn').on('click', function () {
+            const url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=';
+            const zipcode = document.getElementById("zipcode");
+
             // Ajax通信を開始
             $.ajax({
                 url: url + zipcode.value,
@@ -283,6 +283,7 @@
         })
 
         function setAddress(results) {
+            const loc = document.getElementById("loc");
             const address1 = results.address1;
             const address2 = results.address2;
             const address3 = results.address3;
