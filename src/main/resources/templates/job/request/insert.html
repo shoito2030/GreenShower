@@ -20,13 +20,13 @@
 
 
         <th:block role="presentation"
-					sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
-        <div class="row mt-md-4 pr-md-5">
+						sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
+ <div class="row mt-md-4 pr-md-5">
             <div class="col-md-2 pr-md-5">
                 <span><small class="text-muted">クラス</small><span
                         class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
             </div>
-            <div class="col-md-1 offset-md-1">
+            <div class="col-md-2 offset-md-1">
                 <label class="my-1 mr-2"><small class="text-muted">番号</small></label>
                 <select name="class_number" id="class_number" class="float-md-right mt-md-1 font-weight-bold h4">
                     <option value="S3A1">00</option>
@@ -46,7 +46,8 @@
 
 
 
-
+<th:block role="presentation"
+						sec:authorize="hasRole('ROLE_STUDENT')">
         <div class="row mt-md-4 pr-md-5">
             <div class="col-md-2 pr-md-5">
                 <span><small class="text-muted">クラス</small><span
@@ -61,6 +62,7 @@
                         class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
             </div>
         </div>
+        </th:block>
 
         <br>
         <br>
