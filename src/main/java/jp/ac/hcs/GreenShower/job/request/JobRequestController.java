@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jp.ac.hcs.GreenShower.user.UserData;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -41,7 +42,7 @@ public class JobRequestController {
 	 * @return 就職活動申請申請一覧画面 or トップ画面
 	 */
 	@GetMapping("/job/request/list")
-	public String getReportList(Principal principal, Model model) {
+	public String getRequestList(Principal principal, Model model) {
 
 		Optional<JobRequestEntity> jobRequestEntity;
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
@@ -85,11 +86,26 @@ public class JobRequestController {
 	/**
 	 * 就職活動申請登録画面を表示する
 	 * 
+	 * @param apply_id 申請ID
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動申請登録画面
 	 */
-	@GetMapping("/job/request/insert")
-	public String getRequestInsert(JobRequestForm form, Model model) {
+	@GetMapping("/job/request/insert/{apply_id}")
+	public String getRequestInsert(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
+		Optional<UserData> userData = null;
+
+		// TODO 山下作業予定
+//		userData = jobRequestService.selectPersonalInfo(apply_id);
+//
+//		if (userData.isEmpty()) {
+//			return getRequestList(principal, model);
+//		}
+//
+//		// sessionに申請IDを保存
+//		session.setAttribute("apply_id", apply_id);
+
+		model.addAttribute("userData", userData.get());
 		return "job/request/insert";
 	}
 
