@@ -98,8 +98,46 @@ CREATE TABLE IF NOT EXISTS reports (
               REFERENCES users(user_id) 
 );
 
+/**
+ * とりまとめ企業マスタ
+ */
+CREATE TABLE IF NOT EXISTS summary_companies (
+	company_id VARCHAR(254) PRIMARY KEY,
+	job_no VARCHAR(254),
+	company_name VARCHAR(137),
+	resume BOOLEAN  NOT NULL DEFAULT false,
+	university_tranriptsscripts BOOLEAN NOT NULL DEFAULT false,
+	university_diploma BOOLEAN NOT NULL DEFAULT false,
+	hcs_transcript BOOLEAN NOT NULL DEFAULT false,
+	hcs_diploma BOOLEAN NOT NULL DEFAULT false,
+	health_certificate BOOLEAN NOT NULL DEFAULT false,
+	high_school_transcript BOOLEAN NOT NULL DEFAULT false,
+	recommendation BOOLEAN NOT NULL DEFAULT false,
+	personal_information_agreement BOOLEAN NOT NULL DEFAULT false
+);
 
-
+/**
+ * とりまとめ書類マスタ
+ */
+CREATE TABLE IF NOT EXISTS summary_documents (
+	apply_id VARCHAR(254) PRIMARY KEY,
+	company_id VARCHAR(254),
+	receipt_of_tresume TIMESTAMP,
+	receipt_of_university_tranriptsscripts TIMESTAMP,
+	receipt_of_university_diploma TIMESTAMP,
+	receipt_of_hcs_transcript TIMESTAMP,
+	receipt_of_hcs_diploma TIMESTAMP,
+	receipt_of_health_certificate TIMESTAMP,
+	receipt_of_high_school_transcript TIMESTAMP,
+	receipt_of_recommendation TIMESTAMP,
+	receipt_of_personal_information_agreement TIMESTAMP,
+	receipt_of_all_required  TIMESTAMP,
+	
+	FOREIGN KEY (apply_id)
+    	REFERENCES job_hunting(apply_id),
+    FOREIGN KEY (company_id)
+    	REFERENCES summary_companies(company_id)
+);
 
 /**
  * 前回のやつ
