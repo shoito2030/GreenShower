@@ -1,68 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-<meta charset="UTF-8">
-<title>就職活動申請新規登録画面</title>
-    
-    
-<th:block th:insert="components/part::frag_mobile"></th:block>
-<th:block th:insert="components/part::frag_icon"></th:block>
-<th:block th:insert="components/part::frag_style"></th:block>
+    <meta charset="UTF-8">
+    <title>就職活動申請新規登録画面</title>
+
+
+    <th:block th:insert="components/part::frag_mobile"></th:block>
+    <th:block th:insert="components/part::frag_icon"></th:block>
+    <th:block th:insert="components/part::frag_style"></th:block>
 </head>
 
 <body>
-	<th:block th:insert="components/part::frag_header"></th:block>
+    <th:block th:insert="components/part::frag_header"></th:block>
 
-	<h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動申請 新規登録</h1>
+    <h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動申請 新規登録</h1>
 
     <form class="container mt-md-5" method="post" th:action="@{/job/request/insert}">
 
 
-        <th:block role="presentation"
-						sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
- <div class="row mt-md-4 pr-md-5">
-            <div class="col-md-2 pr-md-5">
-                <span><small class="text-muted">クラス</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
-            </div>
-            <div class="col-md-2 offset-md-1">
-                <label class="my-1 mr-2"><small class="text-muted">番号</small></label>
-                <select name="class_number" id="class_number" class="float-md-right mt-md-1 font-weight-bold h4">
-                    <option value="S3A1">00</option>
-                    <option value="S3A2">01</option>
-                    <option value="S3A3">02</option>
-                </select>
-                
-
-            </div>
-            <div class="col-md-2 offset-md-1 pr-md-5">
-                <span><small class="text-muted">氏名</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
-
-            </div>
-        </div>
-    </th:block>
+        <th:block role="presentation" sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
+            <div class="row mt-md-4 pr-md-5">
+                <div class="col-md-2 pr-md-5">
+                    <span><small class="text-muted">クラス</small><span
+                            class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
+                </div>
+                <div class="col-md-2 offset-md-1">
+                    <label class="my-1 mr-2"><small class="text-muted">番号</small></label>
+                    <select name="class_number" id="class_number" class="float-md-right mt-md-1 font-weight-bold h4">
+                        <option value="S3A1">00</option>
+                        <option value="S3A2">01</option>
+                        <option value="S3A3">02</option>
+                    </select>
 
 
+                </div>
+                <div class="col-md-2 offset-md-1 pr-md-5">
+                    <span><small class="text-muted">氏名</small><span
+                            class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
 
-<th:block role="presentation"
-						sec:authorize="hasRole('ROLE_STUDENT')">
-        <div class="row mt-md-4 pr-md-5">
-            <div class="col-md-2 pr-md-5">
-                <span><small class="text-muted">クラス</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
+                </div>
             </div>
-            <div class="col-md-1 offset-md-1">
-                <span><small class="text-muted">番号</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4 ">01</span></span>
+        </th:block>
+
+
+
+        <th:block role="presentation" sec:authorize="hasRole('ROLE_STUDENT')">
+            <div class="row mt-md-4 pr-md-5">
+                <div class="col-md-2 pr-md-5">
+                    <span><small class="text-muted">クラス</small><span
+                            class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
+                </div>
+                <div class="col-md-1 offset-md-1">
+                    <span><small class="text-muted">番号</small><span
+                            class="float-md-right mt-md-1 font-weight-bold h4 ">01</span></span>
+                </div>
+                <div class="col-md-2 offset-md-1 pr-md-5">
+                    <span><small class="text-muted">氏名</small><span
+                            class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
+                </div>
             </div>
-            <div class="col-md-2 offset-md-1 pr-md-5">
-                <span><small class="text-muted">氏名</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
-            </div>
-        </div>
         </th:block>
 
         <br>
@@ -163,7 +160,7 @@
             </div>
             <div class="col-md-4 form-inline justify-content-center justify-content-md-start">
                 <input type="text" class="form-control w-50" id="zipcode">
-                <button class="btn btn-primary" type="button">検索</button>
+                <button class="btn btn-primary" type="button" id="zip-btn">検索</button>
             </div>
         </div>
 
@@ -215,7 +212,7 @@
                             <label>早退</label>
                         </div>
                         <div class="col-md-5">
-                            <input type="datetime-local" class="form-control" name="leave_eary_date">
+                            <input type="datetime-local" class="form-control" name="leave_early_date">
                             <small class="form-text text-md-left text-danger">エラーメッセージ</small>
                         </div>
                     </div>
@@ -257,40 +254,46 @@
             style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
     </form>
 
-	<th:block th:insert="components/part::frag_script"></th:block>
-<script type="text/javascript" th:inline="javascript">
-function getUserId(){
-    const classi = document.getElementById('classi').value;
-    const number = document.getElementById('number').value;
- 
-    // AjaxにてDemoControllerクラスのsearchメソッドを呼び出す
-    let request = new XMLHttpRequest();
-    request.open("get", "/search?classi=" + classi + "?number=" + number, true);
-    request.send(null);
-    request.onload = function (event) {
-       // Ajaxが正常終了した場合
-       if (request.readyState === 4 && request.status === 200) {
-          // 該当するデータが無かった場合
-          if(!request.responseText){
-              alert("該当するデータはありませんでした");
-              return;
-          }
-          // 該当するデータがあった場合は、取得したUserDataオブジェクトの内容を画面に
-          // 表示する。その際、名前・性別・メモはデコードする
-          const userId = request.responseText;
-          document.getElementById('userId').textContent = userId;
-       // Ajaxが異常終了した場合
-       }else{
-          alert("エラーが発生し、データが取得できませんでしたよ」");
-       }
-    };
-    // Ajaxが異常終了した場合
-    request.onerror = function (event) {
-       alert("エラーが発生し、データが取得できませんでしたあああ");
-    }
-}
+    <th:block th:insert="components/part::frag_script"></th:block>
 
-</script>
+    <!-- オリジナルスクリプト -->
+    <script type="text/javascript" th:inline="javascript">
+        const url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=';
+        const zipcode = document.getElementById("zipcode");
+        const loc = document.getElementById("loc");
+
+        $('#zip-btn').on('click', function () {
+            // Ajax通信を開始
+            $.ajax({
+                url: url + zipcode.value,
+                type: 'GET',
+                dataType: 'json',
+            })
+                .done(function (data) {
+                    // 通信成功時の処理を記述
+                    const results = data.results[0];
+                    setAddress(results);
+
+
+                })
+                .fail(function () {
+                    // 通信失敗時の処理を記述
+                    alert("ajax失敗");
+                });
+        })
+
+        function setAddress(results) {
+            const address1 = results.address1;
+            const address2 = results.address2;
+            const address3 = results.address3;
+
+            const address = address1 + address2 + address3;
+
+            loc.value = address;
+
+        }
+
+    </script>
 </body>
 
 </html>
