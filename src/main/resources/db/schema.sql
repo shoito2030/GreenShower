@@ -140,6 +140,42 @@ CREATE TABLE IF NOT EXISTS summary_documents (
 );
 
 /**
+ * 就活イベントマスタ
+ */
+CREATE TABLE IF NOT EXISTS events (
+	event_id VARCHAR(254) PRIMARY KEY,
+	company_name VARCHAR(137) NOT NULL,
+	datetime TIMESTAMP NOT NULL,
+	loc VARCHAR(100) NOT NULL,
+	content VARCHAR(254) NOT NULL,
+	bring VARCHAR(254),
+	register_date TIMESTAMP NOT NULL,
+	register_user_id VARCHAR(254) NOT NULL,
+	update_date TIMESTAMP DEFAULT NULL,
+	update_user_id VARCHAR(254) DEFAULT NULL,
+	
+	FOREIGN KEY (register_user_id)
+    	REFERENCES users(user_id),
+    FOREIGN KEY (update_user_id)
+    	REFERENCES users(user_id)	
+);
+
+/**
+ * とりまとめ名簿管理マスタ
+ */
+CREATE TABLE IF NOT EXISTS summary_list_management (
+	apply_id VARCHAR(254) PRIMARY KEY,
+	register_date TIMESTAMP,
+	register_user_id VARCHAR(254) NOT NULL,
+	
+	FOREIGN KEY (apply_id)
+    	REFERENCES job_hunting(apply_id),
+    FOREIGN KEY (register_user_id)
+    	REFERENCES users(user_id)
+);
+
+
+/**
  * 前回のやつ
  */
 CREATE TABLE IF NOT EXISTS report_hoge (
