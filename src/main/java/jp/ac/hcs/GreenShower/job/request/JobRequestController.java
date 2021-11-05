@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jp.ac.hcs.GreenShower.user.UserData;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -91,9 +90,9 @@ public class JobRequestController {
 	 * @param model
 	 * @return 就職活動申請登録画面
 	 */
-	@GetMapping("/job/request/insert/")
+	@GetMapping("/job/request/insert")
 	public String getRequestInsert(Principal principal, Model model) {
-		Optional<UserData> userData = null;
+		//Optional<UserData> userData = null;
 
 		// TODO 山下作業予定
 //		userData = jobRequestService.selectPersonalInfo(principal.getName());
@@ -102,7 +101,7 @@ public class JobRequestController {
 //			return getRequestList(principal, model);
 //		}
 
-		model.addAttribute("userData", userData.get());
+		//model.addAttribute("userData", userData.get());
 		return "job/request/insert";
 	}
 
@@ -206,5 +205,11 @@ public class JobRequestController {
 			Principal principal, Model model) {
 		jobRequestService.updateJobContent(apply_id, form);
 		return "index";
+	}
+	
+	@GetMapping("/job/event-registration")
+	public String getRequestevent_registration(Principal principal, Model model) {
+		return "job/event-registration";
+		
 	}
 }
