@@ -156,4 +156,42 @@ public class JobRequestController {
 		String userId = jobRequestService.searchUserId(classi, number);
 		return userId;
 	}
+	
+	/**
+	 * 個人の申請情報を取得し就職活動申請内容変更画面を表示する
+	 * 
+	 * @param principal ログイン情報
+	 * @param apply_id  申請ID
+	 * @param model
+	 * @return 就職活動申請内容変更画面
+	 */
+	@GetMapping("/job/request/fix/{apply_id}")
+	public String getRequestContentChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
+
+		// sessionから申請情報の一覧を取得
+		Optional<JobRequestData> jobRequestData;
+
+		jobRequestData = jobRequestService.selectOne(apply_id);
+
+		if (jobRequestData.isEmpty()) {
+			return "index";
+		}
+
+		model.addAttribute("jobRequestData", jobRequestData.get());
+		return "job/request/fix";
+	}
+	/**
+	 * 就職活動申請内容変更処理を行う
+	 * 
+	 * @param principal ログイン情報
+	 * @param apply_id  申請ID
+	 * @param model
+	 * @return トップ画面
+	 */
+	@PostMapping("/job/request/fix/{apply_id}")
+	public String JobRequestContentChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
+			Principal principal, Model model) {
+		jobRequestService.updateJobContent(apply_id, form);
+		return "index";
+	}
 }
