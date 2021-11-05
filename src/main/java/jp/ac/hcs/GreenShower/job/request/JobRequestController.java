@@ -208,7 +208,7 @@ public class JobRequestController {
 	}
 	
 	@GetMapping("/job/event-registration")
-	public String getRequestevent_registration(Principal principal, Model model) {
+	public String getRequestEvent_registration(Principal principal, Model model) {
 		return "job/event-registration";
 		
 	}
