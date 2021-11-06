@@ -5,8 +5,8 @@ INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_num
 VALUES('yamada@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '山田啓介', 'ROLE_STUDENT', 'S3A2', '02', 'yamada@xxx.co.jp');
 
 /* ユーザマスタのデータ（ADMIN権限：担任、事務） PASS:password */
-INSERT INTO users (user_id, encrypted_password, name, role,  register_user_id)
-VALUES('abe@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '安部華奈', 'ROLE_TEACHER', 'abe@xxx.co.jp');
+INSERT INTO users (user_id, encrypted_password, name, role, classroom, register_user_id)
+VALUES('abe@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '安部華奈', 'ROLE_TEACHER', 'S3A1',  'abe@xxx.co.jp');
 INSERT INTO users (user_id, encrypted_password, name, role, register_user_id)
 VALUES('sano@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '佐野翼', 'ROLE_STAFF', 'sano@xxx.co.jp');
 

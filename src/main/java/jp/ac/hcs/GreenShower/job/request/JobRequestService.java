@@ -17,6 +17,7 @@ import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Apply_type;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
 import jp.ac.hcs.GreenShower.job.request.JobRequestData.Way;
+import jp.ac.hcs.GreenShower.user.UserData;
 
 /**
  * 就職活動申請に関する処理を行うServiceクラス
@@ -63,7 +64,7 @@ public class JobRequestService {
 		try {
 			jobRequestData = jobRequestRepository.selectOne(apply_id);
 		} catch (DataAccessException e) {
-			//System.out.println("request selectOneで例外キャッチ");
+			// System.out.println("request selectOneで例外キャッチ");
 			e.printStackTrace();
 			jobRequestData = null;
 		}
@@ -71,18 +72,75 @@ public class JobRequestService {
 	}
 
 	/**
+	 * ユーザの個人情報を1件取得
+	 * 
+	 * @param apply_id 申請ID
+	 * @return Optional<userData>
+	 */
+	public Optional<UserData> selectPersonalInfo(String user_id) {
+		UserData userData;
+
+		try {
+			userData = jobRequestRepository.selectPersonalInfo(user_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			userData = null;
+		}
+		return Optional.ofNullable(userData);
+	}
+
+	/**
+	 * ユーザの個人情報を1件取得（API用）
+	 * 
+	 * @param classroom    クラス
+	 * @param class_number 出席番号
+	 * @return userData
+	 */
+	public UserData selectPersonalInfo(String classroom, String class_number) {
+		UserData userData;
+
+		try {
+			userData = jobRequestRepository.selectPersonalInfo(classroom, class_number);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			userData = null;
+		}
+
+		return userData;
+	}
+
+	/**
+	 * 担任が受け持つ生徒数を取得する
+	 * 
+	 * @param user_id 担任のユーザID
+	 * @return
+	 */
+	public int selectStudentsNumber(String user_id) {
+		int studentsNumber;
+
+		try {
+			studentsNumber = jobRequestRepository.selectStudentsNumber(user_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			studentsNumber = 0;
+		}
+
+		return studentsNumber;
+	}
+
+	/**
 	 * 申請マスタに新たな報告情報を1件追加する
 	 * 
 	 * @param form             検証済み入力情報
+	 * @param applicant_id 申請者ID
 	 * @param register_user_id 登録処理を実行したユーザのID
 	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
-	public boolean insert(JobRequestForm form, String register_user_id) {
+	public boolean insert(JobRequestForm form, String applicant_id, String register_user_id) {
 		int rowNumber = 0;
-
 		try {
 			// 追加処理を行い、追加できた件数を取得
-			rowNumber = jobRequestRepository.insertOne(refillToJobReportData(form, register_user_id));
+			rowNumber = jobRequestRepository.insertOne(refillToJobReportData(form, applicant_id, register_user_id));
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -94,22 +152,30 @@ public class JobRequestService {
 	 * 入力情報をJobRequestData型に変換する（insert用）
 	 * 
 	 * @param form    検証済み入力データ
+	 * @param applicant_id 申請者ID
 	 * @param user_id 登録処理を実行したユーザのID
 	 * @return JobRequestData
 	 */
-	private JobRequestData refillToJobReportData(JobRequestForm form, String register_user_id) {
+	private JobRequestData refillToJobReportData(JobRequestForm form, String applicant_id, String register_user_id) {
 		JobRequestData data = new JobRequestData();
 
 		int apply_id = jobRequestRepository.apply_id_get() + 1;
 		data.setApply_id(String.valueOf(apply_id));
-		data.setApplicant_id(register_user_id);
+		data.setApplicant_id(applicant_id);
 		data.setContent(CommonEnum.getEnum(Content.class, form.getContent()));
 		data.setCompany_name(form.getCompany_name());
 		data.setIndicate(form.getIndicate());
 		data.setDate_activity_from(strLocalDateTimeToDate(form.getDate_activity_from()));
 		data.setDate_activity_to(strLocalDateTimeToDate(form.getDate_activity_to()));
 		data.setLoc(form.getLoc());
-		data.setWay(CommonEnum.getEnum(Way.class, form.getWay()));
+
+		// 内容を複数（遅刻と早退）を選択している可能性がある
+		if (form.getWay().size() >= 2) {
+			data.setWay(CommonEnum.getEnum(Way.class, "4"));
+		} else {
+			data.setWay(CommonEnum.getEnum(Way.class, form.getWay().get(0)));
+		}
+
 		data.setApply_type(CommonEnum.getEnum(Apply_type.class, form.getApply_type()));
 		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_from()));
 		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_to()));
@@ -136,7 +202,7 @@ public class JobRequestService {
 		return rowNumber;
 
 	}
-	
+
 	/**
 	 * 就職活動申請の内容変更処理を行う
 	 * 
@@ -146,7 +212,7 @@ public class JobRequestService {
 	public int updateJobContent(String apply_id, JobRequestForm form) {
 		int rowNumber = 0;
 		try {
-			rowNumber = jobRequestRepository.updateJobContent(refillToJobReportDataUpdate(form,apply_id),apply_id);
+			rowNumber = jobRequestRepository.updateJobContent(refillToJobRequestDataUpdate(form, apply_id), apply_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -161,7 +227,7 @@ public class JobRequestService {
 	 * @param user_id 登録処理を実行したユーザのID
 	 * @return JobRequestData
 	 */
-	private JobRequestData refillToJobReportDataUpdate(JobRequestForm form,String apply_id) {
+	private JobRequestData refillToJobRequestDataUpdate(JobRequestForm form, String apply_id) {
 		JobRequestData data = new JobRequestData();
 
 		data.setApply_id(String.valueOf(apply_id));
@@ -171,7 +237,13 @@ public class JobRequestService {
 		data.setDate_activity_from(strLocalDateTimeToDate(form.getDate_activity_from()));
 		data.setDate_activity_to(strLocalDateTimeToDate(form.getDate_activity_to()));
 		data.setLoc(form.getLoc());
-		data.setWay(CommonEnum.getEnum(Way.class, form.getWay()));
+		
+		// 内容を複数（遅刻と早退）を選択している可能性がある
+		if (form.getWay().size() >= 2) {
+			data.setWay(CommonEnum.getEnum(Way.class, "4"));
+		} else {
+			data.setWay(CommonEnum.getEnum(Way.class, form.getWay().get(0)));
+		}
 		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_from()));
 		data.setDate_absence_to(strLocalDateTimeToDate(form.getDate_activity_to()));
 		data.setLeave_early_date(strLocalDateTimeToDate(form.getLeave_early_date()));
@@ -179,7 +251,7 @@ public class JobRequestService {
 		data.setRemark(form.getRemark());
 		return data;
 	}
-	
+
 	/**
 	 * LocalDateTime形式の文字列をDate型に変換する
 	 * 
@@ -199,9 +271,4 @@ public class JobRequestService {
 
 		return date;
 	}
-
-	public String searchUserId(String classi, String number) {
-		return jobRequestRepository.searchUserId(classi, number);
-	}
-
 }

@@ -1,11 +1,20 @@
 package jp.ac.hcs.GreenShower.job.request;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
 @Data
 public class JobRequestForm {
+	
+	/**
+	 * 出席番号
+	 */
+	private String class_number;
+	
 	/**
 	 * 申請種別
 	 */
@@ -35,8 +44,7 @@ public class JobRequestForm {
 	/**
 	 * 手段
 	 */
-	@NotBlank
-	private String way;
+	private List<String> way = new ArrayList<>(); ;
 	
 	/**
 	 * 内容
