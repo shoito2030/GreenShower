@@ -88,7 +88,6 @@ public class JobRequestController {
 	/**
 	 * 就職活動申請登録画面を表示する
 	 * 
-	 * @param apply_id  申請ID
 	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動申請登録画面
@@ -109,18 +108,18 @@ public class JobRequestController {
 		// 自身の受け持つ生徒数を取得
 		if (role.equals("ROLE_TEACHER")) {
 			int studentsNumber = jobRequestService.selectStudentsNumber(principal.getName());
-			
+
 			// 出席番号のリストを作成
 			List<Integer> classNumbers = IntStream.range(1, studentsNumber + 1).boxed().collect(toList());
-			
+
 			Map<String, String> classNumbersMap = new LinkedHashMap<String, String>();
 			classNumbers.forEach(num -> {
 				classNumbersMap.put(String.format("%02d", num), String.format("%02d", num));
 			});
-			
+
 			// 担任が他クラスの生徒の申請を閲覧するのを防ぐために使用する
 			session.setAttribute("classroom", userData.get().getClassroom());
-			
+
 			model.addAttribute("classNumbersMap", classNumbersMap);
 		}
 
@@ -140,24 +139,29 @@ public class JobRequestController {
 	@PostMapping("/job/request/insert")
 	public String getJobRequestInsert(@ModelAttribute @Validated JobRequestForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
-		
+
+		if (bindingResult.hasErrors()) {
+			log.info("申請の登録に失敗しました");
+			model.addAttribute("errmsg", "申請の登録に失敗しました");
+			return getRequestInsert(principal, model);
+		}
+
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
 		if (role.equals("ROLE_TEACHER")) {
 			// JobApiController参照
 			session.removeAttribute("classroom");
-			String applicant_id = (String)session.getAttribute("applicant_id");
-			
+			String applicant_id = (String) session.getAttribute("applicant_id");
+
 			jobRequestService.insert(form, applicant_id, principal.getName());
-		} else if(role.equals("ROLE_STUDENT")){
-			
+		} else if (role.equals("ROLE_STUDENT")) {
+
 			// ユーザが生徒の場合、登録者のユーザIDも当該生徒のものとなる
 			jobRequestService.insert(form, principal.getName(), principal.getName());
 		}
-		
+
 		System.out.println(form);
-		
-		
+
 		return "index";
 	}
 

@@ -64,15 +64,14 @@
 				<p class="font-weight-bold h5">進退</p>
 			</div>
 			<div class="col-md-4 mr-md-5">
-				<div class="radio-inline mr-md-5 mt-md-3">
-					<input type="radio" name="advance_or_retreat" value="true" onclick="not_ES_other()" th:field="*{advance_or_retreat}">
-					<label>進める</label>
-				</div>
-
-				<div class="radio-inline mr-md-5 mt-md-3">
-					<input type="radio" name="advance_or_retreat" value="false" onclick="not_ES_other()" th:field="*{advance_or_retreat}">
-					<label>進まない</label>
-				</div>
+				<div class="form-check form-check-inline">
+                    <input type="radio" name="advance_or_retreat" value="true" onclick="not_ES_other()" id="advance_or_retreat1"　th:field="*{advance_or_retreat}">
+                    <label class="form-check-label" for="advance_or_retreat">進める</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio" name="advance_or_retreat" value="false" onclick="not_ES_other()" id="advance_or_retreat2"　th:field="*{advance_or_retreat}">
+                    <label class="form-check-label" for="advance_or_retreat2">進めない</label>
+                  </div>
 				<p th:text="${errmsg}" style="background-color: #ffcc99;"></p>
 			</div>
 		</div>

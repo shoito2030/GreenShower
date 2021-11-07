@@ -15,24 +15,24 @@
 	
 
 
-	<div class="container">
+	<div class="container-lg">
         <div class="row justify-content-md-center">
             <div class="col-sm-8">
                 <div class="card center-block" style="border-radius:75px;">
                     <div class="card-body">
                         <h3 class="card-title">就職活動申請</h3>
-                        <div class="btn-group-vertical btn-group-lg w-50" role="group">
-                            <input type="button" class="btn btn-primary mt-5" value="新規作成"
+                        <div class="btn-group-vertical btn-group-lg" role="group">
+                            <input type="button" class="btn btn-primary mt-4" value="新規作成"
 							th:onclick="'window.location.href = \'' + @{/job/request/insert} + '\''">
-                            <input type="button" class="btn btn-primary mt-5" value="申請一覧"
+                            <input type="button" class="btn btn-primary mt-4" value="申請一覧"
 							th:onclick="'window.location.href = \'' + @{/job/request/list} + '\''">
-                            <input type="button" class="btn btn-primary mt-5" value="報告一覧"
+                            <input type="button" class="btn btn-primary mt-4" value="報告一覧"
 							th:onclick="'window.location.href = \'' + @{/job/report/list} + '\''">
-                            <input type="button" class="btn btn-primary mt-5" value="イベント情報 登録"
+                            <input type="button" class="btn btn-primary mt-4" value="イベント情報 登録"
 							th:onclick="'window.location.href = \'' + @{/job/event-registration} + '\''">
 							
 							<th:block role="presentation" sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
-                            <input type="button" class="btn btn-primary mt-5 mb-5" value="申請一覧 出力"
+                            <input type="button" class="btn btn-primary mt-4 mb-5" value="申請一覧 出力"
 							th:onclick="'window.location.href = \'' + @{/job/csv} + '\''">
 							</th:block>
 							

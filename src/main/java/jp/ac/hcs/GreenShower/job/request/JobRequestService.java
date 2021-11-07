@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.Optional;
 
@@ -132,12 +134,13 @@ public class JobRequestService {
 	 * 申請マスタに新たな報告情報を1件追加する
 	 * 
 	 * @param form             検証済み入力情報
-	 * @param applicant_id 申請者ID
+	 * @param applicant_id     申請者ID
 	 * @param register_user_id 登録処理を実行したユーザのID
 	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
 	public boolean insert(JobRequestForm form, String applicant_id, String register_user_id) {
 		int rowNumber = 0;
+
 		try {
 			// 追加処理を行い、追加できた件数を取得
 			rowNumber = jobRequestRepository.insertOne(refillToJobReportData(form, applicant_id, register_user_id));
@@ -151,9 +154,9 @@ public class JobRequestService {
 	/**
 	 * 入力情報をJobRequestData型に変換する（insert用）
 	 * 
-	 * @param form    検証済み入力データ
+	 * @param form         検証済み入力データ
 	 * @param applicant_id 申請者ID
-	 * @param user_id 登録処理を実行したユーザのID
+	 * @param user_id      登録処理を実行したユーザのID
 	 * @return JobRequestData
 	 */
 	private JobRequestData refillToJobReportData(JobRequestForm form, String applicant_id, String register_user_id) {
@@ -237,7 +240,7 @@ public class JobRequestService {
 		data.setDate_activity_from(strLocalDateTimeToDate(form.getDate_activity_from()));
 		data.setDate_activity_to(strLocalDateTimeToDate(form.getDate_activity_to()));
 		data.setLoc(form.getLoc());
-		
+
 		// 内容を複数（遅刻と早退）を選択している可能性がある
 		if (form.getWay().size() >= 2) {
 			data.setWay(CommonEnum.getEnum(Way.class, "4"));
@@ -264,8 +267,15 @@ public class JobRequestService {
 		if (strDate.equals("")) {
 			return null;
 		} else {
-			LocalDateTime localDateTime = LocalDateTime.parse(strDate.replace("T", " "),
-					DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+			TemporalAccessor parsed;
+
+			try {
+				parsed = DateTimeFormatter.ISO_LOCAL_DATE_TIME.parse(strDate);
+			} catch (DateTimeParseException e) {
+				e.printStackTrace();
+				return null;
+			}
+			LocalDateTime localDateTime = LocalDateTime.from(parsed);
 			date = Date.from(ZonedDateTime.of(localDateTime, ZoneId.systemDefault()).toInstant());
 		}
 
