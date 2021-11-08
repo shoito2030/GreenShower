@@ -35,7 +35,7 @@ public class JobReportRepository {
 	/** 報告情報状態更新(状態変更用) */
 	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE JOB_HUNTING SET STATUS = ?, INDICATE = ? WHERE APPLY_ID = ?;";
 
-	/** ユーザIDからクラス・番号・名前を取得するSQL */
+	/** 申請IDからクラス・番号・名前を取得するSQL */
 	private static final String SQL_SELECT_PERSONAL_INFO = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS U LEFT JOIN JOB_HUNTING JH ON U.USER_ID = JH.APPLICANT_ID WHERE JH.APPLY_ID = ?;";
 
 	/** 報告情報内容更新（進退用） */
@@ -73,7 +73,7 @@ public class JobReportRepository {
 	/**
 	 * 特定のユーザ一人の情報を取得
 	 * 
-	 * @param user_id ユーザID
+	 * @param apply_id ユーザID
 	 * @return UserData ユーザ情報
 	 */
 	public UserData selectPersonalInfo(String apply_id) {

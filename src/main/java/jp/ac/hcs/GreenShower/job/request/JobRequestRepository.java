@@ -14,6 +14,7 @@ import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Apply_type;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Status;
 import jp.ac.hcs.GreenShower.job.request.JobRequestData.Way;
+import jp.ac.hcs.GreenShower.user.UserData;
 
 @Repository
 public class JobRequestRepository {
@@ -23,12 +24,20 @@ public class JobRequestRepository {
 			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID\r\n"
 			+ "WHERE NOT EXISTS(SELECT *  FROM REPORTS REP WHERE JH.APPLY_ID  = REP.APPLY_ID) ORDER BY JH.STATUS DESC;";
 
+	/** ユーザIDからクラス・番号・名前を取得するSQL */
+	private static final String SQL_SELECT_PERSONAL_INFO = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID  = ?;";
+	
+	/** クラス・番号からユーザ情報を取得するSQL (API用)*/
+	private static final String SQL_SELECT_PERSONAL_INFO_FOR_API = "SELECT USER_ID, NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE CLASSROOM = ? AND CLASS_NUMBER = ?;";
+
+	/** ユーザが所属するクラスの人数を取得するSQL */
+	private static final String SQL_SELECT_STUDENTS_NUMBER = "SELECT COUNT(U1.USER_ID) AS STUDENTS_NUMBER FROM USERS U1 WHERE U1.CLASSROOM = (SELECT U2.CLASSROOM FROM USERS U2 WHERE U2.USER_ID = ?) AND U1.ROLE = 'ROLE_STUDENT';";
+
 	/** SQL 申請情報1件取得 */
 	private static final String SQL_SELECT_REQUEST = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REQ.DATE_ACTIVITY_FROM, REQ.DATE_ACTIVITY_TO, REQ.LOC, REQ.WAY, REQ.DATE_ABSENCE_FROM, REQ.DATE_ABSENCE_TO, REQ.LEAVE_EARLY_DATE, REQ.ATTENDANCE_DATE, REQ.REMARK \n"
 			+ "FROM JOB_HUNTING JH\n" + "LEFT JOIN REQUESTS REQ ON REQ.APPLY_ID  =  JH.APPLY_ID\n"
-			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \n"
-			+ "WHERE JH.APPLY_ID = ?;";
-	
+			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \n" + "WHERE JH.APPLY_ID = ?;";
+
 	/** 申請一件追加 */
 	private static final String SQL_INSERT_JOB_HUNTING = "INSERT INTO JOB_HUNTING(APPLY_ID, APPLICANT_ID, CONTENT, COMPANY_NAME, APPLY_TYPE) VALUES(?, ?, ?, ?, ?);";
 	private static final String SQL_INSERT_JOB_REQUESTS = "INSERT INTO REQUESTS(APPLY_ID, DATE_ACTIVITY_FROM, DATE_ACTIVITY_TO, LOC, WAY, DATE_ABSENCE_FROM, DATE_ABSENCE_TO, LEAVE_EARLY_DATE, ATTENDANCE_DATE, REMARK, REGISTER_USER_ID) VALUES"
@@ -38,7 +47,7 @@ public class JobRequestRepository {
 	private static final String SQL_UPDATE_JOBCONTENT_REQUESTS = "UPDATE requests SET date_activity_from=?,date_activity_to=?,loc=?,way=?,date_absence_from=?,date_absence_to=?,leave_early_date=?,attendance_date=?,remark=? WHERE apply_id=?";
 	private static final String SQL_UPDATE_JOBCONTENT_JOB_HUNTING = "UPDATE job_hunting SET apply_type=?,company_name=?,content=? WHERE apply_id=?";
 	private static final String SQL_MAX_APPLY_ID = "SELECT MAX(apply_id) FROM JOB_HUNTING";
-	
+
 	private static final String SQL_SEARCH_USERID = "SELECT USER_ID FROM USERS WHERE CLASSROOM = ? AND CLASS_NUMBER = ?";
 
 	@Autowired
@@ -56,9 +65,10 @@ public class JobRequestRepository {
 
 		return jobRequestEntity;
 	}
-	
+
 	/**
 	 * 申請IDから1件の申請情報を取得する
+	 * 
 	 * @param apply_id 申請ID
 	 * @return JobRequestData
 	 */
@@ -69,7 +79,41 @@ public class JobRequestRepository {
 		return jobRequestData;
 	}
 
-	
+	/**
+	 * 特定のユーザ一人の情報を取得
+	 * 
+	 * @param user_id ユーザID
+	 * @return UserData ユーザ情報
+	 */
+	public UserData selectPersonalInfo(String user_id) {
+		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO, user_id);
+		UserData data = mappingSelectPersonalInfoResult(result);
+		return data;
+	}
+
+	/**
+	 * 特定のユーザ一人の情報を取得（API用）
+	 * @param classroom クラス
+	 * @param class_number 出席番号
+	 * @return
+	 */
+	public UserData selectPersonalInfo(String classroom, String class_number) {
+		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO_FOR_API, classroom, class_number);
+		UserData data = mappingSelectPersonalInfoResult(result);
+		return data;
+	}
+
+	/**
+	 * 担任が受け持つ生徒数を取得する
+	 * 
+	 * @param user_id 担任のユーザID
+	 * @return studentsNumber 生徒数
+	 */
+	public int selectStudentsNumber(String user_id) {
+		Map<String, Object> studentsNumber = jdbc.queryForMap(SQL_SELECT_STUDENTS_NUMBER, user_id);
+		return Integer.valueOf(studentsNumber.get("STUDENTS_NUMBER").toString());
+	}
+
 	/**
 	 * job_huntingテーブルとrequestsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
 	 * 
@@ -101,7 +145,7 @@ public class JobRequestRepository {
 		data.setLeave_early_date((Date) result.get("leave_early_date"));
 		data.setAttendance_date((Date) result.get("attendance_date"));
 		data.setRemark((String) result.get("remark"));
-		
+
 		return data;
 	}
 
@@ -147,6 +191,22 @@ public class JobRequestRepository {
 
 	}
 
+	/**
+	 * usersテーブルから取得したデータをUserData形式にマッピングする.
+	 * 
+	 * @param result report usersテーブルから取得したデータ
+	 * @return UserData
+	 */
+	private UserData mappingSelectPersonalInfoResult(Map<String, Object> result) {
+		UserData data = new UserData();		
+		data.setUser_id((String) result.get("user_id"));
+		data.setClass_number((String) result.get("class_number"));
+		data.setClassroom((String) result.get("classroom"));
+		data.setName((String) result.get("name"));
+
+		return data;
+	}
+
 	public int insertOne(JobRequestData data) {
 		int rowNumber = jdbc.update(SQL_INSERT_JOB_HUNTING, data.getApply_id(), data.getApplicant_id(),
 				data.getContent().getId(), data.getCompany_name(), data.getApply_type().getId());
@@ -170,16 +230,12 @@ public class JobRequestRepository {
 	}
 
 	public int updateJobContent(JobRequestData data, String apply_id) {
-		int rowNumber = jdbc.update(SQL_UPDATE_JOBCONTENT_REQUESTS, data.getDate_activity_from(), data.getDate_activity_to(),data.getLoc(),data.getWay().getId(),data.getDate_absence_from(),data.getDate_absence_to(),data.getLeave_early_date(),data.getAttendance_date(),data.getRemark(),apply_id);
-		rowNumber = jdbc.update(SQL_UPDATE_JOBCONTENT_JOB_HUNTING,data.getApply_type().getId(),data.getCompany_name(),data.getContent().getId(),apply_id);
+		int rowNumber = jdbc.update(SQL_UPDATE_JOBCONTENT_REQUESTS, data.getDate_activity_from(),
+				data.getDate_activity_to(), data.getLoc(), data.getWay().getId(), data.getDate_absence_from(),
+				data.getDate_absence_to(), data.getLeave_early_date(), data.getAttendance_date(), data.getRemark(),
+				apply_id);
+		rowNumber = jdbc.update(SQL_UPDATE_JOBCONTENT_JOB_HUNTING, data.getApply_type().getId(), data.getCompany_name(),
+				data.getContent().getId(), apply_id);
 		return rowNumber;
 	}
-
-	public String searchUserId(String classi, String number) {
-		String userId = jdbc.queryForObject(SQL_SEARCH_USERID, String.class, classi, number);
-		return userId;
-	}
-
-	
-
 }
