@@ -243,10 +243,29 @@ public class JobRequestController {
 		jobRequestService.updateJobContent(apply_id, form);
 		return "index";
 	}
-
+	
+	/**
+	 * イベント情報登録画面を表示する
+	 * @param principal
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/job/event-registration")
 	public String getRequestEvent_registration(Principal principal, Model model) {
 		return "job/event-registration";
+
+	}
+	
+	/**
+	 * イベント情報登録処理を行う
+	 * @param principal
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/job/event-registration")
+	public String getInsertEvent_registration(Principal principal, Model model, EventForm form) {
+		jobRequestService.insertEvent(form, principal.getName());
+		return "index";
 
 	}
 }
