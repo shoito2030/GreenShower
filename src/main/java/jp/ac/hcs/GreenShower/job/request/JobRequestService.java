@@ -180,8 +180,8 @@ public class JobRequestService {
 		}
 
 		data.setApply_type(CommonEnum.getEnum(Apply_type.class, form.getApply_type()));
-		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_from()));
-		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_to()));
+		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_absence_from()));
+		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_absence_to()));
 		data.setLeave_early_date(strLocalDateTimeToDate(form.getLeave_early_date()));
 		data.setAttendance_date(strLocalDateTimeToDate(form.getAttendance_date()));
 		data.setRemark(form.getRemark());
@@ -247,8 +247,8 @@ public class JobRequestService {
 		} else {
 			data.setWay(CommonEnum.getEnum(Way.class, form.getWay().get(0)));
 		}
-		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_activity_from()));
-		data.setDate_absence_to(strLocalDateTimeToDate(form.getDate_activity_to()));
+		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_absence_from()));
+		data.setDate_absence_to(strLocalDateTimeToDate(form.getDate_absence_to()));
 		data.setLeave_early_date(strLocalDateTimeToDate(form.getLeave_early_date()));
 		data.setAttendance_date(strLocalDateTimeToDate(form.getAttendance_date()));
 		data.setRemark(form.getRemark());
