@@ -48,3 +48,6 @@ VALUES('4', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校',
 /* 報告マスタ用データ */
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('1', TRUE, 'テスト報告', 'isida@xxx.co.jp');
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('2', TRUE, '報告詳細から申請詳細に遷移できるかテスト', 'isida@xxx.co.jp');
+
+/* events用データ */
+INSERT INTO  EVENTS(event_id, company_name, datetime, loc, content, bring, register_user_id) VALUES('1', 'メルカリ株式会社', '2021-7-17 12:00', '自宅', 'あいうえおかきくけこ', '筆記用具', 'abe@xxx.co.jp')

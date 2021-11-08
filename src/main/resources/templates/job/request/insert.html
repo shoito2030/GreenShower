@@ -64,7 +64,7 @@
 				<dt class="col-sm-1 pt-md-1">番号</dt>
 				<dd class="col-sm-1">
 					<select name="class_number" id="class_number" class="fs-5 fw-bold">
-						<option value="zero">00</option>
+						<option value="zero">--</option>
 						<option th:each="map : ${classNumbersMap}" th:value="${map.key}" th:text="${map.value}">
 						</option>
 					</select>

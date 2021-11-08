@@ -282,4 +282,24 @@ public class JobRequestService {
 		return date;
 	}
 
+	public boolean insertEvent(EventForm form, String name) {
+		int rowNumber = 0;
+		jobRequestRepository.insertEvent(refillToEventData(form), name);
+		return rowNumber > 0;
+	}
+	
+	private EventData refillToEventData(EventForm form) {
+		EventData data = new EventData();
+		
+		int event_id = jobRequestRepository.event_id_get() + 1;
+		data.setEvent_id((String.valueOf(event_id)));
+		data.setCompany_name(form.getCompany_name());
+		data.setDatetime(strLocalDateTimeToDate(form.getDatetime()));
+		data.setLoc(form.getLoc());
+		data.setContent(form.getContent());
+		data.setBring(form.getBring());	
+		return data;
+		
+	}
+
 }
