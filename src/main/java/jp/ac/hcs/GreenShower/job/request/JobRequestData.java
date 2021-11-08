@@ -56,7 +56,7 @@ public class JobRequestData extends JobHuntingData{
 	 */
 	private String remark;
 	
-	/**
+	/**　
 	 *登録ユーザID
 	 */
 	private String register_user_id;
