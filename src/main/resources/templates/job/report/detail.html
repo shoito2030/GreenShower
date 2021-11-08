@@ -13,16 +13,93 @@
 	<th:block th:insert="components/part::frag_header"></th:block>
 
 	<h1 class="title">就職活動報告 詳細</h1>
-	<div class="container mt-md-5">
+	<div class="container mt-md-5" th:object="${jobReportData}">
 
-		<!-- 共通部品挿入（メモまで） -->
-		<th:block th:insert="components/part::frag_detail (${jobReportData})"></th:block>
+		<div class="row justify-content-md-center mt-md-4">
+			<div class="col-md-2">
+				<span><small class="text-muted">クラス</small><span
+					class="float-md-right mt-md-1 font-weight-bold h4"
+					th:text="*{classroom}"></span></span>
+			</div>
+			<div class="col-md-1 offset-md-1">
+				<span><small class="text-muted">番号</small><span
+					class="float-md-right mt-md-1 font-weight-bold h4"
+					th:text="*{class_number}"></span></span>
+			</div>
+			<div class="col-md-2 offset-md-1">
+				<span><small class="text-muted">氏名</small><span
+					class="float-md-right mt-md-1 font-weight-bold h4"
+					th:text="*{name}"></span></span>
+			</div>
+		</div>
+
+
+
+		<div class="row mt-md-5">
+			<div class="col-md-4 bg-color-white">
+				<p class="font-weight-bold h4">申請種別</p>
+			</div>
+			<div class="col-md-8">
+				<p class="h4 text-center text-md-left pl-md-5"
+					th:text="*{apply_type.value}"></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="font-weight-bold h4">企業名</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5"
+					th:text="*{company_name}"></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="font-weight-bold h4">内容</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5"
+					th:text="*{content.value}"></p>
+			</div>
+		</div>
+
+
+
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="font-weight-bold h4">進退</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<th:block th:if="${jobReportData.advance_or_retreat}">
+					<p class="h4 text-center text-md-left pl-md-5">進める</p>
+				</th:block>
+
+				<th:block th:unless="${jobReportData.advance_or_retreat}">
+					<p class="h4 text-center text-md-left pl-md-5">進めない</p>
+				</th:block>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="font-weight-bold h4">備考</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5" th:text="*{remark}"></p>
+			</div>
+		</div>
+
+
 
 		<!-- メモ以降追加 -->
 		<div class="row mt-md-5">
 			<div class="col-md-5 ">
 				<p class="font-weight-bold h4">現在の申請状態</p>
-				<div class="card center-block w-50" style="border-radius: 75px; margin: 0 auto;">
+				<div class="card center-block w-50"
+					style="border-radius: 75px; margin: 0 auto;">
 					<div class="card-body">
 
 						<p th:text="${jobReportData.status.value}"></p>

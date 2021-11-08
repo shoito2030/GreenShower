@@ -46,7 +46,7 @@ INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, 
 VALUES('4', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '3',  '2021-7-17 12:00', '阿部先生が代わりに申請しました。', 'abe@xxx.co.jp');
 
 /* 報告マスタ用データ */
-INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('1', TRUE, 'テスト報告', 'isida@xxx.co.jp');
+INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('1', TRUE, 'システムの規格から開発・運用まD幅広く関われます。私の得意分野は自然言語処利です。', 'isida@xxx.co.jp');
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('2', TRUE, '報告詳細から申請詳細に遷移できるかテスト', 'isida@xxx.co.jp');
 
 /* events用データ */

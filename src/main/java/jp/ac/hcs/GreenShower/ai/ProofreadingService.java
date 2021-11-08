@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,35 +33,58 @@ public class ProofreadingService {
 	private final static String MARKUP_HTML_OPEN = "<span class='mark font-weight-bold text-danger' style='background-color:yellow'>";
 	private final static String MARKUP_HTML_CLOSE = "</span>";
 	
-	public static void main(String[] args) {
-		proofreading("システムの規格から開発・運用まD幅広く関われます。");
-	}
-
 	/**
 	 * 文章を校正APIに渡し結果を得る
 	 * @param sentence メモや備考
 	 * @return 異常あり - 加工済みのHTML文字列 異常なし - 加工なしの文章
 	 */
 	@SuppressWarnings("unchecked")
-	public static String proofreading(String sentence) {
+	public Optional<ProofreadingData> proofreading(String sentence) {
 		if(KEY.isBlank() || KEY.isEmpty()) {
-			return sentence;
+			return Optional.empty();
 		}
 		
+		// APIから結果を取得
 		String json = getResult(String.format(URL, KEY, sentence));
 		
+		// jsonからMap形式に変換
 		Map<String, Object> result = jsonStringToMap(json);
+		
+		// ステータスを取得し、処理の成否を判定する
 		String status = String.valueOf(result.get("status"));
 		
 		if(status.equals("1")) {
+			ProofreadingData data = new ProofreadingData();
+			
+			// マッピング
+			data.setResultID( (String) result.get("resultID"));
+			data.setStatus(status);
+			data.setMessage((String) result.get("message"));
+			data.setInputSentence((String) result.get("inputSentence"));
+			data.setNormalizedSentence((String) result.get("normalizedSentence"));
+			
 			String checkedSentence = (String) result.get("checkedSentence");
-			List<LinkedHashMap<String, String>> alerts = (List<LinkedHashMap<String, String>>) result.get("alerts");
-			System.out.println(alerts);
-
-			System.out.println(toHtml(checkedSentence));
-			return toHtml(checkedSentence);
+			
+			// 検査結果をHTML文字列に変換する
+			data.setCheckedSentence(toHtml(checkedSentence));
+			
+			List<LinkedHashMap<String, Object>> alerts = (List<LinkedHashMap<String, Object>>) result.get("alerts");
+			
+			for(Map<String, Object> map : alerts) {
+				// マッピング
+				AlertsData alertsData = new AlertsData();
+				
+				alertsData.setPos(map.get("pos").toString());
+				alertsData.setWord(map.get("word").toString());
+				alertsData.setScore(map.get("score").toString());
+				alertsData.setSuggestions((List<String>)map.get("suggestions"));
+				
+				data.getAlerts().add(alertsData);
+			}
+			
+			return Optional.ofNullable(data);
 		} else {
-			return sentence;	
+			return Optional.empty();	
 		}
 	}
 
@@ -69,7 +93,7 @@ public class ProofreadingService {
 	 * @param urlString リクエストを含むURL文字列
 	 * @return result json形式のレスポンス
 	 */
-	private static String getResult(String urlString) {
+	private String getResult(String urlString) {
 		String result = "";
 		try {
 			URL url = new URL(urlString);
@@ -93,7 +117,7 @@ public class ProofreadingService {
 	 * @param json json文字列
 	 * @return json文字列を読み込んだMapオブジェクト。失敗した場合はnull
 	 */
-	private static Map<String, Object> jsonStringToMap(String json) {
+	private Map<String, Object> jsonStringToMap(String json) {
 		Map<String, Object> map = null;
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -112,7 +136,7 @@ public class ProofreadingService {
 	 * @param checkedSentence  校正済み文字列
 	 * @return html
 	 */
-	private static String toHtml(String checkedSentence) {
+	private String toHtml(String checkedSentence) {
 		Pattern pattern = Pattern.compile("<<");
         Matcher matcher = pattern.matcher(checkedSentence);
         String replaced = matcher.replaceAll(MARKUP_HTML_OPEN);

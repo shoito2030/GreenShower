@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jp.ac.hcs.GreenShower.ai.ProofreadingData;
+import jp.ac.hcs.GreenShower.ai.ProofreadingService;
 import jp.ac.hcs.GreenShower.user.UserData;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 public class JobReportController {
 	@Autowired
 	private JobReportService jobReportService;
+	
+	@Autowired
+	private ProofreadingService proofreadingService;
 
 	@Autowired
 	private HttpSession session;
@@ -226,8 +231,15 @@ public class JobReportController {
 			return getReportList(principal, model);
 		}
 		
+		// AIサービスの呼び出し
+		Optional<ProofreadingData> proofreadingData = proofreadingService.proofreading(jobReportData.get().getRemark());
 		
-
+		// 値が入っていた（検査結果が黒）だった場合に実行
+		if(!proofreadingData.isEmpty()) {
+			model.addAttribute("proofreadingData", proofreadingData.get());
+			log.info("校正結果： " + proofreadingData.get());
+		}
+		
 		model.addAttribute("jobReportData", jobReportData.get());
 
 		// sessionに申請IDを保存

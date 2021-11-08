@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>就職活動申請新規登録画面</title>
+
+
+	
+		<meta id="viewport" name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="manifest" href="/css/manifest.json" crossorigin="use-credentials">
+		<meta name="application-name" content="WebPortal">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-title" content="WebPortal">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+	
+		<link rel="icon" sizes="192x192" href="/img/favicon.ico">
+		<link rel="shortcut icon" href="/img/favicon.ico">
+		<link rel="apple-touch-icon" href="/img/favicon.ico">
+		<link rel="apple-touch-icon" href="/img/favicon.ico" sizes="192x192">
+		<link rel="apple-touch-icon" href="/img/favicon.ico" sizes="58x58">
+
+		<!-- FontAwesome -->
+		<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+	
+	
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="../../../static/css/ress.css">
+	<link rel="stylesheet" href="../../../static/css/common.css">
+	
+</head>
+
+<body>
+	
+		<header>
+			<nav class="navbar navbar-expand-md navbar-light bg-light">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="/"><img src=”../../static/img/bootstrap-solid.svg” width="30"
+							height="30" class="d-inline-block align-top" alt=""> 就活ポータル.com</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+						aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+	
+					<div class="collapse navbar-collapse" id="navbar">
+						<ul class="navbar-nav me-auto mb-2 mb-md-0 w-100 nav-justified">
+	
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/">就職活動管理</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="#">受験報告管理</a>
+							</li>
+	
+							
+								<li class="nav-item">
+									<a class="nav-link active" href="/">証明書管理</a>
+								</li>
+							
+	
+							
+	
+							<li class="nav-item">
+								<a class="nav-link active" href="/"><i class="fas fa-envelope"></i>メッセージ</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="/"><i class="fas fa-cog"></i>設定</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="/logout">Log out</a>
+							</li>
+	
+						</ul>
+	
+					</div>
+				</div>
+			</nav>
+		</header>
+	
+
+	<h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動申請
+		新規登録</h1>
+
+	<form class="container-lg mt-md-5" method="post" action="/job/request/insert">
+
+        <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword">
+            </div>
+          </div>
+
+
+		
+			<div class="row mt-md-4 pr-md-5">
+				<div class="col-md-2 pr-md-5">
+					<span>
+						<small class="text-muted">クラス</small>
+						<span class="float-md-right mt-md-1 font-weight-bold h4" id="classroom">S3A1</span>
+					</span>
+				</div>
+				<div class="col-md-2 offset-md-1">
+					<label class="my-1 mr-2"><small class="text-muted">番号</small></label>
+					<select name="class_number" id="class_number" class="float-md-right mt-md-1 font-weight-bold h4">
+						<option value="zero">00</option>
+						<option value="01">01</option>
+
+					</select>
+
+
+				</div>
+				<div class="col-md-2 offset-md-1 pr-md-5">
+					<span><small class="text-muted">氏名</small><span class="float-md-right mt-md-1 font-weight-bold h4" name="name"
+							id="name">情報太郎</span></span>
+
+				</div>
+			</div>
+		
+
+
+
+		
+
+		<br> <br>
+
+		<div class="form-group row mt-md-5">
+			<div class="col-md-3">
+				<p class="font-weight-bold h5 mt-md-1">申請種別</p>
+				<small class="text-danger">※必須</small>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group input-box">
+					<div class="checkbox-inline" style="margin-right: 10%;">
+						<input type="radio" name="apply_type" value="0"> <label>個人</label>
+					</div>
+					<div class="checkbox-inline" style="margin-left: 10%;">
+						<input type="radio" name="apply_type" value="1"> <label>とりまとめ</label>
+					</div>
+
+					<small class="form-text text-md-left text-danger">エラーメッセージ</small>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-group row">
+			<div class="col-md-3">
+				<p class="font-weight-bold h5 ">企業名</p>
+				<small class="text-danger">※必須</small>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="form-control" name="company_name">
+				<small class="form-text text-md-left text-danger">エラーメッセージ</small>
+			</div>
+		</div>
+
+
+		<div class="form-group row mt-md-5">
+			<div class="col-md-3">
+				<p class="font-weight-bold h5 ">内容</p>
+				<small class="text-danger">※必須</small>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group input-box">
+					<div class="checkbox-inline" style="margin-right: 5%;">
+						<input type="radio" name="content" value="1"> <label>合企</label>
+					</div>
+					<div class="checkbox-inline" style="margin-right: 5%;">
+						<input type="radio" name="content" value="2"> <label>単独</label>
+					</div>
+					<div class="checkbox-inline" style="margin-right: 5%;">
+						<input type="radio" name="content" value="3"> <label>試験</label>
+					</div>
+					<div class="checkbox-inline" style="margin-right: 5%;">
+						<input type="radio" name="content" value="99"> <label>その他</label>
+					</div>
+
+					<small class="form-text text-md-left text-danger">エラーメッセージ</small>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="form-group row">
+			<div class="col-md-3">
+				<p class="font-weight-bold h5 mt-md-5">開始時刻・終了日時</p>
+				<small class="text-danger">※必須</small>
+			</div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-6">
+						<label>開始</label> <input type="datetime-local" class="form-control mr-md-5"
+							name="date_activity_from"> <small
+							class="form-text text-md-left text-danger">エラーメッセージ</small>
+					</div>
+					<div class="col-md-6">
+						<label>終了</label> <input type="datetime-local" class="form-control mr-md-5"
+							name="date_activity_to"> <small class="form-text text-md-left text-danger">エラーメッセージ</small>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<br> <br>
+
+		<div class="form-group row">
+			<div class="col-md-3">
+				<p class="font-weight-bold h5 ">郵便番号</p>
+			</div>
+			<div class="col-md-4 form-inline justify-content-center justify-content-md-start">
+				
+
+                <input type="text" class="form-control" id="zipcode">
+                <button class="btn btn-primary" type="button" id="zip-btn">検索</button>
+			</div>
+		</div>
+
+        <div class="input-group row mb-3">
+            <div class="col-sm-3">
+				<p class="font-weight-bold h5 ">郵便番号</p>
+			</div>
+            <input type="text" class="form-control" id="zipcode">
+            <button class="btn btn-primary" type="button" id="zip-btn">検索</button>
+          </div>
+
+		<br> <br>
+
+		<div class="form-group row">
+			<div class="col-md-3">
+				<p class="font-weight-bold h5 ">場所</p>
+				<small class="text-danger">※必須</small>
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="form-control" id="loc" name="loc">
+				<small class="form-text text-md-left text-danger">エラーメッセージ</small>
+			</div>
+		</div>
+
+
+		<br> <br>
+
+		<div class="form-group row">
+			<div class="col-md-3">
+				<p class="font-weight-bold h5" style="margin-top: 90px;">手段</p>
+				<small class="text-danger">※必須</small>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group input-box pull-left">
+					<div class="row">
+						<div class="col-md-2 mt-md-5">
+							<input type="checkbox" name="way" value="1"> <label>欠席</label>
+						</div>
+						<div class="col-md-5">
+							<label>開始</label> <input type="datetime-local" class="form-control"
+								name="date_absence_from"> <small
+								class="form-text text-md-left text-danger">エラーメッセージ</small>
+						</div>
+						<div class="col-md-5">
+							<label>終了</label> <input type="datetime-local" class="form-control" name="date_absence_to">
+							<small class="form-text text-md-left text-danger">エラーメッセージ</small>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-2 mt-md-2">
+							<input type="checkbox" name="way" value="2"> <label>早退</label>
+						</div>
+						<div class="col-md-5">
+							<input type="datetime-local" class="form-control" name="leave_early_date"> <small
+								class="form-text text-md-left text-danger">エラーメッセージ</small>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-2 mt-md-2">
+							<input type="checkbox" name="way" value="3"> <label>遅刻</label>
+						</div>
+						<div class="col-md-5">
+							<input type="datetime-local" class="form-control" name="attendance_date"> <small
+								class="form-text text-md-left text-danger">エラーメッセージ</small>
+						</div>
+					</div>
+
+
+					<small class="form-text text-md-left text-danger">エラーメッセージ</small>
+				</div>
+			</div>
+		</div>
+
+		<br> <br>
+
+		<div class="form-group row">
+			<div class="col-md-3">
+				<p class="font-weight-bold h5 mt-md-5">メモ</p>
+			</div>
+			<div class="col-md-6">
+				<textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
+			</div>
+		</div>
+
+		<br> <br> <br>
+
+		<button type="submit" class="btn btn-primary"
+			style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
+	</form>
+
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+
+		<!-- オリジナルスクリプト -->
+		<script src="/js/common.js"></script>
+
+	
+
+	<!-- オリジナルスクリプト -->
+	<script type="text/javascript">
+
+		// 郵便番号用
+		$('#zip-btn').on('click', function () {
+			const url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=';
+			const zipcode = document.getElementById("zipcode");
+
+			// Ajax通信を開始
+			$.ajax({
+				url: url + zipcode.value,
+				type: 'GET',
+				dataType: 'json',
+			}).done(function (data) {
+				const results = data.results[0];
+				setAddress(results);
+
+			}).fail(function () {
+				alert("ajax失敗");
+			});
+		})
+
+		function setAddress(results) {
+			const loc = document.getElementById("loc");
+			const address1 = results.address1;
+			const address2 = results.address2;
+			const address3 = results.address3;
+
+			const address = address1 + address2 + address3;
+
+			loc.value = address;
+		}
+
+		// クラスと番号から名前を取得する用
+		$('#class_number').on('change', function () {
+			const name = document.getElementById("name");
+			const classroom = document.getElementById("classroom").textContent;
+			const class_number = document.getElementById("class_number").value;
+			
+			const json = {
+				"classroom": classroom,
+				"class_number": class_number
+			}
+			
+			if(class_number == "zero") {
+				name.innerText = "情報太郎";
+				return false;
+			}
+
+			$.ajax({
+				url: window.location.href + "/getUserInfo",
+				type: 'GET',
+				dataType: 'json',
+				data: {
+					// CSRF対策
+					_csrf: $("*[name=_csrf]").val(),
+					json: JSON.stringify(json)
+				}
+			}).done(function (data) {
+				//name.value =  data[0].name;
+				name.innerText = data[0].name;
+
+			}).fail(function () {
+				alert("ajax失敗");
+			});
+		});
+	</script>
+</body>
+
+</html>
