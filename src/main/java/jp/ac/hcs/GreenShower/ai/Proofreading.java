@@ -19,7 +19,10 @@ public class Proofreading {
 	
 	/** API リクエストURL */
 	private final static String URL = "https://api.a3rt.recruit.co.jp/proofreading/v2/typo?apikey=%s&sentence=%s";
-	private final static String KEY = "DZZJue7PdWJJi8yXJQHUN4827W1uYpo8";
+	
+	/* APIキー */
+	private final static String KEY = "";
+	
 	private final static String MARKUP_HTML_OPEN = "<span class='mark font-weight-bold text-danger' style='background-color:yellow'>";
 	private final static String MARKUP_HTML_CLOSE = "</span>";
 	
@@ -33,6 +36,10 @@ public class Proofreading {
 	 * @return 異常あり - 加工済みのHTML文字列 異常なし - 加工なしの文章
 	 */
 	public static String proofreading(String sentence) {
+		if(KEY.isBlank() || KEY.isEmpty()) {
+			return sentence;
+		}
+		
 		String json = getResult(String.format(URL, KEY, sentence));
 		
 		Map<String, Object> result = jsonStringToMap(json);
