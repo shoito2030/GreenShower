@@ -93,7 +93,7 @@ public class JobRequestController {
 	 * @return 就職活動申請登録画面
 	 */
 	@GetMapping("/job/request/insert")
-	public String getRequestInsert(Principal principal, Model model) {
+	public String getRequestInsert(JobRequestForm form, Principal principal, Model model) {
 		Optional<UserData> userData = null;
 
 		// ユーザの情報を取得
@@ -143,7 +143,7 @@ public class JobRequestController {
 		if (bindingResult.hasErrors()) {
 			log.info("申請の登録に失敗しました");
 			model.addAttribute("errmsg", "申請の登録に失敗しました");
-			return getRequestInsert(principal, model);
+			return getRequestInsert(form, principal, model);
 		}
 
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");

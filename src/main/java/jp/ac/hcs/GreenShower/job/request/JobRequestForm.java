@@ -25,27 +25,27 @@ public class JobRequestForm {
 	/**
 	 * 企業名
 	 */
-	@NotBlank
+	@NotBlank(message = "企業名を入力してください")
 	private String company_name;
 	
 	/**
 	 * 開始時刻
 	 */
-	@NotBlank
+	@NotBlank(message = "選択してください")
 	@DateValueValid
 	private String date_activity_from;
 	
 	/**
 	 * 終了日時
 	 */
-	@NotBlank
+	@NotBlank(message = "選択してください")
 	@DateValueValid
 	private String date_activity_to;
 	
 	/**
 	 * 場所
 	 */
-	@NotBlank
+	@NotBlank(message = "場所を入力してください")
 	private String loc;
 	
 	/**
@@ -56,7 +56,7 @@ public class JobRequestForm {
 	/**
 	 * 内容
 	 */
-	@NotBlank
+	@NotBlank(message = "内容を入力してください")
 	private String content;
 	
 	/**
