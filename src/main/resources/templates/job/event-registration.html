@@ -4,21 +4,125 @@
 
 <head>
 <meta charset="UTF-8">
-<title>就職活動イベント登録p画面</title>
+<title>就職活動イベント登録画面</title>
     
     
-<th:block th:insert="components/art::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
+
+	<style>
+		.container {
+			max-width: 960px;
+		}
+
+		.original-input-group {
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: stretch;
+			/*width: 100%;*/
+		}
+
+		@media screen and (max-width: 800px) {
+			.margin-md-0-auto {
+				margin: 0 auto;
+			}
+		}
+
+
+		@media screen and (min-width: 801px) {
+			.media-margin-top-8rem {
+				margin-top: 8rem;
+			}
+
+			.media-margin-top-35rem {
+				margin-top: 3.5rem;
+			}
+
+			.media-margin-left-9rem {
+				margin-left: 9rem;
+			}
+		}
+	</style>
 </head>
 
 <body>
-
+	
 	<th:block th:insert="components/part::frag_header"></th:block>
+	<h1 class="ml-md-5 text-center text-md-start media-margin-left-9rem fw-bold">
+		就職活動イベント登録画面
+	</h1>
+	<form class="container mt-md-5 needs-validation" novalidate method="post" th:action="@{/job/event-registration}"
+		th:object="${userData}">
+	<div class="col-md-4">
+		<h4 class="fw-bold mt-md-1 text-center">企業名</h4>
+		<h6 class="text-danger text-center">※必須</h6>
+	</div>
+	<div class="col">
+		<input type="text" class="form-control" name="company_name" required>
+		<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">エラーメッセージ
+		</h6>
+
+		<div class="invalid-feedback">
+			<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+				必須項目です。</h6>
+		</div>
+	</div>
 	
-	<!-- 作成中 -->
-	就職活動イベント登録画面
-	<th:block th:insert="components/part::frag_script"></th:block>
+	<div class="col-md-4">
+		<h4 class="fw-bold mt-md-1 text-center">日時</h4>
+		<h6 class="text-danger text-center">※必須</h6>
+		<input type="datetime-local" class="form-control" name="datetime">
+		<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+			エラーメッセージ</h6>
+
+		<div class="invalid-feedback">
+		<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+			必須項目です。</h6>
+		</div>
+	</div>
 	
+	<div class="col-md-4">
+		<h4 class="fw-bold mt-md-1 text-center">場所</h4>
+		<h6 class="text-danger text-center">※必須</h6>
+	</div>
+	<div class="col">
+		<input type="text" class="form-control" name="loc" required>
+		<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">エラーメッセージ
+		</h6>
+
+		<div class="invalid-feedback">
+			<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+				必須項目です。</h6>
+		</div>
+	</div>
+	
+	<div class="col-md-4">
+		<h4 class="fw-bold mt-md-1 text-center">実施内容</h4>
+		<h6 class="text-danger text-center">※必須</h6>
+	</div>
+	<div class="col">
+		<textarea class="form-control" name="content" rows="5" cols="50"></textarea>
+		<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">エラーメッセージ
+		</h6>
+
+		<div class="invalid-feedback">
+			<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+				必須項目です。</h6>
+		</div>
+	</div>
+
+	<div class="col-md-4 media-margin-top-35rem">
+		<h4 class="fw-bold mt-md-1 text-center">持参</h4>
+	</div>
+	<div class="col">
+		<textarea class="form-control" name="bring" rows="5" cols="50"></textarea>
+	</div>
+	
+	<div class="d-grid col-4 mx-auto mt-5">
+		<button class="btn btn-primary btn-lg" type="submit">登録</button>
+	</div>
+	</form>
 </body>
 </html>
