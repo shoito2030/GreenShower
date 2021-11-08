@@ -28,12 +28,14 @@
 							th:onclick="'window.location.href = \'' + @{/job/request/list} + '\''">
                             <input type="button" class="btn btn-primary mt-4" value="報告一覧"
 							th:onclick="'window.location.href = \'' + @{/job/report/list} + '\''">
-                            <input type="button" class="btn btn-primary mt-4" value="イベント情報 登録"
-							th:onclick="'window.location.href = \'' + @{/job/event-registration} + '\''">
+
 							
 							<th:block role="presentation" sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
+                            <input type="button" class="btn btn-primary mt-4" value="イベント情報 登録"
+							th:onclick="'window.location.href = \'' + @{/job/event-registration} + '\''">
                             <input type="button" class="btn btn-primary mt-4 mb-5" value="申請一覧 出力"
 							th:onclick="'window.location.href = \'' + @{/job/csv} + '\''">
+
 							</th:block>
 							
                         </div>
