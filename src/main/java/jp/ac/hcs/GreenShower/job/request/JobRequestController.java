@@ -191,7 +191,7 @@ public class JobRequestController {
 
 	/**
 	 * 就職活動申請状態変更処理を行う
-	 * 
+	 *  
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
 	 * @param model
