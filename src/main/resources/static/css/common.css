@@ -3,94 +3,101 @@
  1ページにしか使わない設定は、各html内で直接styleタグで指定する.
  */
 body {
-  font-family: "Open Sans", sans-serif;
-  text-align: center;
+	font-family: "Open Sans", sans-serif;
+	text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6, p, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
 	font-family: 'Noto Sans JP', sans-serif;
 }
 
 .container {
-  margin-top: 10px;
+	margin-top: 10px;
 }
 
 .content-box {
-  min-width: 250px;
-  margin: 5px;
-  padding: 10px;
-  border-radius: 3px;
-  background-color: rgb(206, 223, 232);
+	min-width: 250px;
+	margin: 5px;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: rgb(206, 223, 232);
 }
 
 .content-box ul {
-  list-style: none;
+	list-style: none;
 }
 
 .title-font {
-  font-size: 2rem;
+	font-size: 2rem;
 }
 
 .config-img {
-  margin: 0 10px;
-  width: 25px;
+	margin: 0 10px;
+	width: 25px;
 }
 
 .back-red {
-  background-color: red;
+	background-color: red;
 }
 
 .button-logout {
-  position: fixed;
-  font-size: 1rem;
-  right: -15px;
-  top: 0px;
+	position: fixed;
+	font-size: 1rem;
+	right: -15px;
+	top: 0px;
 }
 
 .input-form {
-  margin: 20px auto;
-  max-width: 600px;
+	margin: 20px auto;
+	max-width: 600px;
 }
 
 .input-box {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .mode-dark {
-  color: black;
-  background-color: black;
+	color: black;
+	background-color: black;
 }
 
 /* ヘッダー用 */
 .nav-link {
-  position: relative;
-  display: inline-block;
-  transition: 0.3s;
-  font-weight: 500;
+	position: relative;
+	display: inline-block;
+	transition: 0.3s;
+	font-weight: 500;
 }
 
 .navbar > a {
-  text-shadow: -1px 1px 0 rgba(0, 0, 0, 1);
+	text-shadow: -1px 1px 0 rgba(0, 0, 0, 1);
 }
 
 /* スマホ縦対応 1カラン */
 @media screen and (max-width: 499px) {
-  /* ヘッダー(navbar) */
-  .nav-link {
-    border-top: solid 1px rgba(0, 0, 0, 0.1);
-  }
+	/* ヘッダー(navbar) */
+	.nav-link {
+		border-top: solid 1px rgba(0, 0, 0, 0.1);
+	}
 
-  .nav-link:last-child {
-    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
-  }
+	.nav-link:last-child {
+		border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+	}
 
-  .bg-color-sky {
-	background-color: white;
-}
+	.bg-color-sky {
+		background-color: white;
+	}
 
-.bg-color-white {
-	background-color: #dae8fc;
-}
+	.bg-color-white {
+		background-color: #dae8fc;
+	}
 }
 
 /* スマホ横＆タブレット縦対応 ２カラン */
@@ -106,60 +113,89 @@ h1, h2, h3, h4, h5, h6, p, a {
 
 /* タブレット横＆ＰＣ対応 3カラン */
 @media screen and (min-width: 801px) {
-  .nav-link::after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    content: "";
-    width: 0;
-    height: 3px;
-    background-color: blue;
-    transition: 0.3s;
-    transition-duration: 0.75s;
-  }
+	.nav-link::after {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		content: "";
+		width: 0;
+		height: 3px;
+		background-color: blue;
+		transition: 0.3s;
+		transition-duration: 0.75s;
+	}
 
-  .nav-link:hover::after {
-    width: 100%;
-  }
+	.nav-link:hover::after {
+		width: 100%;
+	}
 
-  .bg-color-sky {
+	.bg-color-sky {
+		background-color: #dae8fc;
+	}
+
+	.bg-color-white {
+		background-color: white;
+	}
+}
+
+/* 背景色 */
+.bg-color-sky {
 	background-color: #dae8fc;
 }
 
 .bg-color-white {
 	background-color: white;
 }
-}
-
-/* 背景色 */
-.bg-color-sky {
-  background-color: #dae8fc;
-}
-
-.bg-color-white {
-  background-color: white;
-}
 
 /* 見出し用 */
 h1.title {
-  font-size: 24px;
+	font-size: 24px;
 }
 
 @media only screen and (min-width: 651px) {
-  /* 中画面用 */
-  h1.title {
-    font-size: 26px;
-  }
+	/* 中画面用 */
+	h1.title {
+		font-size: 26px;
+	}
 }
 
 @media only screen and (min-width: 961px) {
-  /* 大画面用 */
-  h1.title {
-    font-size: 28px;
-  }
+	/* 大画面用 */
+	h1.title {
+		font-size: 28px;
+	}
 }
 
 select {
-  -moz-appearance: menulist;
-  -webkit-appearance: menulist;
+	-moz-appearance: menulist;
+	-webkit-appearance: menulist;
+}
+
+/* bootstrapのボタンを上書き */
+.btn {
+	display: inline-block;
+	padding: 6 px 12 px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1 px solid transparent;
+	border-radius: 4 px;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
 }
