@@ -1,296 +1,447 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-<meta charset="UTF-8">
-<title>就職活動申請新規登録画面</title>
-    
-    
-<th:block th:insert="components/part::frag_mobile"></th:block>
-<th:block th:insert="components/part::frag_icon"></th:block>
-<th:block th:insert="components/part::frag_style"></th:block>
+	<meta charset="UTF-8">
+	<title>就職活動申請新規登録画面</title>
+
+
+	<th:block th:insert="components/part::frag_mobile"></th:block>
+	<th:block th:insert="components/part::frag_icon"></th:block>
+	<th:block th:insert="components/part::frag_style"></th:block>
+
+	<style>
+		.container {
+			max-width: 960px;
+		}
+
+		.original-input-group {
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: stretch;
+			/*width: 100%;*/
+		}
+
+		@media screen and (max-width: 800px) {
+			.margin-md-0-auto {
+				margin: 0 auto;
+			}
+		}
+
+
+		@media screen and (min-width: 801px) {
+			.media-margin-top-8rem {
+				margin-top: 8rem;
+			}
+
+			.media-margin-top-35rem {
+				margin-top: 3.5rem;
+			}
+
+			.media-margin-left-9rem {
+				margin-left: 9rem;
+			}
+		}
+	</style>
 </head>
 
 <body>
 	<th:block th:insert="components/part::frag_header"></th:block>
 
-	<h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動申請 新規登録</h1>
+	<h1 class="ml-md-5 text-center text-md-start media-margin-left-9rem fw-bold">就職活動申請
+		新規登録</h1>
 
-    <form class="container mt-md-5" method="post" th:action="@{/job/request/insert}">
+	<form class="container mt-md-5 needs-validation" novalidate method="post" th:action="@{/job/request/insert}"
+		th:object="${userData}">
 
 
-        <th:block role="presentation"
-						sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
- <div class="row mt-md-4 pr-md-5">
-            <div class="col-md-2 pr-md-5">
-                <span><small class="text-muted">クラス</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
-            </div>
-            <div class="col-md-2 offset-md-1">
-                <label class="my-1 mr-2"><small class="text-muted">番号</small></label>
-                <select name="class_number" id="class_number" class="float-md-right mt-md-1 font-weight-bold h4">
-                    <option value="S3A1">00</option>
-                    <option value="S3A2">01</option>
-                    <option value="S3A3">02</option>
-                </select>
-                
+		<th:block role="presentation" sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
+			<dl class="row mb-5 text-md-start text-center">
+				<dt class="col-sm-1 pt-md-1">クラス</dt>
+				<dl class="col-sm-1 fs-5 fw-bold" name="classroom" id="classroom" th:text="*{classroom}"></dl>
 
-            </div>
-            <div class="col-md-2 offset-md-1 pr-md-5">
-                <span><small class="text-muted">氏名</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
+				<dt class="col-sm-1 pt-md-1">番号</dt>
+				<dd class="col-sm-1">
+					<select name="class_number" id="class_number" class="fs-5 fw-bold">
+						<option value="zero">00</option>
+						<option th:each="map : ${classNumbersMap}" th:value="${map.key}" th:text="${map.value}">
+						</option>
+					</select>
+				</dd>
 
-            </div>
-        </div>
-    </th:block>
+				<dt class="col-sm-1 pt-md-1">氏名</dt>
+				<dd class="col-sm-2 fs-5 fw-bold" name="name" id="name">情報太郎</dd>
+			</dl>
+		</th:block>
 
 
 
-<th:block role="presentation"
-						sec:authorize="hasRole('ROLE_STUDENT')">
-        <div class="row mt-md-4 pr-md-5">
-            <div class="col-md-2 pr-md-5">
-                <span><small class="text-muted">クラス</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4">S3A1</span></span>
-            </div>
-            <div class="col-md-1 offset-md-1">
-                <span><small class="text-muted">番号</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4 ">01</span></span>
-            </div>
-            <div class="col-md-2 offset-md-1 pr-md-5">
-                <span><small class="text-muted">氏名</small><span
-                        class="float-md-right mt-md-1 font-weight-bold h4">石田悠介</span></span>
-            </div>
-        </div>
-        </th:block>
+		<th:block role="presentation" sec:authorize="hasRole('ROLE_STUDENT')">
+			<dl class="row mb-5 text-md-start text-center">
+				<dt class="col-sm-1 pt-md-1">クラス</dt>
+				<dl class="col-sm-1 fs-5 fw-bold" name="classroom" id="classroom"th:text="*{classroom}"></dl>
 
-        <br>
-        <br>
+				<dt class="col-sm-1 pt-md-1">番号</dt>
+				<dd class="col-sm-1 fs-5 fw-bold" name="class_number" id="class_number" th:text="*{class_number}"></dd>
 
-        <div class="form-group row mt-md-5">
-            <div class="col-md-3">
-                <p class="font-weight-bold h5 mt-md-1">申請種別</p>
-                <small class="text-danger">※必須</small>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group input-box">
-                    <div class="checkbox-inline" style="margin-right:10%;">
-                        <input type="radio" name="apply_type" value="0">
-                        <label>個人</label>
-                    </div>
-                    <div class="checkbox-inline" style="margin-left:10%;">
-                        <input type="radio" name="apply_type" value="1">
-                        <label>とりまとめ</label>
-                    </div>
+				<dt class="col-sm-1 pt-md-1">氏名</dt>
+				<dd class="col-sm-2 fs-5 fw-bold" name="name" id="name" th:text="*{name}"></dd>
+			</dl>
+		</th:block>
 
-                    <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-                </div>
-            </div>
-        </div>
+		<div class="row row-cols-1 row-cols-md-2 gy-3 mb-md-5">
+			<div class="col-md-4">
+				<h4 class="fw-bold text-center">申請種別</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col">
+				<div class="input-group justify-content-around pt-md-2">
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="apply_type" id="applyType1" value="0"
+							required>
+						<label class="form-check-label" for="applyType1">個人</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="apply_type" id="applyType2" value="1"
+							required>
+						<label class="form-check-label" for="applyType2">とりまとめ</label>
+					</div>
 
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						エラーメッセージ</h6>
 
-        <div class="form-group row">
-            <div class="col-md-3">
-                <p class="font-weight-bold h5 ">企業名</p>
-                <small class="text-danger">※必須</small>
-            </div>
-            <div class="col-md-6">
-                <input type="text" class="form-control" name="company_name">
-                <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-            </div>
-        </div>
+					<div class="invalid-feedback">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+                            必須項目です。</h6>
+					</div>
+				</div>
+			</div>
 
 
-        <div class="form-group row mt-md-5">
-            <div class="col-md-3">
-                <p class="font-weight-bold h5 ">内容</p>
-                <small class="text-danger">※必須</small>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group input-box">
-                    <div class="checkbox-inline" style="margin-right:5%;">
-                        <input type="radio" name="content" value="1">
-                        <label>合企</label>
-                    </div>
-                    <div class="checkbox-inline" style="margin-right:5%;">
-                        <input type="radio" name="content" value="2">
-                        <label>単独</label>
-                    </div>
-                    <div class="checkbox-inline" style="margin-right:5%;">
-                        <input type="radio" name="content" value="3">
-                        <label>試験</label>
-                    </div>
-                    <div class="checkbox-inline" style="margin-right:5%;">
-                        <input type="radio" name="content" value="99">
-                        <label>その他</label>
-                    </div>
+			<div class="col-md-4">
+				<h4 class="fw-bold mt-md-1 text-center">企業名</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col">
+				<input type="text" class="form-control" name="company_name" required>
+				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">エラーメッセージ
+				</h6>
 
-                    <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-                </div>
-            </div>
-        </div>
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						必須項目です。</h6>
+				</div>
+			</div>
 
 
-        <div class="form-group row">
-            <div class="col-md-3">
-                <p class="font-weight-bold h5 mt-md-5">開始時刻・終了日時</p>
-                <small class="text-danger">※必須</small>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>開始</label>
-                        <input type="datetime-local" class="form-control mr-md-5" name="date_activity_from">
-                        <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-                    </div>
-                    <div class="col-md-6">
-                        <label>終了</label>
-                        <input type="datetime-local" class="form-control mr-md-5" name="date_activity_to">
-                        <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-                    </div>
-                </div>
-            </div>
-        </div>
+			<div class="col-md-4">
+				<h4 class="fw-bold mt-md-1 text-center">内容</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col pt-md-2">
+				<div class="input-group justify-content-around">
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="content1" name="content" value="1" required>
+						<label class="form-check-label" for="content1">合企</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="content2" name="content" value="2" required>
+						<label class="form-check-label" for="content2">単独</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="content3" name="content" value="3" required>
+						<label class="form-check-label" for="content3">試験</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="content99" name="content" value="99" required>
+						<label class="form-check-label" for="content99">その他</label>
+					</div>
+
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						エラーメッセージ</h6>
+
+					<div class="invalid-feedback">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+                            必須項目です。</h6>
+					</div>
+				</div>
+			</div>
 
 
-        <br>
-        <br>
+			<div class="col-md-4">
+				<h4 class="fw-bold mt-md-4 text-center">開始時刻・終了日時</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col">
+				<div class="row g-3">
+					<div class="col-md-6">
+						<label for="date_activity_from" class="form-label input-group justify-content-center">開始</label>
+						<input type="datetime-local" class="form-control" name="date_activity_from"
+							id="date_activity_from" required>
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							エラーメッセージ</h6>
 
-        <div class="form-group row">
-            <div class="col-md-3">
-                <p class="font-weight-bold h5 ">郵便番号</p>
-            </div>
-            <div class="col-md-4 form-inline justify-content-center justify-content-md-start">
-                <input type="text" class="form-control w-50" id="zipcode">
-                <button class="btn btn-primary" type="button">検索</button>
-            </div>
-        </div>
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label for="date_activity_to" class="form-label input-group justify-content-around">終了</label>
+						<input type="datetime-local" class="form-control" name="date_activity_to" id="date_activity_to"
+							required>
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							エラーメッセージ</h6>
 
-        <br>
-        <br>
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+				</div>
 
-        <div class="form-group row">
-            <div class="col-md-3">
-                <p class="font-weight-bold h5 ">場所</p>
-                <small class="text-danger">※必須</small>
-            </div>
-            <div class="col-md-6">
-                <input type="text" class="form-control" id="loc" name="loc">
-                <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-            </div>
-        </div>
-
-
-        <br>
-        <br>
-
-        <div class="form-group row">
-            <div class="col-md-3">
-                <p class="font-weight-bold h5" style="margin-top: 90px;">手段</p>
-                <small class="text-danger">※必須</small>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group input-box pull-left">
-                    <div class="row">
-                        <div class="col-md-2 mt-md-5">
-                            <input type="checkbox" name="way" value="0">
-                            <label>欠席</label>
-                        </div>
-                        <div class="col-md-5">
-                            <label>開始</label>
-                            <input type="datetime-local" class="form-control" name="date_absence_from">
-                            <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-                        </div>
-                        <div class="col-md-5">
-                            <label>終了</label>
-                            <input type="datetime-local" class="form-control" name="date_absence_to">
-                            <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2 mt-md-2">
-                            <input type="checkbox" name="way" value="1">
-                            <label>早退</label>
-                        </div>
-                        <div class="col-md-5">
-                            <input type="datetime-local" class="form-control" name="leave_eary_date">
-                            <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2 mt-md-2">
-                            <input type="checkbox" name="way" value="2">
-                            <label>遅刻</label>
-                        </div>
-                        <div class="col-md-5">
-                            <input type="datetime-local" class="form-control" name="attendance_date">
-                            <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-                        </div>
-                    </div>
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						必須項目です。</h6>
+				</div>
+			</div>
 
 
-                    <small class="form-text text-md-left text-danger">エラーメッセージ</small>
-                </div>
-            </div>
-        </div>
+			<div class="col-md-4">
+				<h4 class="fw-bold mt-md-1 text-center">郵便番号</h4>
+			</div>
+			<div class="col">
+				<div class="input-group w-50 margin-md-0-auto">
+					<input type="text" class="form-control" id="zipcode">
+					<button type="button" id="zip-btn" class="btn btn-primary">検索</button>
+				</div>
 
-        <br>
-        <br>
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						必須項目です。</h6>
+				</div>
+			</div>
 
-        <div class="form-group row">
-            <div class="col-md-3">
-                <p class="font-weight-bold h5 mt-md-5">メモ</p>
-            </div>
-            <div class="col-md-6">
-                <textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
-            </div>
-        </div>
 
-        <br>
-        <br>
-        <br>
+			<div class="col-md-4 mt-md-5">
+				<h4 class="fw-bold mt-md-1 text-center">場所</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col mt-md-5">
+				<input type="text" class="form-control" name="loc" id="loc" required>
+				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">エラーメッセージ
+				</h6>
 
-        <button type="submit" class="btn btn-primary"
-            style="-webkit-appearance: none; width: 200px; height: 50px; font-size: 23px;">登録</button>
-    </form>
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						必須項目です。</h6>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 media-margin-top-8rem">
+				<h4 class="fw-bold mt-md-1 text-center">手段</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col">
+
+				<div class="row g-3">
+					<div
+						class="form-check col-sm-2 pt-md-5 original-input-group justify-content-center justify-content-md-start">
+						<input type="checkbox" class="form-check-input" name="way" value="1" id="way1">
+						<label for="way1" class="form-check-label">
+							欠席
+						</label>
+					</div>
+
+					<div class="col-sm-5 pt-md-2">
+						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
+						<input type="datetime-local" class="form-control" name="date_absence_from"
+							id="date_absence_from">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							エラーメッセージ
+						</h6>
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+
+					<div class="col-sm-5 pt-md-2">
+						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
+						<input type="datetime-local" class="form-control" name="date_absence_to" id="date_absence_to">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							エラーメッセージ
+						</h6>
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row g-3">
+					<div
+						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
+						<input type="checkbox" class="form-check-input" name="way" value="2" id="way2">
+						<label for="way2" class="form-check-label">
+							早退
+						</label>
+					</div>
+
+					<div class="col pt-md-2">
+						<input type="datetime-local" class="form-control" name="leave_early_date" id="leave_early_date">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							エラーメッセージ
+						</h6>
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+				</div>
+
+				<div class="row g-3">
+					<div
+						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
+						<input type="checkbox" class="form-check-input" name="way" value="3" id="way3">
+						<label for="way3" class="form-check-label">
+							遅刻
+						</label>
+					</div>
+
+					<div class="col pt-md-2">
+						<input type="datetime-local" class="form-control" name="attendance_date" id="attendance_date">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							エラーメッセージ
+						</h6>
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+				</div>
+
+				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">エラーメッセージ
+				</h6>
+
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						必須項目です。</h6>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 media-margin-top-35rem">
+				<h4 class="fw-bold mt-md-1 text-center">メモ</h4>
+			</div>
+			<div class="col">
+				<textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
+			</div>
+
+		</div>
+
+
+		<div class="d-grid col-4 mx-auto mt-5">
+			<button class="btn btn-primary btn-lg" type="submit">登録</button>
+		</div>
+	</form>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
-<script type="text/javascript" th:inline="javascript">
-function getUserId(){
-    const classi = document.getElementById('classi').value;
-    const number = document.getElementById('number').value;
- 
-    // AjaxにてDemoControllerクラスのsearchメソッドを呼び出す
-    let request = new XMLHttpRequest();
-    request.open("get", "/search?classi=" + classi + "?number=" + number, true);
-    request.send(null);
-    request.onload = function (event) {
-       // Ajaxが正常終了した場合
-       if (request.readyState === 4 && request.status === 200) {
-          // 該当するデータが無かった場合
-          if(!request.responseText){
-              alert("該当するデータはありませんでした");
-              return;
-          }
-          // 該当するデータがあった場合は、取得したUserDataオブジェクトの内容を画面に
-          // 表示する。その際、名前・性別・メモはデコードする
-          const userId = request.responseText;
-          document.getElementById('userId').textContent = userId;
-       // Ajaxが異常終了した場合
-       }else{
-          alert("エラーが発生し、データが取得できませんでしたよ」");
-       }
-    };
-    // Ajaxが異常終了した場合
-    request.onerror = function (event) {
-       alert("エラーが発生し、データが取得できませんでしたあああ");
-    }
-}
 
-</script>
+	<!-- オリジナルスクリプト -->
+	<script type="text/javascript" th:inline="javascript">
+		// 無効なフィールドがある場合にフォーム送信を無効にする
+        (function () {
+            'use strict';
+
+            // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
+            var forms = document.querySelectorAll('needs-validation');
+
+            // ループして帰順を防ぐ
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false)
+                })
+        })()
+
+
+		// 郵便番号用
+		$('#zip-btn').on('click', function () {
+			const url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=';
+			const zipcode = document.getElementById("zipcode");
+
+			// Ajax通信を開始
+			$.ajax({
+				url: url + zipcode.value,
+				type: 'GET',
+				dataType: 'json',
+			}).done(function (data) {
+				const results = data.results[0];
+				setAddress(results);
+
+			}).fail(function () {
+				alert("ajax失敗");
+			});
+		})
+
+		function setAddress(results) {
+			const loc = document.getElementById("loc");
+			const address1 = results.address1;
+			const address2 = results.address2;
+			const address3 = results.address3;
+
+			const address = address1 + address2 + address3;
+
+			loc.value = address;
+		}
+
+		// クラスと番号から名前を取得する用
+		$('#class_number').on('change', function () {
+			const name = document.getElementById("name");
+			const classroom = document.getElementById("classroom").textContent;
+			const class_number = document.getElementById("class_number").value;
+
+			const json = {
+				"classroom": classroom,
+				"class_number": class_number
+			}
+
+			if (class_number == "zero") {
+				name.innerText = "情報太郎";
+				return false;
+			}
+
+			$.ajax({
+				url: window.location.href + "/getUserInfo",
+				type: 'GET',
+				dataType: 'json',
+				data: {
+					// CSRF対策
+					_csrf: $("*[name=_csrf]").val(),
+					json: JSON.stringify(json)
+				}
+			}).done(function (data) {
+				//name.value =  data[0].name;
+				name.innerText = data[0].name;
+
+			}).fail(function () {
+				alert("ajax失敗");
+			});
+		});
+	</script>
 </body>
 
 </html>
