@@ -225,6 +225,8 @@ public class JobReportController {
 		if (jobReportData.isEmpty()) {
 			return getReportList(principal, model);
 		}
+		
+		
 
 		model.addAttribute("jobReportData", jobReportData.get());
 
@@ -249,7 +251,6 @@ public class JobReportController {
 
 		// sessionから申請ID取得しセット
 		form.setApply_id((String) session.getAttribute("apply_id"));
-
 
 		if(form.getStatus().equals("5") && form.getIndicate().equals("")) {
 			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
