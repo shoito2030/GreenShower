@@ -23,7 +23,6 @@ public class JobCsvRequestService {
 	/**
 	 * 就職活動申請一覧情報をCSVファイルとしてサーバに保存する.
 	 * 
-	 * @param user_id ユーザID
 	 * @throws DataAccessException
 	 */
 	public void jobRequestListCsvOut() throws DataAccessException {

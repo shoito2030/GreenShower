@@ -286,7 +286,8 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
 						<input type="datetime-local" class="form-control" name="date_absence_to" id="date_absence_to">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('date_absence_to')}" th:errors="*{date_absence_to}">
 							エラーメッセージ
 						</h6>
 
@@ -309,7 +310,8 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control" name="leave_early_date" id="leave_early_date">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('leave_early_date')}" th:errors="*{leave_early_date}">
 							エラーメッセージ
 						</h6>
 
@@ -331,7 +333,8 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control" name="attendance_date" id="attendance_date">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('attendance_date')}" th:errors="*{attendance_date}">
 							エラーメッセージ
 						</h6>
 
@@ -342,13 +345,6 @@
 					</div>
 				</div>
 
-				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">エラーメッセージ
-				</h6>
-
-				<div class="invalid-feedback">
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						必須項目です。</h6>
-				</div>
 			</div>
 
 

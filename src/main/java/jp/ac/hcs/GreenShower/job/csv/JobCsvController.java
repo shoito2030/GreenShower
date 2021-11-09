@@ -24,6 +24,7 @@ public class JobCsvController {
 	
 	/**
 	 * すべての就職活動申請一覧情報をCSVファイルとしてダウンロードさせる
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動申請一覧情報のCSVファイル
 	 */
