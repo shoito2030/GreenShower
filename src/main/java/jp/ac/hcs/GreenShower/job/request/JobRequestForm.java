@@ -63,7 +63,6 @@ public class JobRequestForm {
 	 * 欠席開始日時
 	 */
 	@DateValueValid
-	@NotBlank(message = "欠席日時を選択してください")
 	private String date_absence_from;
 	
 	/**
