@@ -1,6 +1,7 @@
 package jp.ac.hcs.GreenShower.ai;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -48,7 +49,13 @@ public class ProofreadingService {
 		String json = getResult(String.format(URL, KEY, sentence));
 		
 		// jsonからMap形式に変換
-		Map<String, Object> result = jsonStringToMap(json);
+		Optional<Map<String, Object>> temp = jsonStringToMap(json);
+		
+		if(temp.isEmpty()) {
+			return Optional.empty();
+		}
+		
+		Map<String, Object> result = temp.get();
 		
 		// ステータスを取得し、処理の成否を判定する
 		String status = String.valueOf(result.get("status"));
@@ -106,7 +113,7 @@ public class ProofreadingService {
 			}
 			in.close();
 			con.disconnect();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return result;
@@ -117,7 +124,7 @@ public class ProofreadingService {
 	 * @param json json文字列
 	 * @return json文字列を読み込んだMapオブジェクト。失敗した場合はnull
 	 */
-	private Map<String, Object> jsonStringToMap(String json) {
+	private Optional<Map<String, Object>> jsonStringToMap(String json) {
 		Map<String, Object> map = null;
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -128,7 +135,7 @@ public class ProofreadingService {
 			e.printStackTrace();
 		}
 
-		return map;
+		return Optional.ofNullable(map);
 	}
 	
 	/**

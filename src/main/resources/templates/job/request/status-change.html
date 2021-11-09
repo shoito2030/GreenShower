@@ -13,8 +13,172 @@
 	<p class="h1">就職活動申請 管理</p>
 	<div class="container mt-md-5">
 
-		<!-- 共通部品挿入（メモまで） -->
-		<th:block th:insert="components/part::frag_detail (${jobRequestData})"></th:block>
+		<div class="container mt-md-5" th:object="${jobRequestData}">
+
+		<div class="row justify-content-md-center mt-md-4">
+			<div class="col-md-2">
+				<span><small class="text-muted">クラス</small><span
+					class="float-md-right mt-md-1 fw-bold h4"
+					th:text="*{classroom}"></span></span>
+			</div>
+			<div class="col-md-1 offset-md-1">
+				<span><small class="text-muted">番号</small><span
+					class="float-md-right mt-md-1 fw-bold h4"
+					th:text="*{class_number}"></span></span>
+			</div>
+			<div class="col-md-2 offset-md-1">
+				<span><small class="text-muted">氏名</small><span
+					class="float-md-right mt-md-1 fw-bold h4"
+					th:text="*{name}"></span></span>
+			</div>
+		</div>
+
+
+
+		<div class="row mt-md-5">
+			<div class="col-md-4 bg-color-white">
+				<p class="fw-bold h4">申請種別</p>
+			</div>
+			<div class="col-md-8">
+				<p class="h4 text-center text-md-left pl-md-5"
+					th:text="*{apply_type.value}"></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="fw-bold h4">企業名</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5"
+					th:text="*{company_name}"></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="fw-bold h4">内容</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5"
+					th:text="*{content.value}"></p>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-5">
+				<p class="fw-bold h4">開始日時・終了日時</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+
+				<div class="row">
+					<div class="col-md-5">
+						<label class="" for="date_activity_from">開始</label>
+						<p class="h4 text-center text-md-left pl-md-5"
+							id="date_activity_from"
+							th:text="${#dates.format(jobRequestData.date_activity_from, 'yyyy年MM月dd日 HH時mm分')}"></p>
+					</div>
+					<div class="col-md-2 mt-md-4">
+						<p class="h4 text-center text-md-left pl-md-5">~</p>
+					</div>
+					<div class="col-md-5">
+						<label class="" for="date_activity_to">終了</label>
+						<p class="h4 text-center text-md-left pl-md-5"
+							id="date_activity_to"
+							th:text="${#dates.format(jobRequestData.date_activity_to, 'yyyy年MM月dd日 HH時mm分')}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="fw-bold h4">場所</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5" th:text="*{loc}"></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="fw-bold h4" th:text="'手段(' + *{way.value} + ')'"></p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+
+				<th:block th:switch="${jobRequestData.way.id}">
+					<div class="row" th:case="1">
+						<div class="col-md-5">
+							<p class="h4 text-center text-md-left pl-md-5"
+								th:text="${#dates.format(jobRequestData.date_absence_from, 'yyyy年MM月dd日 HH時mm分')}">
+							</p>
+						</div>
+						<div class="col-md-2">
+							<p class="h4 text-center text-md-left pl-md-5">~</p>
+						</div>
+						<div class="col-md-5">
+							<p class="h4 text-center text-md-left pl-md-5"
+								th:text="${#dates.format(jobRequestData.date_absence_to, 'yyyy年MM月dd日 HH時mm分')}">
+							</p>
+						</div>
+					</div>
+
+					<p class="h4 text-center text-md-left pl-md-5" th:case="2"
+						th:text="${#dates.format(jobRequestData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'">
+					</p>
+					<p class="h4 text-center text-md-left pl-md-5" th:case="3"
+						th:text="${#dates.format(jobRequestData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'に出席します'">
+					</p>
+
+					<th:block th:case="4">
+						<p class="h4 text-center text-md-left pl-md-5"
+							th:text="${#dates.format(jobRequestData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'から出席し、'">
+						</p>
+						<p class="h4 text-center text-md-left pl-md-5"
+							th:text="${#dates.format(jobRequestData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'">
+						</p>
+					</th:block>
+
+				</th:block>
+
+			</div>
+		</div>
+
+		<!-- AIによる誤字脱字判定の結果が『白』の場合  -->
+		<div class="row" th:unless="${proofreadingData}">
+			<div class="col-md-4 bg-color-white pt-md-4">
+				<p class="fw-bold h4">メモ</p>
+			</div>
+			<div class="col-md-8 pt-md-4">
+				<p class="h4 text-center text-md-left pl-md-5" th:text="*{remark}"></p>
+			</div>
+		</div>
+
+
+		<!-- AIによる誤字脱字判定の結果が『黒』の場合  -->
+		<th:block th:if="${proofreadingData}">
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="fw-bold h4">備考</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+					<p class="h4 text-center text-md-left pl-md-5 lh-lg"
+						th:utext="${proofreadingData.checkedSentence}"></p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="fw-bold h4">変換候補</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+
+					<p class="h4 text-center text-md-left pl-md-5 lh-lg" th:each="alert : ${proofreadingData.alerts}" th:text="${alert.word + ' >> ' + '[' + alert.suggestions + ']'}"></p>
+
+				</div>
+			</div>
+		</th:block>
 
 		<!-- メモ以降追加 -->
 		<hr>

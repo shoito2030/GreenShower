@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jp.ac.hcs.GreenShower.ai.ProofreadingData;
+import jp.ac.hcs.GreenShower.ai.ProofreadingService;
 import jp.ac.hcs.GreenShower.user.UserData;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +37,9 @@ public class JobRequestController {
 
 	@Autowired
 	private JobRequestService jobRequestService;
+
+	@Autowired
+	private ProofreadingService proofreadingService;
 
 	@Autowired
 	private HttpSession session;
@@ -186,6 +191,16 @@ public class JobRequestController {
 		}
 
 		model.addAttribute("jobRequestData", jobRequestData.get());
+
+		// AIサービスの呼び出し
+		Optional<ProofreadingData> proofreadingData = proofreadingService
+				.proofreading(jobRequestData.get().getRemark());
+
+		// 値が入っていた（検査結果が黒）だった場合に実行
+		if (!proofreadingData.isEmpty()) {
+			model.addAttribute("proofreadingData", proofreadingData.get());
+			log.info("校正結果： " + proofreadingData.get());
+		}
 		return "job/request/status-change";
 	}
 
@@ -243,9 +258,10 @@ public class JobRequestController {
 		jobRequestService.updateJobContent(apply_id, form);
 		return "index";
 	}
-	
+
 	/**
 	 * イベント情報登録画面を表示する
+	 * 
 	 * @param principal
 	 * @param model
 	 * @return
@@ -255,9 +271,10 @@ public class JobRequestController {
 		return "job/event-registration";
 
 	}
-	
+
 	/**
 	 * イベント情報登録処理を行う
+	 * 
 	 * @param principal
 	 * @param model
 	 * @return
