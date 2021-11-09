@@ -270,6 +270,9 @@ public class JobReportController {
 		}else if(form.getStatus().isEmpty()){
 			model.addAttribute("errmsg", "状態を選択してください");
 			return getReportStatus(form.getApply_id(), principal, model);
+		}else if (!(form.getStatus().equals("5") || form.getStatus().equals("7") || form.getStatus().equals("99"))) {
+			model.addAttribute("errmsg", "改ざんしないでください。");
+			return getReportStatus(form.getApply_id(), principal, model);
 		}
 
 		// 報告状態変更処理実行
