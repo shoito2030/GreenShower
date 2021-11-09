@@ -214,7 +214,7 @@
 				<div class="row g-3">
 					<div
 						class="form-check col-sm-2 pt-md-5 original-input-group justify-content-center justify-content-md-start">
-						<input type="checkbox" class="form-check-input" name="way" value="1" th:checked="*{way.id=='1'}" id="way1">
+						<input type="checkbox" class="form-check-input" name="way" value="1" th:checked="*{way.id=='1'}" id="way1" required>
 						<label for="way1" class="form-check-label">
 							欠席
 						</label>
@@ -223,7 +223,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
 						<input type="datetime-local" class="form-control" name="date_absence_from"
-							id="date_absence_from" disabled>
+							id="date_absence_from" disabled required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -237,7 +237,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
 						<input type="datetime-local" class="form-control" name="date_absence_to"
-							id="date_absence_to" disabled>
+							id="date_absence_to" disabled required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -253,7 +253,7 @@
 				<div class="row g-3">
 					<div
 						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
-						<input type="checkbox" class="form-check-input" name="way" th:checked="*{way.id=='2'}" value="2" id="way2">
+						<input type="checkbox" class="form-check-input" name="way" th:checked="*{way.id=='2'}" value="2" id="way2" required>
 						<label for="way2" class="form-check-label">
 							早退
 						</label>
@@ -261,7 +261,7 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control" name="leave_early_date"
-						id="leave_early_date" disabled>
+						id="leave_early_date" disabled required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -276,7 +276,7 @@
 				<div class="row g-3">
 					<div
 						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
-						<input type="checkbox" class="form-check-input" name="way" th:checked="*{way.id=='3'}" value="3" id="way3">
+						<input type="checkbox" class="form-check-input" name="way" th:checked="*{way.id=='3'}" value="3" id="way3" required>
 						<label for="way3" class="form-check-label">
 							遅刻
 						</label>
@@ -284,7 +284,7 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control" name="attendance_date"
-						id="attendance_date" disabled>
+						id="attendance_date" disabled  required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -412,6 +412,7 @@
 
 		$('#way1').on('change', function () {
 			if(document.getElementById("way1").checked){
+				//入力制限の為の属性付与
 				document.getElementById("date_absence_from").removeAttribute("disabled");
 				document.getElementById("date_absence_to").removeAttribute("disabled");
 				document.getElementById("way2").setAttribute("disabled",true);
@@ -420,7 +421,13 @@
 				document.getElementById("way3").setAttribute("disabled",true);
 				document.getElementById("way3").checked=false;
 				document.getElementById("attendance_date").setAttribute("disabled",true);
+				//required属性の付与
+				document.getElementById("way2").removeAttribute("required");
+				document.getElementById("way3").removeAttribute("required");
+				document.getElementById("leave_early_date").removeAttribute("required");
+				document.getElementById("attendance_date").removeAttribute("required");
 			}else{
+				//入力制限の為の属性付与
 				document.getElementById("date_absence_from").setAttribute("disabled",true);
 				var textForm = document.getElementById("date_absence_from");
 				  textForm.value = '';
@@ -429,34 +436,67 @@
 				  textForm.value = '';
 				document.getElementById("way2").removeAttribute("disabled");
 				document.getElementById("way3").removeAttribute("disabled");
+				//required属性の付与
+				document.getElementById("way2").setAttribute("required",true);
+				document.getElementById("way3").setAttribute("required",true);
+				document.getElementById("leave_early_date").setAttribute("required",true);
+				document.getElementById("attendance_date").setAttribute("required",true);
 			}
 			
 
 		})
+
 		$('#way2').on('change', function () {
 			if(document.getElementById("way2").checked){
+				//入力制限の為の属性付与
 				document.getElementById("leave_early_date").removeAttribute("disabled");
 				document.getElementById("way1").setAttribute("disabled",true);
 				document.getElementById("way3").removeAttribute("disabled");
+				//required属性の付与
+				document.getElementById("way1").removeAttribute("required");
+				document.getElementById("way3").removeAttribute("required");
+				document.getElementById("date_absence_from").removeAttribute("required");
+				document.getElementById("date_absence_to").removeAttribute("required");
+				document.getElementById("attendance_date").removeAttribute("required");
 			}else{
+				//入力制限の為の属性付与
 				document.getElementById("leave_early_date").setAttribute("disabled",true);
 				var textForm = document.getElementById("leave_early_date");
 				  textForm.value = '';
 				document.getElementById("way1").removeAttribute("disabled");
+				//required属性の付与
+				document.getElementById("way1").setAttribute("required",true);
+				document.getElementById("way3").setAttribute("required",true);
+				document.getElementById("date_absence_from").setAttribute("required",true);
+				document.getElementById("date_absence_to").setAttribute("required",true);
+				document.getElementById("attendance_date").setAttribute("required",true);
 			}
 			
-
 		})
 		$('#way3').on('change', function () {
 			if(document.getElementById("way3").checked){
+				//入力制限の為の属性付与
 				document.getElementById("attendance_date").removeAttribute("disabled");
 				document.getElementById("way1").setAttribute("disabled",true);
 				document.getElementById("way2").removeAttribute("disabled");
+				//required属性の付与
+				document.getElementById("way1").removeAttribute("required");
+				document.getElementById("way2").removeAttribute("required");
+				document.getElementById("date_absence_from").removeAttribute("required");
+				document.getElementById("date_absence_to").removeAttribute("required");
+				document.getElementById("leave_early_date").removeAttribute("required");
 			}else{
+				//入力制限の為の属性付与
 				document.getElementById("attendance_date").setAttribute("disabled",true);
 				var textForm = document.getElementById("attendance_date");
 				  textForm.value = '';
 				document.getElementById("way1").removeAttribute("disabled");
+				//required属性の付与
+				document.getElementById("way1").setAttribute("required",true);
+				document.getElementById("way2").setAttribute("required",true);
+				document.getElementById("date_absence_from").setAttribute("required",true);
+				document.getElementById("date_absence_to").setAttribute("required",true);
+				document.getElementById("leave_early_date").setAttribute("required",true);
 			}
 			
 
