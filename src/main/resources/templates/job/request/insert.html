@@ -53,43 +53,48 @@
 		新規登録</h1>
 
 	<form class="container mt-md-5 needs-validation" novalidate method="post" th:action="@{/job/request/insert}"
-		th:object="${userData}">
+		th:object="${jobRequestForm}">
+
+		<div th:object="${userData}">
+			<th:block role="presentation"
+				sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
+				<dl class="row mb-5 text-md-start text-center">
+					<dt class="col-sm-1 pt-md-1">クラス</dt>
+					<dl class="col-sm-1 fs-5 fw-bold" name="classroom" id="classroom"
+						th:text="*{classroom}"></dl>
+
+					<dt class="col-sm-1 pt-md-1">番号</dt>
+					<dd class="col-sm-1">
+						<select name="class_number" id="class_number" class="fs-5 fw-bold">
+							<option value="zero">--</option>
+							<option th:each="map : ${classNumbersMap}" th:value="${map.key}"
+								th:text="${map.value}"></option>
+						</select>
+					</dd>
+
+					<dt class="col-sm-1 pt-md-1">氏名</dt>
+					<dd class="col-sm-2 fs-5 fw-bold" name="name" id="name">情報太郎</dd>
+				</dl>
+			</th:block>
 
 
-		<th:block role="presentation" sec:authorize="hasAnyRole('ROLE_TEACHER', 'ROLE_STAFF')">
-			<dl class="row mb-5 text-md-start text-center">
-				<dt class="col-sm-1 pt-md-1">クラス</dt>
-				<dl class="col-sm-1 fs-5 fw-bold" name="classroom" id="classroom" th:text="*{classroom}"></dl>
 
-				<dt class="col-sm-1 pt-md-1">番号</dt>
-				<dd class="col-sm-1">
-					<select name="class_number" id="class_number" class="fs-5 fw-bold">
-						<option value="zero">--</option>
-						<option th:each="map : ${classNumbersMap}" th:value="${map.key}" th:text="${map.value}">
-						</option>
-					</select>
-				</dd>
+			<th:block role="presentation" sec:authorize="hasRole('ROLE_STUDENT')">
+				<dl class="row mb-5 text-md-start text-center">
+					<dt class="col-sm-1 pt-md-1">クラス</dt>
+					<dl class="col-sm-1 fs-5 fw-bold" name="classroom" id="classroom"
+						th:text="*{classroom}"></dl>
 
-				<dt class="col-sm-1 pt-md-1">氏名</dt>
-				<dd class="col-sm-2 fs-5 fw-bold" name="name" id="name">情報太郎</dd>
-			</dl>
-		</th:block>
+					<dt class="col-sm-1 pt-md-1">番号</dt>
+					<dd class="col-sm-1 fs-5 fw-bold" name="class_number"
+						id="class_number" th:text="*{class_number}"></dd>
 
-
-
-		<th:block role="presentation" sec:authorize="hasRole('ROLE_STUDENT')">
-			<dl class="row mb-5 text-md-start text-center">
-				<dt class="col-sm-1 pt-md-1">クラス</dt>
-				<dl class="col-sm-1 fs-5 fw-bold" name="classroom" id="classroom"th:text="*{classroom}"></dl>
-
-				<dt class="col-sm-1 pt-md-1">番号</dt>
-				<dd class="col-sm-1 fs-5 fw-bold" name="class_number" id="class_number" th:text="*{class_number}"></dd>
-
-				<dt class="col-sm-1 pt-md-1">氏名</dt>
-				<dd class="col-sm-2 fs-5 fw-bold" name="name" id="name" th:text="*{name}"></dd>
-			</dl>
-		</th:block>
-
+					<dt class="col-sm-1 pt-md-1">氏名</dt>
+					<dd class="col-sm-2 fs-5 fw-bold" name="name" id="name"
+						th:text="*{name}"></dd>
+				</dl>
+			</th:block>
+		</div>
 		<div class="row row-cols-1 row-cols-md-2 gy-3 mb-md-5">
 			<div class="col-md-4">
 				<h4 class="fw-bold text-center">申請種別</h4>
@@ -101,6 +106,10 @@
 						<input class="form-check-input" type="radio" name="apply_type" id="applyType1" value="0"
 							required>
 						<label class="form-check-label" for="applyType1">個人</label>
+						<div class="invalid-feedback">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+                            選択してください</h6>
+                            </div>
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" name="apply_type" id="applyType2" value="1"
@@ -108,13 +117,11 @@
 						<label class="form-check-label" for="applyType2">とりまとめ</label>
 					</div>
 
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+					th:if="${#fields.hasErrors('apply_type')}" th:errors="*{apply_type}">
 						エラーメッセージ</h6>
 
-					<div class="invalid-feedback">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                            必須項目です。</h6>
-					</div>
+					
 				</div>
 			</div>
 
@@ -125,12 +132,14 @@
 			</div>
 			<div class="col">
 				<input type="text" class="form-control" name="company_name" required>
-				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">エラーメッセージ
+				
+				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+				th:if="${#fields.hasErrors('company_name')}" th:errors="*{company_name}">エラーメッセージ
 				</h6>
 
 				<div class="invalid-feedback">
 					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						必須項目です。</h6>
+						企業名を入力してください</h6>
 				</div>
 			</div>
 
@@ -144,6 +153,10 @@
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" id="content1" name="content" value="1" required>
 						<label class="form-check-label" for="content1">合企</label>
+						<div class="invalid-feedback">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+                            選択してください</h6>
+                            </div>
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" id="content2" name="content" value="2" required>
@@ -158,13 +171,10 @@
 						<label class="form-check-label" for="content99">その他</label>
 					</div>
 
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+					th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
 						エラーメッセージ</h6>
 
-					<div class="invalid-feedback">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                            必須項目です。</h6>
-					</div>
 				</div>
 			</div>
 
@@ -179,24 +189,26 @@
 						<label for="date_activity_from" class="form-label input-group justify-content-center">開始</label>
 						<input type="datetime-local" class="form-control" name="date_activity_from"
 							id="date_activity_from" required>
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('date_activity_from')}" th:errors="*{date_activity_from}">
 							エラーメッセージ</h6>
 
 						<div class="invalid-feedback">
 							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								必須項目です。</h6>
+								選択してください</h6>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="date_activity_to" class="form-label input-group justify-content-around">終了</label>
 						<input type="datetime-local" class="form-control" name="date_activity_to" id="date_activity_to"
 							required>
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('date_activity_to')}" th:errors="*{date_activity_to}">
 							エラーメッセージ</h6>
 
 						<div class="invalid-feedback">
 							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								必須項目です。</h6>
+								選択してください</h6>
 						</div>
 					</div>
 				</div>
@@ -230,12 +242,13 @@
 			</div>
 			<div class="col mt-md-5">
 				<input type="text" class="form-control" name="loc" id="loc" required>
-				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">エラーメッセージ
+				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+				th:if="${#fields.hasErrors('loc')}" th:errors="*{loc}">エラーメッセージ
 				</h6>
 
 				<div class="invalid-feedback">
 					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						必須項目です。</h6>
+						場所を入力してください</h6>
 				</div>
 			</div>
 
@@ -259,7 +272,8 @@
 						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
 						<input type="datetime-local" class="form-control" name="date_absence_from"
 							id="date_absence_from">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('date_absence_from')}" th:errors="*{date_absence_from}">
 							エラーメッセージ
 						</h6>
 
