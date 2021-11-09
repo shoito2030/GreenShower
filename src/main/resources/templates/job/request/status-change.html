@@ -202,6 +202,9 @@
 							<option value="99">取消し</option>
 						</select>
 					</div>
+					<div th:if="${errmsg}">
+						<span th:text="${errmsg}" style="color: red;"></span>
+					</div>
 				</div>
 			</div>
 			<div class="row">

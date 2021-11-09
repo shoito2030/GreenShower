@@ -216,6 +216,17 @@ public class JobRequestController {
 	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
 			Principal principal, Model model) {
 		System.out.println(apply_id);
+		
+		if(form.getStatus().equals("1") && form.getIndicate().equals("")) {
+			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
+			return getRequestStatusChange(principal, apply_id, model);
+		}else if(form.getStatus().isEmpty()){
+			model.addAttribute("errmsg", "状態を選択してください");
+			return getRequestStatusChange(principal, apply_id, model);
+		}else if (!(form.getStatus().equals("4") || form.getStatus().equals("1") || form.getStatus().equals("99"))) {
+			model.addAttribute("errmsg", "改ざんしないでください。");
+			return getRequestStatusChange(principal, apply_id, model);
+		}
 		jobRequestService.updateJobStatus(apply_id, form);
 		return "index";
 	}
