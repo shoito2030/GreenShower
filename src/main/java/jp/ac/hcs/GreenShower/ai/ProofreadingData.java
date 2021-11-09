@@ -27,7 +27,7 @@ public class ProofreadingData {
 	/* チェックロジック入力用に正規化した文 */
 	private String normalizedSentence;
 	
-	/* チェック後の文。指摘箇所を<<>>で示す。 */
+	/* チェック後の文。指摘箇所をマークアップするためにHTMLで加工した文 */
 	private String checkedSentence;
 	
 	/* 指定内容を格納した配列	 */

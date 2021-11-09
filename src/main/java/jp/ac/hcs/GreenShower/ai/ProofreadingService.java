@@ -30,7 +30,7 @@ public class ProofreadingService {
 	/* APIキー */
 	private final static String KEY = "DZZJue7PdWJJi8yXJQHUN4827W1uYpo8";
 	
-	private final static String MARKUP_HTML_OPEN = "<span class='mark font-weight-bold text-danger' style='background-color:yellow'>";
+	private final static String MARKUP_HTML_OPEN = "<span class='mark fw-bold text-danger' style='background-color:yellow'>";
 	private final static String MARKUP_HTML_CLOSE = "</span>";
 	
 	/**
