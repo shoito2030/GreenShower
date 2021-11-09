@@ -66,7 +66,6 @@ public class JobRequestService {
 		try {
 			jobRequestData = jobRequestRepository.selectOne(apply_id);
 		} catch (DataAccessException e) {
-			// System.out.println("request selectOneで例外キャッチ");
 			e.printStackTrace();
 			jobRequestData = null;
 		}
