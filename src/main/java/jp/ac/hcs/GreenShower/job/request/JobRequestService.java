@@ -38,15 +38,21 @@ public class JobRequestService {
 	 */
 	public Optional<JobRequestEntity> selectAllRequests(String user_id, String role) {
 		JobRequestEntity jobRequestEntity;
+		
+		Optional<UserData> userData = selectPersonalInfo(user_id);
+		if(userData.isEmpty()) {
+			return Optional.empty();
+		}
 
 		try {
-			jobRequestEntity = jobRequestRepository.selectAllRequests();
-
-			// ユーザが生徒の場合は、ユーザ自身の申請情報のみを抽出する
+			jobRequestEntity = jobRequestRepository.selectAllRequests(userData.get().getClassroom());
+			
+			// ユーザが『生徒』の場合は、ユーザ自身の申請情報のみを抽出する
 			if (role.equals("ROLE_STUDENT")) {
 				jobRequestEntity.setJobRequestList(jobRequestEntity.getJobRequestList().stream()
 						.filter(report -> report.getApplicant_id().equals(user_id)).collect(toList()));
 			}
+
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			jobRequestEntity = null;

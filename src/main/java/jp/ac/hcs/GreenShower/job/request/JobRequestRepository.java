@@ -22,7 +22,7 @@ public class JobRequestRepository {
 	/** SQL 申請情報全件取得 */
 	private static final String SQL_SELECT_ALL_REQUESTS = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS  FROM JOB_HUNTING JH\r\n"
 			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID\r\n"
-			+ "WHERE NOT EXISTS(SELECT *  FROM REPORTS REP WHERE JH.APPLY_ID  = REP.APPLY_ID) ORDER BY JH.STATUS DESC;";
+			+ "WHERE NOT EXISTS(SELECT *  FROM REPORTS REP WHERE JH.APPLY_ID  = REP.APPLY_ID) AND U.CLASSROOM = ? ORDER BY JH.STATUS DESC;";
 
 	/** ユーザIDからクラス・番号・名前を取得するSQL */
 	private static final String SQL_SELECT_PERSONAL_INFO = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID  = ?;";
@@ -62,8 +62,8 @@ public class JobRequestRepository {
 	 * @return jobRequestEntity
 	 * @throws DataAccessException
 	 */
-	public JobRequestEntity selectAllRequests() throws DataAccessException {
-		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_REQUESTS);
+	public JobRequestEntity selectAllRequests(String classroom) throws DataAccessException {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_REQUESTS, classroom);
 		JobRequestEntity jobRequestEntity = mappingSelectResult(resultList);
 
 		return jobRequestEntity;
