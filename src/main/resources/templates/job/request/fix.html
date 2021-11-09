@@ -223,7 +223,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
 						<input type="datetime-local" class="form-control" name="date_absence_from"
-							id="date_absence_from">
+							id="date_absence_from" disabled>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -236,7 +236,8 @@
 
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
-						<input type="datetime-local" class="form-control" name="date_absence_to" id="date_absence_to">
+						<input type="datetime-local" class="form-control" name="date_absence_to"
+							id="date_absence_to" disabled>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -259,7 +260,8 @@
 					</div>
 
 					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control" name="leave_early_date" id="leave_early_date">
+						<input type="datetime-local" class="form-control" name="leave_early_date"
+						id="leave_early_date" disabled>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -281,7 +283,8 @@
 					</div>
 
 					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control" name="attendance_date" id="attendance_date">
+						<input type="datetime-local" class="form-control" name="attendance_date"
+						id="attendance_date" disabled>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -406,6 +409,58 @@
 				alert("ajax失敗");
 			});
 		});
+
+		$('#way1').on('change', function () {
+			if(document.getElementById("way1").checked){
+				document.getElementById("date_absence_from").removeAttribute("disabled");
+				document.getElementById("date_absence_to").removeAttribute("disabled");
+				document.getElementById("way2").setAttribute("disabled",true);
+				document.getElementById("way2").checked=false;
+				document.getElementById("leave_early_date").setAttribute("disabled",true);
+				document.getElementById("way3").setAttribute("disabled",true);
+				document.getElementById("way3").checked=false;
+				document.getElementById("attendance_date").setAttribute("disabled",true);
+			}else{
+				document.getElementById("date_absence_from").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_from");
+				  textForm.value = '';
+				document.getElementById("date_absence_to").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_to");
+				  textForm.value = '';
+				document.getElementById("way2").removeAttribute("disabled");
+				document.getElementById("way3").removeAttribute("disabled");
+			}
+			
+
+		})
+		$('#way2').on('change', function () {
+			if(document.getElementById("way2").checked){
+				document.getElementById("leave_early_date").removeAttribute("disabled");
+				document.getElementById("way1").setAttribute("disabled",true);
+				document.getElementById("way3").removeAttribute("disabled");
+			}else{
+				document.getElementById("leave_early_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("leave_early_date");
+				  textForm.value = '';
+				document.getElementById("way1").removeAttribute("disabled");
+			}
+			
+
+		})
+		$('#way3').on('change', function () {
+			if(document.getElementById("way3").checked){
+				document.getElementById("attendance_date").removeAttribute("disabled");
+				document.getElementById("way1").setAttribute("disabled",true);
+				document.getElementById("way2").removeAttribute("disabled");
+			}else{
+				document.getElementById("attendance_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("attendance_date");
+				  textForm.value = '';
+				document.getElementById("way1").removeAttribute("disabled");
+			}
+			
+
+		})
 	</script>
 </body>
 
