@@ -264,7 +264,7 @@ public class JobRequestService {
 	public Date strLocalDateTimeToDate(String strDate) {
 		Date date;
 
-		if (strDate.equals("")) {
+		if (strDate == null||strDate.isBlank()) {
 			return null;
 		} else {
 			TemporalAccessor parsed;
