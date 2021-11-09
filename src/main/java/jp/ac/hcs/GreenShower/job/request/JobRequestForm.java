@@ -19,7 +19,7 @@ public class JobRequestForm {
 	/**
 	 * 申請種別
 	 */
-	@NotBlank
+	@NotBlank(message = "選択してください")
 	private String apply_type;
 	
 	/**
@@ -51,18 +51,19 @@ public class JobRequestForm {
 	/**
 	 * 手段
 	 */
-	private List<String> way = new ArrayList<>(); ;
+	private List<String> way = new ArrayList<>();
 	
 	/**
 	 * 内容
 	 */
-	@NotBlank(message = "内容を入力してください")
+	@NotBlank(message = "内容を選択してください")
 	private String content;
 	
 	/**
 	 * 欠席開始日時
 	 */
 	@DateValueValid
+	@NotBlank(message = "欠席日時を選択してください")
 	private String date_absence_from;
 	
 	/**
