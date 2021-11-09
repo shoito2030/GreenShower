@@ -45,10 +45,10 @@ public class JobRequestController {
 	private HttpSession session;
 
 	/**
-	 * 就職活動申請申請一覧画面を表示する 
+	 * 就職活動申請申請一覧画面を表示する
 	 * 
 	 * @param model
-	 * @return - 処理成功時：就職活動申請(申請)一覧画面 - 処理失敗時：トップ画面
+	 * @return - 処理成功時：就職活動申請一覧画面 - 処理失敗時：就職活動申請トップ画面
 	 */
 	@GetMapping("/job/request/list")
 	public String getRequestList(Principal principal, Model model) {
@@ -58,7 +58,7 @@ public class JobRequestController {
 
 		jobRequestEntity = jobRequestService.selectAllRequests(principal.getName(), role);
 
-		// 処理失敗によりトップ画面へ
+		// 処理失敗により就職活動申請トップ画面へ
 		if (jobRequestEntity.isEmpty()) {
 			return "index";
 		}
@@ -73,16 +73,17 @@ public class JobRequestController {
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
 	 * @param model
-	 * @return - 処理成功時：就職活動申請詳細画面 - 処理失敗時：就職活動申請(申請)一覧画面
+	 * @return - 処理成功時：就職活動申請詳細画面 - 処理失敗時：就職活動申請一覧画面
 	 */
 	@GetMapping("/job/request/detail/{apply_id}")
 	public String getRequestDetail(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
 
 		Optional<JobRequestData> jobRequestData;
 
-		jobRequestData = jobRequestService.selectOne(apply_id);
-		
-		// 処理失敗により就職活動申請(申請)一覧画面へ
+		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
+		jobRequestData = jobRequestService.selectOne(apply_id, principal.getName(), role);
+
+		// 処理失敗により就職活動申請一覧画面へ
 		if (jobRequestData.isEmpty()) {
 			return getRequestList(principal, model);
 		}
@@ -96,7 +97,7 @@ public class JobRequestController {
 	 * 
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return - 処理成功時：就職活動申請登録画面 - 処理失敗時：就職活動申請(申請)一覧画面
+	 * @return - 処理成功時：就職活動申請新規作成画面 - 処理失敗時：就職活動申請一覧画面
 	 */
 	@GetMapping("/job/request/insert")
 	public String getRequestInsert(JobRequestForm form, Principal principal, Model model) {
@@ -105,7 +106,7 @@ public class JobRequestController {
 		// ユーザの情報を取得
 		userData = jobRequestService.selectPersonalInfo(principal.getName());
 
-		// 処理失敗により就職活動申請(申請)一覧画面へ
+		// 処理失敗により就職活動申請一覧画面へ
 		if (userData.isEmpty()) {
 			return getRequestList(principal, model);
 		}
@@ -142,55 +143,67 @@ public class JobRequestController {
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
 	 * @param model
-	 * @return 受験報告情報一覧画面
+	 * @return - 入力内容誤り：就職活動申請新規作成画面 - 処理終了時（成否に関わらず）就職活動申請トップ画面
 	 */
 	@PostMapping("/job/request/insert")
 	public String getJobRequestInsert(@ModelAttribute @Validated JobRequestForm form, BindingResult bindingResult,
 			Principal principal, Model model) {
 
+		// 入力内容に何らかの誤りがある場合
 		if (bindingResult.hasErrors()) {
-			log.info("申請の登録に失敗しました");
 			model.addAttribute("errmsg", "申請の登録に失敗しました");
+
+			// 就職活動申請新規作成画面へ
 			return getRequestInsert(form, principal, model);
 		}
 
+		// ユーザの権限を取得
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
+
+		// 処理結果を保持する
+		boolean isSuccess = false;
 
 		if (role.equals("ROLE_TEACHER")) {
 			// JobApiController参照
 			session.removeAttribute("classroom");
 			String applicant_id = (String) session.getAttribute("applicant_id");
 
-			jobRequestService.insert(form, applicant_id, principal.getName());
+			isSuccess = jobRequestService.insert(form, applicant_id, principal.getName());
 		} else if (role.equals("ROLE_STUDENT")) {
 
 			// ユーザが生徒の場合、登録者のユーザIDも当該生徒のものとなる
-			jobRequestService.insert(form, principal.getName(), principal.getName());
+			isSuccess = jobRequestService.insert(form, principal.getName(), principal.getName());
 		}
 
-		System.out.println(form);
+		if (isSuccess) {
+			model.addAttribute("msg", "申請の登録に成功しました");
+		} else {
+			model.addAttribute("errmsg", "申請の登録に失敗しました");
+		}
 
 		return "index";
 	}
 
 	/**
-	 * 個人の申請情報を取得し就職活動申請状態変更画面を表示する
+	 * 個人の申請情報を取得し就職活動申請管理画面を表示する
 	 * 
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
 	 * @param model
-	 * @return 就職活動申請状態変更画面
+	 * @return - 処理成功時：就職活動申請管理画面 - 処理失敗時：就職活動申請一覧画面
 	 */
 	@GetMapping("/job/request/status_change/{apply_id}")
 	public String getRequestStatusChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-
-		// sessionから申請情報の一覧を取得
 		Optional<JobRequestData> jobRequestData;
+		
+		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
-		jobRequestData = jobRequestService.selectOne(apply_id);
+		// 個人の申請情報を取得
+		jobRequestData = jobRequestService.selectOne(apply_id, principal.getName(), role);
 
+		// 処理失敗により就職活動申請一覧画面へ
 		if (jobRequestData.isEmpty()) {
-			return "index";
+			return getRequestList(principal, model);
 		}
 
 		model.addAttribute("jobRequestData", jobRequestData.get());
@@ -213,20 +226,21 @@ public class JobRequestController {
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
 	 * @param model
-	 * @return トップ画面
+	 * @return - 処理成功時：就職活動申請トップ画面 - 入力内容誤り：就職活動申請管理画面
 	 */
 	@PostMapping("/job/request/status-change/{apply_id}")
 	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
 			Principal principal, Model model) {
-		System.out.println(apply_id);
-		
-		if(form.getStatus().equals("1") && form.getIndicate().equals("")) {
+
+		if (form.getStatus().equals("1") && form.getIndicate().equals("")) {
 			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
 			return getRequestStatusChange(principal, apply_id, model);
-		}else if(form.getStatus().isEmpty()){
+			
+		} else if (form.getStatus().isEmpty()) {
 			model.addAttribute("errmsg", "状態を選択してください");
 			return getRequestStatusChange(principal, apply_id, model);
-		}else if (!(form.getStatus().equals("4") || form.getStatus().equals("1") || form.getStatus().equals("99"))) {
+			
+		} else if (!(form.getStatus().equals("4") || form.getStatus().equals("1") || form.getStatus().equals("99"))) {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getRequestStatusChange(principal, apply_id, model);
 		}
@@ -235,23 +249,25 @@ public class JobRequestController {
 	}
 
 	/**
-	 * 個人の申請情報を取得し就職活動申請内容変更画面を表示する
+	 * 個人の申請情報を取得し就職活動申請修正画面を表示する
 	 * 
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
 	 * @param model
-	 * @return 就職活動申請内容変更画面
+	 * @return 就職活動申請修正画面
 	 */
 	@GetMapping("/job/request/fix/{apply_id}")
 	public String getRequestContentChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-
-		// sessionから申請情報の一覧を取得
 		Optional<JobRequestData> jobRequestData;
+		
+		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
-		jobRequestData = jobRequestService.selectOne(apply_id);
+		// 個人の申請情報を取得
+		jobRequestData = jobRequestService.selectOne(apply_id, principal.getName(), role);
 
+		// 処理失敗により就職活動申請一覧画面へ
 		if (jobRequestData.isEmpty()) {
-			return "index";
+			return getRequestList(principal, model);
 		}
 
 		model.addAttribute("jobRequestData", jobRequestData.get());
@@ -264,13 +280,13 @@ public class JobRequestController {
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
 	 * @param model
-	 * @return トップ画面
+	 * @return 就職活動申請一覧画面
 	 */
 	@PostMapping("/job/request/fix/{apply_id}")
 	public String JobRequestContentChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
 			Principal principal, Model model) {
 		jobRequestService.updateJobContent(apply_id, form);
-		return "index";
+		return getRequestList(principal, model);
 	}
 
 	/**

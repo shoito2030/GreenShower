@@ -55,21 +55,30 @@ public class JobRequestService {
 	}
 
 	/**
-	 * 特定の申請情報を1件取得
+	 * 申請IDに紐づく申請情報を１件取得する
 	 * 
 	 * @param apply_id 申請ID
-	 * @return
+	 * @param user_id  ユーザID
+	 * @param role     ユーザの権限
+	 * @return - 処理成功時：JobRequestDataを持つOptional - 処理失敗時、不正な操作時：空のOptional
 	 */
-	public Optional<JobRequestData> selectOne(String apply_id) {
+	public Optional<JobRequestData> selectOne(String apply_id, String user_id, String role) {
 		JobRequestData jobRequestData;
 
 		try {
 			jobRequestData = jobRequestRepository.selectOne(apply_id);
 		} catch (DataAccessException e) {
-			// System.out.println("request selectOneで例外キャッチ");
 			e.printStackTrace();
-			jobRequestData = null;
+			return Optional.empty();
 		}
+
+		if (role.equals("ROLE_STUDENT")) {
+			// 取得した情報が申請者本人のものではない場合
+			if (!user_id.equals(jobRequestData.getApplicant_id())) {
+				return Optional.empty();
+			}
+		}
+
 		return Optional.ofNullable(jobRequestData);
 	}
 
@@ -287,19 +296,19 @@ public class JobRequestService {
 		jobRequestRepository.insertEvent(refillToEventData(form), name);
 		return rowNumber > 0;
 	}
-	
+
 	private EventData refillToEventData(EventForm form) {
 		EventData data = new EventData();
-		
+
 		int event_id = jobRequestRepository.event_id_get() + 1;
 		data.setEvent_id((String.valueOf(event_id)));
 		data.setCompany_name(form.getCompany_name());
 		data.setDatetime(strLocalDateTimeToDate(form.getDatetime()));
 		data.setLoc(form.getLoc());
 		data.setContent(form.getContent());
-		data.setBring(form.getBring());	
+		data.setBring(form.getBring());
 		return data;
-		
+
 	}
 
 }
