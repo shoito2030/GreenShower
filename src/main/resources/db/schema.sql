@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS job_hunting (
 	applicant_id VARCHAR(254) NOT NULL,
 	content VARCHAR(2) NOT NULL,
     company_name VARCHAR(137) NOT NULL,
-	status VARCHAR(2) NOT NULL DEFAULT '3',
+	status VARCHAR(2) NOT NULL DEFAULT '2',
 	apply_type CHAR(1) NOT NULL,
 	indicate VARCHAR(254),	
 	FOREIGN KEY (applicant_id)
