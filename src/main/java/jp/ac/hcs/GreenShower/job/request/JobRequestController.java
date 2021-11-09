@@ -45,10 +45,10 @@ public class JobRequestController {
 	private HttpSession session;
 
 	/**
-	 * 就職活動申請申請一覧画面を表示する - 処理失敗時：トップ画面を表示
+	 * 就職活動申請申請一覧画面を表示する 
 	 * 
 	 * @param model
-	 * @return 就職活動申請申請一覧画面 or トップ画面
+	 * @return - 処理成功時：就職活動申請(申請)一覧画面 - 処理失敗時：トップ画面
 	 */
 	@GetMapping("/job/request/list")
 	public String getRequestList(Principal principal, Model model) {
@@ -73,7 +73,7 @@ public class JobRequestController {
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
 	 * @param model
-	 * @return 就職活動申請詳細画面
+	 * @return - 処理成功時：就職活動申請詳細画面 - 処理失敗時：就職活動申請(申請)一覧画面
 	 */
 	@GetMapping("/job/request/detail/{apply_id}")
 	public String getRequestDetail(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
@@ -81,9 +81,10 @@ public class JobRequestController {
 		Optional<JobRequestData> jobRequestData;
 
 		jobRequestData = jobRequestService.selectOne(apply_id);
-		System.out.println("就職活動申請 詳細画面表示: " + apply_id);
+		
+		// 処理失敗により就職活動申請(申請)一覧画面へ
 		if (jobRequestData.isEmpty()) {
-			return "index";
+			return getRequestList(principal, model);
 		}
 
 		model.addAttribute("jobRequestData", jobRequestData.get());
@@ -95,7 +96,7 @@ public class JobRequestController {
 	 * 
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return 就職活動申請登録画面
+	 * @return - 処理成功時：就職活動申請登録画面 - 処理失敗時：就職活動申請(申請)一覧画面
 	 */
 	@GetMapping("/job/request/insert")
 	public String getRequestInsert(JobRequestForm form, Principal principal, Model model) {
@@ -104,10 +105,12 @@ public class JobRequestController {
 		// ユーザの情報を取得
 		userData = jobRequestService.selectPersonalInfo(principal.getName());
 
+		// 処理失敗により就職活動申請(申請)一覧画面へ
 		if (userData.isEmpty()) {
 			return getRequestList(principal, model);
 		}
 
+		// ユーザの権限を取得
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
 		// 自身の受け持つ生徒数を取得
