@@ -417,8 +417,12 @@
 				document.getElementById("date_absence_to").removeAttribute("disabled");
 				document.getElementById("way2").checked=false;
 				document.getElementById("leave_early_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("leave_early_date");
+				  textForm.value = '';
 				document.getElementById("way3").checked=false;
 				document.getElementById("attendance_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("attendance_date");
+				  textForm.value = '';
 				//required属性の付与
 				document.getElementById("date_absence_from").setAttribute("required",true);
 				document.getElementById("date_absence_to").setAttribute("required",true);
@@ -446,7 +450,11 @@
 				document.getElementById("leave_early_date").removeAttribute("disabled");
 				document.getElementById("way1").checked=false;
 				document.getElementById("date_absence_from").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_from");
+				  textForm.value = '';
 				document.getElementById("date_absence_to").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_to");
+				  textForm.value = '';
 				//required属性の付与
 				document.getElementById("date_absence_from").removeAttribute("required");
 				document.getElementById("date_absence_to").removeAttribute("required");
@@ -480,7 +488,11 @@
 				document.getElementById("attendance_date").removeAttribute("disabled");
 				document.getElementById("way1").checked=false;
 				document.getElementById("date_absence_from").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_from");
+				  textForm.value = '';
 				document.getElementById("date_absence_to").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_to");
+				  textForm.value = '';
 				//required属性の付与
 				document.getElementById("date_absence_from").removeAttribute("required");
 				document.getElementById("date_absence_to").removeAttribute("required");
