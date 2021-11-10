@@ -131,7 +131,7 @@ public class JobRequestService {
 			userData = jobRequestRepository.selectPersonalInfo(classroom, class_number);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			userData = null;
+			return null;
 		}
 
 		return userData;
@@ -150,7 +150,7 @@ public class JobRequestService {
 			studentsNumber = jobRequestRepository.selectStudentsNumber(user_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			studentsNumber = 0;
+			return 0;
 		}
 
 		return studentsNumber;
@@ -173,6 +173,7 @@ public class JobRequestService {
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
@@ -229,6 +230,7 @@ public class JobRequestService {
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
@@ -247,6 +249,7 @@ public class JobRequestService {
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
