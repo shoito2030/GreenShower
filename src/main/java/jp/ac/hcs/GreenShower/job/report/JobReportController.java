@@ -98,7 +98,7 @@ public class JobReportController {
 	public String getReportInert(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
 		Optional<UserData> userData;
 
-		userData = jobReportService.selectPersonalInfo(apply_id);
+		userData = jobReportService.selectPersonalInfoApply(apply_id);
 
 		if (userData.isEmpty()) {
 			return getReportList(principal, model);

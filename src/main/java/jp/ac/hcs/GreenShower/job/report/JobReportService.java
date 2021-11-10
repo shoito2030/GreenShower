@@ -29,9 +29,15 @@ public class JobReportService {
 	 */
 	public Optional<JobReportEntity> selectAllReports(String user_id, String role) {
 		JobReportEntity jobReportEntity;
+		
+		// ユーザIDに紐づく個人情報を取得
+		Optional<UserData> userData = selectPersonalInfoUserId(user_id);
+		if (userData.isEmpty()) {
+			return Optional.empty();
+		}
 
 		try {
-			jobReportEntity = jobReportRepository.selectAllReports();
+			jobReportEntity = jobReportRepository.selectAllReports(userData.get().getClassroom());
 
 			// ユーザが生徒の場合は、ユーザ自身の申請情報のみを抽出する
 			if (role.equals("ROLE_STUDENT")) {
@@ -45,6 +51,8 @@ public class JobReportService {
 
 		return Optional.ofNullable(jobReportEntity);
 	}
+
+
 
 	/**
 	 * 就職活動申請の報告情報を1件取得する
@@ -65,16 +73,34 @@ public class JobReportService {
 	}
 
 	/**
-	 * ユーザの個人情報を1件取得
+	 * applyIdからユーザの個人情報を1件取得
 	 * 
 	 * @param apply_id 申請ID
 	 * @return Optional<userData>
 	 */
-	public Optional<UserData> selectPersonalInfo(String apply_id) {
+	public Optional<UserData> selectPersonalInfoApply(String apply_id) {
 		UserData userData;
 
 		try {
-			userData = jobReportRepository.selectPersonalInfo(apply_id);
+			userData = jobReportRepository.selectPersonalInfoApply(apply_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			userData = null;
+		}
+		return Optional.ofNullable(userData);
+	}
+	
+	/**
+	 * userIdからユーザの個人情報を1件取得
+	 * 
+	 * @param user_id ユーザID
+	 * @return Optional<userData>
+	 */
+	private Optional<UserData> selectPersonalInfoUserId(String user_id) {
+		UserData userData;
+
+		try {
+			userData = jobReportRepository.selectPersonalInfoUserID(user_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			userData = null;

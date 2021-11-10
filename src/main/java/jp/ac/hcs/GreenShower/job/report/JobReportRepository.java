@@ -19,7 +19,7 @@ public class JobReportRepository {
 	/** SQL 報告情報全件取得 */
 	private static final String SQL_SELECT_ALL_REPORTS = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS  FROM JOB_HUNTING \r\n"
 			+ "JH LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \r\n"
-			+ "WHERE JH.STATUS > '4' ORDER BY JH.STATUS DESC;";
+			+ "WHERE JH.STATUS > '4' AND U.CLASSROOM = ? ORDER BY JH.STATUS DESC;";
 
 	/* 特定の1件の報告情報を取得 */
 	private static final String SQL_SELECT_ONE = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLICANT_ID, JH.APPLY_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REP.ADVANCE_OR_RETREAT, REP.REMARK\r\n"
@@ -36,8 +36,10 @@ public class JobReportRepository {
 	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE JOB_HUNTING SET STATUS = ?, INDICATE = ? WHERE APPLY_ID = ?;";
 
 	/** 申請IDからクラス・番号・名前を取得するSQL */
-	private static final String SQL_SELECT_PERSONAL_INFO = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS U LEFT JOIN JOB_HUNTING JH ON U.USER_ID = JH.APPLICANT_ID WHERE JH.APPLY_ID = ?;";
+	private static final String SQL_SELECT_PERSONAL_INFO_APPLY = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS U LEFT JOIN JOB_HUNTING JH ON U.USER_ID = JH.APPLICANT_ID WHERE JH.APPLY_ID = ?;";
 
+	private static final String SQL_SELECT_PERSONAL_INFO_USERID = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID  = ?;";
+	
 	/** 報告情報内容更新（進退用） */
 	private static final String SQL_UPDATE_ADVANCE_OR_RETREAT_TO_TRUE = "UPDATE REPORTS  SET ADVANCE_OR_RETREAT  = TRUE WHERE APPLY_ID = ?;";
 
@@ -50,8 +52,8 @@ public class JobReportRepository {
 	@Autowired
 	private JdbcTemplate jdbc;
 
-	public JobReportEntity selectAllReports() {
-		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_REPORTS);
+	public JobReportEntity selectAllReports(String classroom) {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_REPORTS, classroom);
 		JobReportEntity jobReportEntity = mappingSelectResult(resultList);
 
 		return jobReportEntity;
@@ -71,13 +73,25 @@ public class JobReportRepository {
 	}
 
 	/**
-	 * 特定のユーザ一人の情報を取得
+	 * apply_idから特定のユーザ一人の情報を取得
 	 * 
-	 * @param apply_id ユーザID
+	 * @param apply_id 申請ID
 	 * @return UserData ユーザ情報
 	 */
-	public UserData selectPersonalInfo(String apply_id) {
-		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO, apply_id);
+	public UserData selectPersonalInfoApply(String apply_id) {
+		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO_APPLY, apply_id);
+		UserData data = mappingSelectPersonalInfoResult(result);
+		return data;
+	}
+	
+	/**
+	 * user_idから特定のユーザ一人の情報を取得
+	 * 
+	 * @param apply_id 申請ID
+	 * @return UserData ユーザ情報
+	 */
+	public UserData selectPersonalInfoUserID(String user_id) {
+		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO_USERID, user_id);
 		UserData data = mappingSelectPersonalInfoResult(result);
 		return data;
 	}
@@ -234,5 +248,7 @@ public class JobReportRepository {
 		return entity;
 
 	}
+
+
 
 }
