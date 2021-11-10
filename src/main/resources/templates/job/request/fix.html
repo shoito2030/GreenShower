@@ -91,7 +91,8 @@
 						<label class="form-check-label" for="applyType2">とりまとめ</label>
 					</div>
 
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+					th:if="${#fields.hasErrors('apply_type')}" th:errors="*{apply_type}">
 						エラーメッセージ</h6>
 
 					<div class="invalid-feedback">
@@ -189,6 +190,23 @@
 				</div>
 			</div>
 
+
+			<div class="col-md-4">
+				<h4 class="fw-bold mt-md-1 text-center">郵便番号</h4>
+			</div>
+			<div class="col">
+				<div class="input-group w-50 margin-md-0-auto">
+					<input type="text" class="form-control" id="zipcode">
+					<button type="button" id="zip-btn" class="btn btn-primary">検索</button>
+				</div>
+
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						必須項目です。</h6>
+				</div>
+			</div>
+
+
 			<div class="col-md-4 mt-md-5">
 				<h4 class="fw-bold mt-md-1 text-center">場所</h4>
 				<h6 class="text-danger text-center">※必須</h6>
@@ -223,7 +241,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
 						<input type="datetime-local" class="form-control" name="date_absence_from"
-							id="date_absence_from" disabled required>
+							id="date_absence_from">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -237,7 +255,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
 						<input type="datetime-local" class="form-control" name="date_absence_to"
-							id="date_absence_to" disabled required>
+							id="date_absence_to">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -261,7 +279,7 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control" name="leave_early_date"
-						id="leave_early_date" disabled required>
+						id="leave_early_date">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -284,7 +302,7 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control" name="attendance_date"
-						id="attendance_date" disabled  required>
+						id="attendance_date">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
 							エラーメッセージ
 						</h6>
@@ -519,6 +537,16 @@
 			}
 		})
 		window.onload=function(){
+			//disabled・required属性の付与
+			document.getElementById("date_absence_from").setAttribute("disabled",true);
+			document.getElementById("date_absence_to").setAttribute("disabled",true);
+			document.getElementById("leave_early_date").setAttribute("disabled",true);
+			document.getElementById("attendance_date").setAttribute("disabled",true);
+			document.getElementById("date_absence_from").setAttribute("required",true);
+			document.getElementById("date_absence_to").setAttribute("required",true);
+			document.getElementById("leave_early_date").setAttribute("required",true);
+			document.getElementById("attendance_date").setAttribute("required",true);
+
 			if(document.getElementById("way1").checked){
 				document.getElementById("date_absence_from").removeAttribute("disabled");
 				document.getElementById("date_absence_to").removeAttribute("disabled");
@@ -535,7 +563,7 @@
 				document.getElementById("leave_early_date").removeAttribute("required");
 				document.getElementById("attendance_date").removeAttribute("disabled");
 			}
-		};
+		}
 	</script>
 </body>
 
