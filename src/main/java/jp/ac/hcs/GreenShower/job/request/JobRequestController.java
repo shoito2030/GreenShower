@@ -290,9 +290,9 @@ public class JobRequestController {
 	}
 
 	/**
-	 * イベント情報登録画面を表示する
+	 * 就職活動イベント登録画面を表示する
 	 * 
-	 * @param principal
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return
 	 */
@@ -305,7 +305,7 @@ public class JobRequestController {
 	/**
 	 * イベント情報登録処理を行う
 	 * 
-	 * @param principal
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return
 	 */
