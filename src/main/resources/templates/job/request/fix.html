@@ -505,9 +505,25 @@
 					document.getElementById("attendance_date").removeAttribute("required");
 				}
 			}
-			
-
 		})
+		window.onload=function(){
+			if(document.getElementById("way1").checked){
+				document.getElementById("date_absence_from").removeAttribute("disabled");
+				document.getElementById("date_absence_to").removeAttribute("disabled");
+				document.getElementById("leave_early_date").removeAttribute("required");
+				document.getElementById("attendance_date").removeAttribute("required");
+			}else if(document.getElementById("way2").checked){
+				document.getElementById("date_absence_from").removeAttribute("required");
+				document.getElementById("date_absence_to").removeAttribute("required");
+				document.getElementById("leave_early_date").removeAttribute("disabled");
+				document.getElementById("attendance_date").removeAttribute("required");
+			}else if(document.getElementById("way3").checked){
+				document.getElementById("date_absence_from").removeAttribute("required");
+				document.getElementById("date_absence_to").removeAttribute("required");
+				document.getElementById("leave_early_date").removeAttribute("required");
+				document.getElementById("attendance_date").removeAttribute("disabled");
+			}
+		};
 	</script>
 </body>
 
