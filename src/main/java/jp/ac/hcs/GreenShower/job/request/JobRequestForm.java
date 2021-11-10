@@ -8,6 +8,10 @@ import javax.validation.constraints.NotBlank;
 import jp.ac.hcs.GreenShower.job.validations.DateValueValid;
 import lombok.Data;
 
+/**
+ * 就職活動申請（申請）処理において画面からの入力を受け取るFormクラス
+ *
+ */
 @Data
 public class JobRequestForm {
 	

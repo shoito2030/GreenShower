@@ -4,6 +4,10 @@ import java.util.Date;
 
 import lombok.Data;
 
+/**
+ * １件のイベント情報（イベントマスタの１カラム）を管理するDAO
+ *
+ */
 @Data
 public class EventData {
 	/**

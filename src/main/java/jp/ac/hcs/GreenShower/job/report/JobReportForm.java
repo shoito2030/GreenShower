@@ -2,6 +2,10 @@ package jp.ac.hcs.GreenShower.job.report;
 
 import lombok.Data;
 
+/**
+ * 就職活動申請（報告）処理において画面からの入力を受け取るFormクラス
+ *
+ */
 @Data
 public class JobReportForm {
 	/**

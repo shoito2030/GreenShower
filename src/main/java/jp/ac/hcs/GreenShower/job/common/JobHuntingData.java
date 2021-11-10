@@ -3,7 +3,7 @@ package jp.ac.hcs.GreenShower.job.common;
 import lombok.Data;
 
 /**
- * 就職活動申請マスタの情報を取り扱うクラス
+ * 就職活動申請マスタの情報を取り扱うDAO
  */
 @Data
 public class JobHuntingData {
