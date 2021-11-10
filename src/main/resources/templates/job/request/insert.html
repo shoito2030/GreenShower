@@ -271,7 +271,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
 						<input type="datetime-local" class="form-control" name="date_absence_from"
-							id="date_absence_from">
+							id="date_absence_from" disabled required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_absence_from')}" th:errors="*{date_absence_from}">
 							エラーメッセージ
@@ -285,7 +285,8 @@
 
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
-						<input type="datetime-local" class="form-control" name="date_absence_to" id="date_absence_to">
+						<input type="datetime-local" class="form-control" name="date_absence_to"
+							id="date_absence_to" disabled required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_absence_to')}" th:errors="*{date_absence_to}">
 							エラーメッセージ
@@ -309,7 +310,8 @@
 					</div>
 
 					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control" name="leave_early_date" id="leave_early_date">
+						<input type="datetime-local" class="form-control" name="leave_early_date"
+							id="leave_early_date" disabled required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('leave_early_date')}" th:errors="*{leave_early_date}">
 							エラーメッセージ
@@ -332,7 +334,8 @@
 					</div>
 
 					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control" name="attendance_date" id="attendance_date">
+						<input type="datetime-local" class="form-control" name="attendance_date"
+							id="attendance_date" disabled required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('attendance_date')}" th:errors="*{attendance_date}">
 							エラーメッセージ
@@ -451,6 +454,115 @@
 				alert("ajax失敗");
 			});
 		});
+
+		$('#way1').on('change', function () {
+			if(document.getElementById("way1").checked){
+				//入力制限の為の属性付与
+				document.getElementById("date_absence_from").removeAttribute("disabled");
+				document.getElementById("date_absence_to").removeAttribute("disabled");
+				document.getElementById("way2").checked=false;
+				document.getElementById("leave_early_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("leave_early_date");
+				  textForm.value = '';
+				document.getElementById("way3").checked=false;
+				document.getElementById("attendance_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("attendance_date");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").setAttribute("required",true);
+				document.getElementById("date_absence_to").setAttribute("required",true);
+				document.getElementById("leave_early_date").removeAttribute("required");
+				document.getElementById("attendance_date").removeAttribute("required");
+			}else{
+				//入力制限の為の属性付与
+				document.getElementById("date_absence_from").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_from");
+				  textForm.value = '';
+				document.getElementById("date_absence_to").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_to");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("leave_early_date").setAttribute("required",true);
+				document.getElementById("attendance_date").setAttribute("required",true);
+			}
+			
+
+		})
+
+		$('#way2').on('change', function () {
+			if(document.getElementById("way2").checked){
+				//入力制限の為の属性付与
+				document.getElementById("leave_early_date").removeAttribute("disabled");
+				document.getElementById("way1").checked=false;
+				document.getElementById("date_absence_from").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_from");
+				  textForm.value = '';
+				document.getElementById("date_absence_to").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_to");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").removeAttribute("required");
+				document.getElementById("date_absence_to").removeAttribute("required");
+				document.getElementById("leave_early_date").setAttribute("required",true);
+				document.getElementById("attendance_date").removeAttribute("required");
+				if(document.getElementById("way3").checked){
+					document.getElementById("attendance_date").setAttribute("required",true);
+				}
+				
+			}else{
+				//入力制限の為の属性付与
+				document.getElementById("leave_early_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("leave_early_date");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").setAttribute("required",true);
+				document.getElementById("date_absence_to").setAttribute("required",true);
+				document.getElementById("leave_early_date").setAttribute("required",true);
+				document.getElementById("attendance_date").setAttribute("required",true);
+				if(document.getElementById("way3").checked){
+					document.getElementById("date_absence_from").removeAttribute("required");
+					document.getElementById("date_absence_to").removeAttribute("required");
+					document.getElementById("leave_early_date").removeAttribute("required");
+				}
+			}
+			
+		})
+		$('#way3').on('change', function () {
+			if(document.getElementById("way3").checked){
+				//入力制限の為の属性付与
+				document.getElementById("attendance_date").removeAttribute("disabled");
+				document.getElementById("way1").checked=false;
+				document.getElementById("date_absence_from").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_from");
+				  textForm.value = '';
+				document.getElementById("date_absence_to").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_to");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").removeAttribute("required");
+				document.getElementById("date_absence_to").removeAttribute("required");
+				document.getElementById("leave_early_date").removeAttribute("required");
+				document.getElementById("attendance_date").setAttribute("required",true);
+				if(document.getElementById("way2").checked){
+					document.getElementById("leave_early_date").setAttribute("required",true);
+				}
+			}else{
+				//入力制限の為の属性付与
+				document.getElementById("attendance_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("attendance_date");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").setAttribute("required",true);
+				document.getElementById("date_absence_to").setAttribute("required",true);
+				document.getElementById("leave_early_date").setAttribute("required",true);
+				document.getElementById("attendance_date").setAttribute("required",true);
+				if(document.getElementById("way2").checked){
+					document.getElementById("date_absence_from").removeAttribute("required");
+					document.getElementById("date_absence_to").removeAttribute("required");
+					document.getElementById("attendance_date").removeAttribute("required");
+				}
+			}
+		})
 	</script>
 </body>
 
