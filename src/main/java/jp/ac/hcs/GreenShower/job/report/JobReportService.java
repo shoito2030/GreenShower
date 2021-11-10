@@ -107,6 +107,22 @@ public class JobReportService {
 		}
 		return Optional.ofNullable(userData);
 	}
+	
+	/**
+	 * 申請状態を取得する
+	 * @param apply_id 申請ID
+	 * @return status 
+	 */
+	public String selectJobHuntingStatus(String apply_id) {
+		String status;
+		try {
+			status = jobReportRepository.selectJobHuntingStatus(apply_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return status;
+	}
 
 	/**
 	 * 報告マスタに新たな報告情報を1件追加する
@@ -209,5 +225,9 @@ public class JobReportService {
 		return rowNumber > 0;
 
 	}
+
+
+
+
 
 }

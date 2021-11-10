@@ -40,6 +40,9 @@ public class JobReportRepository {
 
 	private static final String SQL_SELECT_PERSONAL_INFO_USERID = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID  = ?;";
 	
+	/**  就職活動情報の状態を取得する */
+	private static final String SQL_SELECT_JOB_HUNTING_STATUS = "SELECT JH.STATUS  FROM JOB_HUNTING JH WHERE JH.APPLY_ID = ?;";
+	
 	/** 報告情報内容更新（進退用） */
 	private static final String SQL_UPDATE_ADVANCE_OR_RETREAT_TO_TRUE = "UPDATE REPORTS  SET ADVANCE_OR_RETREAT  = TRUE WHERE APPLY_ID = ?;";
 
@@ -87,13 +90,24 @@ public class JobReportRepository {
 	/**
 	 * user_idから特定のユーザ一人の情報を取得
 	 * 
-	 * @param apply_id 申請ID
+	 * @param user_id ユーザID
 	 * @return UserData ユーザ情報
 	 */
 	public UserData selectPersonalInfoUserID(String user_id) {
 		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO_USERID, user_id);
 		UserData data = mappingSelectPersonalInfoResult(result);
 		return data;
+	}
+	
+	/**
+	 * 申請IDに紐づく就職活動情報の状態を取得
+	 * 
+	 * @param apply_id 申請ID
+	 * @return UserData ユーザ情報
+	 */
+	public String selectJobHuntingStatus(String apply_id) {
+		String status = (String) jdbc.queryForMap(SQL_SELECT_JOB_HUNTING_STATUS, apply_id).get("status");
+		return status;
 	}
 
 	/**

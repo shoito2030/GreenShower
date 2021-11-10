@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class JobReportController {
 	@Autowired
 	private JobReportService jobReportService;
-	
+
 	@Autowired
 	private ProofreadingService proofreadingService;
 
@@ -46,9 +46,9 @@ public class JobReportController {
 	@GetMapping("/job/report/list")
 	public String getReportList(Principal principal, Model model) {
 
-//	// 取得できなかった場合は空のOptionalが格納される
+		// 取得できなかった場合は空のOptionalが格納される
 		Optional<JobReportEntity> jobReportEntity;
-		
+
 		// アクターの権限を取得
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
@@ -80,7 +80,7 @@ public class JobReportController {
 		if (jobReportData.isEmpty()) {
 			return getReportList(principal, model);
 		}
-		
+
 		session.setAttribute("apply_id", apply_id);
 		log.info("申請報告詳細画面 jobReportData: " + jobReportData.get().toString());
 
@@ -96,6 +96,14 @@ public class JobReportController {
 	 */
 	@GetMapping("/job/report/insert/{apply_id}")
 	public String getReportInert(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
+		String status = jobReportService.selectJobHuntingStatus(apply_id);
+
+		// 状態が『申請完了』ではない場合
+		if (status == null || Integer.parseInt(status) != 4) {
+			model.addAttribute("errmsg", "申請が完了されていません。");
+			return getReportList(principal, model);
+		}
+
 		Optional<UserData> userData;
 
 		userData = jobReportService.selectPersonalInfoApply(apply_id);
@@ -104,7 +112,7 @@ public class JobReportController {
 			return getReportList(principal, model);
 		}
 
-		// sessionに申請IDを保存
+		// 報告処理時に不正な値が使用されてしまうのを防ぐために使用
 		session.setAttribute("apply_id", apply_id);
 
 		model.addAttribute("userData", userData.get());
@@ -179,12 +187,12 @@ public class JobReportController {
 	@PostMapping("/job/report/fix")
 	public String fixReportContent(Principal principal, Model model, @ModelAttribute @Validated JobReportForm form,
 			BindingResult bindingResult) {
-		
-		if(bindingResult.hasErrors()) {
+
+		if (bindingResult.hasErrors()) {
 			model.addAttribute("msg", "報告内容の変更に失敗しました。");
 			return getReportList(principal, model);
 		}
-		
+
 		String apply_id = (String) session.getAttribute("apply_id");
 		form.setApply_id(apply_id);
 
@@ -196,13 +204,13 @@ public class JobReportController {
 			model.addAttribute("msg", "報告内容の変更に失敗しました。");
 			return getReportList(principal, model);
 		}
-		
+
 		// 入力内容がDBの情報と変わらない場合は実行しない
 		if (jobReportData.get().isAdvance_or_retreat() != form.isAdvance_or_retreat()) {
 			jobReportService.updateAdvance_or_retreat(form);
-		} 
-		
-		if(!(jobReportData.get().getRemark().equals(form.getRemark()))) {
+		}
+
+		if (!(jobReportData.get().getRemark().equals(form.getRemark()))) {
 			jobReportService.updateRemark(form);
 		}
 
@@ -230,16 +238,16 @@ public class JobReportController {
 		if (jobReportData.isEmpty()) {
 			return getReportList(principal, model);
 		}
-		
+
 		// AIサービスの呼び出し
 		Optional<ProofreadingData> proofreadingData = proofreadingService.proofreading(jobReportData.get().getRemark());
-		
+
 		// 値が入っていた（検査結果が黒）だった場合に実行
-		if(!proofreadingData.isEmpty()) {
+		if (!proofreadingData.isEmpty()) {
 			model.addAttribute("proofreadingData", proofreadingData.get());
 			log.info("校正結果： " + proofreadingData.get());
 		}
-		
+
 		model.addAttribute("jobReportData", jobReportData.get());
 
 		// sessionに申請IDを保存
@@ -264,13 +272,13 @@ public class JobReportController {
 		// sessionから申請ID取得しセット
 		form.setApply_id((String) session.getAttribute("apply_id"));
 
-		if(form.getStatus().equals("5") && form.getIndicate().equals("")) {
+		if (form.getStatus().equals("5") && form.getIndicate().equals("")) {
 			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
 			return getReportStatus(form.getApply_id(), principal, model);
-		}else if(form.getStatus().isEmpty()){
+		} else if (form.getStatus().isEmpty()) {
 			model.addAttribute("errmsg", "状態を選択してください");
 			return getReportStatus(form.getApply_id(), principal, model);
-		}else if (!(form.getStatus().equals("5") || form.getStatus().equals("7") || form.getStatus().equals("99"))) {
+		} else if (!(form.getStatus().equals("5") || form.getStatus().equals("7") || form.getStatus().equals("99"))) {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getReportStatus(form.getApply_id(), principal, model);
 		}
