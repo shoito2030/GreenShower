@@ -32,21 +32,24 @@ public class JobRequestService {
 	JobRequestRepository jobRequestRepository;
 
 	/**
-	 * 就職活動申請の申請情報を全件取得する
+	 * 就職活動申請の申請一覧情報をユーザの権限に応じて取得する
 	 * 
-	 * @return Optional<jobRequestEntity>
+	 * @param user_id ユーザID
+	 * @param role    権限
+	 * @return - 処理成功時：JobRequestEntityを持つOptional - 処理失敗時：空のOptional
 	 */
 	public Optional<JobRequestEntity> selectAllRequests(String user_id, String role) {
 		JobRequestEntity jobRequestEntity;
-		
+
+		// ユーザIDに紐づく個人情報を取得
 		Optional<UserData> userData = selectPersonalInfo(user_id);
-		if(userData.isEmpty()) {
+		if (userData.isEmpty()) {
 			return Optional.empty();
 		}
 
 		try {
 			jobRequestEntity = jobRequestRepository.selectAllRequests(userData.get().getClassroom());
-			
+
 			// ユーザが『生徒』の場合は、ユーザ自身の申請情報のみを抽出する
 			if (role.equals("ROLE_STUDENT")) {
 				jobRequestEntity.setJobRequestList(jobRequestEntity.getJobRequestList().stream()
@@ -55,7 +58,7 @@ public class JobRequestService {
 
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			jobRequestEntity = null;
+			return Optional.empty();
 		}
 		return Optional.ofNullable(jobRequestEntity);
 	}
@@ -83,16 +86,24 @@ public class JobRequestService {
 			if (!user_id.equals(jobRequestData.getApplicant_id())) {
 				return Optional.empty();
 			}
+		} else if(role.equals("ROLE_TEACHER")) {
+			// 担任の所属クラスを取得
+			String classroom = selectPersonalInfo(user_id).get().getClassroom();
+			
+			// 取得した情報が担任の受け持つクラスの情報ではない場合
+			if (!classroom.equals(jobRequestData.getClassroom())) {
+				return Optional.empty();
+			}
 		}
 
 		return Optional.ofNullable(jobRequestData);
 	}
 
 	/**
-	 * ユーザの個人情報を1件取得
+	 * ユーザIDに紐づく個人情報を1件取得
 	 * 
-	 * @param apply_id 申請ID
-	 * @return Optional<userData>
+	 * @param user_id ユーザID
+	 * @return - 処理成功時：UserDataを持つOptional - 処理失敗時：空のOptional
 	 */
 	public Optional<UserData> selectPersonalInfo(String user_id) {
 		UserData userData;
@@ -101,17 +112,17 @@ public class JobRequestService {
 			userData = jobRequestRepository.selectPersonalInfo(user_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			userData = null;
+			return Optional.empty();
 		}
 		return Optional.ofNullable(userData);
 	}
 
 	/**
-	 * ユーザの個人情報を1件取得（API用）
+	 * クラスと出席番号からユーザの個人情報を1件取得（API用）
 	 * 
 	 * @param classroom    クラス
 	 * @param class_number 出席番号
-	 * @return userData
+	 * @return - 処理成功時：UserData - 処理失敗時：null
 	 */
 	public UserData selectPersonalInfo(String classroom, String class_number) {
 		UserData userData;
@@ -130,7 +141,7 @@ public class JobRequestService {
 	 * 担任が受け持つ生徒数を取得する
 	 * 
 	 * @param user_id 担任のユーザID
-	 * @return
+	 * @return - 処理成功時: studentsNumber(生徒数) - 処理失敗時：studentsNumber(0)
 	 */
 	public int selectStudentsNumber(String user_id) {
 		int studentsNumber;
@@ -151,7 +162,7 @@ public class JobRequestService {
 	 * @param form             検証済み入力情報
 	 * @param applicant_id     申請者ID
 	 * @param register_user_id 登録処理を実行したユーザのID
-	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
+	 * @return - true：追加件数1件（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
 	public boolean insert(JobRequestForm form, String applicant_id, String register_user_id) {
 		int rowNumber = 0;
@@ -169,10 +180,10 @@ public class JobRequestService {
 	/**
 	 * 入力情報をJobRequestData型に変換する（insert用）
 	 * 
-	 * @param form         検証済み入力データ
-	 * @param applicant_id 申請者ID
-	 * @param user_id      登録処理を実行したユーザのID
-	 * @return JobRequestData
+	 * @param form             検証済み入力データ
+	 * @param applicant_id     申請者ID
+	 * @param register_user_id 登録処理を実行したユーザのID
+	 * @return JobRequestData 
 	 */
 	private JobRequestData refillToJobReportData(JobRequestForm form, String applicant_id, String register_user_id) {
 		JobRequestData data = new JobRequestData();
@@ -207,34 +218,36 @@ public class JobRequestService {
 	/**
 	 * 就職活動申請の状態変更処理を行う
 	 * 
-	 * @param user_id ユーザID
-	 * @return Optional<jobRequestEntity>
+	 * @param apply_id 申請ID
+	 * @param form 検証済み入力データ
+	 * @return - true：更新件数1件（処理成功）の場合 - false：更新件数0件（処理失敗）の場合
 	 */
-	public int updateJobStatus(String apply_id, JobRequestForm form) {
+	public boolean updateJobStatus(String apply_id, JobRequestForm form) {
 		int rowNumber = 0;
 		try {
 			rowNumber = jobRequestRepository.updateJobStatus(apply_id, form);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		return rowNumber;
+		return rowNumber > 0;
 
 	}
 
 	/**
 	 * 就職活動申請の内容変更処理を行う
 	 * 
-	 * @param user_id ユーザID
-	 * @return Optional<jobRequestEntity>
+	 * @param apply_id 申請ID
+	 * @param form 検証済み入力データ
+	 * @return - true：更新件数1件（処理成功）の場合 - false：更新件数0件（処理失敗）の場合
 	 */
-	public int updateJobContent(String apply_id, JobRequestForm form) {
+	public boolean updateJobContent(String apply_id, JobRequestForm form) {
 		int rowNumber = 0;
 		try {
 			rowNumber = jobRequestRepository.updateJobContent(refillToJobRequestDataUpdate(form, apply_id), apply_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		return rowNumber;
+		return rowNumber > 0;
 
 	}
 
@@ -242,7 +255,7 @@ public class JobRequestService {
 	 * 入力情報をJobRequestData型に変換する（内容変更用）
 	 * 
 	 * @param form    検証済み入力データ
-	 * @param user_id 登録処理を実行したユーザのID
+	 * @param apply_id 申請ID
 	 * @return JobRequestData
 	 */
 	private JobRequestData refillToJobRequestDataUpdate(JobRequestForm form, String apply_id) {
@@ -279,7 +292,7 @@ public class JobRequestService {
 	public Date strLocalDateTimeToDate(String strDate) {
 		Date date;
 
-		if (strDate == null||strDate.isBlank()) {
+		if (strDate == null || strDate.isBlank()) {
 			return null;
 		} else {
 			TemporalAccessor parsed;
@@ -297,12 +310,23 @@ public class JobRequestService {
 		return date;
 	}
 
+	/**
+	 * イベントマスタに新たにイベント情報を1件追加する
+	 * @param form
+	 * @param name
+	 * @return - true：追加件数1件（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
+	 */
 	public boolean insertEvent(EventForm form, String name) {
 		int rowNumber = 0;
 		jobRequestRepository.insertEvent(refillToEventData(form), name);
 		return rowNumber > 0;
 	}
 
+	/**
+	 * 入力情報をEventData型に変換する（イベント情報登録用）
+	 * @param form 検証済み入力情報
+	 * @return EventData
+	 */
 	private EventData refillToEventData(EventForm form) {
 		EventData data = new EventData();
 

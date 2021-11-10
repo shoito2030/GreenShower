@@ -244,7 +244,15 @@ public class JobRequestController {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getRequestStatusChange(principal, apply_id, model);
 		}
-		jobRequestService.updateJobStatus(apply_id, form);
+		
+		boolean isSuccess = jobRequestService.updateJobStatus(apply_id, form);
+		
+		if (isSuccess) {
+			model.addAttribute("msg", "申請状態の変更に成功しました");
+		} else {
+			model.addAttribute("errmsg", "申請状態の変更に失敗しました");
+		}
+		
 		return "index";
 	}
 
@@ -285,7 +293,13 @@ public class JobRequestController {
 	@PostMapping("/job/request/fix/{apply_id}")
 	public String JobRequestContentChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
 			Principal principal, Model model) {
-		jobRequestService.updateJobContent(apply_id, form);
+		boolean isSuccess = jobRequestService.updateJobContent(apply_id, form);
+		
+		if (isSuccess) {
+			model.addAttribute("msg", "申請内容の変更に成功しました");
+		} else {
+			model.addAttribute("errmsg", "申請内容の変更に失敗しました");
+		}
 		return getRequestList(principal, model);
 	}
 
