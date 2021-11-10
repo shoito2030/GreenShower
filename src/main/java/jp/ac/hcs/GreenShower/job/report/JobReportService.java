@@ -46,7 +46,7 @@ public class JobReportService {
 			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			jobReportEntity = null;
+			return Optional.empty();
 		}
 
 		return Optional.ofNullable(jobReportEntity);
@@ -67,7 +67,7 @@ public class JobReportService {
 			jobReportData = jobReportRepository.selectOne(apply_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			jobReportData = null;
+			return Optional.empty();
 		}
 		return Optional.ofNullable(jobReportData);
 	}
@@ -85,7 +85,7 @@ public class JobReportService {
 			userData = jobReportRepository.selectPersonalInfoApply(apply_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			userData = null;
+			return Optional.empty();
 		}
 		return Optional.ofNullable(userData);
 	}
@@ -103,7 +103,7 @@ public class JobReportService {
 			userData = jobReportRepository.selectPersonalInfoUserID(user_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			userData = null;
+			return Optional.empty();
 		}
 		return Optional.ofNullable(userData);
 	}
@@ -142,6 +142,7 @@ public class JobReportService {
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 	}
 
@@ -159,6 +160,7 @@ public class JobReportService {
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
@@ -202,6 +204,7 @@ public class JobReportService {
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
@@ -222,6 +225,7 @@ public class JobReportService {
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
