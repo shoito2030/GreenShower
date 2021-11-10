@@ -271,7 +271,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
 						<input type="datetime-local" class="form-control" name="date_absence_from"
-							id="date_absence_from" disabled required>
+							id="date_absence_from">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_absence_from')}" th:errors="*{date_absence_from}">
 							エラーメッセージ
@@ -286,7 +286,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
 						<input type="datetime-local" class="form-control" name="date_absence_to"
-							id="date_absence_to" disabled required>
+							id="date_absence_to">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_absence_to')}" th:errors="*{date_absence_to}">
 							エラーメッセージ
@@ -311,7 +311,7 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control" name="leave_early_date"
-							id="leave_early_date" disabled required>
+							id="leave_early_date">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('leave_early_date')}" th:errors="*{leave_early_date}">
 							エラーメッセージ
@@ -335,7 +335,7 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control" name="attendance_date"
-							id="attendance_date" disabled required>
+							id="attendance_date">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('attendance_date')}" th:errors="*{attendance_date}">
 							エラーメッセージ
@@ -563,6 +563,17 @@
 				}
 			}
 		})
+		window.onload=function(){
+			//disabled・required属性の付与
+			document.getElementById("date_absence_from").setAttribute("disabled",true);
+			document.getElementById("date_absence_to").setAttribute("disabled",true);
+			document.getElementById("leave_early_date").setAttribute("disabled",true);
+			document.getElementById("attendance_date").setAttribute("disabled",true);
+			document.getElementById("date_absence_from").setAttribute("required",true);
+			document.getElementById("date_absence_to").setAttribute("required",true);
+			document.getElementById("leave_early_date").setAttribute("required",true);
+			document.getElementById("attendance_date").setAttribute("required",true);
+		}
 	</script>
 </body>
 
