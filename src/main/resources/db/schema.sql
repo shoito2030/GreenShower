@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 
+
 /* 就職活動申請マスタ
  * 定義書の内容を参照
  * */
@@ -172,6 +173,27 @@ CREATE TABLE IF NOT EXISTS summary_list_management (
     	REFERENCES job_hunting(apply_id),
     FOREIGN KEY (register_user_id)
     	REFERENCES users(user_id)
+);
+
+/* メッセージマスタ
+ * 定義書の内容を参照
+ * */
+CREATE TABLE IF NOT EXISTS messages (
+	message_id VARCHAR(254) PRIMARY KEY,
+	user_id VARCHAR(254) NOT NULL,
+	event_id VARCHAR(254),
+        subject VARCHAR(254) NOT NULL,
+	content VARCHAR(254),
+	is_checked boolean NOT NULL DEFAULT FALSE,
+	sender_id VARCHAR(254) NOT NULL,	
+	received_date TIMESTAMP,
+	
+	FOREIGN KEY (user_id)
+              REFERENCES users(user_id) ,
+        FOREIGN KEY (event_id)
+              REFERENCES events(event_id) ,
+        FOREIGN KEY (sender_id)
+              REFERENCES users(user_id) 
 );
 
 
