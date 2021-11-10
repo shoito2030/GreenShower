@@ -30,6 +30,13 @@
 <body>
 
 	<th:block th:insert="components/part::frag_header"></th:block>
+	<div th:if="${msg}" class="alert alert-success w-75 mx-auto" role="alert">
+		<span th:text="${msg}"></span>
+	</div>
+
+	<div th:if="${errmsg}" class="alert alert-danger w-75 mx-auto" role="alert">
+		<span th:text="${errmsg}"></span>
+	</div>
 
 	就職活動申請一覧画面
 	<div class="container">

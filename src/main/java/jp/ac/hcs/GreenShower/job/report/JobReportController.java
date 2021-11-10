@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.ac.hcs.GreenShower.ai.ProofreadingData;
 import jp.ac.hcs.GreenShower.ai.ProofreadingService;
+import jp.ac.hcs.GreenShower.job.request.JobRequestController;
 import jp.ac.hcs.GreenShower.user.UserData;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +34,9 @@ public class JobReportController {
 
 	@Autowired
 	private ProofreadingService proofreadingService;
+	
+	@Autowired
+	private JobRequestController jobRequestController;
 
 	@Autowired
 	private HttpSession session;
@@ -101,7 +105,7 @@ public class JobReportController {
 		// 状態が『申請完了』ではない場合
 		if (status == null || Integer.parseInt(status) != 4) {
 			model.addAttribute("errmsg", "申請が完了されていません。");
-			return getReportList(principal, model);
+			return jobRequestController.getRequestList(principal, model);
 		}
 
 		Optional<UserData> userData;
