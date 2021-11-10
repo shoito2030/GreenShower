@@ -168,11 +168,11 @@ public class JobRequestController {
 			session.removeAttribute("classroom");
 			String applicant_id = (String) session.getAttribute("applicant_id");
 
-			isSuccess = jobRequestService.insert(form, applicant_id, principal.getName());
+			isSuccess = jobRequestService.hasInserted(form, applicant_id, principal.getName());
 		} else if (role.equals("ROLE_STUDENT")) {
 
 			// ユーザが生徒の場合、登録者のユーザIDも当該生徒のものとなる
-			isSuccess = jobRequestService.insert(form, principal.getName(), principal.getName());
+			isSuccess = jobRequestService.hasInserted(form, principal.getName(), principal.getName());
 		}
 
 		if (isSuccess) {
@@ -245,7 +245,7 @@ public class JobRequestController {
 			return getRequestStatusChange(principal, apply_id, model);
 		}
 		
-		boolean isSuccess = jobRequestService.updateJobStatus(apply_id, form);
+		boolean isSuccess = jobRequestService.hasUpdateJobStatus(apply_id, form);
 		
 		if (isSuccess) {
 			model.addAttribute("msg", "申請状態の変更に成功しました");
@@ -293,7 +293,7 @@ public class JobRequestController {
 	@PostMapping("/job/request/fix/{apply_id}")
 	public String JobRequestContentChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
 			Principal principal, Model model) {
-		boolean isSuccess = jobRequestService.updateJobContent(apply_id, form);
+		boolean isSuccess = jobRequestService.hasUpdatedJobContent(apply_id, form);
 		
 		if (isSuccess) {
 			model.addAttribute("msg", "申請内容の変更に成功しました");
@@ -308,7 +308,7 @@ public class JobRequestController {
 	 * 
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return
+	 * @return 就職活動イベント登録画面
 	 */
 	@GetMapping("/job/event-registration")
 	public String getRequestEvent_registration(Principal principal, Model model) {
@@ -321,11 +321,11 @@ public class JobRequestController {
 	 * 
 	 * @param principal ログイン情報
 	 * @param model
-	 * @return
+	 * @return 就職活動トップ画面
 	 */
 	@PostMapping("/job/event-registration")
 	public String getInsertEvent_registration(Principal principal, Model model, EventForm form) {
-		jobRequestService.insertEvent(form, principal.getName());
+		jobRequestService.hasInsertedEvent(form, principal.getName());
 		return "index";
 
 	}

@@ -86,10 +86,10 @@ public class JobRequestService {
 			if (!user_id.equals(jobRequestData.getApplicant_id())) {
 				return Optional.empty();
 			}
-		} else if(role.equals("ROLE_TEACHER")) {
+		} else if (role.equals("ROLE_TEACHER")) {
 			// 担任の所属クラスを取得
 			String classroom = selectPersonalInfo(user_id).get().getClassroom();
-			
+
 			// 取得した情報が担任の受け持つクラスの情報ではない場合
 			if (!classroom.equals(jobRequestData.getClassroom())) {
 				return Optional.empty();
@@ -164,7 +164,7 @@ public class JobRequestService {
 	 * @param register_user_id 登録処理を実行したユーザのID
 	 * @return - true：追加件数1件（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
-	public boolean insert(JobRequestForm form, String applicant_id, String register_user_id) {
+	public boolean hasInserted(JobRequestForm form, String applicant_id, String register_user_id) {
 		int rowNumber = 0;
 
 		try {
@@ -183,7 +183,7 @@ public class JobRequestService {
 	 * @param form             検証済み入力データ
 	 * @param applicant_id     申請者ID
 	 * @param register_user_id 登録処理を実行したユーザのID
-	 * @return JobRequestData 
+	 * @return JobRequestData
 	 */
 	private JobRequestData refillToJobReportData(JobRequestForm form, String applicant_id, String register_user_id) {
 		JobRequestData data = new JobRequestData();
@@ -207,7 +207,7 @@ public class JobRequestService {
 
 		data.setApply_type(CommonEnum.getEnum(Apply_type.class, form.getApply_type()));
 		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_absence_from()));
-		data.setDate_absence_to(strLocalDateTimeToDate(form.getDate_absence_to()));
+		data.setDate_absence_from(strLocalDateTimeToDate(form.getDate_absence_to()));
 		data.setLeave_early_date(strLocalDateTimeToDate(form.getLeave_early_date()));
 		data.setAttendance_date(strLocalDateTimeToDate(form.getAttendance_date()));
 		data.setRemark(form.getRemark());
@@ -219,13 +219,13 @@ public class JobRequestService {
 	 * 就職活動申請の状態変更処理を行う
 	 * 
 	 * @param apply_id 申請ID
-	 * @param form 検証済み入力データ
+	 * @param form     検証済み入力データ
 	 * @return - true：更新件数1件（処理成功）の場合 - false：更新件数0件（処理失敗）の場合
 	 */
-	public boolean updateJobStatus(String apply_id, JobRequestForm form) {
+	public boolean hasUpdateJobStatus(String apply_id, JobRequestForm form) {
 		int rowNumber = 0;
 		try {
-			rowNumber = jobRequestRepository.updateJobStatus(apply_id, form);
+			rowNumber = jobRequestRepository.updateJobStatus(apply_id, form.getStatus(), form.getIndicate());
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -237,10 +237,10 @@ public class JobRequestService {
 	 * 就職活動申請の内容変更処理を行う
 	 * 
 	 * @param apply_id 申請ID
-	 * @param form 検証済み入力データ
+	 * @param form     検証済み入力データ
 	 * @return - true：更新件数1件（処理成功）の場合 - false：更新件数0件（処理失敗）の場合
 	 */
-	public boolean updateJobContent(String apply_id, JobRequestForm form) {
+	public boolean hasUpdatedJobContent(String apply_id, JobRequestForm form) {
 		int rowNumber = 0;
 		try {
 			rowNumber = jobRequestRepository.updateJobContent(refillToJobRequestDataUpdate(form, apply_id), apply_id);
@@ -254,7 +254,7 @@ public class JobRequestService {
 	/**
 	 * 入力情報をJobRequestData型に変換する（内容変更用）
 	 * 
-	 * @param form    検証済み入力データ
+	 * @param form     検証済み入力データ
 	 * @param apply_id 申請ID
 	 * @return JobRequestData
 	 */
@@ -312,18 +312,20 @@ public class JobRequestService {
 
 	/**
 	 * イベントマスタに新たにイベント情報を1件追加する
-	 * @param form
-	 * @param name
+	 * 
+	 * @param form 検査済み入力内容
+	 * @param user_id ユーザID
 	 * @return - true：追加件数1件（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
-	public boolean insertEvent(EventForm form, String name) {
+	public boolean hasInsertedEvent(EventForm form, String user_id) {
 		int rowNumber = 0;
-		jobRequestRepository.insertEvent(refillToEventData(form), name);
+		jobRequestRepository.insertEvent(refillToEventData(form), user_id);
 		return rowNumber > 0;
 	}
 
 	/**
 	 * 入力情報をEventData型に変換する（イベント情報登録用）
+	 * 
 	 * @param form 検証済み入力情報
 	 * @return EventData
 	 */
