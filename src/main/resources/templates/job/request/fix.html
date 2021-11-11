@@ -162,7 +162,7 @@
 				<div class="row g-3">
 					<div class="col-md-6">
 						<label for="date_activity_from" class="form-label input-group justify-content-center">開始</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_activity_from" th:value="${#dates.format(jobRequestData.date_activity_from, 'yyyy-MM-dd HH:mm:ss')}"
+						<input type="datetime-local" class="form-control dateValid" name="date_activity_from" th:value="${#dates.format(jobRequestData.date_activity_from, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_activity_from, 'HH:mm:ss')}"
 							id="date_activity_from" required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_activity_from')}" th:errors="*{date_activity_from}">
@@ -175,7 +175,7 @@
 					</div>
 					<div class="col-md-6">
 						<label for="date_activity_to" class="form-label input-group justify-content-around">終了</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_activity_to" th:value="${#dates.format(jobRequestData.date_activity_from, 'yyyy-MM-dd HH:mm:ss')}" id="date_activity_to"
+						<input type="datetime-local" class="form-control dateValid" name="date_activity_to" th:value="${#dates.format(jobRequestData.date_activity_to, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_activity_to, 'HH:mm:ss')}" id="date_activity_to"
 							required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_activity_to')}" th:errors="*{date_activity_to}">
@@ -245,7 +245,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
 						<input type="datetime-local" class="form-control dateValid" name="date_absence_from"
-							id="date_absence_from">
+							id="date_absence_from" th:value="${#dates.format(jobRequestData.date_absence_from, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_absence_from, 'HH:mm:ss')}">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_absence_from')}" th:errors="*{date_absence_from}">
 							エラーメッセージ
@@ -260,7 +260,7 @@
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
 						<input type="datetime-local" class="form-control dateValid" name="date_absence_to"
-							id="date_absence_to">
+							id="date_absence_to" th:value="${#dates.format(jobRequestData.date_absence_to, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_absence_to, 'HH:mm:ss')}">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_absence_to')}" th:errors="*{date_absence_to}">
 							エラーメッセージ
@@ -285,7 +285,7 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control dateValid" name="leave_early_date"
-						id="leave_early_date">
+						id="leave_early_date" th:value="${#dates.format(jobRequestData.leave_early_date, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.leave_early_date, 'HH:mm:ss')}">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('leave_early_date')}" th:errors="*{leave_early_date}">
 							エラーメッセージ
@@ -309,7 +309,7 @@
 
 					<div class="col pt-md-2">
 						<input type="datetime-local" class="form-control dateValid" name="attendance_date"
-						id="attendance_date">
+						id="attendance_date" th:value="${#dates.format(jobRequestData.attendance_date, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.attendance_date, 'HH:mm:ss')}">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('attendance_date')}" th:errors="*{attendance_date}">
 							エラーメッセージ
