@@ -291,8 +291,11 @@ public class JobRequestController {
 	 * @return 就職活動申請一覧画面
 	 */
 	@PostMapping("/job/request/fix/{apply_id}")
-	public String JobRequestContentChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
+	public String JobRequestContentChange(@PathVariable("apply_id") String apply_id, @ModelAttribute @Validated JobRequestForm form, BindingResult bindingResult, 
 			Principal principal, Model model) {
+		if(bindingResult.hasErrors()) {
+			return getRequestContentChange(principal, apply_id, model);
+		}
 		boolean isSuccess = jobRequestService.hasUpdatedJobContent(apply_id, form);
 		
 		if (isSuccess) {
