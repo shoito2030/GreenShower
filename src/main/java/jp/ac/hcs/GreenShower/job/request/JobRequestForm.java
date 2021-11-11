@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import jp.ac.hcs.GreenShower.job.validations.DateValueValid;
 import lombok.Data;
@@ -55,6 +56,7 @@ public class JobRequestForm {
 	/**
 	 * 手段
 	 */
+	@NotEmpty(message = "手段を選択してください")
 	private List<String> way = new ArrayList<>();
 	
 	/**
