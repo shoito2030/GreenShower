@@ -266,12 +266,21 @@ public class JobRequestController {
 	 */
 	@GetMapping("/job/request/fix/{apply_id}")
 	public String getRequestContentChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
+		
 		Optional<JobRequestData> jobRequestData;
 		
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
 		// 個人の申請情報を取得
 		jobRequestData = jobRequestService.selectOne(apply_id, principal.getName(), role);
+		
+		String status = jobRequestService.selectJobHuntingStatus(apply_id);
+
+		// 状態が『申請完了』である場合
+		if (status == null || Integer.parseInt(status) == 4) {
+			model.addAttribute("errmsg", "申請が完了されているので修正できません。");
+			return getRequestList(principal, model);
+		}
 
 		// 処理失敗により就職活動申請一覧画面へ
 		if (jobRequestData.isEmpty()) {

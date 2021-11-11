@@ -346,4 +346,20 @@ public class JobRequestService {
 
 	}
 
+	/**
+	 * 申請状態を取得する
+	 * @param apply_id 申請ID
+	 * @return status 
+	 */
+	public String selectJobHuntingStatus(String apply_id) {
+		String status;
+		try {
+			status = jobRequestRepository.selectJobHuntingStatus(apply_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return status;
+	}
+
 }

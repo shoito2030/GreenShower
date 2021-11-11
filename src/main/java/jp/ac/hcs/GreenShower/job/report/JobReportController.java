@@ -165,6 +165,14 @@ public class JobReportController {
 	 */
 	@GetMapping("/job/report/fix/{apply_id}")
 	public String getReportFix(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
+		String status = jobReportService.selectJobHuntingStatus(apply_id);
+
+		// 状態が『報告完了』である場合
+		if (status == null || Integer.parseInt(status) == 7) {
+			model.addAttribute("errmsg", "報告が完了されているので修正できません。");
+			return getReportList(principal, model);
+		}
+		
 		Optional<JobReportData> jobReportData;
 
 		// 申請IDに紐づく報告情報を取得

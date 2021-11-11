@@ -67,6 +67,8 @@ public class JobRequestRepository {
 	/** イベントマスタの情報を更新するSQL */
 	private static final String SQL_UPDATE_JOBEVENT = "INSERT INTO EVENTS(event_id, company_name, datetime, loc, content, bring, register_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	
+	/** */
+	private static final String SQL_SELECT_JOB_HUNTING_STATUS = "SELECT JH.STATUS  FROM JOB_HUNTING JH WHERE JH.APPLY_ID = ?;";
 	@Autowired
 	private JdbcTemplate jdbc;
 
@@ -298,5 +300,16 @@ public class JobRequestRepository {
 	public int event_id_get() {
 		int event_id = jdbc.queryForObject(SQL_MAX_EVENT_ID, int.class);
 		return event_id;
+	}
+	
+	/**
+	 * 申請IDに紐づく就職活動情報の状態を取得
+	 * 
+	 * @param apply_id 申請ID
+	 * @return UserData ユーザ情報
+	 */
+	public String selectJobHuntingStatus(String apply_id) {
+		String status = (String) jdbc.queryForMap(SQL_SELECT_JOB_HUNTING_STATUS, apply_id).get("status");
+		return status;
 	}
 }
