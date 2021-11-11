@@ -162,7 +162,7 @@
 				<div class="row g-3">
 					<div class="col-md-6">
 						<label for="date_activity_from" class="form-label input-group justify-content-center">開始</label>
-						<input type="datetime-local" class="form-control" name="date_activity_from" th:value="${#dates.format(jobRequestData.date_activity_from, 'yyyy-MM-dd HH:mm:ss')}"
+						<input type="datetime-local" class="form-control dateValid" name="date_activity_from" th:value="${#dates.format(jobRequestData.date_activity_from, 'yyyy-MM-dd HH:mm:ss')}"
 							id="date_activity_from" required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_activity_from')}" th:errors="*{date_activity_from}">
@@ -175,7 +175,7 @@
 					</div>
 					<div class="col-md-6">
 						<label for="date_activity_to" class="form-label input-group justify-content-around">終了</label>
-						<input type="datetime-local" class="form-control" name="date_activity_to" th:value="${#dates.format(jobRequestData.date_activity_from, 'yyyy-MM-dd HH:mm:ss')}" id="date_activity_to"
+						<input type="datetime-local" class="form-control dateValid" name="date_activity_to" th:value="${#dates.format(jobRequestData.date_activity_from, 'yyyy-MM-dd HH:mm:ss')}" id="date_activity_to"
 							required>
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_activity_to')}" th:errors="*{date_activity_to}">
@@ -244,7 +244,7 @@
 
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
-						<input type="datetime-local" class="form-control" name="date_absence_from"
+						<input type="datetime-local" class="form-control dateValid" name="date_absence_from"
 							id="date_absence_from">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_absence_from')}" th:errors="*{date_absence_from}">
@@ -259,7 +259,7 @@
 
 					<div class="col-sm-5 pt-md-2">
 						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
-						<input type="datetime-local" class="form-control" name="date_absence_to"
+						<input type="datetime-local" class="form-control dateValid" name="date_absence_to"
 							id="date_absence_to">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('date_absence_to')}" th:errors="*{date_absence_to}">
@@ -284,7 +284,7 @@
 					</div>
 
 					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control" name="leave_early_date"
+						<input type="datetime-local" class="form-control dateValid" name="leave_early_date"
 						id="leave_early_date">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('leave_early_date')}" th:errors="*{leave_early_date}">
@@ -308,7 +308,7 @@
 					</div>
 
 					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control" name="attendance_date"
+						<input type="datetime-local" class="form-control dateValid" name="attendance_date"
 						id="attendance_date">
 						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
 						th:if="${#fields.hasErrors('attendance_date')}" th:errors="*{attendance_date}">
@@ -340,7 +340,7 @@
 
 
 		<div class="d-grid col-4 mx-auto mt-5">
-			<button class="btn btn-primary btn-lg" type="submit">登録</button>
+			<button class="btn btn-primary btn-lg" type="submit" id="submit">登録</button>
 		</div>
 	</form>
 
@@ -432,6 +432,47 @@
 				alert("ajax失敗");
 			});
 		});
+
+		// 日付形式確認用
+		$('#submit').click(function (e) {
+			let result = true;
+
+			$(".dateValid").each(function (i, e) {
+
+				// 必須チェック(required)があるか
+				if ($(e).attr('required')) {
+					console.log('必須要素:' + $(e).val());
+
+					if ($(e).val != '') {
+						const temp = $(e).val().split('T');
+						const date = temp[0];
+						const time = temp[1];
+
+						if (date != '' && time != '') {
+							const regexDate = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
+							const regexTime = /^([01][0-9]|2[0-3]):[0-5][0-9]$/;
+
+							if (!regexDate.test(date) && regexTime.test(time)) {
+								$(e).val('');
+								result = false;
+								return false;
+							}
+
+							console.log('適切な値を確認');
+
+
+						}
+					}
+				}
+
+			});
+
+			if (!result) {
+				return false;
+			}
+
+		});
+
 
 		$('#way1').on('change', function () {
 			if(document.getElementById("way1").checked){

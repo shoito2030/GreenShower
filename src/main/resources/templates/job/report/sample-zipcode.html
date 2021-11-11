@@ -1,71 +1,627 @@
+
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<title>就職活動申請新規登録画面</title>
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+	
+		<meta id="viewport" name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="manifest" href="/css/manifest.json" crossorigin="use-credentials">
+		<meta name="application-name" content="WebPortal">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-title" content="WebPortal">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	
+	
+		<link rel="icon" sizes="192x192" href="/img/favicon.ico">
+		<link rel="shortcut icon" href="/img/favicon.ico">
+		<link rel="apple-touch-icon" href="/img/favicon.ico">
+		<link rel="apple-touch-icon" href="/img/favicon.ico" sizes="192x192">
+		<link rel="apple-touch-icon" href="/img/favicon.ico" sizes="58x58">
+
+		<!-- FontAwesome -->
+		<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+	
+	
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+        crossorigin="anonymous">
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10/build/styles/github.min.css">
+    	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1/font/bootstrap-icons.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<link rel="stylesheet" href="/css/ress.css">
+		<link rel="stylesheet" href="/css/common.css">
+	
+		<!-- Googleフォント -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap" rel="stylesheet">
+	
+
+	<style>
+		.container {
+			max-width: 960px;
+		}
+
+		.original-input-group {
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: stretch;
+			/*width: 100%;*/
+		}
+
+		@media screen and (max-width: 800px) {
+			.margin-md-0-auto {
+				margin: 0 auto;
+			}
+		}
+
+
+		@media screen and (min-width: 801px) {
+			.media-margin-top-8rem {
+				margin-top: 8rem;
+			}
+
+			.media-margin-top-35rem {
+				margin-top: 3.5rem;
+			}
+
+			.media-margin-left-9rem {
+				margin-left: 9rem;
+			}
+		}
+	</style>
 </head>
 
 <body>
+	
+		<header>
+			<nav class="navbar navbar-expand-md navbar-light bg-light">
+				<div class="container-fluid">
+					
+					<a class="navbar-brand" href="/"><img src=”../../static/img/bootstrap-solid.svg” width="30"
+							height="30" class="d-inline-block align-top" alt=""> 就活ポータル.com</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+						aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+	
+					<div class="collapse navbar-collapse" id="navbar">
+						<ul class="navbar-nav me-auto mb-2 mb-md-0 w-100 nav-justified">
+	
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/">就職活動管理</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="#">受験報告管理</a>
+							</li>
+	
+							
+	
+							
+								<li class="nav-item">
+									<a class="nav-link active" href="/user/list">ユーザ管理</a>
+								</li>
+							
+	
+							<li class="nav-item">
+								<a class="nav-link active" href="/"><i class="fas fa-envelope"></i>メッセージ</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="/"><i class="fas fa-cog"></i>設定</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="/logout">Log out</a>
+							</li>
+	
+						</ul>
+	
+					</div>
+				</div>
+			</nav>
+		</header>
+	
 
-    <form class="form-inline" action="#">
-        <div class="form-group mx-sm-3 mb-2">
-            <label for="zipcode" class="sr-only">郵便番号</label>
-            <input type="text" class="form-control" id="zipcode" placeholder="郵便番号">
-        </div>
-        <button type="submit" class="btn btn-primary mb-2" id="zip-btn">検索</button>
+	<h1 class="ml-md-5 text-center text-md-start media-margin-left-9rem fw-bold">就職活動申請
+		新規登録</h1>
 
-        <div class="form-group mx-sm-3 mb-2">
-            <input type="text" class="form-control" id="loc" placeholder="場所">
-        </div>
-    </form>
+	<form class="container mt-md-5 needs-validation" novalidate method="post" action="/job/request/insert">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
+		<div>
+			
+
+
+
+			
+				<dl class="row mb-5 text-md-start text-center">
+					<dt class="col-sm-1 pt-md-1">クラス</dt>
+					<dl class="col-sm-1 fs-5 fw-bold" name="classroom" id="classroom">S3A2</dl>
+
+					<dt class="col-sm-1 pt-md-1">番号</dt>
+					<dd class="col-sm-1 fs-5 fw-bold" name="class_number"
+						id="class_number">02</dd>
+
+					<dt class="col-sm-1 pt-md-1">氏名</dt>
+					<dd class="col-sm-2 fs-5 fw-bold" name="name" id="name">山田啓介</dd>
+				</dl>
+			
+		</div>
+		<div class="row row-cols-1 row-cols-md-2 gy-3 mb-md-5">
+			<div class="col-md-4">
+				<h4 class="fw-bold text-center">申請種別</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col">
+				<div class="input-group justify-content-around pt-md-2">
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="apply_type" id="applyType1" value="0"
+							required>
+						<label class="form-check-label" for="applyType1">個人</label>
+						<div class="invalid-feedback">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+                            選択してください</h6>
+                            </div>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="apply_type" id="applyType2" value="1"
+							required>
+						<label class="form-check-label" for="applyType2">とりまとめ</label>
+					</div>
+
+					
+
+					
+				</div>
+			</div>
+
+
+			<div class="col-md-4">
+				<h4 class="fw-bold mt-md-1 text-center">企業名</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col">
+				<input type="text" class="form-control" name="company_name" required>
+				
+				
+
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						企業名を入力してください</h6>
+				</div>
+			</div>
+
+
+			<div class="col-md-4">
+				<h4 class="fw-bold mt-md-1 text-center">内容</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col pt-md-2">
+				<div class="input-group justify-content-around">
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="content1" name="content" value="1" required>
+						<label class="form-check-label" for="content1">合企</label>
+						<div class="invalid-feedback">
+						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+                            選択してください</h6>
+                            </div>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="content2" name="content" value="2" required>
+						<label class="form-check-label" for="content2">単独</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="content3" name="content" value="3" required>
+						<label class="form-check-label" for="content3">試験</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="content99" name="content" value="99" required>
+						<label class="form-check-label" for="content99">その他</label>
+					</div>
+
+					
+
+				</div>
+			</div>
+
+
+			<div class="col-md-4">
+				<h4 class="fw-bold mt-md-4 text-center">開始時刻・終了日時</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col">
+				<div class="row g-3">
+					<div class="col-md-6">
+						<label for="date_activity_from" class="form-label input-group justify-content-center">開始</label>
+						<input type="datetime-local" class="form-control" name="date_activity_from"
+							id="date_activity_from" required>
+						
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								選択してください</h6>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<label for="date_activity_to" class="form-label input-group justify-content-around">終了</label>
+						<input type="datetime-local" class="form-control" name="date_activity_to" id="date_activity_to"
+							required>
+						
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								選択してください</h6>
+						</div>
+					</div>
+				</div>
+
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						必須項目です。</h6>
+				</div>
+			</div>
+
+
+			<div class="col-md-4">
+				<h4 class="fw-bold mt-md-1 text-center">郵便番号</h4>
+			</div>
+			<div class="col">
+				<div class="input-group w-50 margin-md-0-auto">
+					<input type="text" class="form-control" id="zipcode">
+					<button type="button" id="zip-btn" class="btn btn-primary">検索</button>
+				</div>
+
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						必須項目です。</h6>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 mt-md-5">
+				<h4 class="fw-bold mt-md-1 text-center">場所</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col mt-md-5">
+				<input type="text" class="form-control" name="loc" id="loc" required>
+				
+
+				<div class="invalid-feedback">
+					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+						場所を入力してください</h6>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 media-margin-top-8rem">
+				<h4 class="fw-bold mt-md-1 text-center">手段</h4>
+				<h6 class="text-danger text-center">※必須</h6>
+			</div>
+			<div class="col">
+
+				<div class="row g-3">
+					<div
+						class="form-check col-sm-2 pt-md-5 original-input-group justify-content-center justify-content-md-start">
+						<input type="checkbox" class="form-check-input" name="way" value="1" id="way1">
+						<label for="way1" class="form-check-label">
+							欠席
+						</label>
+					</div>
+
+					<div class="col-sm-5 pt-md-2">
+						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
+						<input type="datetime-local" class="form-control" name="date_absence_from"
+							id="date_absence_from">
+						
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+
+					<div class="col-sm-5 pt-md-2">
+						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
+						<input type="datetime-local" class="form-control" name="date_absence_to"
+							id="date_absence_to">
+						
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row g-3">
+					<div
+						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
+						<input type="checkbox" class="form-check-input" name="way" value="2" id="way2">
+						<label for="way2" class="form-check-label">
+							早退
+						</label>
+					</div>
+
+					<div class="col pt-md-2">
+						<input type="datetime-local" class="form-control" name="leave_early_date"
+							id="leave_early_date">
+						
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+				</div>
+
+				<div class="row g-3">
+					<div
+						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
+						<input type="checkbox" class="form-check-input" name="way" value="3" id="way3">
+						<label for="way3" class="form-check-label">
+							遅刻
+						</label>
+					</div>
+
+					<div class="col pt-md-2">
+						<input type="datetime-local" class="form-control" name="attendance_date"
+							id="attendance_date">
+						
+
+						<div class="invalid-feedback">
+							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
+								必須項目です。</h6>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="col-md-4 media-margin-top-35rem">
+				<h4 class="fw-bold mt-md-1 text-center">メモ</h4>
+			</div>
+			<div class="col">
+				<textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
+			</div>
+
+		</div>
+
+
+		<div class="d-grid col-4 mx-auto mt-5">
+			<button class="btn btn-primary btn-lg" type="submit">登録</button>
+		</div>
+	</form>
+
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+			crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+			<script src="https://bootstrap-guide.com/js/style.js"></script>
+
+		<!-- オリジナルスクリプト -->
+		<script src="/js/common.js"></script>
+
+	
+
+	<!-- オリジナルスクリプト -->
+	<script type="text/javascript">
+		// 無効なフィールドがある場合にフォーム送信を無効にする
+        (function () {
+            'use strict';
+
+            // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
+            var forms = document.querySelectorAll('needs-validation');
+
+            // ループして帰順を防ぐ
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false)
+                })
+        })()
+
+
+		// 郵便番号用
+		$('#zip-btn').on('click', function () {
+			const url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=';
+			const zipcode = document.getElementById("zipcode");
+
+			// Ajax通信を開始
+			$.ajax({
+				url: url + zipcode.value,
+				type: 'GET',
+				dataType: 'json',
+			}).done(function (data) {
+				const results = data.results[0];
+				setAddress(results);
+
+			}).fail(function () {
+				alert("ajax失敗");
+			});
+		})
+
+		function setAddress(results) {
+			const loc = document.getElementById("loc");
+			const address1 = results.address1;
+			const address2 = results.address2;
+			const address3 = results.address3;
+
+			const address = address1 + address2 + address3;
+
+			loc.value = address;
+		}
+
+		// クラスと番号から名前を取得する用
+		$('#class_number').on('change', function () {
+			const name = document.getElementById("name");
+			const classroom = document.getElementById("classroom").textContent;
+			const class_number = document.getElementById("class_number").value;
+
+			const json = {
+				"classroom": classroom,
+				"class_number": class_number
+			}
+
+			if (class_number == "zero") {
+				name.innerText = "情報太郎";
+				return false;
+			}
+
+			$.ajax({
+				url: window.location.href + "/getUserInfo",
+				type: 'GET',
+				dataType: 'json',
+				data: {
+					// CSRF対策
+					_csrf: $("*[name=_csrf]").val(),
+					json: JSON.stringify(json)
+				}
+			}).done(function (data) {
+				//name.value =  data[0].name;
+				name.innerText = data[0].name;
+
+			}).fail(function () {
+				alert("ajax失敗");
+			});
+		});
+
+		$('#way1').on('change', function () {
+			if(document.getElementById("way1").checked){
+				//入力制限の為の属性付与
+				document.getElementById("date_absence_from").removeAttribute("disabled");
+				document.getElementById("date_absence_to").removeAttribute("disabled");
+				document.getElementById("way2").checked=false;
+				document.getElementById("leave_early_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("leave_early_date");
+				  textForm.value = '';
+				document.getElementById("way3").checked=false;
+				document.getElementById("attendance_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("attendance_date");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").setAttribute("required",true);
+				document.getElementById("date_absence_to").setAttribute("required",true);
+				document.getElementById("leave_early_date").removeAttribute("required");
+				document.getElementById("attendance_date").removeAttribute("required");
+			}else{
+				//入力制限の為の属性付与
+				document.getElementById("date_absence_from").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_from");
+				  textForm.value = '';
+				document.getElementById("date_absence_to").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_to");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("leave_early_date").setAttribute("required",true);
+				document.getElementById("attendance_date").setAttribute("required",true);
+			}
+			
+
+		})
+
+		$('#way2').on('change', function () {
+			if(document.getElementById("way2").checked){
+				//入力制限の為の属性付与
+				document.getElementById("leave_early_date").removeAttribute("disabled");
+				document.getElementById("way1").checked=false;
+				document.getElementById("date_absence_from").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_from");
+				  textForm.value = '';
+				document.getElementById("date_absence_to").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_to");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").removeAttribute("required");
+				document.getElementById("date_absence_to").removeAttribute("required");
+				document.getElementById("leave_early_date").setAttribute("required",true);
+				document.getElementById("attendance_date").removeAttribute("required");
+				if(document.getElementById("way3").checked){
+					document.getElementById("attendance_date").setAttribute("required",true);
+				}
+				
+			}else{
+				//入力制限の為の属性付与
+				document.getElementById("leave_early_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("leave_early_date");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").setAttribute("required",true);
+				document.getElementById("date_absence_to").setAttribute("required",true);
+				document.getElementById("leave_early_date").setAttribute("required",true);
+				document.getElementById("attendance_date").setAttribute("required",true);
+				if(document.getElementById("way3").checked){
+					document.getElementById("date_absence_from").removeAttribute("required");
+					document.getElementById("date_absence_to").removeAttribute("required");
+					document.getElementById("leave_early_date").removeAttribute("required");
+				}
+			}
+			
+		})
+		$('#way3').on('change', function () {
+			if(document.getElementById("way3").checked){
+				//入力制限の為の属性付与
+				document.getElementById("attendance_date").removeAttribute("disabled");
+				document.getElementById("way1").checked=false;
+				document.getElementById("date_absence_from").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_from");
+				  textForm.value = '';
+				document.getElementById("date_absence_to").setAttribute("disabled",true);
+				var textForm = document.getElementById("date_absence_to");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").removeAttribute("required");
+				document.getElementById("date_absence_to").removeAttribute("required");
+				document.getElementById("leave_early_date").removeAttribute("required");
+				document.getElementById("attendance_date").setAttribute("required",true);
+				if(document.getElementById("way2").checked){
+					document.getElementById("leave_early_date").setAttribute("required",true);
+				}
+			}else{
+				//入力制限の為の属性付与
+				document.getElementById("attendance_date").setAttribute("disabled",true);
+				var textForm = document.getElementById("attendance_date");
+				  textForm.value = '';
+				//required属性の付与
+				document.getElementById("date_absence_from").setAttribute("required",true);
+				document.getElementById("date_absence_to").setAttribute("required",true);
+				document.getElementById("leave_early_date").setAttribute("required",true);
+				document.getElementById("attendance_date").setAttribute("required",true);
+				if(document.getElementById("way2").checked){
+					document.getElementById("date_absence_from").removeAttribute("required");
+					document.getElementById("date_absence_to").removeAttribute("required");
+					document.getElementById("attendance_date").removeAttribute("required");
+				}
+			}
+		})
+		window.onload=function(){
+			//disabled・required属性の付与
+			document.getElementById("date_absence_from").setAttribute("disabled",true);
+			document.getElementById("date_absence_to").setAttribute("disabled",true);
+			document.getElementById("leave_early_date").setAttribute("disabled",true);
+			document.getElementById("attendance_date").setAttribute("disabled",true);
+			document.getElementById("date_absence_from").setAttribute("required",true);
+			document.getElementById("date_absence_to").setAttribute("required",true);
+			document.getElementById("leave_early_date").setAttribute("required",true);
+			document.getElementById("attendance_date").setAttribute("required",true);
+		}
+	</script>
 </body>
-
-<script>
-    const url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=';
-    const zipcode = document.getElementById("zipcode");
-    const loc = document.getElementById("loc");
-
-    $('#zip-btn').on('click', function () {
-        // Ajax通信を開始
-        $.ajax({
-            url: url + zipcode.value,
-            type: 'GET',
-            dataType: 'json',
-        })
-            .done(function (data) {
-                // 通信成功時の処理を記述
-                const results = data.results[0];
-                setAddress(results);
-
-
-            })
-            .fail(function () {
-                // 通信失敗時の処理を記述
-                alert("ajax失敗");
-            });
-    })
-
-    function setAddress(results) {
-        const address1 = results.address1;
-        const address2 = results.address2;
-        const address3 = results.address3;
-
-        const address = address1 + address2 + address3;
-        
-        loc.value = address;
-
-    }
-</script>
 
 </html>
