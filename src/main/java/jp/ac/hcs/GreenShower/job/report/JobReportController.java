@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.ac.hcs.GreenShower.ai.ProofreadingData;
 import jp.ac.hcs.GreenShower.ai.ProofreadingService;
+import jp.ac.hcs.GreenShower.job.request.JobRequestController;
 import jp.ac.hcs.GreenShower.user.UserData;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +34,9 @@ public class JobReportController {
 
 	@Autowired
 	private ProofreadingService proofreadingService;
+	
+	@Autowired
+	private JobRequestController jobRequestController;
 
 	@Autowired
 	private HttpSession session;
@@ -91,8 +95,6 @@ public class JobReportController {
 	/**
 	 * 就職活動報告新規作成画面を表示する
 	 * 
-	 * @param apply_id  申請ID
-	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動報告新規作成画面
 	 */
@@ -103,7 +105,7 @@ public class JobReportController {
 		// 状態が『申請完了』ではない場合
 		if (status == null || Integer.parseInt(status) != 4) {
 			model.addAttribute("errmsg", "申請が完了されていません。");
-			return getReportList(principal, model);
+			return jobRequestController.getRequestList(principal, model);
 		}
 
 		Optional<UserData> userData;
@@ -158,8 +160,6 @@ public class JobReportController {
 	/**
 	 * 就職活動報告修正画面を表示する
 	 * 
-	 * @param apply_id  申請ID
-	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動報告修正画面
 	 */
@@ -185,12 +185,8 @@ public class JobReportController {
 	/**
 	 * 就職活動報告を修正する
 	 * 
-	 * 
-	 * @param principal     ログイン情報
 	 * @param model
-	 * @param form          登録時の入力チェック用JobReportForm
-	 * @param bindingResult 入力情報の検証結果
-	 * @return 受験報告情報一覧画面
+	 * @return
 	 */
 	@PostMapping("/job/report/fix")
 	public String fixReportContent(Principal principal, Model model, @ModelAttribute @Validated JobReportForm form,
@@ -233,8 +229,6 @@ public class JobReportController {
 	/**
 	 * 就職活動報告承認画面を表示する
 	 * 
-	 *  @param apply_id  申請ID
-	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動報告承認画面
 	 */
@@ -297,7 +291,7 @@ public class JobReportController {
 		jobReportService.updateStatus(form);
 
 		log.info("報告状態変更処理： [申請ID:" + form.getApply_id() + "・状態:" + form.getStatus() + "・備考:" + form.getIndicate()
-		+ "]");
+				+ "]");
 		model.addAttribute("msg", "状態変更が完了しました。");
 
 		return getReportList(principal, model);
