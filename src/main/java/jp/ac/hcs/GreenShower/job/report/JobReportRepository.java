@@ -18,13 +18,13 @@ public class JobReportRepository {
 
 	/** SQL 報告情報全件取得 */
 	private static final String SQL_SELECT_ALL_REPORTS = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS  FROM JOB_HUNTING \r\n"
-			+ "JH LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \r\n"
+			+ "JH LEFT JOIN USERS U ON  U.USER_ID = JH.APPLICANT_ID \r\n"
 			+ "WHERE JH.STATUS > '4' AND U.CLASSROOM = ? ORDER BY JH.STATUS DESC;";
 
 	/* 特定の1件の報告情報を取得 */
 	private static final String SQL_SELECT_ONE = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLICANT_ID, JH.APPLY_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS, JH.APPLY_TYPE, JH.INDICATE, REP.ADVANCE_OR_RETREAT, REP.REMARK\r\n"
-			+ "FROM JOB_HUNTING JH LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID \r\n"
-			+ "LEFT JOIN REPORTS REP ON REP.APPLY_ID = JH.APPLY_ID WHERE JH.APPLY_ID  = ?;";
+			+ "FROM JOB_HUNTING JH LEFT JOIN USERS U ON  U.USER_ID = JH.APPLICANT_ID \r\n"
+			+ "LEFT JOIN REPORTS REP ON REP.APPLY_ID = JH.APPLY_ID WHERE JH.APPLY_ID = ?;";
 
 	/** SQL 報告情報一件追加 */
 	private static final String SQL_INSERT_ONE_REPORTS = "INSERT INTO REPORTS(APPLY_ID, ADVANCE_OR_RETREAT, REMARK, REGISTER_USER_ID) VALUES(?, ?, ?, ?);";
@@ -38,23 +38,29 @@ public class JobReportRepository {
 	/** 申請IDからクラス・番号・名前を取得するSQL */
 	private static final String SQL_SELECT_PERSONAL_INFO_APPLY = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS U LEFT JOIN JOB_HUNTING JH ON U.USER_ID = JH.APPLICANT_ID WHERE JH.APPLY_ID = ?;";
 
-	private static final String SQL_SELECT_PERSONAL_INFO_USERID = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID  = ?;";
+	private static final String SQL_SELECT_PERSONAL_INFO_USERID = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID = ?;";
 	
 	/**  就職活動情報の状態を取得する */
 	private static final String SQL_SELECT_JOB_HUNTING_STATUS = "SELECT JH.STATUS  FROM JOB_HUNTING JH WHERE JH.APPLY_ID = ?;";
 	
 	/** 報告情報内容更新（進退用） */
-	private static final String SQL_UPDATE_ADVANCE_OR_RETREAT_TO_TRUE = "UPDATE REPORTS  SET ADVANCE_OR_RETREAT  = TRUE WHERE APPLY_ID = ?;";
+	private static final String SQL_UPDATE_ADVANCE_OR_RETREAT_TO_TRUE = "UPDATE REPORTS  SET ADVANCE_OR_RETREAT = TRUE WHERE APPLY_ID = ?;";
 
 	/** 報告情報内容更新（進退用） */
-	private static final String SQL_UPDATE_ADVANCE_OR_RETREAT_TO_FALSE = "UPDATE REPORTS  SET ADVANCE_OR_RETREAT  = FALSE WHERE APPLY_ID = ?;";
+	private static final String SQL_UPDATE_ADVANCE_OR_RETREAT_TO_FALSE = "UPDATE REPORTS  SET ADVANCE_OR_RETREAT = FALSE WHERE APPLY_ID = ?;";
 	
 	/** 報告情報内容更新（メモ用） */
 	private static final String SQL_UPDATE_REMARK = "UPDATE REPORTS  SET REMARK = ? WHERE APPLY_ID = ?;";
 	
 	@Autowired
 	private JdbcTemplate jdbc;
-
+	
+	/**
+	 * 報告情報を全権取得する
+	 * 
+	 * @param classroom
+	 * @return jobReportEntity
+	 */
 	public JobReportEntity selectAllReports(String classroom) {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_REPORTS, classroom);
 		JobReportEntity jobReportEntity = mappingSelectResult(resultList);
@@ -66,7 +72,7 @@ public class JobReportRepository {
 	 * 特定の1件を取得
 	 * 
 	 * @param apply_id 申請ID
-	 * @return JobHuntingData 1件の報告情報
+	 * @return JobReportData 1件の報告情報
 	 */
 	public JobReportData selectOne(String apply_id) {
 		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_ONE, apply_id);
@@ -114,7 +120,7 @@ public class JobReportRepository {
 	 * reportsテーブルにデータを1件追加する.
 	 * 
 	 * @param data 追加する報告情報
-	 * @return 追加データ数
+	 * @return 追加データ数:0または1
 	 * @throws DataAccessException
 	 */
 	public int insertOne(JobReportData data) throws DataAccessException {
@@ -129,7 +135,7 @@ public class JobReportRepository {
 	 * reportsテーブルの進退を『進めない』に変更する
 	 * 
 	 * @param apply_id
-	 * @return 追加データ数
+	 * @return 追加データ数:0または1
 	 * @throws DataAccessException
 	 */
 	public int updateAdvance_or_retreat_to_false(String apply_id) {
@@ -141,7 +147,7 @@ public class JobReportRepository {
 	 * reportsテーブルの進退を『進める』に変更する
 	 * 
 	 * @param apply_id
-	 * @return 追加データ数
+	 * @return 追加データ数:0または1
 	 * @throws DataAccessException
 	 */
 	public int updateAdvance_or_retreat_to_true(String apply_id) {
@@ -154,7 +160,7 @@ public class JobReportRepository {
 	 * 
 	 * @param apply_id
 	 * @param remark
-	 * @return 修正データ数
+	 * @return 修正データ数:0または1
 	 * @throws DataAccessException
 	 */
 	public int updateRemark(String apply_id, String remark) {
@@ -166,7 +172,7 @@ public class JobReportRepository {
 	 * job_huntingテーブルの状態を6:報告承認待に変更する
 	 * 
 	 * @param apply_id 申請ID
-	 * @return 追加データ数
+	 * @return 追加データ数:0または1
 	 * @throws DataAccessException
 	 */
 	public int updateStatusOne(String apply_id) throws DataAccessException {
@@ -179,7 +185,7 @@ public class JobReportRepository {
 	 * job_huntingテーブルの状態を任意の状態に更新する
 	 * 
 	 * @param form 追加するユーザ情報
-	 * @return 追加データ数
+	 * @return 追加データ数:0または1
 	 * @throws DataAccessException
 	 */
 	public int updateStatus(JobReportForm form) throws DataAccessException {
@@ -209,8 +215,8 @@ public class JobReportRepository {
 	/**
 	 * job_huntingテーブルとreportsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
 	 * 
-	 * @param result  job_huntingテーブルとreportsテーブルから取得したデータ
-	 * @return JobRequestEntity
+	 * @param result job_huntingテーブルとreportsテーブルから取得したデータ
+	 * @return JobRequestdata
 	 */
 	private JobReportData mappingSelectResult(Map<String, Object> result) {
 		JobReportData data = new JobReportData();
