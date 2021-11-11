@@ -1,16 +1,24 @@
-package jp.ac.hcs.GreenShower.main;
-
-import org.springframework.stereotype.Component;
-
-import lombok.extern.slf4j.Slf4j;
-
-/**
- *  認証に関するイベントを制御する
- */
-@Slf4j
-@Component
-public class AuthenticationEventListeners {
-
+//package jp.ac.hcs.GreenShower.main;
+//
+//import javax.servlet.http.HttpSession;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.event.EventListener;
+//import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
+//import org.springframework.stereotype.Component;
+//
+//import jp.ac.hcs.GreenShower.user.UserData;
+//import jp.ac.hcs.GreenShower.user.UserService;
+//import jp.ac.hcs.GreenShower.user.UserStatus;
+//import lombok.extern.slf4j.Slf4j;
+//
+///**
+// *  認証に関するイベントを制御する
+// */
+//@Slf4j
+//@Component
+//public class AuthenticationEventListeners {
+//
 //	/** ロックを行うパスワード誤りの回数 */
 //	private static final int ERROR_LIMIT = 3;
 //
@@ -52,4 +60,4 @@ public class AuthenticationEventListeners {
 //			log.info("[ログイン失敗]入力ユーザ:" + username + ", 存在しないユーザ");
 //		}
 //	}
-}
+//}
