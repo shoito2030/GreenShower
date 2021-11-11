@@ -280,6 +280,9 @@ public class JobRequestController {
 		if (status == null || Integer.parseInt(status) == 4) {
 			model.addAttribute("errmsg", "申請が完了されているので修正できません。");
 			return getRequestList(principal, model);
+		} else if(Integer.parseInt(status) == 2) {
+			model.addAttribute("errmsg", "申請の承認待ちなので修正できません。");
+			return getRequestList(principal, model);
 		}
 
 		// 処理失敗により就職活動申請一覧画面へ
@@ -309,6 +312,7 @@ public class JobRequestController {
 		
 		if (isSuccess) {
 			model.addAttribute("msg", "申請内容の変更に成功しました");
+			jobRequestService.updateStatusFixed(apply_id);
 		} else {
 			model.addAttribute("errmsg", "申請内容の変更に失敗しました");
 		}

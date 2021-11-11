@@ -361,5 +361,13 @@ public class JobRequestService {
 		}
 		return status;
 	}
+	
+	/**
+	 * 申請修正した際にstatusを変更する
+	 * @param apply_id
+	 */
+	public void updateStatusFixed(String apply_id) {
+		jobRequestRepository.updateStatusOne(apply_id);
+	}
 
 }

@@ -69,6 +69,9 @@ public class JobRequestRepository {
 	
 	/** */
 	private static final String SQL_SELECT_JOB_HUNTING_STATUS = "SELECT JH.STATUS  FROM JOB_HUNTING JH WHERE JH.APPLY_ID = ?;";
+	
+	/** 申請承認待ちに変更する*/
+	private static final String SQL_UPDATE_JOB_HUNTING = "UPDATE JOB_HUNTING SET STATUS = '2' WHERE APPLY_ID = ?;";
 	@Autowired
 	private JdbcTemplate jdbc;
 
@@ -311,5 +314,19 @@ public class JobRequestRepository {
 	public String selectJobHuntingStatus(String apply_id) {
 		String status = (String) jdbc.queryForMap(SQL_SELECT_JOB_HUNTING_STATUS, apply_id).get("status");
 		return status;
+	}
+
+	/**
+	 * job_huntingテーブルの状態を2:申請承認待に変更する
+	 * 
+	 * @param apply_id 申請ID
+	 * @return 追加データ数:0または1
+	 * @throws DataAccessException
+	 */
+	public int updateStatusOne(String apply_id) {
+		int rowNumber = jdbc.update(SQL_UPDATE_JOB_HUNTING, apply_id);
+
+		return rowNumber;
+		
 	}
 }

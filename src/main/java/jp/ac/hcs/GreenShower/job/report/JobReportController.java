@@ -171,7 +171,11 @@ public class JobReportController {
 		if (status == null || Integer.parseInt(status) == 7) {
 			model.addAttribute("errmsg", "報告が完了されているので修正できません。");
 			return getReportList(principal, model);
+		} else if(Integer.parseInt(status) == 6) {
+			model.addAttribute("errmsg", "報告の承認待ちなので修正できません。");
+			return getReportList(principal, model);
 		}
+
 		
 		Optional<JobReportData> jobReportData;
 
@@ -217,13 +221,21 @@ public class JobReportController {
 			return getReportList(principal, model);
 		}
 
+		boolean fixed = false;
+		
 		// 入力内容がDBの情報と変わらない場合は実行しない
 		if (jobReportData.get().isAdvance_or_retreat() != form.isAdvance_or_retreat()) {
 			jobReportService.updateAdvance_or_retreat(form);
+			fixed = true;
 		}
 
 		if (!(jobReportData.get().getRemark().equals(form.getRemark()))) {
 			jobReportService.updateRemark(form);
+			fixed = true;
+		}
+		
+		if(fixed) {
+			jobReportService.updateStatusFixed(form.getApply_id());
 		}
 
 		session.removeAttribute("apply_id");

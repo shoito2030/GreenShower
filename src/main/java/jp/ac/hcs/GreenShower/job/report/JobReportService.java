@@ -231,6 +231,15 @@ public class JobReportService {
 	}
 
 
+	/**
+	 * 報告修正した際にstatusを変更する
+	 * @param apply_id
+	 */
+	public void updateStatusFixed(String apply_id) {
+		jobReportRepository.updateStatusOne(apply_id);
+	}
+
+
 
 
 
