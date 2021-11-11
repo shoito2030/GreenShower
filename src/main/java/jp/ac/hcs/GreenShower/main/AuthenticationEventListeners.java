@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- *  認証に関するイベントを制御する.
+ *  認証に関するイベントを制御する
  */
 @Slf4j
 @Component
