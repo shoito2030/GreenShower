@@ -59,10 +59,10 @@ public class JobRequestRepository {
 	private static final String SQL_UPDATE_JOBCONTENT_JOB_HUNTING = "UPDATE job_hunting SET apply_type=?,company_name=?,content=? WHERE apply_id=?";
 	
 	/** 申請マスタから最新の申請IDを取得するSQL */
-	private static final String SQL_MAX_APPLY_ID = "SELECT MAX(apply_id) FROM JOB_HUNTING";
+	private static final String SQL_MAX_APPLY_ID = "SELECT MAX(CAST(apply_id AS INT)) FROM JOB_HUNTING";
 	
 	/** イベントマスタから最新のイベントIDを取得するSQL */
-	private static final String SQL_MAX_EVENT_ID = "SELECT MAX(event_id) FROM events";
+	private static final String SQL_MAX_EVENT_ID = "SELECT MAX(CAST(event_id AS INT)) FROM events";
 
 	/** イベントマスタの情報を更新するSQL */
 	private static final String SQL_UPDATE_JOBEVENT = "INSERT INTO EVENTS(event_id, company_name, datetime, loc, content, bring, register_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
