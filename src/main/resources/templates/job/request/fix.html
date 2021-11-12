@@ -470,6 +470,30 @@
 			if (!result) {
 				return false;
 			}
+			
+			//手段チェック用
+			$(".form-check-input[type='checkbox']").each(function (i, e) {
+                console.log(i, e)
+                $("#err_checkbox h6").remove();
+            });
+
+            let elements = document.querySelectorAll(".form-check-input[type='checkbox']");
+            elements = [].slice.call( elements ) ;
+            
+            let isChecked = true;
+
+            for(let i = 0; i < elements.length; i++) {
+                if(elements[i].checked) {
+                    isChecked = false;
+                    break;
+                }
+            }
+
+            if(isChecked) {
+            	$("#err_checkbox").append('<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
+                
+
+            }
 
 		});
 
@@ -609,6 +633,30 @@
 				document.getElementById("leave_early_date").removeAttribute("required");
 				document.getElementById("attendance_date").removeAttribute("disabled");
 			}
+		}
+		
+		//手段入力チェック
+		$(function(){
+			$("input[name='way']").bind("change", function(){
+				check_checkbox();
+			});
+		});
+		
+		function check_checkbox(){
+			$("#err_checkbox h6").remove();
+			var _result = true;
+			var _check_count = 0;
+
+			$("input[type='checkbox']").each(function(){
+				if($(this).prop('checked')){
+					_check_count = _check_count+1;
+				}
+			});
+			if(_check_count == 0){
+				$("#err_checkbox").append('<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
+				_result = false;
+			}
+			return _result;
 		}
 	</script>
 </body>
