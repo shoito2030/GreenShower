@@ -280,8 +280,13 @@ public class JobRequestController {
 		if (status == null || Integer.parseInt(status) == 4) {
 			model.addAttribute("errmsg", "申請が完了されているので修正できません。");
 			return getRequestList(principal, model);
+		// 状態が『承認待ち』である場合
 		} else if(Integer.parseInt(status) == 2) {
 			model.addAttribute("errmsg", "申請の承認待ちなので修正できません。");
+			return getRequestList(principal, model);
+		// 状態が『取消済』である場合
+		} else if(Integer.parseInt(status) == 99) {
+			model.addAttribute("errmsg", "取消済なので修正できません。");
 			return getRequestList(principal, model);
 		}
 
