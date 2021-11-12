@@ -265,7 +265,7 @@ public class JobRequestController {
 	 * @return 就職活動申請修正画面
 	 */
 	@GetMapping("/job/request/fix/{apply_id}")
-	public String getRequestContentChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
+	public String getRequestContentChange(JobRequestForm form, Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
 		
 		Optional<JobRequestData> jobRequestData;
 		
@@ -306,7 +306,7 @@ public class JobRequestController {
 	public String JobRequestContentChange(@PathVariable("apply_id") String apply_id, @ModelAttribute @Validated JobRequestForm form, BindingResult bindingResult, 
 			Principal principal, Model model) {
 		if(bindingResult.hasErrors()) {
-			return getRequestContentChange(principal, apply_id, model);
+			return getRequestContentChange(form, principal, apply_id, model);
 		}
 		boolean isSuccess = jobRequestService.hasUpdatedJobContent(apply_id, form);
 		
