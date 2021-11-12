@@ -1,21 +1,36 @@
 package jp.ac.hcs.GreenShower.main;
 
+import java.security.Principal;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import lombok.extern.slf4j.Slf4j;
+import jp.ac.hcs.GreenShower.user.UserData;
 
-@Slf4j
 @Controller
 public class PortalController {
-	
+
+	@Autowired
+	LoginService loginService;
+
 	/**
-	 * ルートアクセス時にメイン画面を表示する
-	 * @return テンプレートファイル（index.html）
+	 * トップ画面を表示する.
+	 * @param principal
+	 * @return トップ画面
 	 */
-	@GetMapping("/")
-	public String index() {
-//		log.info("PortalController:" + user_id);
-		return "index";
+	@RequestMapping("/")
+	public String index(Principal principal) {
+
+		UserData userData = loginService.getLoginUserInfo(principal);
+		if (loginService.judgeUserStatus(userData)) {
+			// OK
+			return "index";
+		} else {
+			// NG
+			return "login";
+		}
+
 	}
+
 }

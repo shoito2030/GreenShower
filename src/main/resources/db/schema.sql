@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
     update_user_id VARCHAR(254),
     enabled BOOLEAN DEFAULT true,
     number_of_trials int NOT NULL DEFAULT 0,
+  	user_status int NOT NULL DEFAULT 1,
     
     CONSTRAINT fk_register_user_id
     	FOREIGN KEY (register_user_id)

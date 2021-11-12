@@ -40,7 +40,7 @@ public class UserService {
 	 * @param user_id ユーザID
 	 * @return Optional<UserData>
 	 */
-	public Optional<UserData> select(String user_id) {
+	public Optional<UserData> selectOne(String user_id) {
 		UserData userData;
 
 		try {
@@ -150,6 +150,17 @@ public class UserService {
 		data.setUpdate_date(new Date());		
 		data.setUpdate_user_id(update_user_id);
 		return data;
+	}
+
+	/**
+	 * (管理用)ユーザ情報を1件更新する(パスワード更新無).
+	 * @param userData 更新するユーザ情報(パスワードは設定しない)
+	 * @return 処理結果(成功:true, 失敗:false)
+	 */
+	public boolean updateOne(UserData userData) {
+		int rowNumber = userRepository.updateOne(userData);
+		boolean result = (rowNumber > 0) ? true : false;
+		return result;
 	}
 
 }

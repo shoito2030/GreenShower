@@ -21,9 +21,13 @@
 		<h2>ログイン</h2>
 		<div class="input-form">
 			<!-- エラーメッセージ表示領域 -->
+			<!-- view error message -->
 			<p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
 				th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
 				class="text-danger">ログインエラーメッセージ</p>
+			<p th:if="${session['UserLocked']} != null"
+				th:text="${session['UserLocked']}"
+				class="text-danger">ユーザロックエラーメッセージ</p>
 
 			<form method="post" th:action="@{/login}">
 				<label for="user_id">ユーザID(メールアドレス)</label> <input type="text"

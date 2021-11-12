@@ -32,6 +32,9 @@ public class UserRepository {
 			"UPDATE users SET name = ?, role = ?, classroom = ?, class_number = ?, enabled = ?, update_date = ?,  update_user_id = ? WHERE user_id = ?";
 	/** SQL 1件削除 */
 	private static final String SQL_DELETE_ONE = "DELETE FROM users WHERE user_id = ?";
+	
+	/** SQL 1件更新 管理者 パスワード更新無 */
+	private static final String SQL_UPDATE_ONE = "UPDATE users SET name = ?, role = ?, number_of_trials = ?, user_status = ? WHERE user_id = ?";
 
 	@Autowired
 	private JdbcTemplate jdbc;
@@ -88,7 +91,8 @@ public class UserRepository {
 			data.setUpdate_date((Date) map.get("update_date"));
 			data.setUpdate_user_id((String) map.get("update_user_id"));
 			data.setEnabled((boolean) map.get("enabled"));
-
+			data.setNumber_of_trials((int)map.get("number_of_trials"));		
+			data.setUser_status((int)map.get("user_status"));
 			entity.getUserlist().add(data);
 		}
 		return entity;
@@ -143,6 +147,23 @@ public class UserRepository {
 	 */
 	public int deleteOne(String user_id) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_DELETE_ONE, user_id);
+		return rowNumber;
+	}
+	
+	
+	/**
+	 * (管理用)Userテーブルのデータを1件更新する(パスワード更新無).
+	 * @param data 更新するユーザ情報
+	 * @return 更新データ数
+	 * @throws DataAccessException
+	 */
+	public int updateOne(UserData userData) throws DataAccessException {
+		int rowNumber = jdbc.update(SQL_UPDATE_ONE,
+				userData.getName(),
+				userData.getRole().toString(),
+				userData.getNumber_of_trials(),
+				userData.getUser_status(),
+				userData.getUser_id());
 		return rowNumber;
 	}
 

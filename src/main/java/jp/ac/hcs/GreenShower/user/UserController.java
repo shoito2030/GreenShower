@@ -104,7 +104,7 @@ public class UserController {
 	public String getUserDetail(@PathVariable("id") String user_id, Principal principal, Model model) {
 
 		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
-		Optional<UserData> userData = userService.select(user_id);
+		Optional<UserData> userData = userService.selectOne(user_id);
 
 		// 処理失敗によりトップ画面へ
 		if (userData.isEmpty()) {

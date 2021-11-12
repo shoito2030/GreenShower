@@ -68,6 +68,15 @@ public class UserData {
 	 * アカウント有効性 - 有効 : true - 無効 : false ユーザ作成時はtrue固定
 	 */
 	private boolean enabled;
+	
+	/* ログイン試行回数 **/
+	private int number_of_trials;
+	
+	/**
+	 * ユーザ状態
+	 * - UserStatusクラスで定義
+	 */
+	private int user_status;
 
 }
 

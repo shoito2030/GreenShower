@@ -56,7 +56,7 @@ class UserServiceTest {
 		// 1.Ready
 		String user_id = "abe@xxx.co.jp";
 		// 2.Do
-		Optional<UserData> userData = userService.select(user_id);
+		Optional<UserData> userData = userService.selectOne(user_id);
 		// 3.Assert
 		assertEquals(true, userData.isPresent());
 		// 4.Logs
@@ -70,7 +70,7 @@ class UserServiceTest {
 		//Mock
 		doThrow(new DataAccessResourceFailureException("")).when(userRepository).selectOne(anyString());
 		// 2.Do
-		Optional<UserData> userData = userService.select(user_id);
+		Optional<UserData> userData = userService.selectOne(user_id);
 		// 3.Assert
 		assertEquals(true, userData.isEmpty());
 		// 4.Logs
