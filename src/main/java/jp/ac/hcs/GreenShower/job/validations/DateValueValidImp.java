@@ -40,7 +40,7 @@ public class DateValueValidImp implements ConstraintValidator<DateValueValid, St
 		LocalDateTime someday = LocalDateTime.from(parsed);
 		
 		// 今日の日付と比較する
-		return someday.isAfter(NOW);
+		return someday.isAfter(NOW) && someday.getDayOfYear() != NOW.getDayOfYear();
 	}
 
 }

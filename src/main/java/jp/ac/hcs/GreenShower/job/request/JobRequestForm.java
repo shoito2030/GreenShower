@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+import jp.ac.hcs.GreenShower.job.validations.DateFormatValid;
 import jp.ac.hcs.GreenShower.job.validations.DateValueValid;
 import lombok.Data;
 
@@ -37,6 +38,7 @@ public class JobRequestForm {
 	 * 開始時刻
 	 */
 	@NotBlank(message = "選択してください")
+	@DateFormatValid
 	@DateValueValid
 	private String date_activity_from;
 	
@@ -44,6 +46,7 @@ public class JobRequestForm {
 	 * 終了日時
 	 */
 	@NotBlank(message = "選択してください")
+	@DateFormatValid
 	@DateValueValid
 	private String date_activity_to;
 	
@@ -68,6 +71,7 @@ public class JobRequestForm {
 	/**
 	 * 欠席開始日時
 	 */
+	@DateFormatValid
 	@DateValueValid
 	private String date_absence_from;
 	
@@ -80,12 +84,14 @@ public class JobRequestForm {
 	/**
 	 * 早退日時
 	 */
+	@DateFormatValid
 	@DateValueValid
 	private String leave_early_date;
 	
 	/**
 	 * 遅刻日時
 	 */
+	@DateFormatValid
 	@DateValueValid
 	private String attendance_date;
 	
