@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -146,7 +148,7 @@ class JobRequestServiceTest {
 		// 3.Assert
 		assertNotNull(studentsNumber);
 		// 4.Logs
-		log.warn("[electStudentsNumberの正常系テスト]studentsNumber:" + studentsNumber);
+		log.warn("[selectStudentsNumberの正常系テスト]studentsNumber:" + studentsNumber);
 	}
 	
 	@Test
@@ -159,25 +161,70 @@ class JobRequestServiceTest {
 		// 3.Assert
 		assertNotNull(studentsNumber);
 		// 4.Logs
-		log.warn("[electStudentsNumberの異常系テスト]studentsNumber:" + studentsNumber);
+		log.warn("[selectStudentsNumberの異常系テスト]studentsNumber:" + studentsNumber);
 	}
 
-//	@Test
-//	void hasInsertedの正常系テスト() {
-//		// 1.Ready
-//		JobRequestForm form = new JobRequestForm();
-//		form.setClass_number("01");
-//		form.setApply_type("0");
-//		form.setCompany_name("株式会社HCS");
-//		form.setDate_activity_from();
-//		
-//		// 2.Do
-//		
-//		// 3.Assert
-//		
-//		// 4.Logs
-//		log.warn("[electStudentsNumberの異常系テスト]studentsNumber:");
-//	}
+	@Test
+	void hasInsertedの正常系テスト() {
+		// 1.Ready
+		List<String> way = new ArrayList<>();
+		way.add("3");
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setApply_type("1");
+		form.setCompany_name("株式会社HCS");
+		form.setDate_activity_from("2021-11-20T09:30");
+		form.setDate_activity_to("2021-11-21T10:30");
+		form.setLoc("本校舎9F");
+		form.setContent("1");
+		form.setWay(way);
+		form.setDate_absence_from(null);
+		form.setDate_absence_to(null);
+		form.setLeave_early_date(null);
+		form.setAttendance_date("2021-11-20T09:00");
+		form.setRemark("筆記試験です。");
+		
+		String applicant_id = "isida@xxx.co.jp";
+		String register_user_id = "isida@xxx.co.jp";
+		// 2.Do
+		boolean result = jobRequestService.hasInserted(form, applicant_id, register_user_id);
+		// 3.Assert
+		assertEquals(true, result);
+		// 4.Logs
+		log.warn("[hasInsertedの正常系テスト]result:" + result);
+	}
+	
+	@Test
+	void hasInsertedの異常系テスト() {
+		// 1.Ready
+		List<String> way = new ArrayList<>();
+		way.add("3");
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setApply_type("1");
+		form.setCompany_name("株式会社HCS");
+		form.setDate_activity_from("2021-11-20T09:30");
+		form.setDate_activity_to("2021-11-21T10:30");
+		form.setLoc("本校舎9F");
+		form.setContent("1");
+		form.setWay(way);
+		form.setDate_absence_from(null);
+		form.setDate_absence_to(null);
+		form.setLeave_early_date(null);
+		form.setAttendance_date("2021-11-20T09:00");
+		form.setRemark("筆記試験です。");
+		
+		String applicant_id = "isida@xxx.co.jp";
+		String register_user_id = "isida@xxx.co.jp";
+		
+		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).insertOne(anyString());
+		// 2.Do
+		boolean result = jobRequestService.hasInserted(form, applicant_id, register_user_id);
+		// 3.Assert
+		assertEquals(true, result);
+		// 4.Logs
+		log.warn("[hasInsertedの異常系テスト]result:" + result);
+	}
 
 	@Test
 	void testHasUpdateJobStatus() {
