@@ -172,8 +172,8 @@ public class JobRequestService {
 			rowNumber = jobRequestRepository.insertOne(refillToJobReportData(form, applicant_id, register_user_id));
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			return false;
 		}
-		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
@@ -229,8 +229,8 @@ public class JobRequestService {
 			rowNumber = jobRequestRepository.updateJobStatus(apply_id, form.getStatus(), form.getIndicate());
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			return false;
 		}
-		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
@@ -248,8 +248,8 @@ public class JobRequestService {
 			rowNumber = jobRequestRepository.updateJobContent(refillToJobRequestDataUpdate(form, apply_id), apply_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			return false;
 		}
-		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}

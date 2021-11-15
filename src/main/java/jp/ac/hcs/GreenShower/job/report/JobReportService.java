@@ -141,8 +141,8 @@ public class JobReportService {
 			jobReportRepository.updateStatusOne(form.getApply_id());
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			return false;
 		}
-		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 	}
 
@@ -159,8 +159,8 @@ public class JobReportService {
 			rowNumber = jobReportRepository.updateStatus(form);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			return false;
 		}
-		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
@@ -203,8 +203,8 @@ public class JobReportService {
 			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			return false;
 		}
-		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
@@ -224,8 +224,8 @@ public class JobReportService {
 			rowNumber = jobReportRepository.updateRemark(form.getApply_id(), form.getRemark());
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			return false;
 		}
-		//TODO finaly句が必要である可能性あり
 		return rowNumber > 0;
 
 	}
