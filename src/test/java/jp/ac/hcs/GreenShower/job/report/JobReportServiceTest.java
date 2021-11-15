@@ -8,11 +8,13 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import jp.ac.hcs.GreenShower.user.UserData;
@@ -27,7 +29,9 @@ class JobReportServiceTest {
 	JobReportService jobReportService;
 	@SpyBean
 	JobReportRepository jobReportRepository;
-
+	@Mock
+	JdbcTemplate jdbc;
+	
 	@Test
 	void selectAllReportsの正常系テスト_userDataIsEmpty() {
 		//1.ready
@@ -150,12 +154,11 @@ class JobReportServiceTest {
 		log.warn("[selectPersonalInfoApplyの異常系テスト]status:"+status);
 	}
 
-	@SuppressWarnings("null")
 	@Test
-	void insertの正常系テスト() {
+	void insertの正常系テスト_成功() {
 		//1.ready
 		String register_user_id="abe@xxx.co.jp";
-		JobReportForm form = null;
+		JobReportForm form = new JobReportForm();
 		form.setApply_id("6");
 		form.setAdvance_or_retreat(true);
 		form.setRemark("test");
@@ -166,18 +169,38 @@ class JobReportServiceTest {
 		//3.assert
 		assertTrue(isSuccess);
 		//4.logs
-		log.warn("[insertの正常系テスト]:isSuccess"+isSuccess);
+		log.warn("[insertの正常系テスト_成功]isSuccess:"+isSuccess);
+	}
+
+	@Test
+	void insertの正常系テスト_失敗() {
+		//1.ready
+		String register_user_id="abe@xxx.co.jp";
+		JobReportForm form = new JobReportForm();
+		doReturn(0).when(jdbc).update(anyString());
+		//2.do
+		boolean isSuccess = jobReportService.insert(form,register_user_id);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[insertの正常系テスト_失敗]isSuccess:"+isSuccess);
 	}
 	
-//	@Test
-//	void insertの異常系テスト() throws DataAccessException{
-//		//1.ready
-//		doThrow(new DataAccessResourceFailureException("")).when(jobReportRepository).selectJobHuntingStatus(any());
-//		//2.do
-//		String status = jobReportService.selectJobHuntingStatus("1");
-//		//3.assert
-//		assertNull(status);
-//		//4.logs
-//		log.warn("[selectPersonalInfoApplyの異常系テスト]status:"+status);
-//	}
+	@Test
+	void insertの異常系テスト() throws DataAccessException{
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("6");
+		form.setAdvance_or_retreat(true);
+		form.setRemark("test");
+		form.setStatus(null);
+		form.setIndicate(null);
+		doThrow(new DataAccessResourceFailureException("")).when(jobReportRepository).insertOne(any());
+		//2.do
+		boolean isSuccess = jobReportService.insert(form,"abe@xxx.co.jp");
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[insertの異常系テスト]isSuccess:"+isSuccess);
+	}
 }
