@@ -67,7 +67,7 @@ public class JobRequestRepository {
 	/** イベントマスタの情報を更新するSQL */
 	private static final String SQL_UPDATE_JOBEVENT = "INSERT INTO EVENTS(event_id, company_name, datetime, loc, content, bring, register_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	
-	/** */
+	/** 就職活動申請マスタの申請状態を取得するSQL*/
 	private static final String SQL_SELECT_JOB_HUNTING_STATUS = "SELECT JH.STATUS  FROM JOB_HUNTING JH WHERE JH.APPLY_ID = ?;";
 	
 	/** 申請承認待ちに変更する*/

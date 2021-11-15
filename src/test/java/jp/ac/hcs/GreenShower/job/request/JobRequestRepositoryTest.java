@@ -3,27 +3,66 @@ package jp.ac.hcs.GreenShower.job.request;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import jp.ac.hcs.GreenShower.user.UserData;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RunWith(SpringRunner.class)
+@SpringBootTest
 class JobRequestRepositoryTest {
 
+	@Autowired
+	JobRequestRepository jobRequestRepository;
+
 	@Test
-	void testSelectAllRequests() {
-		fail("まだ実装されていません");
+	void selectAllRequestsの正常系テスト() {
+		// 1.Ready
+		String classroom = "S3A1";
+		// 2.Do
+		JobRequestEntity jobRequestEntity = jobRequestRepository.selectAllRequests(classroom);
+		// 3.Assert
+		assertNotNull(jobRequestEntity);
+		// 4.Logs
+		log.warn("[selectAllRequestsメソッドの正常系テスト]jobRequestEntity:" + jobRequestEntity.toString());
 	}
 
 	@Test
-	void testSelectOne() {
-		fail("まだ実装されていません");
+	void selectOneの正常系テスト() {
+		String apply_id = "1";
+
+		JobRequestData jobRequestData = jobRequestRepository.selectOne(apply_id);
+
+		assertNotNull(jobRequestData);
+
+		log.warn("[selectOneメソッドの正常系テスト]jobRequestData:" + jobRequestData.toString());
 	}
 
 	@Test
-	void testSelectPersonalInfoString() {
-		fail("まだ実装されていません");
+	void selectPersonalInfoの正常系テスト() {
+		String user_id = "isida@xxx.co.jp";
+
+		UserData userData = jobRequestRepository.selectPersonalInfo(user_id);
+
+		assertNotNull(userData);
+
+		log.warn("[selectPersonalInfoメソッドの正常系テスト]userData:" + userData.toString());
 	}
 
 	@Test
-	void testSelectPersonalInfoStringString() {
-		fail("まだ実装されていません");
+	void API用のselectPersonalInfoの正常系テスト() {
+		String classroom = "S3A1";
+		String class_number = "01";
+
+		UserData userData = jobRequestRepository.selectPersonalInfo(classroom, class_number);
+
+		assertNotNull(userData);
+
+		log.warn("[API用のselectPersonalInfoメソッドの正常系テスト]userData:" + userData.toString());
 	}
 
 	@Test
