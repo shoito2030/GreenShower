@@ -233,10 +233,18 @@ public class JobReportService {
 
 	/**
 	 * 報告修正した際にstatusを変更する
-	 * @param apply_id
+	 * @param apply_id 申請ID
 	 */
-	public void updateStatusFixed(String apply_id) {
-		jobReportRepository.updateStatusOne(apply_id);
+	public boolean updateStatusFixed(String apply_id) {
+		int rowNumber = 0;
+		try {
+			// 変更処理を行い、変更できた件数を取得
+			rowNumber = jobReportRepository.updateStatusOne(apply_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return rowNumber > 0;
 	}
 
 

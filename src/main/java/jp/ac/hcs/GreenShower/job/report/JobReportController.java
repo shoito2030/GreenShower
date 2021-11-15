@@ -86,8 +86,7 @@ public class JobReportController {
 		}
 
 		session.setAttribute("apply_id", apply_id);
-		log.info("申請報告詳細画面 jobReportData: " + jobReportData.get().toString());
-
+		
 		model.addAttribute("jobReportData", jobReportData.get());
 		return "job/report/detail";
 	}
@@ -269,7 +268,6 @@ public class JobReportController {
 		// 値が入っていた（検査結果が黒）だった場合に実行
 		if (!proofreadingData.isEmpty()) {
 			model.addAttribute("proofreadingData", proofreadingData.get());
-			log.info("校正結果： " + proofreadingData.get());
 		}
 
 		model.addAttribute("jobReportData", jobReportData.get());

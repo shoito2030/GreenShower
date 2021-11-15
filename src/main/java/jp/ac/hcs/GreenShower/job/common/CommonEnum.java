@@ -32,13 +32,6 @@ public interface CommonEnum <E extends Enum<E>>{
         return (E) this;
     }
     
-//    /**　[staticメソッド] 指定されたCodeEnumを実装したEnumを表示順にソートしたリストを返却する　*/
-//    static <E extends Enum<E>> List<E> getOrderedList(Class<? extends CommonEnum<E>> clazz) {
-//        return Arrays.stream(clazz.getEnumConstants())
-//                .sorted(Comparator.comparing(CommonEnum::getOrder))
-//                .map(CommonEnum::toEnum)
-//                .collect(Collectors.toList());
-//    }
     
     /**
      * IDが同値かチェックするデフォルトメソッド
