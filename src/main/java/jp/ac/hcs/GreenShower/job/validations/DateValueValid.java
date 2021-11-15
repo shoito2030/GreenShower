@@ -16,7 +16,7 @@ import javax.validation.Payload;
 
 @Constraint(validatedBy = { DateValueValidImp.class })
 public @interface DateValueValid {
-	String message() default "本日よりも前の日付は無効です";
+	String message() default "";
 
 	Class<?>[] groups() default {};
 

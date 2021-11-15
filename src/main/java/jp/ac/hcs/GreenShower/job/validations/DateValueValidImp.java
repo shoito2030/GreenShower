@@ -18,6 +18,7 @@ public class DateValueValidImp implements ConstraintValidator<DateValueValid, St
 	
 	@Override
     public void initialize(DateValueValid constraintAnnotation) {
+		
     }
 
 	@Override
@@ -33,11 +34,14 @@ public class DateValueValidImp implements ConstraintValidator<DateValueValid, St
 		try {
 			parsed = DateTimeFormatter.ISO_LOCAL_DATE_TIME.parse(value);
 		} catch (DateTimeParseException e) {
+			context.buildConstraintViolationWithTemplate("入力形式が正しくありません。").addConstraintViolation();
 			e.printStackTrace();
 			return false;
 		}
 		
 		LocalDateTime someday = LocalDateTime.from(parsed);
+		
+		context.buildConstraintViolationWithTemplate("本日よりも前の日付は無効です。").addConstraintViolation();
 		
 		// 今日の日付と比較する
 		return someday.isAfter(NOW) && someday.getDayOfYear() != NOW.getDayOfYear();
