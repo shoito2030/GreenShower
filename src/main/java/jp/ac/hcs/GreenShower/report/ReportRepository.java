@@ -38,11 +38,11 @@ public class ReportRepository {
 			+ ", (SELECT name FROM users WHERE user_id = ?), (SELECT SUBSTRING(classroom, 1)  FROM users WHERE user_id = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	/** SQL 1件更新 */
-	private static final String SQL_UPDATE_ONE = "UPDATE report_hoge SET job_number = ?, company_name = ?,"
-			+ "company_name_kana = ?, datetime = ?, place = ?, entry_section = ?, entry_section_other = ?, venue_section = ?, venue_section_other = ?, test_section = ?,  test_final = ?, "
-			+ "test_section_other = ?, test_summary = ?, test_summary_other = ?, result_notification = ?, success_only, result_notification_day = ?, aptitude_test_detail = ?,"
-			+ "aptitude_test_detail_other = ?, interview_detail = ?, interview_detail_other = ?, interview_number = ?, interviewer_number = ?, interviewer_position = ?,"
-			+ "interview_time = ?, theme = ?, question_contents = ?, request_date = ? WHERE report_id = ?";
+//	private static final String SQL_UPDATE_ONE = "UPDATE report_hoge SET job_number = ?, company_name = ?,"
+//			+ "company_name_kana = ?, datetime = ?, place = ?, entry_section = ?, entry_section_other = ?, venue_section = ?, venue_section_other = ?, test_section = ?,  test_final = ?, "
+//			+ "test_section_other = ?, test_summary = ?, test_summary_other = ?, result_notification = ?, success_only, result_notification_day = ?, aptitude_test_detail = ?,"
+//			+ "aptitude_test_detail_other = ?, interview_detail = ?, interview_detail_other = ?, interview_number = ?, interviewer_number = ?, interviewer_position = ?,"
+//			+ "interview_time = ?, theme = ?, question_contents = ?, request_date = ? WHERE report_id = ?";
 
 	/** SQL 1件更新 */
 	private static final String SQL_UPDATE_REPORT_STATUS = "UPDATE report_hoge SET report_status = ? WHERE report_id = ?";
