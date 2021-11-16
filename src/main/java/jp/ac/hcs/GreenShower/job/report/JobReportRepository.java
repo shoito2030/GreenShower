@@ -124,9 +124,7 @@ public class JobReportRepository {
 	 * @throws DataAccessException
 	 */
 	public int insertOne(JobReportData data) throws DataAccessException {
-		int rowNumber = jdbc.update(SQL_INSERT_ONE_REPORTS,
-
-				data.getApply_id(), data.isAdvance_or_retreat(), data.getRemark(), data.getRegister_user_id());
+		int rowNumber = jdbc.update(SQL_INSERT_ONE_REPORTS,data.getApply_id(), data.isAdvance_or_retreat(), data.getRemark(), data.getRegister_user_id());
 
 		return rowNumber;
 	}
