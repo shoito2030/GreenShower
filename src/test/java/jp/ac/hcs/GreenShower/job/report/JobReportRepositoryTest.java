@@ -30,6 +30,18 @@ class JobReportRepositoryTest {
 		//4.logs
 		log.warn("[selectAllReportsの正常系テスト]jobReportEntity:" + jobReportEntity);
 	}
+	
+	@Test
+	void SelectAllReportsの異常系テスト() {
+		//1.ready
+		String classroom = "S3A4";
+		//2.do
+		JobReportEntity jobReportEntity = jobReportRepository.selectAllReports(classroom);
+		//3.assert
+		assertNotNull(jobReportEntity);
+		//4.logs
+		log.warn("[selectAllReportsの正常系テスト]jobReportEntity:" + jobReportEntity);
+	}
 
 	@Test
 	void SelectOneの正常系テスト() {
