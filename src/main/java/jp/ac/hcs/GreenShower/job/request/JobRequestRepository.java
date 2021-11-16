@@ -250,7 +250,7 @@ public class JobRequestRepository {
 	 * 最新の申請IDを取得する
 	 * @return apply_id
 	 */
-	public int apply_id_get() {
+	public int selectApply_id() {
 		int apply_id = jdbc.queryForObject(SQL_MAX_APPLY_ID, int.class);
 		return apply_id;
 
@@ -300,7 +300,7 @@ public class JobRequestRepository {
 	 * 
 	 * @return event_id
 	 */
-	public int event_id_get() {
+	public int selectEvent_id() {
 		int event_id = jdbc.queryForObject(SQL_MAX_EVENT_ID, int.class);
 		return event_id;
 	}

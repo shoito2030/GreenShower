@@ -189,7 +189,7 @@ public class JobRequestService {
 	private JobRequestData refillToJobReportData(JobRequestForm form, String applicant_id, String register_user_id) {
 		JobRequestData data = new JobRequestData();
 
-		int apply_id = jobRequestRepository.apply_id_get() + 1;
+		int apply_id = jobRequestRepository.selectApply_id() + 1;
 		data.setApply_id(String.valueOf(apply_id));
 		data.setApplicant_id(applicant_id);
 		data.setContent(CommonEnum.getEnum(Content.class, form.getContent()));
@@ -335,7 +335,7 @@ public class JobRequestService {
 	private EventData refillToEventData(EventForm form) {
 		EventData data = new EventData();
 
-		int event_id = jobRequestRepository.event_id_get() + 1;
+		int event_id = jobRequestRepository.selectEvent_id() + 1;
 		data.setEvent_id((String.valueOf(event_id)));
 		data.setCompany_name(form.getCompany_name());
 		data.setDatetime(strLocalDateTimeToDate(form.getDatetime()));
