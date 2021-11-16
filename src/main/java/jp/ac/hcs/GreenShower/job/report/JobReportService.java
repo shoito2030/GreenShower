@@ -1,7 +1,7 @@
 package jp.ac.hcs.GreenShower.job.report;
 
-import static java.util.stream.Collectors.*;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +41,19 @@ public class JobReportService {
 
 			// ユーザが生徒の場合は、ユーザ自身の申請情報のみを抽出する
 			if (role.equals("ROLE_STUDENT")) {
-				jobReportEntity.setJobReportList(jobReportEntity.getJobReportList().stream()
-						.filter(report -> report.getApplicant_id().equals(user_id)).collect(toList()));
+//				jobReportEntity.setJobReportList(jobReportEntity.getJobReportList().stream()
+//						.filter(report -> report.getApplicant_id().equals(user_id)).collect(toList()));
+			
+			
+				List<JobReportData> list = new ArrayList<>();
+				for(JobReportData data: jobReportEntity.getJobReportList()) {
+					if(data.getApplicant_id().equals(user_id)) {
+						list.add(data);					
+					} else {
+						System.out.println("まっちしません。");
+					}
+				}
+				jobReportEntity.setJobReportList(list);
 			}
 		} catch (DataAccessException e) {
 			e.printStackTrace();
@@ -96,7 +107,7 @@ public class JobReportService {
 	 * @param user_id ユーザID
 	 * @return Optional<userData>
 	 */
-	private Optional<UserData> selectPersonalInfoUserId(String user_id) {
+	public Optional<UserData> selectPersonalInfoUserId(String user_id) {
 		UserData userData;
 
 		try {

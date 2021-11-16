@@ -8,13 +8,11 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import jp.ac.hcs.GreenShower.user.UserData;
@@ -29,8 +27,6 @@ class JobReportServiceTest {
 	JobReportService jobReportService;
 	@SpyBean
 	JobReportRepository jobReportRepository;
-	@Mock
-	JdbcTemplate jdbc;
 	
 	@Test
 	void selectAllReportsの正常系テスト_userDataIsEmpty() {
@@ -48,13 +44,29 @@ class JobReportServiceTest {
 	void selectAllReportsの正常系テスト_ROLE_STUDENT() {
 		//1.ready
 		String role = "ROLE_STUDENT";
-		String user_id = "yamada@xxx.co.jp";
+		String user_id = "isida@xxx.co.jp";
 		//2.do
 		Optional<JobReportEntity> jobReportEntity = jobReportService.selectAllReports(user_id,role);
 		//3.assert
 		assertNotNull(jobReportEntity);
 		//4.logs
 		log.warn("[selectAllReportsの正常系テスト_ROLE_STUDENT]jobReportEntity:"+jobReportEntity);
+	}
+	
+	@Test
+	void selectAllReportsの正常系テスト_jobReportEntityIsEmpty() {
+		//1.ready
+		String role = "ROLE_STUDENT";
+		String user_id = "isida@xxx.co.jp";
+		doReturn(new JobReportEntity()).when(jobReportRepository).selectAllReports(anyString());
+//		doReturn(new UserData()).when(jobReportService).selectPersonalInfoUserId(anyString());
+		
+		//2.do
+		Optional<JobReportEntity> jobReportEntity = jobReportService.selectAllReports(user_id,role);
+		//3.assert
+		assertNotNull(jobReportEntity);
+		//4.logs
+		log.warn("[selectAllReportsの正常系テスト_jobReportEntityIsEmpty]jobReportEntity:"+jobReportEntity);
 	}
 
 	@Test
@@ -177,7 +189,12 @@ class JobReportServiceTest {
 		//1.ready
 		String register_user_id="abe@xxx.co.jp";
 		JobReportForm form = new JobReportForm();
-		doReturn(0).when(jdbc).update(anyString());
+		form.setApply_id("3");
+		form.setAdvance_or_retreat(true);
+		form.setRemark("test");
+		form.setStatus(null);
+		form.setIndicate(null);
+		doReturn(0).when(jobReportRepository).insertOne(any());
 		//2.do
 		boolean isSuccess = jobReportService.insert(form,register_user_id);
 		//3.assert
@@ -202,5 +219,208 @@ class JobReportServiceTest {
 		assertFalse(isSuccess);
 		//4.logs
 		log.warn("[insertの異常系テスト]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateStatusの正常系テスト_成功() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setStatus("6");
+		form.setIndicate("指摘事項");
+		//2.do
+		boolean isSuccess = jobReportService.updateStatus(form);
+		//3.assert
+		assertTrue(isSuccess);
+		//4.logs
+		log.warn("[updateStatusの正常系テスト_成功]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateStatusの正常系テスト_失敗() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setStatus("6");
+		form.setIndicate("指摘事項");
+		doReturn(0).when(jobReportRepository).updateStatus(any());
+		//2.do
+		boolean isSuccess = jobReportService.updateStatus(form);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[updateStatusの正常系テスト_失敗]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateStatusの異常系テスト() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setStatus("6");
+		form.setIndicate("指摘事項");
+		doThrow(new DataAccessResourceFailureException("")).when(jobReportRepository).updateStatus(any());
+		//2.do
+		boolean isSuccess = jobReportService.updateStatus(form);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[updateStatusの異常系テスト]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateAdvance_or_retreatの正常系テスト_進める_成功() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setAdvance_or_retreat(true);
+		//2.do
+		boolean isSuccess = jobReportService.updateAdvance_or_retreat(form);
+		//3.assert
+		assertTrue(isSuccess);
+		//4.logs
+		log.warn("[updateAdvance_or_retreatの正常系テスト_進める_成功]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateAdvance_or_retreatの正常系テスト_進める_失敗() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setAdvance_or_retreat(true);
+		doReturn(0).when(jobReportRepository).updateAdvance_or_retreat_to_true(any());
+		//2.do
+		boolean isSuccess = jobReportService.updateAdvance_or_retreat(form);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[updateAdvance_or_retreatの正常系テスト_進める_失敗]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateAdvance_or_retreatの正常系テスト_進めない_成功() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setAdvance_or_retreat(false);
+		//2.do
+		boolean isSuccess = jobReportService.updateAdvance_or_retreat(form);
+		//3.assert
+		assertTrue(isSuccess);
+		//4.logs
+		log.warn("[updateAdvance_or_retreatの正常系テスト_進めない_成功]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateAdvance_or_retreatの正常系テスト_進めない_失敗() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setAdvance_or_retreat(false);
+		doReturn(0).when(jobReportRepository).updateAdvance_or_retreat_to_false(any());
+		//2.do
+		boolean isSuccess = jobReportService.updateAdvance_or_retreat(form);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[updateAdvance_or_retreatの正常系テスト_進めない_失敗]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateAdvance_or_retreatの異常系テスト() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setAdvance_or_retreat(true);
+		doThrow(new DataAccessResourceFailureException("")).when(jobReportRepository).updateAdvance_or_retreat_to_true(any());
+		//2.do
+		boolean isSuccess = jobReportService.updateAdvance_or_retreat(form);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[updateAdvance_or_retreatの異常系テスト]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateRemarkの正常系テスト_成功() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setRemark("備考");
+		//2.do
+		boolean isSuccess = jobReportService.updateRemark(form);
+		//3.assert
+		assertTrue(isSuccess);
+		//4.logs
+		log.warn("[updateRemarkの正常系テスト_成功]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateRemarkの正常系テスト_失敗() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setRemark("備考");
+		doReturn(0).when(jobReportRepository).updateRemark(anyString(),anyString());
+		//2.do
+		boolean isSuccess = jobReportService.updateRemark(form);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[updateRemarkの正常系テスト_失敗]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateRemarkの異常系テスト() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		form.setApply_id("2");
+		form.setRemark("備考");
+		doThrow(new DataAccessResourceFailureException("")).when(jobReportRepository).updateRemark(anyString(),anyString());
+		//2.do
+		boolean isSuccess = jobReportService.updateRemark(form);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[updateRemarkの異常系テスト]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateStatusFixedの正常系テスト_成功() {
+		//1.ready
+		JobReportForm form = new JobReportForm();
+		String Apply_id="2";
+		//2.do
+		boolean isSuccess = jobReportService.updateStatusFixed(Apply_id);
+		//3.assert
+		assertTrue(isSuccess);
+		//4.logs
+		log.warn("[updateStatusFixedの正常系テスト_成功]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateStatusFixedの正常系テスト_失敗() {
+		//1.ready
+		String Apply_id="2";
+		doReturn(0).when(jobReportRepository).updateStatusOne(anyString());
+		//2.do
+		boolean isSuccess = jobReportService.updateStatusFixed(Apply_id);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[updateStatusFixedの正常系テスト_失敗]isSuccess:"+isSuccess);
+	}
+	
+	@Test
+	void updateStatusFixedの異常系テスト() {
+		//1.ready
+		String Apply_id="2";
+		doThrow(new DataAccessResourceFailureException("")).when(jobReportRepository).updateStatusOne(anyString());
+		//2.do
+		boolean isSuccess = jobReportService.updateStatusFixed(Apply_id);
+		//3.assert
+		assertFalse(isSuccess);
+		//4.logs
+		log.warn("[updateStatusFixedの異常系テスト]isSuccess:"+isSuccess);
 	}
 }
