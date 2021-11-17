@@ -1,7 +1,5 @@
 package jp.ac.hcs.GreenShower.main;
 
-import java.security.Principal;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +30,8 @@ public class LoginService {
 	 * @param principal ログイン情報
 	 * @return ログインユーザのユーザ情報
 	 */
-	public UserData getLoginUserInfo(Principal principal) {
-		UserData userData = userService.selectOne(principal.getName()).get();
+	public UserData getLoginUserInfo(String name) {
+		UserData userData = userService.selectOne(name).get();
 		return userData;
 	}
 

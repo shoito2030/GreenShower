@@ -22,7 +22,7 @@ public class PortalController {
 	@RequestMapping("/")
 	public String index(Principal principal) {
 
-		UserData userData = loginService.getLoginUserInfo(principal);
+		UserData userData = loginService.getLoginUserInfo(principal.getName());
 		if (loginService.judgeUserStatus(userData)) {
 			// OK
 			return "index";

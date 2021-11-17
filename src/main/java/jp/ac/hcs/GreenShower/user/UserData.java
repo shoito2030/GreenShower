@@ -77,29 +77,30 @@ public class UserData {
 	 * - UserStatusクラスで定義
 	 */
 	private int user_status;
+	
+	public enum Role {
+		ROLE_STUDENT("学生", "ROLE_STUDENT"), ROLE_TEACHER("担任", "ROLE_TEACHER"), ROLE_STAFF("事務", "ROLE_STAFF");
+
+		/** ラベル */
+		private String label;
+
+		/** 値 */
+		private String value;
+
+		/** コンストラクタ */
+		Role(String label, String value) {
+			this.label = label;
+			this.value = value;
+		}
+
+		public String getLabel() {
+			return this.label;
+		}
+
+		public String getValue() {
+			return this.value;
+		}
+	}
 
 }
 
-enum Role {
-	ROLE_STUDENT("学生", "ROLE_STUDENT"), ROLE_TEACHER("担任", "ROLE_TEACHER"), ROLE_STAFF("事務", "ROLE_STAFF");
-
-	/** ラベル */
-	private String label;
-
-	/** 値 */
-	private String value;
-
-	/** コンストラクタ */
-	Role(String label, String value) {
-		this.label = label;
-		this.value = value;
-	}
-
-	public String getLabel() {
-		return this.label;
-	}
-
-	public String getValue() {
-		return this.value;
-	}
-}

@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import jp.ac.hcs.GreenShower.user.UserData.Role;
+
 /**
  * ユーザ情報のデータを管理する. - usersテーブル
  */

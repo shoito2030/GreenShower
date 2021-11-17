@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import jp.ac.hcs.GreenShower.user.UserData.Role;
+
 @Service
 /**
  *ユーザマスタに関する操作を行う業務クラス
