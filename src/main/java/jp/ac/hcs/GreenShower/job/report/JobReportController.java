@@ -102,8 +102,11 @@ public class JobReportController {
 		String status = jobReportService.selectJobHuntingStatus(apply_id);
 
 		// 状態が『申請完了』ではない場合
-		if (status == null || Integer.parseInt(status) != 4) {
+		if (status == null || status.equals("4")) {
 			model.addAttribute("errmsg", "申請が完了されていません。");
+			return jobRequestController.getRequestList(principal, model);
+		} else if(status.equals("99")) {
+			model.addAttribute("errmsg", "取消済なので報告できません。");
 			return jobRequestController.getRequestList(principal, model);
 		}
 

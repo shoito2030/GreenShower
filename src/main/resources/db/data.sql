@@ -37,7 +37,7 @@ VALUES('3', 'yamada@xxx.co.jp', '5', '0', '2', 'レッドシャワー株式会�
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
 VALUES('4', 'yamada@xxx.co.jp', '4', '1', '2', 'ブラックシャワー株式会社');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
-VALUES('5', 'isida@xxx.co.jp', '1', '0', '2', 'イエローシャワー株式会社');
+VALUES('5', 'isida@xxx.co.jp', '3', '0', '2', 'イエローシャワー株式会社');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
 VALUES('6', 'isida@xxx.co.jp', '4', '0', '2', 'ホワイトシャワー株式会社');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)

@@ -87,9 +87,35 @@ public class JobRequestController {
 		if (jobRequestData.isEmpty()) {
 			return getRequestList(principal, model);
 		}
-
+		
+		session.setAttribute("apply_id", apply_id);
 		model.addAttribute("jobRequestData", jobRequestData.get());
 		return "job/request/detail";
+	}
+	
+	/**
+	 * 個人の申請情報を取得し就職活動申請詳細画面を表示する
+	 * 
+	 * @param principal ログイン情報
+	 * @param apply_id  申請ID
+	 * @param model
+	 * @return - 処理成功時：就職活動申請詳細画面 - 処理失敗時：就職活動申請一覧画面
+	 */
+	@PostMapping("/job/request/detail/notice")
+	public String noticeCourseDirector(Principal principal, Model model) {
+		String apply_id = (String)session.getAttribute("apply_id");
+
+		boolean isSuccess = jobRequestService.hasNoticedCourseDirector(apply_id);
+
+		// 処理失敗により就職活動申請詳細画面へ
+		if (isSuccess) {
+			model.addAttribute("msg", "申請の報告が完了しました。");
+			return getRequestList(principal, model);
+			
+		} else {
+			model.addAttribute("errmsg", "コース担当の先生に報告できませんでした");
+			return getRequestDetail(principal, apply_id, model);
+		}
 	}
 
 	/**
@@ -151,7 +177,7 @@ public class JobRequestController {
 
 		// 入力内容に何らかの誤りがある場合
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("errmsg", "申請の登録に失敗しました");
+			model.addAttribute("errmsg", "申請の登録に失敗しました。");
 
 			// 就職活動申請新規作成画面へ
 			return getRequestInsert(form, principal, model);
@@ -176,9 +202,9 @@ public class JobRequestController {
 		}
 
 		if (isSuccess) {
-			model.addAttribute("msg", "申請の登録に成功しました");
+			model.addAttribute("msg", "申請の登録に成功しました。");
 		} else {
-			model.addAttribute("errmsg", "申請の登録に失敗しました");
+			model.addAttribute("errmsg", "申請の登録に失敗しました。");
 		}
 
 		return "index";
@@ -203,6 +229,11 @@ public class JobRequestController {
 
 		// 処理失敗により就職活動申請一覧画面へ
 		if (jobRequestData.isEmpty()) {
+			return getRequestList(principal, model);
+		}
+		
+		if(jobRequestData.get().getStatus().getId().equals("99")) {
+			model.addAttribute("errmsg", "取消済なので修正できません。");
 			return getRequestList(principal, model);
 		}
 
@@ -237,10 +268,10 @@ public class JobRequestController {
 			return getRequestStatusChange(principal, apply_id, model);
 			
 		} else if (form.getStatus().isEmpty()) {
-			model.addAttribute("errmsg", "状態を選択してください");
+			model.addAttribute("errmsg", "状態を選択してください。");
 			return getRequestStatusChange(principal, apply_id, model);
 			
-		} else if (!(form.getStatus().equals("4") || form.getStatus().equals("1") || form.getStatus().equals("99"))) {
+		} else if (!(form.getStatus().equals("3") || form.getStatus().equals("1") || form.getStatus().equals("99"))) {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getRequestStatusChange(principal, apply_id, model);
 		}
@@ -248,9 +279,9 @@ public class JobRequestController {
 		boolean isSuccess = jobRequestService.hasUpdateJobStatus(apply_id, form);
 		
 		if (isSuccess) {
-			model.addAttribute("msg", "申請状態の変更に成功しました");
+			model.addAttribute("msg", "申請状態の変更に成功しました。");
 		} else {
-			model.addAttribute("errmsg", "申請状態の変更に失敗しました");
+			model.addAttribute("errmsg", "申請状態の変更に失敗しました。");
 		}
 		
 		return "index";
@@ -277,15 +308,15 @@ public class JobRequestController {
 		String status = jobRequestService.selectJobHuntingStatus(apply_id);
 
 		// 状態が『申請完了』である場合
-		if (status == null || Integer.parseInt(status) == 4) {
+		if (status.equals("4") || status == null) {
 			model.addAttribute("errmsg", "申請が完了されているので修正できません。");
 			return getRequestList(principal, model);
 		// 状態が『承認待ち』である場合
-		} else if(Integer.parseInt(status) == 2) {
+		} else if(status.equals("2")) {
 			model.addAttribute("errmsg", "申請の承認待ちなので修正できません。");
 			return getRequestList(principal, model);
 		// 状態が『取消済』である場合
-		} else if(Integer.parseInt(status) == 99) {
+		} else if(status.equals("99")) {
 			model.addAttribute("errmsg", "取消済なので修正できません。");
 			return getRequestList(principal, model);
 		}
@@ -316,10 +347,10 @@ public class JobRequestController {
 		boolean isSuccess = jobRequestService.hasUpdatedJobContent(apply_id, form);
 		
 		if (isSuccess) {
-			model.addAttribute("msg", "申請内容の変更に成功しました");
+			model.addAttribute("msg", "申請内容の変更に成功しました。");
 			jobRequestService.updateStatusFixed(apply_id);
 		} else {
-			model.addAttribute("errmsg", "申請内容の変更に失敗しました");
+			model.addAttribute("errmsg", "申請内容の変更に失敗しました。");
 		}
 		return getRequestList(principal, model);
 	}

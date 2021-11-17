@@ -322,7 +322,13 @@ public class JobRequestService {
 	 */
 	public boolean hasInsertedEvent(EventForm form, String user_id) {
 		int rowNumber = 0;
-		jobRequestRepository.insertEvent(refillToEventData(form), user_id);
+		try {
+			rowNumber = jobRequestRepository.insertEvent(refillToEventData(form), user_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 		return rowNumber > 0;
 	}
 
@@ -365,9 +371,35 @@ public class JobRequestService {
 	/**
 	 * 申請修正した際にstatusを変更する
 	 * @param apply_id
+	 * @return rowNumber
 	 */
-	public void updateStatusFixed(String apply_id) {
-		jobRequestRepository.updateStatusOne(apply_id);
+	public boolean updateStatusFixed(String apply_id) {
+		int rowNumber = 0;
+		try {
+			rowNumber = jobRequestRepository.updateStatusOne(apply_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return rowNumber > 0;
+	}
+	
+	/**
+	 * 生徒が先生から申請の承認をもらったことをコース担当に報告する
+	 * @param apply_id 申請ID
+	 * @return 
+	 */
+	public boolean hasNoticedCourseDirector(String apply_id) {
+		int rowNumber = 0;
+		try {
+			rowNumber = jobRequestRepository.noticeCourseDirector(apply_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return rowNumber > 0;
 	}
 
 }

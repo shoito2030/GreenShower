@@ -20,18 +20,15 @@
 		<div class="row justify-content-md-center mt-md-4">
 			<div class="col-md-2">
 				<span><small class="text-muted">クラス</small><span
-					class="float-md-right mt-md-1 fw-bold h4"
-					th:text="*{classroom}"></span></span>
+					class="float-md-right mt-md-1 fw-bold h4" th:text="*{classroom}"></span></span>
 			</div>
 			<div class="col-md-1 offset-md-1">
 				<span><small class="text-muted">番号</small><span
-					class="float-md-right mt-md-1 fw-bold h4"
-					th:text="*{class_number}"></span></span>
+					class="float-md-right mt-md-1 fw-bold h4" th:text="*{class_number}"></span></span>
 			</div>
 			<div class="col-md-2 offset-md-1">
 				<span><small class="text-muted">氏名</small><span
-					class="float-md-right mt-md-1 fw-bold h4"
-					th:text="*{name}"></span></span>
+					class="float-md-right mt-md-1 fw-bold h4" th:text="*{name}"></span></span>
 			</div>
 		</div>
 
@@ -179,6 +176,14 @@
 				</div>
 			</div>
 		</div>
+
+		
+		<div class="row mt-5 mb-5" th:if="${jobRequestData.status.id == '3'}">
+			<form th:action="@{/job/request/detail/notice}" method="post" class="justify-content-center">
+				<button class="btn-lg btn-primary">コース担当に報告しました</button>
+			</form>
+		</div>
+
 	</div>
 
 	<th:block th:insert="components/part::frag_script"></th:block>

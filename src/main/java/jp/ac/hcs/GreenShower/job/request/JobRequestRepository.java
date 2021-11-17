@@ -50,7 +50,10 @@ public class JobRequestRepository {
 			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 	/** 申請状態を変更するSQL */
-	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE job_hunting SET status=?,indicate=? WHERE apply_id=?";
+	private static final String SQL_UPDATE_JOBSTATUS = "UPDATE JOB_HUNTING SET STATUS=?,INDICATE=? WHERE APPLY_ID=?";
+	
+	/** 申請状態を『申請承認済み』に変更するSQL */
+	private static final String SQL_NOTICE_COURSE_DIRECTOR = "UPDATE JOB_HUNTING SET STATUS='4' WHERE APPLY_ID=?";
 	
 	/** 申請内容を変更するSQL */
 	private static final String SQL_UPDATE_JOBCONTENT_REQUESTS = "UPDATE requests SET date_activity_from=?,date_activity_to=?,loc=?,way=?,date_absence_from=?,date_absence_to=?,leave_early_date=?,attendance_date=?,remark=? WHERE apply_id=?";
@@ -94,6 +97,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param apply_id 申請ID
 	 * @return JobRequestData
+	 * @throws DataAccessException
 	 */
 	public JobRequestData selectOne(String apply_id) {
 		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_REQUEST, apply_id);
@@ -107,6 +111,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param user_id ユーザID
 	 * @return UserData 
+	 * @throws DataAccessException
 	 */
 	public UserData selectPersonalInfo(String user_id) {
 		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO, user_id);
@@ -119,6 +124,7 @@ public class JobRequestRepository {
 	 * @param classroom クラス
 	 * @param class_number 出席番号
 	 * @return data
+	 * @throws DataAccessException
 	 */
 	public UserData selectPersonalInfo(String classroom, String class_number) {
 		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO_FOR_API, classroom, class_number);
@@ -131,6 +137,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param user_id 担任のユーザID
 	 * @return studentsNumber 生徒数
+	 * @throws DataAccessException
 	 */
 	public int selectStudentsNumber(String user_id) {
 		Map<String, Object> studentsNumber = jdbc.queryForMap(SQL_SELECT_STUDENTS_NUMBER, user_id);
@@ -142,6 +149,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param result 問い合わせ結果
 	 * @return JobRequestData
+	 * @throws DataAccessException
 	 */
 	private JobRequestData mappingSelectResult(Map<String, Object> result) {
 		JobRequestData data = new JobRequestData();
@@ -177,6 +185,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param resultList 問い合わせ結果
 	 * @return JobRequestEntity
+	 * @throws DataAccessException
 	 */
 	private JobRequestEntity mappingSelectResult(List<Map<String, Object>> resultList) {
 		JobRequestEntity entity = new JobRequestEntity();
@@ -219,6 +228,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param result 問い合わせ結果
 	 * @return UserData
+	 * @throws DataAccessException
 	 */
 	private UserData mappingSelectPersonalInfoResult(Map<String, Object> result) {
 		UserData data = new UserData();		
@@ -234,6 +244,7 @@ public class JobRequestRepository {
 	 * 就職活動申請新規作成処理を実行する
 	 * @param data 申請情報を格納したオブジェクト（JobRequestData）
 	 * @return rowNumber 追加に成功した件数
+	 * @throws DataAccessException
 	 */
 	public int insertOne(JobRequestData data) {
 		int rowNumber = jdbc.update(SQL_INSERT_JOB_HUNTING, data.getApply_id(), data.getApplicant_id(),
@@ -249,6 +260,7 @@ public class JobRequestRepository {
 	/**
 	 * 最新の申請IDを取得する
 	 * @return apply_id
+	 * @throws DataAccessException
 	 */
 	public int selectApply_id() {
 		int apply_id = jdbc.queryForObject(SQL_MAX_APPLY_ID, int.class);
@@ -262,6 +274,7 @@ public class JobRequestRepository {
 	 * @param status 申請状態
 	 * @param indicate 指摘事項
 	 * @return rowNumber 変更に成功した件数
+	 * @throws DataAccessException
 	 */
 	public int updateJobStatus(String apply_id, String status, String indicate) {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS, status, indicate, apply_id);
@@ -273,6 +286,7 @@ public class JobRequestRepository {
 	 * @param data 申請情報を格納したオブジェクト(JobRequestData)
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
+	 * @throws DataAccessException
 	 */
 	public int updateJobContent(JobRequestData data, String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBCONTENT_REQUESTS, data.getDate_activity_from(),
@@ -289,6 +303,7 @@ public class JobRequestRepository {
 	 * @param eventData イベント情報を格納したオブジェクト
 	 * @param user_id ユーザID
 	 * @return rowNumber 登録に成功した件数
+	 * @throws DataAccessException
 	 */
 	public int insertEvent(EventData eventData, String user_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBEVENT,eventData.getEvent_id(), eventData.getCompany_name(), eventData.getDatetime(), eventData.getLoc(), eventData.getContent(), eventData.getBring(), user_id);
@@ -299,6 +314,7 @@ public class JobRequestRepository {
 	 * 最新のイベントIDを取得する
 	 * 
 	 * @return event_id
+	 * @throws DataAccessException
 	 */
 	public int selectEvent_id() {
 		int event_id = jdbc.queryForObject(SQL_MAX_EVENT_ID, int.class);
@@ -310,6 +326,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param apply_id 申請ID
 	 * @return UserData ユーザ情報
+	 * @throws DataAccessException
 	 */
 	public String selectJobHuntingStatus(String apply_id) {
 		String status = (String) jdbc.queryForMap(SQL_SELECT_JOB_HUNTING_STATUS, apply_id).get("status");
@@ -320,7 +337,7 @@ public class JobRequestRepository {
 	 * job_huntingテーブルの状態を2:申請承認待に変更する
 	 * 
 	 * @param apply_id 申請ID
-	 * @return 追加データ数:0または1
+	 * @return 変更データ数:0または1
 	 * @throws DataAccessException
 	 */
 	public int updateStatusOne(String apply_id) {
@@ -328,5 +345,17 @@ public class JobRequestRepository {
 
 		return rowNumber;
 		
+	}
+
+	/**
+	 * コース担当報告済登録機能を実行する
+	 * @param apply_id 申請ID
+	 * @return rowNumber 追加データ数:0または1
+	 * @throws DataAccessException
+	 */
+	public int noticeCourseDirector(String apply_id) {
+		int rowNumber = jdbc.update(SQL_NOTICE_COURSE_DIRECTOR, apply_id);
+
+		return rowNumber;
 	}
 }
