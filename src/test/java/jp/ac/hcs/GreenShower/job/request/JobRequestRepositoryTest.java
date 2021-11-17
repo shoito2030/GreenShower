@@ -134,7 +134,7 @@ class JobRequestRepositoryTest {
 	@Test
 	void updateJobContentメソッドの正常系テスト() {
 		String apply_id = "1";
-		
+
 		JobRequestData data = new JobRequestData();
 		data.setApplicant_id("isida@xxx.co.jp");
 		data.setContent(Content.TEST);
@@ -150,9 +150,9 @@ class JobRequestRepositoryTest {
 		data.setDate_absence_from(null);
 		data.setRemark("updateJobContentメソッドの正常系テスト");
 		data.setRegister_user_id("isida@xxx.co.jp");
-		
+
 		int rowNumber = jobRequestRepository.updateJobContent(data, apply_id);
-	
+
 		assertEquals(rowNumber, 1);
 
 		log.warn("[updateJobContentメソッドの正常系テスト]rowNumber:" + rowNumber);
@@ -167,11 +167,11 @@ class JobRequestRepositoryTest {
 		data.setEvent_id("0");
 		data.setLoc("HCS");
 		data.setContent("insertEventの正常系メソッド");
-		
+
 		String user_id = "isida@xxx.co.jp";
-		
+
 		int rowNumber = jobRequestRepository.insertEvent(data, user_id);
-		
+
 		assertEquals(rowNumber, 1);
 
 		log.warn("[insertEventメソッドの正常系テスト]rowNumber:" + rowNumber);
@@ -180,32 +180,43 @@ class JobRequestRepositoryTest {
 	@Test
 	void selectEvent_idメソッドの正常系テスト() {
 		int event_id = jobRequestRepository.selectEvent_id();
-		
+
 		assertNotNull(event_id);
-		
+
 		log.warn("[selectEvent_idメソッドの正常系テスト]event_id:" + event_id);
 	}
 
 	@Test
 	void selectJobHuntingStatusメソッドの正常系テスト() {
 		String apply_id = "0";
-		
+
 		String status = jobRequestRepository.selectJobHuntingStatus(apply_id);
-	
+
 		assertNotNull(status);
-		
+
 		log.warn("[selectJobHuntingStatusメソッドの正常系テスト]status:" + status);
 	}
 
 	@Test
 	void updateStatusOneメソッドの正常系テスト() {
 		String apply_id = "0";
-		
+
 		int rowNumber = jobRequestRepository.updateStatusOne(apply_id);
-		
+
 		assertEquals(rowNumber, 1);
-		
+
 		log.warn("[updateStatusOneメソッドの正常系テスト]rowNumber:" + rowNumber);
+	}
+
+	@Test
+	void noticeCourseDirectorメソッドの正常系テスト() {
+		String apply_id = "5";
+
+		int rowNumber = jobRequestRepository.noticeCourseDirector(apply_id);
+
+		assertEquals(rowNumber, 1);
+
+		log.warn("[noticeCourseDirectorメソッドの正常系テスト]rowNumber:" + rowNumber);
 	}
 
 }
