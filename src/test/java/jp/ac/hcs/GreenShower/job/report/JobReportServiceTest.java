@@ -57,10 +57,7 @@ class JobReportServiceTest {
 	void selectAllReportsの正常系テスト_jobReportEntityIsEmpty() {
 		//1.ready
 		String role = "ROLE_STUDENT";
-		String user_id = "isida@xxx.co.jp";
-		doReturn(new JobReportEntity()).when(jobReportRepository).selectAllReports(anyString());
-//		doReturn(new UserData()).when(jobReportService).selectPersonalInfoUserId(anyString());
-		
+		String user_id = "yamada@xxx.co.jp";
 		//2.do
 		Optional<JobReportEntity> jobReportEntity = jobReportService.selectAllReports(user_id,role);
 		//3.assert
