@@ -233,7 +233,7 @@ public class JobRequestController {
 		}
 		
 		if(jobRequestData.get().getStatus().getId().equals("99")) {
-			model.addAttribute("errmsg", "取消済なので修正できません。");
+			model.addAttribute("errmsg", "取消済なので状態を変更できません。");
 			return getRequestList(principal, model);
 		}
 
