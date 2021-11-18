@@ -34,7 +34,7 @@ public class JobReportController {
 
 	@Autowired
 	private ProofreadingService proofreadingService;
-	
+
 	@Autowired
 	private JobRequestController jobRequestController;
 
@@ -86,7 +86,7 @@ public class JobReportController {
 		}
 
 		session.setAttribute("apply_id", apply_id);
-		
+
 		model.addAttribute("jobReportData", jobReportData.get());
 		return "job/report/detail";
 	}
@@ -101,12 +101,15 @@ public class JobReportController {
 	public String getReportInert(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
 		String status = jobReportService.selectJobHuntingStatus(apply_id);
 
-		// 状態が『申請完了』ではない場合
-		if (status == null || !(status.equals("4"))) {
-			model.addAttribute("errmsg", "申請が完了されていません。");
-			return jobRequestController.getRequestList(principal, model);
-		} else if(status.equals("99")) {
+		// 申請が取り消されている場合
+		if (status.equals("99")) {
 			model.addAttribute("errmsg", "取消済なので報告できません。");
+			return jobRequestController.getRequestList(principal, model);
+		}
+
+		// 状態が『申請完了』ではない場合
+		if (status == null || !status.equals("4")) {
+			model.addAttribute("errmsg", "申請が完了されていません。");
 			return jobRequestController.getRequestList(principal, model);
 		}
 
@@ -173,17 +176,16 @@ public class JobReportController {
 		if (status == null || Integer.parseInt(status) == 7) {
 			model.addAttribute("errmsg", "報告が完了されているので修正できません。");
 			return getReportList(principal, model);
-		// 状態が『承認待ち』である場合
-		} else if(Integer.parseInt(status) == 6) {
+			// 状態が『承認待ち』である場合
+		} else if (Integer.parseInt(status) == 6) {
 			model.addAttribute("errmsg", "報告の承認待ちなので修正できません。");
 			return getReportList(principal, model);
-		// 状態が『取消済』である場合
-		} else if(Integer.parseInt(status) == 99) {
+			// 状態が『取消済』である場合
+		} else if (Integer.parseInt(status) == 99) {
 			model.addAttribute("errmsg", "取消済なので修正できません。");
 			return getReportList(principal, model);
 		}
 
-		
 		Optional<JobReportData> jobReportData;
 
 		// 申請IDに紐づく報告情報を取得
@@ -229,7 +231,7 @@ public class JobReportController {
 		}
 
 		boolean fixed = false;
-		
+
 		// 入力内容がDBの情報と変わらない場合は実行しない
 		if (jobReportData.get().isAdvance_or_retreat() != form.isAdvance_or_retreat()) {
 			jobReportService.updateAdvance_or_retreat(form);
@@ -240,8 +242,8 @@ public class JobReportController {
 			jobReportService.updateRemark(form);
 			fixed = true;
 		}
-		
-		if(fixed) {
+
+		if (fixed) {
 			jobReportService.updateStatusFixed(form.getApply_id());
 		}
 

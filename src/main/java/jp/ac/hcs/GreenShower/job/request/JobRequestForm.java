@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 import jp.ac.hcs.GreenShower.job.validations.DateValueValid;
 import lombok.Data;
 
@@ -92,6 +94,7 @@ public class JobRequestForm {
 	/**
 	 * メモ
 	 */
+	@Length(max=254, message="メモが長すぎます。")
 	private String remark;
 	
 	/**
@@ -102,5 +105,6 @@ public class JobRequestForm {
 	/**
 	 * 指摘欄
 	 */
+	@Length(max=254, message="指摘が長すぎます。")
 	private String indicate;
 }

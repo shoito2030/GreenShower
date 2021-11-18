@@ -366,6 +366,9 @@
 			<div class="col">
 				<textarea class="form-control" id="remark" th:field="*{remark}" name="remark" rows="5"
 					cols="50"></textarea>
+				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+					th:if="${#fields.hasErrors('remark')}" th:errors="*{remark}">エラーメッセージ
+				</h6>
 			</div>
 
 		</div>

@@ -1,5 +1,7 @@
 package jp.ac.hcs.GreenShower.job.report;
 
+import org.hibernate.validator.constraints.Length;
+
 import lombok.Data;
 
 /**
@@ -23,6 +25,7 @@ public class JobReportForm {
 	/**
 	 * 備考
 	 */
+	@Length(max=254, message="備考が長すぎます。")
 	private String remark;
 	
 	/**
@@ -33,6 +36,7 @@ public class JobReportForm {
 	/**
 	 * 指摘事項
 	 */
+	@Length(max=254, message="指摘が長すぎます。")
 	private String indicate;
 	
 }
