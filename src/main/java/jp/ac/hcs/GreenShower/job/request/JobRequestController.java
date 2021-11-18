@@ -87,12 +87,12 @@ public class JobRequestController {
 		if (jobRequestData.isEmpty()) {
 			return getRequestList(principal, model);
 		}
-		
+
 		session.setAttribute("apply_id", apply_id);
 		model.addAttribute("jobRequestData", jobRequestData.get());
 		return "job/request/detail";
 	}
-	
+
 	/**
 	 * 個人の申請情報を取得し就職活動申請詳細画面を表示する
 	 * 
@@ -111,7 +111,7 @@ public class JobRequestController {
 		if (isSuccess) {
 			model.addAttribute("msg", "申請の報告が完了しました。");
 			return getRequestList(principal, model);
-			
+
 		} else {
 			model.addAttribute("errmsg", "コース担当の先生に報告できませんでした");
 			return getRequestDetail(principal, apply_id, model);
@@ -221,7 +221,7 @@ public class JobRequestController {
 	@GetMapping("/job/request/status_change/{apply_id}")
 	public String getRequestStatusChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
 		Optional<JobRequestData> jobRequestData;
-		
+
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
 		// 個人の申請情報を取得
@@ -231,9 +231,9 @@ public class JobRequestController {
 		if (jobRequestData.isEmpty()) {
 			return getRequestList(principal, model);
 		}
-		
+
 		if(jobRequestData.get().getStatus().getId().equals("99")) {
-			model.addAttribute("errmsg", "取消済なので修正できません。");
+			model.addAttribute("errmsg", "取消済なので状態を変更できません。");
 			return getRequestList(principal, model);
 		}
 
@@ -266,24 +266,24 @@ public class JobRequestController {
 		if (form.getStatus().equals("1") && form.getIndicate().equals("")) {
 			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
 			return getRequestStatusChange(principal, apply_id, model);
-			
+
 		} else if (form.getStatus().isEmpty()) {
 			model.addAttribute("errmsg", "状態を選択してください。");
 			return getRequestStatusChange(principal, apply_id, model);
-			
+
 		} else if (!(form.getStatus().equals("3") || form.getStatus().equals("1") || form.getStatus().equals("99"))) {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getRequestStatusChange(principal, apply_id, model);
 		}
-		
+
 		boolean isSuccess = jobRequestService.hasUpdateJobStatus(apply_id, form);
-		
+
 		if (isSuccess) {
 			model.addAttribute("msg", "申請状態の変更に成功しました。");
 		} else {
 			model.addAttribute("errmsg", "申請状態の変更に失敗しました。");
 		}
-		
+
 		return "index";
 	}
 
@@ -297,25 +297,29 @@ public class JobRequestController {
 	 */
 	@GetMapping("/job/request/fix/{apply_id}")
 	public String getRequestContentChange(JobRequestForm form, Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
-		
+
 		Optional<JobRequestData> jobRequestData;
-		
+
 		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
 
 		// 個人の申請情報を取得
 		jobRequestData = jobRequestService.selectOne(apply_id, principal.getName(), role);
-		
+
 		String status = jobRequestService.selectJobHuntingStatus(apply_id);
 
 		// 状態が『申請完了』である場合
 		if (status.equals("4") || status == null) {
 			model.addAttribute("errmsg", "申請が完了されているので修正できません。");
 			return getRequestList(principal, model);
-		// 状態が『承認待ち』である場合
+			// 状態が『承認待ち』である場合
 		} else if(status.equals("2")) {
 			model.addAttribute("errmsg", "申請の承認待ちなので修正できません。");
 			return getRequestList(principal, model);
-		// 状態が『取消済』である場合
+			// 状態が『承認済』である場合
+		} else if(status.equals("3")) {
+			model.addAttribute("errmsg", "申請の承認済なので修正できません。");
+			return getRequestList(principal, model);		
+			// 状態が『取消済』である場合
 		} else if(status.equals("99")) {
 			model.addAttribute("errmsg", "取消済なので修正できません。");
 			return getRequestList(principal, model);
@@ -345,7 +349,7 @@ public class JobRequestController {
 			return getRequestContentChange(form, principal, apply_id, model);
 		}
 		boolean isSuccess = jobRequestService.hasUpdatedJobContent(apply_id, form);
-		
+
 		if (isSuccess) {
 			model.addAttribute("msg", "申請内容の変更に成功しました。");
 			jobRequestService.updateStatusFixed(apply_id);

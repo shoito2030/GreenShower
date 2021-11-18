@@ -102,7 +102,7 @@ public class JobReportController {
 		String status = jobReportService.selectJobHuntingStatus(apply_id);
 
 		// 状態が『申請完了』ではない場合
-		if (status == null || status.equals("4")) {
+		if (status == null || !(status.equals("4"))) {
 			model.addAttribute("errmsg", "申請が完了されていません。");
 			return jobRequestController.getRequestList(principal, model);
 		} else if(status.equals("99")) {
@@ -173,8 +173,13 @@ public class JobReportController {
 		if (status == null || Integer.parseInt(status) == 7) {
 			model.addAttribute("errmsg", "報告が完了されているので修正できません。");
 			return getReportList(principal, model);
+		// 状態が『承認待ち』である場合
 		} else if(Integer.parseInt(status) == 6) {
 			model.addAttribute("errmsg", "報告の承認待ちなので修正できません。");
+			return getReportList(principal, model);
+		// 状態が『取消済』である場合
+		} else if(Integer.parseInt(status) == 99) {
+			model.addAttribute("errmsg", "取消済なので修正できません。");
 			return getReportList(principal, model);
 		}
 
@@ -256,7 +261,13 @@ public class JobReportController {
 	 */
 	@GetMapping("/job/report/status_change/{apply_id}")
 	public String getReportStatus(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
+		String status = jobReportService.selectJobHuntingStatus(apply_id);
 
+		// 状態が『取消済』である場合
+		if (status == null || Integer.parseInt(status) == 99) {
+			model.addAttribute("errmsg", "取消済なので状態を変更できません。");
+			return getReportList(principal, model);
+		}
 		Optional<JobReportData> jobReportData;
 
 		jobReportData = jobReportService.selectOne(apply_id);

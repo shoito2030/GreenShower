@@ -2,13 +2,15 @@
 INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id)
 VALUES('isida@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '石田悠介', 'ROLE_STUDENT', 'S3A1', '01', 'isida@xxx.co.jp');
 INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id)
-VALUES('yamada@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '山田啓介', 'ROLE_STUDENT', 'S3A2', '02', 'yamada@xxx.co.jp');
+VALUES('yamada@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '山田啓介', 'ROLE_STUDENT', 'S3A2', '01', 'yamada@xxx.co.jp');
 INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id)
-VALUES('tanaka@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '田中太郎', 'ROLE_STUDENT', 'S3A2', '03', 'tanaka@xxx.co.jp');
+VALUES('tanaka@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '田中太郎', 'ROLE_STUDENT', 'S3A2', '02', 'tanaka@xxx.co.jp');
 
 /* ユーザマスタのデータ（ADMIN権限：担任、事務） PASS:password */
 INSERT INTO users (user_id, encrypted_password, name, role, classroom, register_user_id)
 VALUES('abe@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '安部華奈', 'ROLE_TEACHER', 'S3A1',  'abe@xxx.co.jp');
+INSERT INTO users (user_id, encrypted_password, name, role, classroom, register_user_id)
+VALUES('yosida@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '吉田拓海', 'ROLE_TEACHER', 'S3A2',  'yosida@xxx.co.jp');
 INSERT INTO users (user_id, encrypted_password, name, role, register_user_id)
 VALUES('sano@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '佐野翼', 'ROLE_STAFF', 'sano@xxx.co.jp');
 
@@ -42,6 +44,8 @@ INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, co
 VALUES('6', 'isida@xxx.co.jp', '4', '0', '2', 'ホワイトシャワー株式会社');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
 VALUES('7', 'tanaka@xxx.co.jp', '5', '0', '2', 'ホワイトシャワー株式会社');
+INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
+VALUES('8', 'isida@xxx.co.jp', '2', '0', '1', 'ブラックシャワー株式会社');
 
 /* 申請マスタ用データ */
 INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, date_absence_from, date_absence_to, remark, register_user_id)
@@ -58,6 +62,8 @@ INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, 
 VALUES('6', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '2',  '2021-7-18 12:15', '早退君', 'isida@xxx.co.jp');
 INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, leave_early_date, remark, register_user_id)
 VALUES('7', '2021-7-17 10:00', '2021-7-17 15:00', '北海道情報専門学校', '2',  '2021-7-18 12:15', '早退君', 'tanaka@xxx.co.jp');
+INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, leave_early_date, remark, register_user_id)
+VALUES('8', '2021-10-18 10:00', '2021-10-18 14:00', '北海道情報専門学校', '2',  '2021-11-18 09:00', 'メモ', 'isida@xxx.co.jp');
 
 /* 報告マスタ用データ */
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('1', TRUE, 'システムの規格から開発・運用まD幅広く関われます。私の得意分野は自然言語処利です。', 'isida@xxx.co.jp');
