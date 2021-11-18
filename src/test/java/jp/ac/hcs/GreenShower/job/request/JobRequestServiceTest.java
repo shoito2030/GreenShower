@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,8 +33,8 @@ class JobRequestServiceTest {
 	@Test
 	void selectAllRequestsの正常系テスト() {
 		// 1.Ready
-		String user_id = "1";
-		String role = "学生";
+		String user_id = "yamada@xxx.co.jp";
+		String role = "ROLE_STUDENT";
 		// 2.Do
 		Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllRequests(user_id, role);
 		// 3.Assert
@@ -43,11 +44,37 @@ class JobRequestServiceTest {
 	}
 	
 	@Test
+	void selectAllRequestsの正常系テスト_ユーザが生徒ではない場合() {
+		// 1.Ready
+		String user_id = "abe@xxx.co.jp";
+		String role = "ROLE_TEACHER";
+		// 2.Do
+		Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllRequests(user_id, role);
+		// 3.Assert
+		assertNotNull(jobRequestEntity);
+		// 4.Logs
+		log.warn("[selectAllRequestメソッドの正常系テスト_ユーザが生徒ではない場合]reportEntity:" + jobRequestEntity.toString());
+	}
+	
+	@Test
+	void selectAllRequestsの正常系テスト_存在しないユーザの場合() {
+		// 1.Ready
+		String user_id = "empty@xxx.co.jp";
+		String role = "ROLE_EMPTY";
+		// 2.Do
+		Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllRequests(user_id, role);
+		// 3.Assert
+		assertNotNull(jobRequestEntity);
+		// 4.Logs
+		log.warn("[selectAllRequestメソッドの正常系テスト_存在しないユーザの場合]reportEntity:" + jobRequestEntity.toString());
+	}
+	
+	@Test
 	void selectAllRequestsの異常系テスト() {
 		// 1.Ready
-		String user_id = "1";
-		String role = "学生";
-		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).selectAllRequests(anyString());
+		String user_id = "yamada@xxx.co.jp";
+		String role = "ROLE_STUDENT";
+		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).selectAllRequests(any());
 		// 2.Do
 		Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllRequests(user_id, role);
 		// 3.Assert
@@ -57,26 +84,91 @@ class JobRequestServiceTest {
 	}
 
 	@Test
-	void selectOneの正常系テスト() {
+	void selectOneの正常系テスト_ROLE_STUDENT() {
 		// 1.Ready
 		String apply_id ="1";
-		String user_id = "1";
-		String role = "学生";
+		String user_id = "yamada@xxx.co.jp";
+		String role = "ROLE_STUDENT";
 		// 2.Do
 		Optional<JobRequestData> jobRequestData = jobRequestService.selectOne(apply_id, user_id, role);
 		// 3.Assert
 		assertNotNull(jobRequestData);
 		// 4.Logs
-		log.warn("[selectOneメソッドの正常系テスト]jobRequestData:" + jobRequestData.toString());
+		log.warn("[selectOneメソッドの正常系テスト_ROLE_STUDENT]jobRequestData:" + jobRequestData.toString());
 
 	}
+	
+	@Test
+	void selectOneの正常系テスト_ROLE_TEACHER() {
+		// 1.Ready
+		String apply_id ="1";
+		String user_id = "abe@xxx.co.jp";
+		String role = "ROLE_TEACHER";
+		// 2.Do
+		Optional<JobRequestData> jobRequestData = jobRequestService.selectOne(apply_id, user_id, role);
+		// 3.Assert
+		assertNotNull(jobRequestData);
+		// 4.Logs
+		log.warn("[selectOneメソッドの正常系テスト_ROLE_TEACHER]jobRequestData:" + jobRequestData.toString());
+
+	}
+	
+	@Test
+	void selectOneの正常系テスト_ROLE_TEACHERではない場合() {
+		// 1.Ready
+		String apply_id ="1";
+		String user_id = "empty@xxx.co.jp";
+		String role = "ROLE_EMPTY";
+		// 2.Do
+		Optional<JobRequestData> jobRequestData = jobRequestService.selectOne(apply_id, user_id, role);
+		// 3.Assert
+		assertNotNull(jobRequestData);
+		// 4.Logs
+		log.warn("[selectOneメソッドの正常系テスト_ROLE_TEACHERではない場合]jobRequestData:" + jobRequestData.toString());
+
+	}
+	
+	@Test
+	void selectOneの正常系テスト_取得したクラスがROLE_STUDENTのクラス情報ではない場合() {
+		// 1.Ready
+		String apply_id ="3";
+		String user_id = "yamada@xxx.co.jp";
+		String role = "ROLE_STUDENT";
+//		doReturn(new JobRequestData()).when(jobRequestRepository).selectOne(anyString());
+		// 2.Do
+		Optional<JobRequestData> jobRequestData = jobRequestService.selectOne(apply_id, user_id, role);
+		// 3.Assert
+		assertNotNull(jobRequestData);
+
+		// 4.Logs
+		log.warn("[selectOneメソッドの正常系テスト_取得したクラスがROLE_STUDENTのクラス情報ではない場合]jobRequestData:" + jobRequestData.toString());
+
+	}
+	
+	@Test
+	void selectOneの正常系テスト_取得したクラスがROLE_TEACHERのクラス情報ではない場合() {
+		// 1.Ready
+		String apply_id ="1";
+		String user_id = "abe@xxx.co.jp";
+		String role = "ROLE_TEACHER";
+		doReturn(new JobRequestData()).when(jobRequestRepository).selectOne(anyString());
+		// 2.Do
+		Optional<JobRequestData> jobRequestData = jobRequestService.selectOne(apply_id, user_id, role);
+		// 3.Assert
+		assertTrue(jobRequestData.isEmpty());
+
+		// 4.Logs
+		log.warn("[selectOneメソッドの正常系テスト_取得したクラスがROLE_TEACHERのクラス情報ではない場合]jobRequestData:" + jobRequestData.toString());
+
+	}
+	
 	
 	@Test
 	void selectOneの異常系テスト() {
 		// 1.Ready
 		String apply_id ="1";
 		String user_id = "1";
-		String role = "学生";
+		String role = "ROLE_STUDENT";
 		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).selectOne(anyString());
 		// 2.Do
 		Optional<JobRequestData> jobRequestData = jobRequestService.selectOne(apply_id, user_id, role);
@@ -130,13 +222,13 @@ class JobRequestServiceTest {
 		// 1.Ready
 		String classroom = "S3A1";
 		String class_number = "01";
-		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).selectPersonalInfo(anyString());
+		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).selectPersonalInfo(anyString(), anyString());
 		// 2.Do
 		UserData userData = jobRequestService.selectPersonalInfo(classroom, class_number);
 		// 3.Assert
-		assertNotNull(userData);
+		assertNull(userData);
 		// 4.Logs
-		log.warn("[selectPersonalInfoStringStringの異常系テスト]userData:" + userData.toString());
+		log.warn("[selectPersonalInfoStringStringの異常系テスト]userData:" + userData);
 	}
 
 	@Test
@@ -195,6 +287,73 @@ class JobRequestServiceTest {
 	}
 	
 	@Test
+	void hasInsertedの正常系テスト_内容複数選択() {
+		// 1.Ready
+		List<String> way = new ArrayList<>();
+		way.add("1");
+		way.add("2");
+		way.add("3");
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setApply_type("1");
+		form.setCompany_name("株式会社HCS");
+		form.setDate_activity_from("2021-11-20T09:30");
+		form.setDate_activity_to("2021-11-21T10:30");
+		form.setLoc("本校舎9F");
+		form.setContent("1");
+		form.setWay(way);
+		form.setDate_absence_from(null);
+		form.setDate_absence_to(null);
+		form.setLeave_early_date(null);
+		form.setAttendance_date("2021-11-20T09:00");
+		form.setRemark("筆記試験です。");
+		
+		String applicant_id = "isida@xxx.co.jp";
+		String register_user_id = "isida@xxx.co.jp";
+		// 2.Do
+		boolean result = jobRequestService.hasInserted(form, applicant_id, register_user_id);
+		// 3.Assert
+		assertEquals(true, result);
+		// 4.Logs
+		log.warn("[hasInsertedの正常系テスト_内容複数選択]result:" + result);
+	}
+	
+	@Test
+	void hasInsertedの正常系テスト_失敗() {
+		// 1.Ready
+		List<String> way = new ArrayList<>();
+		way.add("1");
+		way.add("2");
+		way.add("3");
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setApply_type("1");
+		form.setCompany_name("株式会社HCS");
+		form.setDate_activity_from("2021-11-20T09:30");
+		form.setDate_activity_to("2021-11-21T10:30");
+		form.setLoc("本校舎9F");
+		form.setContent("1");
+		form.setWay(way);
+		form.setDate_absence_from(null);
+		form.setDate_absence_to(null);
+		form.setLeave_early_date(null);
+		form.setAttendance_date("2021-11-20T09:00");
+		form.setRemark("筆記試験です。");
+		
+		String applicant_id = "isida@xxx.co.jp";
+		String register_user_id = "isida@xxx.co.jp";
+		
+		doReturn(0).when(jobRequestRepository).insertOne(any());
+
+		// 2.Do
+		boolean result = jobRequestService.hasInserted(form, applicant_id, register_user_id);
+		// 3.Assert
+		assertFalse(result);
+		// 4.Logs
+		log.warn("[hasInsertedの正常系テスト_失敗]result:" + result);
+	}
+	
+	@Test
 	void hasInsertedの異常系テスト() {
 		// 1.Ready
 		List<String> way = new ArrayList<>();
@@ -244,6 +403,25 @@ class JobRequestServiceTest {
 	}
 	
 	@Test
+	void hasUpdateJobStatusの正常系テスト_失敗() {
+		// 1.Ready
+		String apply_id = "1";
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setStatus("1");
+		form.setIndicate("申請に不備があります");
+		
+		doReturn(0).when(jobRequestRepository).updateJobStatus(anyString(), anyString(), anyString());
+		
+		// 2.Do
+		boolean result = jobRequestService.hasUpdateJobStatus(apply_id, form);
+		// 3.Assert
+		assertFalse(result);
+		// 4.Logs
+		log.warn("[hasUpdateJobStatusの正常系テスト_失敗]result:" + result);
+	}
+	
+	@Test
 	void hasUpdateJobStatusの異常系テスト() {
 		// 1.Ready
 		String apply_id = "1";
@@ -263,38 +441,329 @@ class JobRequestServiceTest {
 	}
 
 	@Test
-	void hasUpdatedJobContent() {
+	void hasUpdatedJobContentの正常系テスト() {
 		// 1.Ready
-		String apply_id ="1";
-		String user_id = "1";
-		String role = "学生";
-				doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).selectOne(anyString());
-				// 2.Do
-				Optional<JobRequestData> jobRequestData = jobRequestService.selectOne(apply_id, user_id, role);
-				// 3.Assert
-				assertTrue(jobRequestData.isEmpty());
-				// 4.Logs
-				log.warn("[selectOneメソッドの異常系テスト]jobRequestData:" + jobRequestData.toString());
+		String apply_id = "1";
+		
+		List<String> way = new ArrayList<>();
+		way.add("3");
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setApply_type("0");
+		form.setCompany_name("株式会社HCS");
+		form.setDate_activity_from("2021-11-20T09:30");
+		form.setDate_activity_to("2021-11-21T10:30");
+		form.setLoc("本校舎9F");
+		form.setContent("1");
+		form.setWay(way);
+		form.setDate_absence_from(null);
+		form.setDate_absence_to(null);
+		form.setLeave_early_date(null);
+		form.setAttendance_date("2021-11-20T09:00");
+		form.setRemark("面接試験です。");
+		
+		// 2.Do
+		boolean result = jobRequestService.hasUpdatedJobContent(apply_id, form);
+		// 3.Assert
+		assertEquals(true, result);
+		// 4.Logs
+		log.warn("[hasUpdatedJobContentの正常系テスト]result:" + result);
+	}
+	
+	@Test
+	void hasUpdatedJobContentの正常系テスト_失敗() {
+		// 1.Ready
+		String apply_id = "1";
+		
+		List<String> way = new ArrayList<>();
+		way.add("3");
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setApply_type("0");
+		form.setCompany_name("株式会社HCS");
+		form.setDate_activity_from("2021-11-20T09:30");
+		form.setDate_activity_to("2021-11-21T10:30");
+		form.setLoc("本校舎9F");
+		form.setContent("1");
+		form.setWay(way);
+		form.setDate_absence_from(null);
+		form.setDate_absence_to(null);
+		form.setLeave_early_date(null);
+		form.setAttendance_date("2021-11-20T09:00");
+		form.setRemark("面接試験です。");
+		
+		doReturn(0).when(jobRequestRepository).updateJobContent(any(), anyString());
+		
+		// 2.Do
+		boolean result = jobRequestService.hasUpdatedJobContent(apply_id, form);
+		// 3.Assert
+		assertFalse(result);
+		// 4.Logs
+		log.warn("[hasUpdatedJobContentの正常系テスト_失敗]result:" + result);
+	}
+	
+	@Test
+	void hasUpdatedJobContentの正常系テスト_内容複数選択() {
+		// 1.Ready
+		String apply_id = "1";
+		
+		List<String> way = new ArrayList<>();
+		way.add("1");
+		way.add("2");
+		way.add("3");
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setApply_type("0");
+		form.setCompany_name("株式会社HCS");
+		form.setDate_activity_from("2021-11-20T09:30");
+		form.setDate_activity_to("2021-11-21T10:30");
+		form.setLoc("本校舎9F");
+		form.setContent("1");
+		form.setWay(way);
+		form.setDate_absence_from(null);
+		form.setDate_absence_to(null);
+		form.setLeave_early_date(null);
+		form.setAttendance_date("2021-11-20T09:00");
+		form.setRemark("面接試験です。");
+		
+		// 2.Do
+		boolean result = jobRequestService.hasUpdatedJobContent(apply_id, form);
+		// 3.Assert
+		assertEquals(true, result);
+		// 4.Logs
+		log.warn("[hasUpdatedJobContentの正常系テスト_内容複数選択]result:" + result);
+	}
+	
+	@Test
+	void hasUpdatedJobContentの異常系テスト() {
+		// 1.Ready
+		String apply_id = "1";
+		
+		List<String> way = new ArrayList<>();
+		way.add("3");
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setApply_type("0");
+		form.setCompany_name("株式会社HCS");
+		form.setDate_activity_from("2021-11-20T09:30");
+		form.setDate_activity_to("2021-11-21T10:30");
+		form.setLoc("本校舎9F");
+		form.setContent("1");
+		form.setWay(way);
+		form.setDate_absence_from(null);
+		form.setDate_absence_to(null);
+		form.setLeave_early_date(null);
+		form.setAttendance_date("2021-11-20T09:00");
+		form.setRemark("面接試験です。");
+		
+		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).updateJobContent(any(),anyString());
+		
+		// 2.Do
+		boolean result = jobRequestService.hasUpdatedJobContent(apply_id, form);
+		// 3.Assert
+		assertEquals(false, result);
+		// 4.Logs
+		log.warn("[hasUpdatedJobContentの異常系テスト]result:" + result);
 	}
 
 	@Test
-	void testStrLocalDateTimeToDate() {
-		fail("まだ実装されていません");
+	void strLocalDateTimeToDateの正常系テスト() {
+		// 1.Ready
+		String date = "2021-11-20T09:30";
+		// 2.Do
+		Date resultDate = jobRequestService.strLocalDateTimeToDate(date);
+		// 3.Assert
+		assertNotNull(resultDate);
+		// 4.Logs
+		log.warn("[strLocalDateTimeToDateの正常系テスト]resultDate:" + date);
+	}
+	
+	@Test
+	void strLocalDateTimeToDateの正常系テスト_未入力の場合() {
+		// 1.Ready
+		String date = "";
+		// 2.Do
+		Date resultDate = jobRequestService.strLocalDateTimeToDate(date);
+		// 3.Assert
+		assertNull(resultDate);
+		// 4.Logs
+		log.warn("[strLocalDateTimeToDateの正常系テスト_未入力の場合]resultDate:" + date);
+	}
+	
+	@Test
+	void strLocalDateTimeToDateの異常系テスト() {
+		// 1.Ready
+		String date = "2021-11-200009:30";
+		// 2.Do
+		Date resultDate = jobRequestService.strLocalDateTimeToDate(date);
+		// 3.Assert
+		assertNull(resultDate);
+		// 4.Logs
+		log.warn("[strLocalDateTimeToDateの異常系テスト]resultDate:" + date);
 	}
 
 	@Test
-	void testHasInsertedEvent() {
-		fail("まだ実装されていません");
+	void hasInsertedEventの正常系テスト() {
+		// 1.Ready
+		String user_id = "abe@xxx.co.jp";
+		EventForm form = new EventForm();
+		form.setCompany_name("株式会社SCC");
+		form.setDatetime("2021-12-20T09:30");
+		form.setLoc("本校舎9F");
+		form.setContent("単独説明会");
+		form.setBring("筆記用具");
+		
+		// 2.Do
+		boolean result = jobRequestService.hasInsertedEvent(form, user_id);
+		// 3.Assert
+		assertEquals(true, result);
+		// 4.Logs
+		log.warn("[hasInsertedEventの正常系テスト]result:" + result);
+	}
+	
+	@Test
+	void hasInsertedEventの正常系テスト_失敗() {
+		// 1.Ready
+		String user_id = "abe@xxx.co.jp";
+		EventForm form = new EventForm();
+		form.setCompany_name("株式会社SCC");
+		form.setDatetime("2021-12-20T09:30");
+		form.setLoc("本校舎9F");
+		form.setContent("単独説明会");
+		form.setBring("筆記用具");
+		
+		doReturn(0).when(jobRequestRepository).insertEvent(any(), anyString());
+		// 2.Do
+		boolean result = jobRequestService.hasInsertedEvent(form, user_id);
+		// 3.Assert
+		assertFalse(result);
+		// 4.Logs
+		log.warn("[hasInsertedEventの正常系テスト_失敗]result:" + result);
+	}
+	
+	@Test
+	void hasInsertedEventの異常系テスト() {
+		// 1.Ready
+		String user_id = "abe@xxx.co.jp";
+		EventForm form = new EventForm();
+		form.setCompany_name("株式会社SCC");
+		form.setDatetime("2021-12-20T09:30");
+		form.setLoc("本校舎9F");
+		form.setContent("単独説明会");
+		form.setBring("筆記用具");
+		
+		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).insertEvent(any(),anyString());
+		
+		// 2.Do
+		boolean result = jobRequestService.hasInsertedEvent(form, user_id);
+		// 3.Assert
+		assertEquals(false, result);
+		// 4.Logs
+		log.warn("[hasInsertedEventの異常系テスト]result:" + result);
 	}
 
 	@Test
-	void testSelectJobHuntingStatus() {
-		fail("まだ実装されていません");
+	void selectJobHuntingStatusの正常系テスト() {
+		// 1.Ready
+		String apply_id = "1";
+		// 2.Do
+		String result = jobRequestService.selectJobHuntingStatus(apply_id);
+		// 3.Assert
+		assertNotNull(result);
+		// 4.Logs
+		log.warn("[selectJobHuntingStatusの正常系テスト]result:" + result);
+	}
+	
+	@Test
+	void selectJobHuntingStatusの異常系テスト() {
+		// 1.Ready
+		String apply_id = "1";
+		
+		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).selectJobHuntingStatus(anyString());
+		// 2.Do
+		String result = jobRequestService.selectJobHuntingStatus(apply_id);
+		// 3.Assert
+		assertNull(result);
+		// 4.Logs
+		log.warn("[selectJobHuntingStatusの異常系テスト]result:" + result);
 	}
 
 	@Test
-	void testUpdateStatusFixed() {
-		fail("まだ実装されていません");
+	void updateStatusFixedの正常系テスト() {
+		// 1.Ready
+		String apply_id = "1";
+		// 2.Do
+		boolean result = jobRequestService.updateStatusFixed(apply_id);
+		// 3.Assert
+		assertEquals(true, result);
+		// 4.Logs
+		log.warn("[updateStatusFixedの正常系テスト]result:" + result);
+	}
+	
+	@Test
+	void updateStatusFixedの正常系テスト_失敗() {
+		// 1.Ready
+		String apply_id = "1";
+		doReturn(0).when(jobRequestRepository).updateStatusOne(anyString());
+		// 2.Do
+		boolean result = jobRequestService.updateStatusFixed(apply_id);
+		// 3.Assert
+		assertFalse(result);
+		// 4.Logs
+		log.warn("[updateStatusFixedの正常系テスト_失敗]result:" + result);
+	}
+	
+	@Test
+	void updateStatusFixedの異常系テスト() {
+		// 1.Ready
+		String apply_id = "1";
+		
+		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).updateStatusOne(anyString());
+		// 2.Do
+		boolean result = jobRequestService.updateStatusFixed(apply_id);
+		// 3.Assert
+		assertEquals(false, result);
+		// 4.Logs
+		log.warn("[updateStatusFixedの異常系テスト]result:" + result);
+	}
+	
+	@Test
+	void hasNoticedCourseDirectorの正常系テスト() {
+		// 1.Ready
+		String apply_id = "1";
+		// 2.Do
+		boolean result = jobRequestService.hasNoticedCourseDirector(apply_id);
+		// 3.Assert
+		assertEquals(true, result);
+		// 4.Logs
+		log.warn("[hasNoticedCourseDirectorの正常系テスト]result:" + result);
+	}
+	
+	@Test
+	void hasNoticedCourseDirectorの正常系テスト_失敗() {
+		// 1.Ready
+		String apply_id = "1";
+		doReturn(0).when(jobRequestRepository).noticeCourseDirector(anyString());
+		// 2.Do
+		boolean result = jobRequestService.hasNoticedCourseDirector(apply_id);
+		// 3.Assert
+		assertFalse(result);
+		// 4.Logs
+		log.warn("[hasNoticedCourseDirectorの正常系テスト_失敗]result:" + result);
+	}
+	
+	@Test
+	void hasNoticedCourseDirectorの異常系テスト() {
+		// 1.Ready
+		String apply_id = "1";
+		
+		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).noticeCourseDirector(anyString());
+		// 2.Do
+		boolean result = jobRequestService.hasNoticedCourseDirector(apply_id);
+		// 3.Assert
+		assertEquals(false, result);
+		// 4.Logs
+		log.warn("[hasNoticedCourseDirectorの異常系テスト]result:" + result);
 	}
 
 }
