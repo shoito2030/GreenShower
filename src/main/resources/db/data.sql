@@ -2,13 +2,15 @@
 INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id)
 VALUES('isida@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '石田悠介', 'ROLE_STUDENT', 'S3A1', '01', 'isida@xxx.co.jp');
 INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id)
-VALUES('yamada@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '山田啓介', 'ROLE_STUDENT', 'S3A2', '02', 'yamada@xxx.co.jp');
+VALUES('yamada@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '山田啓介', 'ROLE_STUDENT', 'S3A2', '01', 'yamada@xxx.co.jp');
 INSERT INTO users (user_id, encrypted_password, name, role, classroom, class_number, register_user_id)
-VALUES('tanaka@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '田中太郎', 'ROLE_STUDENT', 'S3A2', '03', 'tanaka@xxx.co.jp');
+VALUES('tanaka@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '田中太郎', 'ROLE_STUDENT', 'S3A2', '02', 'tanaka@xxx.co.jp');
 
 /* ユーザマスタのデータ（ADMIN権限：担任、事務） PASS:password */
 INSERT INTO users (user_id, encrypted_password, name, role, classroom, register_user_id)
 VALUES('abe@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '安部華奈', 'ROLE_TEACHER', 'S3A1',  'abe@xxx.co.jp');
+INSERT INTO users (user_id, encrypted_password, name, role, classroom, register_user_id)
+VALUES('yosida@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '吉田拓海', 'ROLE_TEACHER', 'S3A2',  'yosida@xxx.co.jp');
 INSERT INTO users (user_id, encrypted_password, name, role, register_user_id)
 VALUES('sano@xxx.co.jp', '$2a$10$xRTXvpMWly0oGiu65WZlm.3YL95LGVV2ASFjDhe6WF4.Qji1huIPa', '佐野翼', 'ROLE_STAFF', 'sano@xxx.co.jp');
 
