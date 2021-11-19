@@ -262,6 +262,7 @@ public class JobRequestController {
 	@PostMapping("/job/request/status-change/{apply_id}")
 	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
 			Principal principal, Model model) {
+		String status = jobRequestService.selectJobHuntingStatus(apply_id);
 
 		if (form.getStatus().equals("1") && form.getIndicate().equals("")) {
 			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
@@ -274,6 +275,11 @@ public class JobRequestController {
 		} else if (!(form.getStatus().equals("3") || form.getStatus().equals("1") || form.getStatus().equals("99"))) {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getRequestStatusChange(principal, apply_id, model);
+			
+		} else if (status.equals("4")&&form.getStatus().equals("3")) {
+			model.addAttribute("errmsg", "完了している申請は承認できません。");
+			return getRequestStatusChange(principal, apply_id, model);
+			
 		}
 
 		boolean isSuccess = jobRequestService.hasUpdateJobStatus(apply_id, form);
