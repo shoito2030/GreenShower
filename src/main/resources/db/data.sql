@@ -45,7 +45,7 @@ VALUES('6', 'isida@xxx.co.jp', '4', '0', '2', 'ホワイトシャワー株式会
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
 VALUES('7', 'tanaka@xxx.co.jp', '5', '0', '2', 'ホワイトシャワー株式会社');
 INSERT INTO job_hunting (apply_id, applicant_id, status, apply_type, content, company_name)
-VALUES('8', 'isida@xxx.co.jp', '2', '0', '1', 'ブラックシャワー株式会社');
+VALUES('8', 'isida@xxx.co.jp', '5', '0', '1', 'ブラックシャワー株式会社');
 
 /* 申請マスタ用データ */
 INSERT INTO requests (apply_id, date_activity_from, date_activity_to, loc, way, date_absence_from, date_absence_to, remark, register_user_id)
@@ -70,6 +70,7 @@ INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES(
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('2', TRUE, '報告詳細から申請詳細に遷移できるかテスト', 'isida@xxx.co.jp');
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('3', TRUE, '報告詳細から申請詳細に遷移できるかテスト', 'yamada@xxx.co.jp');
 INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('7', TRUE, '報告詳細から申請詳細に遷移できるかテスト', 'tanaka@xxx.co.jp');
+INSERT INTO REPORTS(APPLY_ID,ADVANCE_OR_RETREAT,REMARK,REGISTER_USER_ID) VALUES('8', TRUE, '状態遷移テスト', 'isida@xxx.co.jp');
 
 /* events用データ */
 INSERT INTO  EVENTS(event_id, company_name, datetime, loc, content, bring, register_user_id) VALUES('1', 'メルカリ株式会社', '2021-7-17 12:00', '自宅', 'あいうえおかきくけこ', '筆記用具', 'abe@xxx.co.jp')
