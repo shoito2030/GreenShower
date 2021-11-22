@@ -1,688 +1,769 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-	<meta charset="UTF-8">
-	<title>就職活動申請修正画面</title>
+<meta charset="UTF-8">
+<title>就職活動申請修正画面</title>
 
 
-	<th:block th:insert="components/part::frag_mobile"></th:block>
-	<th:block th:insert="components/part::frag_icon"></th:block>
-	<th:block th:insert="components/part::frag_style"></th:block>
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
 
-	<style>
-		.container {
-			max-width: 960px;
-		}
+<style>
+.container {
+	max-width: 960px;
+}
 
-		.original-input-group {
-			position: relative;
-			display: flex;
-			flex-wrap: wrap;
-			align-items: stretch;
-			/*width: 100%;*/
-		}
+.original-input-group {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	/*width: 100%;*/
+}
 
-		@media screen and (max-width: 800px) {
-			.margin-md-0-auto {
-				margin: 0 auto;
-			}
-		}
+@media screen and (max-width: 800px) {
+	.margin-md-0-auto {
+		margin: 0 auto;
+	}
+}
 
-
-		@media screen and (min-width: 801px) {
-			.media-margin-top-8rem {
-				margin-top: 8rem;
-			}
-
-			.media-margin-top-35rem {
-				margin-top: 3.5rem;
-			}
-
-			.media-margin-left-9rem {
-				margin-left: 9rem;
-			}
-		}
-	</style>
+@media screen and (min-width: 801px) {
+	.media-margin-top-8rem {
+		margin-top: 8rem;
+	}
+	.media-margin-top-35rem {
+		margin-top: 3.5rem;
+	}
+	.media-margin-left-9rem {
+		margin-left: 9rem;
+	}
+}
+</style>
 </head>
 
 <body>
 	<th:block th:insert="components/part::frag_header"></th:block>
 
-	<h1 class="ml-md-5 text-center text-md-start media-margin-left-9rem fw-bold">就職活動申請
+	<h1
+		class="ml-md-5 text-center text-md-start media-margin-left-9rem fw-bold">就職活動申請
 		修正</h1>
-		
-		<th:block th:if="${jobRequestData}">
-		
-		
-	<form class="container mt-md-5 needs-validation" novalidate method="post" th:action="@{'/job/request/fix/' + ${jobRequestData.apply_id}}"
-		th:object="${jobRequestData}">
+
+	<th:block th:if="${jobRequestData}">
 
 
-		<th:block role="presentation">
-			<div class="row mt-md-4 pr-md-5">
-                <div class="col-md-2 pr-md-5">
-                    <span><small class="text-muted">クラス</small><span
-                            class="float-md-right mt-md-1 font-weight-bold h4" th:text="*{classroom}"></span></span>
-                </div>
-                <div class="col-md-1 offset-md-1">
-                    <span><small class="text-muted">番号</small><span
-                            class="float-md-right mt-md-1 font-weight-bold h4 " th:text="*{class_number}"></span></span>
-                </div>
-                <div class="col-md-2 offset-md-1 pr-md-5">
-                    <span><small class="text-muted">氏名</small><span
-                            class="float-md-right mt-md-1 font-weight-bold h4" th:text="*{name}"></span></span>
-                </div>
-            </div>
-		</th:block>
+		<form class="container mt-md-5 needs-validation" novalidate
+			method="post"
+			th:action="@{'/job/request/fix/' + ${jobRequestData.apply_id}}"
+			th:object="${jobRequestData}">
 
-		<div class="row row-cols-1 row-cols-md-2 gy-3 mb-md-5">
-			<div class="col-md-4">
-				<h4 class="fw-bold text-center">申請種別</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col">
-				<div class="input-group justify-content-around pt-md-2">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="apply_type" id="applyType1" th:checked="*{apply_type.id=='0'}" value="0"
-							required>
-						<label class="form-check-label" for="applyType1">個人</label>
-						<div class="invalid-feedback">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                            選択してください</h6>
+
+			<th:block role="presentation">
+				<div class="row mt-md-4 pr-md-5">
+					<div class="col-md-2 pr-md-5">
+						<span><small class="text-muted">クラス</small><span
+							class="float-md-right mt-md-1 font-weight-bold h4"
+							th:text="*{classroom}"></span></span>
 					</div>
+					<div class="col-md-1 offset-md-1">
+						<span><small class="text-muted">番号</small><span
+							class="float-md-right mt-md-1 font-weight-bold h4 "
+							th:text="*{class_number}"></span></span>
 					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="apply_type" id="applyType2" th:checked="*{apply_type.id=='1'}" value="1"
-							required>
-						<label class="form-check-label" for="applyType2">とりまとめ</label>
+					<div class="col-md-2 offset-md-1 pr-md-5">
+						<span><small class="text-muted">氏名</small><span
+							class="float-md-right mt-md-1 font-weight-bold h4"
+							th:text="*{name}"></span></span>
 					</div>
-
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-					th:if="${#fields.hasErrors('apply_type')}" th:errors="*{apply_type}">
-						エラーメッセージ</h6>
-
 				</div>
-			</div>
+			</th:block>
 
-
-			<div class="col-md-4">
-				<h4 class="fw-bold mt-md-1 text-center">企業名</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col">
-				<input type="text" class="form-control" name="company_name" th:field="*{company_name}" required>
-				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-				th:if="${#fields.hasErrors('company_name')}" th:errors="*{company_name}">エラーメッセージ
-				</h6>
-
-				<div class="invalid-feedback">
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						企業名を入力してください</h6>
+			<div class="row row-cols-1 row-cols-md-2 gy-3 mb-md-5">
+				<div class="col-md-4">
+					<h4 class="fw-bold text-center">申請種別</h4>
+					<h6 class="text-danger text-center">※必須</h6>
 				</div>
-			</div>
-
-
-			<div class="col-md-4">
-				<h4 class="fw-bold mt-md-1 text-center">内容</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col pt-md-2">
-				<div class="input-group justify-content-around">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="content1" name="content" th:checked="*{content.id=='1'}" value="1" required>
-						<label class="form-check-label" for="content1">合企</label>
-						<div class="invalid-feedback">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                            選択してください</h6>
-					</div>
+				<div class="col">
+					<div class="input-group justify-content-around pt-md-2">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="apply_type"
+								id="applyType1" th:checked="*{apply_type.id=='0'}" value="0"
+								required> <label class="form-check-label"
+								for="applyType1">個人</label>
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
 						</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="content2" name="content" th:checked="*{content.id=='2'}" value="2" required>
-						<label class="form-check-label" for="content2">単独</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="content3" name="content" th:checked="*{content.id=='3'}" value="3" required>
-						<label class="form-check-label" for="content3">試験</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="content99" name="content" th:checked="*{content.id=='99'}" value="99" required>
-						<label class="form-check-label" for="content99">その他</label>
-					</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="apply_type"
+								id="applyType2" th:checked="*{apply_type.id=='1'}" value="1"
+								required> <label class="form-check-label"
+								for="applyType2">とりまとめ</label>
+						</div>
 
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-					th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
-						エラーメッセージ</h6>
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger"
+							th:if="${#fields.hasErrors('apply_type')}"
+							th:errors="*{apply_type}">エラーメッセージ</h6>
+
+					</div>
 				</div>
-			</div>
 
-			<div class="col-md-4">
-				<h4 class="fw-bold mt-md-4 text-center">開始時刻・終了日時</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col">
-				<div class="row g-3">
-					<div class="col-md-6">
-						<label for="date_activity_from" class="form-label input-group justify-content-center">開始</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_activity_from" th:value="${#dates.format(jobRequestData.date_activity_from, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_activity_from, 'HH:mm:ss')}"
-							id="date_activity_from" required>
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('date_activity_from')}" th:errors="*{date_activity_from}">
+
+				<div class="col-md-4">
+					<h4 class="fw-bold mt-md-1 text-center">企業名</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col">
+					<input type="text" class="form-control" name="company_name"
+						th:field="*{company_name}" required>
+					<h6
+						class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('company_name')}"
+						th:errors="*{company_name}">エラーメッセージ</h6>
+
+					<div class="invalid-feedback">
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							企業名を入力してください</h6>
+					</div>
+				</div>
+
+
+				<div class="col-md-4">
+					<h4 class="fw-bold mt-md-1 text-center">内容</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col pt-md-2">
+					<div class="input-group justify-content-around">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="content1"
+								name="content" th:checked="*{content.id=='1'}" value="1"
+								required> <label class="form-check-label" for="content1">合企</label>
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="content2"
+								name="content" th:checked="*{content.id=='2'}" value="2"
+								required> <label class="form-check-label" for="content2">単独</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="content3"
+								name="content" th:checked="*{content.id=='3'}" value="3"
+								required> <label class="form-check-label" for="content3">試験</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="content99"
+								name="content" th:checked="*{content.id=='99'}" value="99"
+								required> <label class="form-check-label"
+								for="content99">その他</label>
+						</div>
+
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger"
+							th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
 							エラーメッセージ</h6>
+					</div>
+				</div>
 
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								選択してください</h6>
+				<div class="col-md-4">
+					<h4 class="fw-bold mt-md-4 text-center">開始日時・終了日時</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col">
+					<div class="row g-3">
+						<div class="col-md-6">
+							<label for="date_activity_from"
+								class="form-label input-group justify-content-center">開始</label>
+							<input type="datetime-local" class="form-control dateValid"
+								name="date_activity_from"
+								th:value="${#dates.format(jobRequestData.date_activity_from, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_activity_from, 'HH:mm:ss')}"
+								id="date_activity_from" required>
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('date_activity_from')}"
+								th:errors="*{date_activity_from}">エラーメッセージ</h6>
+
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label for="date_activity_to"
+								class="form-label input-group justify-content-around">終了</label>
+							<input type="datetime-local" class="form-control dateValid"
+								name="date_activity_to"
+								th:value="${#dates.format(jobRequestData.date_activity_to, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_activity_to, 'HH:mm:ss')}"
+								id="date_activity_to" required>
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('date_activity_to')}"
+								th:errors="*{date_activity_to}">エラーメッセージ</h6>
+
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<label for="date_activity_to" class="form-label input-group justify-content-around">終了</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_activity_to" th:value="${#dates.format(jobRequestData.date_activity_to, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_activity_to, 'HH:mm:ss')}" id="date_activity_to"
-							required>
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('date_activity_to')}" th:errors="*{date_activity_to}">
+
+					<div class="invalid-feedback">
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							必須項目です。</h6>
+					</div>
+				</div>
+
+
+				<div class="col-md-4">
+					<h4 class="fw-bold mt-md-1 text-center">郵便番号</h4>
+				</div>
+				<div class="col">
+					<div class="input-group w-50 margin-md-0-auto">
+						<input type="text" class="form-control" id="zipcode">
+						<button type="button" id="zip-btn" class="btn btn-primary">検索</button>
+					</div>
+
+					<div class="invalid-feedback">
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							必須項目です。</h6>
+					</div>
+				</div>
+
+
+				<div class="col-md-4 mt-md-5">
+					<h4 class="fw-bold mt-md-1 text-center">場所</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col mt-md-5">
+					<input type="text" class="form-control" name="loc"
+						th:field="*{loc}" id="loc" required>
+					<h6
+						class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('loc')}" th:errors="*{loc}">エラーメッセージ</h6>
+
+					<div class="invalid-feedback">
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							場所を入力してください</h6>
+					</div>
+				</div>
+
+
+				<div class="col-md-4 media-margin-top-8rem">
+					<h4 class="fw-bold mt-md-1 text-center">手段</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col">
+
+					<div class="row g-3">
+						<div
+							class="form-check col-sm-2 pt-md-5 original-input-group justify-content-center justify-content-md-start">
+							<input type="checkbox" class="form-check-input" name="way"
+								value="1" th:checked="*{way.id=='1'}" id="way1"> <label
+								for="way1" class="form-check-label"> 欠席 </label>
+						</div>
+
+						<div class="col-sm-5 pt-md-2">
+							<label for="date_absence_from"
+								class="form-label input-group justify-content-center">開始</label>
+							<input type="datetime-local" class="form-control dateValid"
+								name="date_absence_from" id="date_absence_from"
+								th:value="${#dates.format(jobRequestData.date_absence_from, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_absence_from, 'HH:mm:ss')}">
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('date_absence_from')}"
+								th:errors="*{date_absence_from}">エラーメッセージ</h6>
+
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
+						</div>
+
+						<div class="col-sm-5 pt-md-2">
+							<label for="date_absence_to"
+								class="form-label input-group justify-content-center">終了</label>
+							<input type="datetime-local" class="form-control dateValid"
+								name="date_absence_to" id="date_absence_to"
+								th:value="${#dates.format(jobRequestData.date_absence_to, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_absence_to, 'HH:mm:ss')}">
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('date_absence_to')}"
+								th:errors="*{date_absence_to}">エラーメッセージ</h6>
+
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row g-3">
+						<div
+							class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
+							<input type="checkbox" class="form-check-input" name="way"
+								th:checked="*{way.id=='2'}" value="2" id="way2"> <label
+								for="way2" class="form-check-label"> 早退 </label>
+						</div>
+
+						<div class="col pt-md-2">
+							<input type="datetime-local" class="form-control dateValid"
+								name="leave_early_date" id="leave_early_date"
+								th:value="${#dates.format(jobRequestData.leave_early_date, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.leave_early_date, 'HH:mm:ss')}">
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('leave_early_date')}"
+								th:errors="*{leave_early_date}">エラーメッセージ</h6>
+
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									早退日時を選択してください</h6>
+							</div>
+						</div>
+					</div>
+
+					<div class="row g-3">
+						<div
+							class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
+							<input type="checkbox" class="form-check-input" name="way"
+								th:checked="*{way.id=='3'}" value="3" id="way3"> <label
+								for="way3" class="form-check-label"> 遅刻 </label>
+						</div>
+
+						<div class="col pt-md-2">
+							<input type="datetime-local" class="form-control dateValid"
+								name="attendance_date" id="attendance_date"
+								th:value="${#dates.format(jobRequestData.attendance_date, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.attendance_date, 'HH:mm:ss')}">
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('attendance_date')}"
+								th:errors="*{attendance_date}">エラーメッセージ</h6>
+
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									遅刻日時を選択してください</h6>
+							</div>
+						</div>
+					</div>
+
+					<h6
+						class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('way')}" th:errors="*{way}">エラーメッセージ
+					</h6>
+
+					<div class="err_text" id="err_checkbox"></div>
+				</div>
+
+
+				<div class="col-md-4 media-margin-top-35rem">
+					<h4 class="fw-bold mt-md-1 text-center">メモ</h4>
+				</div>
+				<div class="col">
+					<textarea class="form-control" id="remark" th:field="*{remark}"
+						name="remark" rows="5" cols="50"></textarea>
+				</div>
+
+			</div>
+
+
+			<div class="d-grid col-4 mx-auto mt-5">
+				<button class="btn btn-primary btn-lg" type="submit" id="submit">登録</button>
+			</div>
+		</form>
+	</th:block>
+
+	<th:block th:if="${jobRequestForm}">
+		<form class="container mt-md-5 needs-validation" novalidate
+			method="post"
+			th:action="@{'/job/request/fix/' + ${jobRequestForm.apply_id}}"
+			th:object="${jobRequestForm}">
+
+
+			<th:block role="presentation">
+				<div class="row mt-md-4 pr-md-5">
+					<div class="col-md-2 pr-md-5">
+						<span><small class="text-muted">クラス</small><span
+							class="float-md-right mt-md-1 font-weight-bold h4"
+							th:text="*{classroom}"></span></span>
+					</div>
+					<div class="col-md-1 offset-md-1">
+						<span><small class="text-muted">番号</small><span
+							class="float-md-right mt-md-1 font-weight-bold h4 "
+							th:text="*{class_number}"></span></span>
+					</div>
+					<div class="col-md-2 offset-md-1 pr-md-5">
+						<span><small class="text-muted">氏名</small><span
+							class="float-md-right mt-md-1 font-weight-bold h4"
+							th:text="*{name}"></span></span>
+					</div>
+				</div>
+			</th:block>
+
+			<div class="row row-cols-1 row-cols-md-2 gy-3 mb-md-5">
+				<div class="col-md-4">
+					<h4 class="fw-bold text-center">申請種別</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col">
+					<div class="input-group justify-content-around pt-md-2">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="apply_type"
+								id="applyType1" th:checked="*{apply_type=='0'}" value="0"
+								required> <label class="form-check-label"
+								for="applyType1">個人</label>
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" name="apply_type"
+								id="applyType2" th:checked="*{apply_type=='1'}" value="1"
+								required> <label class="form-check-label"
+								for="applyType2">とりまとめ</label>
+						</div>
+
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger"
+							th:if="${#fields.hasErrors('apply_type')}"
+							th:errors="*{apply_type}">エラーメッセージ</h6>
+
+					</div>
+				</div>
+
+
+				<div class="col-md-4">
+					<h4 class="fw-bold mt-md-1 text-center">企業名</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col">
+					<input type="text" class="form-control" name="company_name"
+						th:field="*{company_name}" required>
+					<h6
+						class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('company_name')}"
+						th:errors="*{company_name}">エラーメッセージ</h6>
+
+					<div class="invalid-feedback">
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							企業名を入力してください</h6>
+					</div>
+				</div>
+
+
+				<div class="col-md-4">
+					<h4 class="fw-bold mt-md-1 text-center">内容</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col pt-md-2">
+					<div class="input-group justify-content-around">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="content1"
+								name="content" th:checked="*{content=='1'}" value="1" required>
+							<label class="form-check-label" for="content1">合企</label>
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="content2"
+								name="content" th:checked="*{content=='2'}" value="2" required>
+							<label class="form-check-label" for="content2">単独</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="content3"
+								name="content" th:checked="*{content=='3'}" value="3" required>
+							<label class="form-check-label" for="content3">試験</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="content99"
+								name="content" th:checked="*{content=='99'}" value="99" required>
+							<label class="form-check-label" for="content99">その他</label>
+						</div>
+
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger"
+							th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
 							エラーメッセージ</h6>
+					</div>
+				</div>
 
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								選択してください</h6>
+				<div class="col-md-4">
+					<h4 class="fw-bold mt-md-4 text-center">開始日時・終了日時</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col">
+					<div class="row g-3">
+						<div class="col-md-6">
+							<label for="date_activity_from"
+								class="form-label input-group justify-content-center">開始</label>
+							<input type="datetime-local" class="form-control dateValid"
+								name="date_activity_from" th:value="*{date_activity_from}"
+								id="date_activity_from" required>
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('date_activity_from')}"
+								th:errors="*{date_activity_from}">エラーメッセージ</h6>
+
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
 						</div>
-					</div>
-				</div>
+						<div class="col-md-6">
+							<label for="date_activity_to"
+								class="form-label input-group justify-content-around">終了</label>
+							<input type="datetime-local" class="form-control dateValid"
+								name="date_activity_to" th:value="*{date_activity_to}"
+								id="date_activity_to" required>
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('date_activity_to')}"
+								th:errors="*{date_activity_to}">エラーメッセージ</h6>
 
-				<div class="invalid-feedback">
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						必須項目です。</h6>
-				</div>
-			</div>
-
-
-			<div class="col-md-4">
-				<h4 class="fw-bold mt-md-1 text-center">郵便番号</h4>
-			</div>
-			<div class="col">
-				<div class="input-group w-50 margin-md-0-auto">
-					<input type="text" class="form-control" id="zipcode">
-					<button type="button" id="zip-btn" class="btn btn-primary">検索</button>
-				</div>
-
-				<div class="invalid-feedback">
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						必須項目です。</h6>
-				</div>
-			</div>
-
-
-			<div class="col-md-4 mt-md-5">
-				<h4 class="fw-bold mt-md-1 text-center">場所</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col mt-md-5">
-				<input type="text" class="form-control" name="loc" th:field="*{loc}" id="loc" required>
-				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-				th:if="${#fields.hasErrors('loc')}" th:errors="*{loc}">エラーメッセージ</h6>
-
-				<div class="invalid-feedback">
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						場所を入力してください</h6>
-				</div>
-			</div>
-
-
-			<div class="col-md-4 media-margin-top-8rem">
-				<h4 class="fw-bold mt-md-1 text-center">手段</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col">
-
-				<div class="row g-3">
-					<div
-						class="form-check col-sm-2 pt-md-5 original-input-group justify-content-center justify-content-md-start">
-						<input type="checkbox" class="form-check-input" name="way" value="1" th:checked="*{way.id=='1'}" id="way1">
-						<label for="way1" class="form-check-label">
-							欠席
-						</label>
-					</div>
-
-					<div class="col-sm-5 pt-md-2">
-						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_absence_from"
-							id="date_absence_from" th:value="${#dates.format(jobRequestData.date_absence_from, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_absence_from, 'HH:mm:ss')}">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('date_absence_from')}" th:errors="*{date_absence_from}">
-							エラーメッセージ
-						</h6>
-
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								選択してください</h6>
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
 						</div>
 					</div>
 
-					<div class="col-sm-5 pt-md-2">
-						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_absence_to"
-							id="date_absence_to" th:value="${#dates.format(jobRequestData.date_absence_to, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.date_absence_to, 'HH:mm:ss')}">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('date_absence_to')}" th:errors="*{date_absence_to}">
-							エラーメッセージ
-						</h6>
+					<div class="invalid-feedback">
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							必須項目です。</h6>
+					</div>
+				</div>
 
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								選択してください</h6>
+
+				<div class="col-md-4">
+					<h4 class="fw-bold mt-md-1 text-center">郵便番号</h4>
+				</div>
+				<div class="col">
+					<div class="input-group w-50 margin-md-0-auto">
+						<input type="text" class="form-control" id="zipcode">
+						<button type="button" id="zip-btn" class="btn btn-primary">検索</button>
+					</div>
+
+					<div class="invalid-feedback">
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							必須項目です。</h6>
+					</div>
+				</div>
+
+
+				<div class="col-md-4 mt-md-5">
+					<h4 class="fw-bold mt-md-1 text-center">場所</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col mt-md-5">
+					<input type="text" class="form-control" name="loc"
+						th:field="*{loc}" id="loc" required>
+					<h6
+						class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('loc')}" th:errors="*{loc}">エラーメッセージ</h6>
+
+					<div class="invalid-feedback">
+						<h6
+							class="form-text input-group justify-content-md-start justify-content-center text-danger">
+							場所を入力してください</h6>
+					</div>
+				</div>
+
+
+				<div class="col-md-4 media-margin-top-8rem">
+					<h4 class="fw-bold mt-md-1 text-center">手段</h4>
+					<h6 class="text-danger text-center">※必須</h6>
+				</div>
+				<div class="col">
+
+					<div class="row g-3">
+						<div
+							class="form-check col-sm-2 pt-md-5 original-input-group justify-content-center justify-content-md-start">
+							<input type="checkbox" class="form-check-input" name="way"
+								value="1" th:checked="*{way=='1'}" id="way1"> <label
+								for="way1" class="form-check-label"> 欠席 </label>
 						</div>
-					</div>
-				</div>
 
+						<div class="col-sm-5 pt-md-2">
+							<label for="date_absence_from"
+								class="form-label input-group justify-content-center">開始</label>
+							<input type="datetime-local" class="form-control dateValid"
+								name="date_absence_from" id="date_absence_from"
+								th:value="*{date_absence_from}">
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('date_absence_from')}"
+								th:errors="*{date_absence_from}">エラーメッセージ</h6>
 
-				<div class="row g-3">
-					<div
-						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
-						<input type="checkbox" class="form-check-input" name="way" th:checked="*{way.id=='2'}" value="2" id="way2">
-						<label for="way2" class="form-check-label">
-							早退
-						</label>
-					</div>
-
-					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control dateValid" name="leave_early_date"
-						id="leave_early_date" th:value="${#dates.format(jobRequestData.leave_early_date, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.leave_early_date, 'HH:mm:ss')}">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('leave_early_date')}" th:errors="*{leave_early_date}">
-							エラーメッセージ
-						</h6>
-
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								早退日時を選択してください</h6>
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
 						</div>
-					</div>
-				</div>
 
-				<div class="row g-3">
-					<div
-						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
-						<input type="checkbox" class="form-check-input" name="way" th:checked="*{way.id=='3'}" value="3" id="way3">
-						<label for="way3" class="form-check-label">
-							遅刻
-						</label>
-					</div>
+						<div class="col-sm-5 pt-md-2">
+							<label for="date_absence_to"
+								class="form-label input-group justify-content-center">終了</label>
+							<input type="datetime-local" class="form-control dateValid"
+								name="date_absence_to" id="date_absence_to"
+								th:value="*{date_absence_to}">
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('date_absence_to')}"
+								th:errors="*{date_absence_to}">エラーメッセージ</h6>
 
-					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control dateValid" name="attendance_date"
-						id="attendance_date" th:value="${#dates.format(jobRequestData.attendance_date, 'yyyy-MM-dd') + 'T' + #dates.format(jobRequestData.attendance_date, 'HH:mm:ss')}">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('attendance_date')}" th:errors="*{attendance_date}">
-							エラーメッセージ
-						</h6>
-
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								遅刻日時を選択してください</h6>
-						</div>
-					</div>
-				</div>
-
-				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-				th:if="${#fields.hasErrors('way')}" th:errors="*{way}">エラーメッセージ
-				</h6>
-				
-				<div class="err_text" id="err_checkbox"></div>
-			</div>
-
-
-			<div class="col-md-4 media-margin-top-35rem">
-				<h4 class="fw-bold mt-md-1 text-center">メモ</h4>
-			</div>
-			<div class="col">
-				<textarea class="form-control" id="remark" th:field="*{remark}" name="remark" rows="5" cols="50"></textarea>
-			</div>
-
-		</div>
-
-
-		<div class="d-grid col-4 mx-auto mt-5">
-			<button class="btn btn-primary btn-lg" type="submit" id="submit">登録</button>
-		</div>
-	</form>
-</th:block>
-
-<th:block th:if="${jobRequestForm}">
-<form class="container mt-md-5 needs-validation" novalidate method="post" th:action="@{'/job/request/fix/' + ${jobRequestForm.apply_id}}"
-		th:object="${jobRequestForm}">
-
-
-		<th:block role="presentation">
-			<div class="row mt-md-4 pr-md-5">
-                <div class="col-md-2 pr-md-5">
-                    <span><small class="text-muted">クラス</small><span
-                            class="float-md-right mt-md-1 font-weight-bold h4" th:text="*{classroom}"></span></span>
-                </div>
-                <div class="col-md-1 offset-md-1">
-                    <span><small class="text-muted">番号</small><span
-                            class="float-md-right mt-md-1 font-weight-bold h4 " th:text="*{class_number}"></span></span>
-                </div>
-                <div class="col-md-2 offset-md-1 pr-md-5">
-                    <span><small class="text-muted">氏名</small><span
-                            class="float-md-right mt-md-1 font-weight-bold h4" th:text="*{name}"></span></span>
-                </div>
-            </div>
-		</th:block>
-
-		<div class="row row-cols-1 row-cols-md-2 gy-3 mb-md-5">
-			<div class="col-md-4">
-				<h4 class="fw-bold text-center">申請種別</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col">
-				<div class="input-group justify-content-around pt-md-2">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="apply_type" id="applyType1" th:checked="*{apply_type=='0'}" value="0"
-							required>
-						<label class="form-check-label" for="applyType1">個人</label>
-						<div class="invalid-feedback">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                            選択してください</h6>
-					</div>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="apply_type" id="applyType2" th:checked="*{apply_type=='1'}" value="1"
-							required>
-						<label class="form-check-label" for="applyType2">とりまとめ</label>
-					</div>
-
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-					th:if="${#fields.hasErrors('apply_type')}" th:errors="*{apply_type}">
-						エラーメッセージ</h6>
-
-				</div>
-			</div>
-
-
-			<div class="col-md-4">
-				<h4 class="fw-bold mt-md-1 text-center">企業名</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col">
-				<input type="text" class="form-control" name="company_name" th:field="*{company_name}" required>
-				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-				th:if="${#fields.hasErrors('company_name')}" th:errors="*{company_name}">エラーメッセージ
-				</h6>
-
-				<div class="invalid-feedback">
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						企業名を入力してください</h6>
-				</div>
-			</div>
-
-
-			<div class="col-md-4">
-				<h4 class="fw-bold mt-md-1 text-center">内容</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col pt-md-2">
-				<div class="input-group justify-content-around">
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="content1" name="content" th:checked="*{content=='1'}" value="1" required>
-						<label class="form-check-label" for="content1">合企</label>
-						<div class="invalid-feedback">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                            選択してください</h6>
-					</div>
-						</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="content2" name="content" th:checked="*{content=='2'}" value="2" required>
-						<label class="form-check-label" for="content2">単独</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="content3" name="content" th:checked="*{content=='3'}" value="3" required>
-						<label class="form-check-label" for="content3">試験</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="content99" name="content" th:checked="*{content=='99'}" value="99" required>
-						<label class="form-check-label" for="content99">その他</label>
-					</div>
-
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-					th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
-						エラーメッセージ</h6>
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<h4 class="fw-bold mt-md-4 text-center">開始時刻・終了日時</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col">
-				<div class="row g-3">
-					<div class="col-md-6">
-						<label for="date_activity_from" class="form-label input-group justify-content-center">開始</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_activity_from" th:value="*{date_activity_from}"
-							id="date_activity_from" required>
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('date_activity_from')}" th:errors="*{date_activity_from}">
-							エラーメッセージ</h6>
-
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								選択してください</h6>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<label for="date_activity_to" class="form-label input-group justify-content-around">終了</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_activity_to" th:value="*{date_activity_to}" id="date_activity_to"
-							required>
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('date_activity_to')}" th:errors="*{date_activity_to}">
-							エラーメッセージ</h6>
-
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								選択してください</h6>
-						</div>
-					</div>
-				</div>
-
-				<div class="invalid-feedback">
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						必須項目です。</h6>
-				</div>
-			</div>
-
-
-			<div class="col-md-4">
-				<h4 class="fw-bold mt-md-1 text-center">郵便番号</h4>
-			</div>
-			<div class="col">
-				<div class="input-group w-50 margin-md-0-auto">
-					<input type="text" class="form-control" id="zipcode">
-					<button type="button" id="zip-btn" class="btn btn-primary">検索</button>
-				</div>
-
-				<div class="invalid-feedback">
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						必須項目です。</h6>
-				</div>
-			</div>
-
-
-			<div class="col-md-4 mt-md-5">
-				<h4 class="fw-bold mt-md-1 text-center">場所</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col mt-md-5">
-				<input type="text" class="form-control" name="loc" th:field="*{loc}" id="loc" required>
-				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-				th:if="${#fields.hasErrors('loc')}" th:errors="*{loc}">エラーメッセージ</h6>
-
-				<div class="invalid-feedback">
-					<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-						場所を入力してください</h6>
-				</div>
-			</div>
-
-
-			<div class="col-md-4 media-margin-top-8rem">
-				<h4 class="fw-bold mt-md-1 text-center">手段</h4>
-				<h6 class="text-danger text-center">※必須</h6>
-			</div>
-			<div class="col">
-
-				<div class="row g-3">
-					<div
-						class="form-check col-sm-2 pt-md-5 original-input-group justify-content-center justify-content-md-start">
-						<input type="checkbox" class="form-check-input" name="way" value="1" th:checked="*{way=='1'}" id="way1">
-						<label for="way1" class="form-check-label">
-							欠席
-						</label>
-					</div>
-
-					<div class="col-sm-5 pt-md-2">
-						<label for="date_absence_from" class="form-label input-group justify-content-center">開始</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_absence_from"
-							id="date_absence_from" th:value="*{date_absence_from}">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('date_absence_from')}" th:errors="*{date_absence_from}">
-							エラーメッセージ
-						</h6>
-
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								選択してください</h6>
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									選択してください</h6>
+							</div>
 						</div>
 					</div>
 
-					<div class="col-sm-5 pt-md-2">
-						<label for="date_absence_to" class="form-label input-group justify-content-center">終了</label>
-						<input type="datetime-local" class="form-control dateValid" name="date_absence_to"
-							id="date_absence_to" th:value="*{date_absence_to}">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('date_absence_to')}" th:errors="*{date_absence_to}">
-							エラーメッセージ
-						</h6>
 
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								選択してください</h6>
+					<div class="row g-3">
+						<div
+							class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
+							<input type="checkbox" class="form-check-input" name="way"
+								th:checked="*{way=='2'}" value="2" id="way2"> <label
+								for="way2" class="form-check-label"> 早退 </label>
+						</div>
+
+						<div class="col pt-md-2">
+							<input type="datetime-local" class="form-control dateValid"
+								name="leave_early_date" id="leave_early_date"
+								th:value="*{leave_early_date}">
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('leave_early_date')}"
+								th:errors="*{leave_early_date}">エラーメッセージ</h6>
+
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									早退日時を選択してください</h6>
+							</div>
 						</div>
 					</div>
+
+					<div class="row g-3">
+						<div
+							class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
+							<input type="checkbox" class="form-check-input" name="way"
+								th:checked="*{way=='3'}" value="3" id="way3"> <label
+								for="way3" class="form-check-label"> 遅刻 </label>
+						</div>
+
+						<div class="col pt-md-2">
+							<input type="datetime-local" class="form-control dateValid"
+								name="attendance_date" id="attendance_date"
+								th:value="*{attendance_date}">
+							<h6
+								class="form-text input-group justify-content-md-start justify-content-center text-danger"
+								th:if="${#fields.hasErrors('attendance_date')}"
+								th:errors="*{attendance_date}">エラーメッセージ</h6>
+
+							<div class="invalid-feedback">
+								<h6
+									class="form-text input-group justify-content-md-start justify-content-center text-danger">
+									遅刻日時を選択してください</h6>
+							</div>
+						</div>
+					</div>
+
+					<h6
+						class="form-text input-group justify-content-md-start justify-content-center text-danger"
+						th:if="${#fields.hasErrors('way')}" th:errors="*{way}">エラーメッセージ
+					</h6>
+
+					<div class="err_text" id="err_checkbox"></div>
 				</div>
 
 
-				<div class="row g-3">
-					<div
-						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
-						<input type="checkbox" class="form-check-input" name="way" th:checked="*{way=='2'}" value="2" id="way2">
-						<label for="way2" class="form-check-label">
-							早退
-						</label>
-					</div>
-
-					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control dateValid" name="leave_early_date"
-						id="leave_early_date" th:value="*{leave_early_date}">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('leave_early_date')}" th:errors="*{leave_early_date}">
-							エラーメッセージ
-						</h6>
-
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								早退日時を選択してください</h6>
-						</div>
-					</div>
+				<div class="col-md-4 media-margin-top-35rem">
+					<h4 class="fw-bold mt-md-1 text-center">メモ</h4>
+				</div>
+				<div class="col">
+					<textarea class="form-control" id="remark" th:field="*{remark}"
+						name="remark" rows="5" cols="50"></textarea>
 				</div>
 
-				<div class="row g-3">
-					<div
-						class="form-check col-sm-2 pt-md-3 original-input-group justify-content-center justify-content-md-start">
-						<input type="checkbox" class="form-check-input" name="way" th:checked="*{way=='3'}" value="3" id="way3">
-						<label for="way3" class="form-check-label">
-							遅刻
-						</label>
-					</div>
-
-					<div class="col pt-md-2">
-						<input type="datetime-local" class="form-control dateValid" name="attendance_date"
-						id="attendance_date" th:value="*{attendance_date}">
-						<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-						th:if="${#fields.hasErrors('attendance_date')}" th:errors="*{attendance_date}">
-							エラーメッセージ
-						</h6>
-
-						<div class="invalid-feedback">
-							<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">
-								遅刻日時を選択してください</h6>
-						</div>
-					</div>
-				</div>
-
-				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
-				th:if="${#fields.hasErrors('way')}" th:errors="*{way}">エラーメッセージ
-				</h6>
-				
-				<div class="err_text" id="err_checkbox"></div>
 			</div>
 
 
-			<div class="col-md-4 media-margin-top-35rem">
-				<h4 class="fw-bold mt-md-1 text-center">メモ</h4>
+			<div class="d-grid col-4 mx-auto mt-5">
+				<button class="btn btn-primary btn-lg" type="submit" id="submit">登録</button>
 			</div>
-			<div class="col">
-				<textarea class="form-control" id="remark" th:field="*{remark}" name="remark" rows="5" cols="50"></textarea>
-			</div>
-
-		</div>
-
-
-		<div class="d-grid col-4 mx-auto mt-5">
-			<button class="btn btn-primary btn-lg" type="submit" id="submit">登録</button>
-		</div>
-	</form>
-</th:block>
+		</form>
+	</th:block>
 
 	<th:block th:insert="components/part::frag_script"></th:block>
-	<script th:src="@{/js/wayValid.js}" src="../../../static/js/wayValid.js"></script>
+	<script th:src="@{/js/wayValid.js}"
+		src="../../../static/js/wayValid.js"></script>
 
 	<!-- オリジナルスクリプト -->
 	<script type="text/javascript" th:inline="javascript">
 		// 無効なフィールドがある場合にフォーム送信を無効にする
-        (function () {
-            'use strict';
+		(function() {
+			'use strict';
 
-            // Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
-            var forms = document.querySelectorAll('needs-validation');
+			// Bootstrapカスタム検証スタイルを適用してすべてのフォームを取得
+			var forms = document.querySelectorAll('needs-validation');
 
-            // ループして帰順を防ぐ
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false)
-                })
-        })()
-
+			// ループして帰順を防ぐ
+			Array.prototype.slice.call(forms).forEach(function(form) {
+				form.addEventListener('submit', function(event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add('was-validated');
+				}, false)
+			})
+		})()
 
 		// 郵便番号用
-		$('#zip-btn').on('click', function () {
+		$('#zip-btn').on('click', function() {
 			const url = 'https://zipcloud.ibsnet.co.jp/api/search?zipcode=';
 			const zipcode = document.getElementById("zipcode");
 
 			// Ajax通信を開始
 			$.ajax({
-				url: url + zipcode.value,
-				type: 'GET',
-				dataType: 'json',
-			}).done(function (data) {
+				url : url + zipcode.value,
+				type : 'GET',
+				dataType : 'json',
+			}).done(function(data) {
 				const results = data.results[0];
 				setAddress(results);
 
-			}).fail(function () {
+			}).fail(function() {
 				alert("ajax失敗");
 			});
 		})
@@ -699,14 +780,14 @@
 		}
 
 		// クラスと番号から名前を取得する用
-		$('#class_number').on('change', function () {
+		$('#class_number').on('change', function() {
 			const name = document.getElementById("name");
 			const classroom = document.getElementById("classroom").textContent;
 			const class_number = document.getElementById("class_number").value;
 
 			const json = {
-				"classroom": classroom,
-				"class_number": class_number
+				"classroom" : classroom,
+				"class_number" : class_number
 			}
 
 			if (class_number == "zero") {
@@ -715,107 +796,121 @@
 			}
 
 			$.ajax({
-				url: window.location.href + "/getUserInfo",
-				type: 'GET',
-				dataType: 'json',
-				data: {
+				url : window.location.href + "/getUserInfo",
+				type : 'GET',
+				dataType : 'json',
+				data : {
 					// CSRF対策
-					_csrf: $("*[name=_csrf]").val(),
-					json: JSON.stringify(json)
+					_csrf : $("*[name=_csrf]").val(),
+					json : JSON.stringify(json)
 				}
-			}).done(function (data) {
+			}).done(function(data) {
 				//name.value =  data[0].name;
 				name.innerText = data[0].name;
 
-			}).fail(function () {
+			}).fail(function() {
 				alert("ajax失敗");
 			});
 		});
 
 		// 日付形式確認用
-		$('#submit').click(function (e) {
-			let result = true;
+		$('#submit')
+				.click(
+						function(e) {
+							let result = true;
 
-			$(".dateValid").each(function (i, e) {
+							$(".dateValid")
+									.each(
+											function(i, e) {
 
-				// 必須チェック(required)があるか
-				if ($(e).attr('required')) {
-					console.log('必須要素:' + $(e).val());
+												// 必須チェック(required)があるか
+												if ($(e).attr('required')) {
+													console.log('必須要素:'
+															+ $(e).val());
 
-					if ($(e).val != '') {
-						const temp = $(e).val().split('T');
-						const date = temp[0];
-						const time = temp[1];
+													if ($(e).val != '') {
+														const temp = $(e).val()
+																.split('T');
+														const date = temp[0];
+														const time = temp[1];
 
-						if (date != '' && time != '') {
-							const regexDate = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
-							const regexTime = /^([01][0-9]|2[0-3]):[0-5][0-9]$/;
+														if (date != ''
+																&& time != '') {
+															const regexDate = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
+															const regexTime = /^([01][0-9]|2[0-3]):[0-5][0-9]$/;
 
-							if (!regexDate.test(date) && regexTime.test(time)) {
-								$(e).val('');
-								result = false;
+															if (!regexDate
+																	.test(date)
+																	&& regexTime
+																			.test(time)) {
+																$(e).val('');
+																result = false;
+																return false;
+															}
+
+															console
+																	.log('適切な値を確認');
+
+														}
+													}
+												}
+
+											});
+
+							if (!result) {
 								return false;
 							}
 
-							console.log('適切な値を確認');
+							//手段チェック用
+							$(".form-check-input[type='checkbox']").each(
+									function(i, e) {
+										console.log(i, e)
+										$("#err_checkbox h6").remove();
+									});
 
+							let elements = document
+									.querySelectorAll(".form-check-input[type='checkbox']");
+							elements = [].slice.call(elements);
 
-						}
-					}
-				}
+							let isChecked = true;
 
-			});
+							for (let i = 0; i < elements.length; i++) {
+								if (elements[i].checked) {
+									isChecked = false;
+									break;
+								}
+							}
 
-			if (!result) {
-				return false;
-			}
-			
-			//手段チェック用
-			$(".form-check-input[type='checkbox']").each(function (i, e) {
-                console.log(i, e)
-                $("#err_checkbox h6").remove();
-            });
+							if (isChecked) {
+								$("#err_checkbox")
+										.append(
+												'<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
 
-            let elements = document.querySelectorAll(".form-check-input[type='checkbox']");
-            elements = [].slice.call( elements ) ;
-            
-            let isChecked = true;
+							}
 
-            for(let i = 0; i < elements.length; i++) {
-                if(elements[i].checked) {
-                    isChecked = false;
-                    break;
-                }
-            }
-
-            if(isChecked) {
-            	$("#err_checkbox").append('<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
-                
-
-            }
-
-		});
-
+						});
 
 		//手段入力チェック
-		$(function(){
-			$("input[name='way']").bind("change", function(){
+		$(function() {
+			$("input[name='way']").bind("change", function() {
 				check_checkbox();
 			});
 		});
-		
-		function check_checkbox(){
+
+		function check_checkbox() {
 			$("#err_checkbox h6").remove();
 			var _result = true;
 			var _check_count = 0;
 
-			$("input[type='checkbox']").each(function(){
-				if($(this).prop('checked')){
-					_check_count = _check_count+1;
+			$("input[type='checkbox']").each(function() {
+				if ($(this).prop('checked')) {
+					_check_count = _check_count + 1;
 				}
 			});
-			if(_check_count == 0){
-				$("#err_checkbox").append('<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
+			if (_check_count == 0) {
+				$("#err_checkbox")
+						.append(
+								'<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
 				_result = false;
 			}
 			return _result;
