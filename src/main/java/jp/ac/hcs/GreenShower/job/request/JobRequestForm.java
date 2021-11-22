@@ -19,9 +19,24 @@ import lombok.Data;
 public class JobRequestForm {
 	
 	/**
+	 * 申請ID
+	 */
+	protected String apply_id;
+	
+	/**
+	 * クラス
+	 */
+	protected String classroom;
+	
+	/**
 	 * 出席番号
 	 */
 	private String class_number;
+	
+	/**
+	 * 氏名
+	 */
+	protected String name;
 	
 	/**
 	 * 申請種別

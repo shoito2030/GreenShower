@@ -262,7 +262,6 @@ public class JobRequestController {
 	@PostMapping("/job/request/status-change/{apply_id}")
 	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
 			Principal principal, Model model) {
-		String status = jobRequestService.selectJobHuntingStatus(apply_id);
 
 		if (form.getStatus().equals("1") && form.getIndicate().equals("")) {
 			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
@@ -275,11 +274,6 @@ public class JobRequestController {
 		} else if (!(form.getStatus().equals("3") || form.getStatus().equals("1") || form.getStatus().equals("99"))) {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getRequestStatusChange(principal, apply_id, model);
-			
-		} else if (status.equals("4")&&form.getStatus().equals("3")) {
-			model.addAttribute("errmsg", "完了している申請は承認できません。");
-			return getRequestStatusChange(principal, apply_id, model);
-			
 		}
 
 		boolean isSuccess = jobRequestService.hasUpdateJobStatus(apply_id, form);
@@ -302,7 +296,7 @@ public class JobRequestController {
 	 * @return 就職活動申請修正画面
 	 */
 	@GetMapping("/job/request/fix/{apply_id}")
-	public String getRequestContentChange(JobRequestForm form, Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
+	public String getRequestContentChange(Principal principal, @PathVariable("apply_id") String apply_id, Model model) {
 
 		Optional<JobRequestData> jobRequestData;
 
@@ -337,6 +331,7 @@ public class JobRequestController {
 		}
 
 		model.addAttribute("jobRequestData", jobRequestData.get());
+		session.setAttribute("applicant_id", jobRequestData.get().getApplicant_id());
 		return "job/request/fix";
 	}
 
@@ -352,7 +347,18 @@ public class JobRequestController {
 	public String JobRequestContentChange(@PathVariable("apply_id") String apply_id, @ModelAttribute @Validated JobRequestForm form, BindingResult bindingResult, 
 			Principal principal, Model model) {
 		if(bindingResult.hasErrors()) {
-			return getRequestContentChange(form, principal, apply_id, model);
+			Optional<UserData> userData = null;
+			String applicant_id = (String)session.getAttribute("applicant_id");
+
+			// ユーザの情報を取得
+			userData = jobRequestService.selectPersonalInfo(applicant_id);
+			
+			form.setClassroom(userData.get().getClassroom());
+			form.setClass_number(userData.get().getClass_number());
+			form.setName(userData.get().getName());
+			
+			model.addAttribute("jobRequestForm", form);
+			return "job/request/fix";
 		}
 		boolean isSuccess = jobRequestService.hasUpdatedJobContent(apply_id, form);
 
