@@ -306,9 +306,13 @@ public class JobRequestController {
 		jobRequestData = jobRequestService.selectOne(apply_id, principal.getName(), role);
 
 		String status = jobRequestService.selectJobHuntingStatus(apply_id);
+		
+		if(status == null) {
+			return getRequestList(principal, model);
+		}
 
 		// 状態が『申請完了』である場合
-		if (status.equals("4") || status == null) {
+		if (status.equals("4")) {
 			model.addAttribute("errmsg", "申請が完了されているので修正できません。");
 			return getRequestList(principal, model);
 			// 状態が『承認待ち』である場合

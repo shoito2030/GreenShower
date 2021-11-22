@@ -166,10 +166,15 @@ public class JobRequestService {
 	 */
 	public boolean hasInserted(JobRequestForm form, String applicant_id, String register_user_id) {
 		int rowNumber = 0;
+		JobRequestData data = refillToJobReportData(form, applicant_id, register_user_id);
+		
+		if(data == null) {
+			return false;
+		}
 
 		try {
 			// 追加処理を行い、追加できた件数を取得
-			rowNumber = jobRequestRepository.insertOne(refillToJobReportData(form, applicant_id, register_user_id));
+			rowNumber = jobRequestRepository.insertOne(data);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			return false;
@@ -189,7 +194,14 @@ public class JobRequestService {
 	private JobRequestData refillToJobReportData(JobRequestForm form, String applicant_id, String register_user_id) {
 		JobRequestData data = new JobRequestData();
 
-		int apply_id = jobRequestRepository.selectApply_id() + 1;
+		int latest_apply_id = jobRequestRepository.selectApply_id();
+
+		// 申請IDが取得できなかった時
+		if (latest_apply_id < 0) {
+			return null;
+		}
+
+		int apply_id = latest_apply_id + 1;
 		data.setApply_id(String.valueOf(apply_id));
 		data.setApplicant_id(applicant_id);
 		data.setContent(CommonEnum.getEnum(Content.class, form.getContent()));
@@ -316,19 +328,25 @@ public class JobRequestService {
 	/**
 	 * イベントマスタに新たにイベント情報を1件追加する
 	 * 
-	 * @param form 検査済み入力内容
+	 * @param form    検査済み入力内容
 	 * @param user_id ユーザID
 	 * @return - true：追加件数1件（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
 	public boolean hasInsertedEvent(EventForm form, String user_id) {
 		int rowNumber = 0;
+		EventData data = refillToEventData(form);
+		
+		if(data == null) {
+			return false;
+		}
+		
 		try {
-			rowNumber = jobRequestRepository.insertEvent(refillToEventData(form), user_id);
+			rowNumber = jobRequestRepository.insertEvent(data, user_id);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return rowNumber > 0;
 	}
 
@@ -340,8 +358,14 @@ public class JobRequestService {
 	 */
 	private EventData refillToEventData(EventForm form) {
 		EventData data = new EventData();
+		int latest_event_id = jobRequestRepository.selectEvent_id();
 
-		int event_id = jobRequestRepository.selectEvent_id() + 1;
+		// イベントIDが取得できなかった時
+		if (latest_event_id < 0) {
+			return null;
+		}
+
+		int event_id = latest_event_id + 1;
 		data.setEvent_id((String.valueOf(event_id)));
 		data.setCompany_name(form.getCompany_name());
 		data.setDatetime(strLocalDateTimeToDate(form.getDatetime()));
@@ -354,8 +378,9 @@ public class JobRequestService {
 
 	/**
 	 * 申請状態を取得する
+	 * 
 	 * @param apply_id 申請ID
-	 * @return status 
+	 * @return status
 	 */
 	public String selectJobHuntingStatus(String apply_id) {
 		String status;
@@ -367,9 +392,10 @@ public class JobRequestService {
 		}
 		return status;
 	}
-	
+
 	/**
 	 * 申請修正した際にstatusを変更する
+	 * 
 	 * @param apply_id
 	 * @return rowNumber
 	 */
@@ -381,14 +407,15 @@ public class JobRequestService {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return rowNumber > 0;
 	}
-	
+
 	/**
 	 * 生徒が先生から申請の承認をもらったことをコース担当に報告する
+	 * 
 	 * @param apply_id 申請ID
-	 * @return 
+	 * @return
 	 */
 	public boolean hasNoticedCourseDirector(String apply_id) {
 		int rowNumber = 0;
@@ -398,7 +425,7 @@ public class JobRequestService {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return rowNumber > 0;
 	}
 

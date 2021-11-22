@@ -100,6 +100,10 @@ public class JobReportController {
 	@GetMapping("/job/report/insert/{apply_id}")
 	public String getReportInert(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
 		String status = jobReportService.selectJobHuntingStatus(apply_id);
+		
+		if(status == null) {
+			return getReportList(principal, model);
+		}
 
 		// 申請が取り消されている場合
 		if (status.equals("99")) {
@@ -108,7 +112,7 @@ public class JobReportController {
 		}
 
 		// 状態が『申請完了』ではない場合
-		if (status == null || !status.equals("4")) {
+		if (!status.equals("4")) {
 			model.addAttribute("errmsg", "申請が完了されていません。");
 			return jobRequestController.getRequestList(principal, model);
 		}

@@ -263,7 +263,10 @@ public class JobRequestRepository {
 	 * @throws DataAccessException
 	 */
 	public int selectApply_id() {
-		int apply_id = jdbc.queryForObject(SQL_MAX_APPLY_ID, int.class);
+		Integer apply_id = jdbc.queryForObject(SQL_MAX_APPLY_ID, int.class);
+		if(apply_id == null) {
+			return -1;
+		}
 		return apply_id;
 
 	}
@@ -317,7 +320,10 @@ public class JobRequestRepository {
 	 * @throws DataAccessException
 	 */
 	public int selectEvent_id() {
-		int event_id = jdbc.queryForObject(SQL_MAX_EVENT_ID, int.class);
+		Integer event_id = jdbc.queryForObject(SQL_MAX_EVENT_ID, int.class);
+		if(event_id == null) {
+			return -1;
+		}
 		return event_id;
 	}
 	

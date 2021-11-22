@@ -385,7 +385,6 @@ class JobReportServiceTest {
 	@Test
 	void updateStatusFixedの正常系テスト_成功() {
 		//1.ready
-		JobReportForm form = new JobReportForm();
 		String Apply_id="2";
 		//2.do
 		boolean isSuccess = jobReportService.updateStatusFixed(Apply_id);
