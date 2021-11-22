@@ -354,6 +354,38 @@ class JobRequestServiceTest {
 	}
 	
 	@Test
+	void hasInsertedの異常系テスト_申請IDが取得できずにdataにnullが設定された() {
+		// 1.Ready
+		List<String> way = new ArrayList<>();
+		way.add("3");
+		
+		JobRequestForm form = new JobRequestForm();
+		form.setApply_type("1");
+		form.setCompany_name("株式会社HCS");
+		form.setDate_activity_from("2021-11-20T09:30");
+		form.setDate_activity_to("2021-11-21T10:30");
+		form.setLoc("本校舎9F");
+		form.setContent("1");
+		form.setWay(way);
+		form.setDate_absence_from(null);
+		form.setDate_absence_to(null);
+		form.setLeave_early_date(null);
+		form.setAttendance_date("2021-11-20T09:00");
+		form.setRemark("筆記試験です。");
+		
+		String applicant_id = "isida@xxx.co.jp";
+		String register_user_id = "isida@xxx.co.jp";
+		
+		doReturn(-1).when(jobRequestRepository).selectApply_id();
+		// 2.Do
+		boolean result = jobRequestService.hasInserted(form, applicant_id, register_user_id);
+		// 3.Assert
+		assertEquals(false, result);
+		// 4.Logs
+		log.warn("[hasInsertedの異常系テスト]result:" + result);
+	}
+	
+	@Test
 	void hasInsertedの異常系テスト() {
 		// 1.Ready
 		List<String> way = new ArrayList<>();
@@ -639,6 +671,27 @@ class JobRequestServiceTest {
 		assertFalse(result);
 		// 4.Logs
 		log.warn("[hasInsertedEventの正常系テスト_失敗]result:" + result);
+	}
+	
+	@Test
+	void hasInsertedEventの異常系テスト_イベントIDが取得できずにdataにnullが設定された() {
+		// 1.Ready
+		String user_id = "abe@xxx.co.jp";
+		EventForm form = new EventForm();
+		form.setCompany_name("株式会社SCC");
+		form.setDatetime("2021-12-20T09:30");
+		form.setLoc("本校舎9F");
+		form.setContent("単独説明会");
+		form.setBring("筆記用具");
+		
+		doReturn(-1).when(jobRequestRepository).selectEvent_id();
+		
+		// 2.Do
+		boolean result = jobRequestService.hasInsertedEvent(form, user_id);
+		// 3.Assert
+		assertEquals(false, result);
+		// 4.Logs
+		log.warn("[hasInsertedEventの異常系テスト]result:" + result);
 	}
 	
 	@Test
