@@ -2,9 +2,32 @@
  共通のCSS設定を記載.
  1ページにしか使わない設定は、各html内で直接styleタグで指定する.
  */
+html {
+	height: 100%;
+}
+
+img {
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+}
+
 body {
+	height: 100%;
+	margin: 0;
 	font-family: "Open Sans", sans-serif;
 	text-align: center;
+	-ms-overflow-style: none; /* IE, Edge 対応 */
+	scrollbar-width: none; /* Firefox 対応 */
+}
+
+body::-webkit-scrollbar {
+	/* Chrome, Safari 対応 */
+	display: none;
+}
+
+.max-height {
+	height: 80%;
 }
 
 h1,
@@ -19,7 +42,9 @@ a {
 }
 
 .container {
-	margin-top: 10px;
+	width: 80%; /* 幅は親要素の80% */
+	max-width: 1500px; /* 幅は最大500pxまでしか広げない */
+	margin: 0 auto; /* 左右をauto指定にして左右中央揃えに */
 }
 
 .content-box {
@@ -120,7 +145,7 @@ a {
 		content: "";
 		width: 0;
 		height: 3px;
-		background-color: blue;
+		background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
 		transition: 0.3s;
 		transition-duration: 0.75s;
 	}
@@ -140,7 +165,7 @@ a {
 
 /* 背景色 */
 .bg-color-sky {
-	background-color: #dae8fc;
+	background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
 }
 
 .bg-color-white {
@@ -195,7 +220,15 @@ select {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+	/* color: #fff;
+	background-color: #337ab7;
+	border-color: #2e6da4; */
+	display: inline-block;
+	padding: 0.5em 1em;
+	text-decoration: none;
+	border-radius: 4px;
+	color: #ffffff;
+	background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+	border-bottom: solid 3px #5e7fca;
 }
