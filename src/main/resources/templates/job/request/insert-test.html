@@ -155,20 +155,22 @@
 
                             </div>
                             <div class="row row-cols-1 row-cols-md-2 gy-3 mb-md-5">
+
                                 <div class="col-md-5">
-                                    <h5 class="fw-bold text-center">申請種別</h5>
+                                    <h5 class="job-form-label text-center">申請種別</h5>
+                                    
                                     <small class="text-danger text-center">※必須</small>
                                 </div>
                                 <div class="col-md-5">
-                                    <div class="input-group justify-content-around pt-md-2">
+                                    <div class="input-group justify-content-around">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="apply_type"
                                                 id="applyType1" value="0" required>
                                             <label class="form-check-label" for="applyType1">外部</label>
                                             <div class="invalid-feedback">
-                                                <h6
+                                                <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                                    選択してください</h6>
+                                                    選択してください</small>
                                             </div>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -177,45 +179,48 @@
                                             <label class="form-check-label" for="applyType2">とりまとめ</label>
                                         </div>
 
-
+                                        <small
+                                            class="input-group justify-content-md-start justify-content-center text-danger mt-1"
+                                            th:if="${#fields.hasErrors('apply_type')}" th:errors="*{apply_type}">
+                                            エラーメッセージ</small>
 
 
                                     </div>
                                 </div>
 
 
-                                <div class="col-md-4">
-                                    <h4 class="fw-bold mt-md-1 text-center">企業名</h4>
-                                    <h6 class="text-danger text-center">※必須</h6>
+                                <div class="col-md-5 mt-md-4">
+                                    <h5 class="fw-bold text-center">企業名</h5>
+                                    <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-5">
                                     <input type="text" class="form-control" name="company_name" required
                                         id="company_name" value="">
 
 
 
                                     <div class="invalid-feedback">
-                                        <h6
+                                        <small
                                             class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                            企業名を入力してください</h6>
+                                            企業名を入力してください</small>
                                     </div>
                                 </div>
 
 
-                                <div class="col-md-4">
-                                    <h4 class="fw-bold mt-md-1 text-center">内容</h4>
-                                    <h6 class="text-danger text-center">※必須</h6>
+                                <div class="col-md-5">
+                                    <h5 class="fw-bold mt-md-1 text-center">内容</h5>
+                                    <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col pt-md-2">
+                                <div class="col-md-5 pt-md-2">
                                     <div class="input-group justify-content-around">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" id="content1" name="content"
                                                 value="1" required>
                                             <label class="form-check-label" for="content1">合企</label>
                                             <div class="invalid-feedback">
-                                                <h6
+                                                <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                                    選択してください</h6>
+                                                    選択してください</small>
                                             </div>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -240,11 +245,11 @@
                                 </div>
 
 
-                                <div class="col-md-4">
-                                    <h4 class="fw-bold mt-md-4 text-center">開始日時・終了日時</h4>
-                                    <h6 class="text-danger text-center">※必須</h6>
+                                <div class="col-md-5">
+                                    <h5 class="fw-bold mt-md-4 text-center">開始日時・終了日時</h5>
+                                    <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-5">
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="date_activity_from"
@@ -254,9 +259,9 @@
 
 
                                             <div class="invalid-feedback">
-                                                <h6
+                                                <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                                    選択してください</h6>
+                                                    選択してください</small>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -267,59 +272,59 @@
 
 
                                             <div class="invalid-feedback">
-                                                <h6
+                                                <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                                    選択してください</h6>
+                                                    選択してください</small>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="invalid-feedback">
-                                        <h6
+                                        <small
                                             class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                            必須項目です。</h6>
+                                            必須項目です。</small>
                                     </div>
                                 </div>
 
 
-                                <div class="col-md-4">
-                                    <h4 class="fw-bold mt-md-1 text-center">郵便番号</h4>
+                                <div class="col-md-5">
+                                    <h5 class="fw-bold mt-md-1 text-center">郵便番号</h5>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-5">
                                     <div class="input-group w-50 margin-md-0-auto">
                                         <input type="text" class="form-control" id="zipcode">
                                         <button type="button" id="zip-btn" class="btn btn-primary">検索</button>
                                     </div>
 
                                     <div class="invalid-feedback">
-                                        <h6
+                                        <small
                                             class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                            必須項目です。</h6>
+                                            必須項目です。</small>
                                     </div>
                                 </div>
 
 
-                                <div class="col-md-4 mt-md-5">
-                                    <h4 class="fw-bold mt-md-1 text-center">場所</h4>
-                                    <h6 class="text-danger text-center">※必須</h6>
+                                <div class="col-md-5 mt-md-5">
+                                    <h5 class="fw-bold mt-md-1 text-center">場所</h5>
+                                    <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col mt-md-5">
+                                <div class="col-md-5 mt-md-5">
                                     <input type="text" class="form-control" name="loc" id="loc" required value="">
 
 
                                     <div class="invalid-feedback">
-                                        <h6
+                                        <small
                                             class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                            場所を入力してください</h6>
+                                            場所を入力してください</small>
                                     </div>
                                 </div>
 
 
-                                <div class="col-md-4 media-margin-top-8rem">
-                                    <h4 class="fw-bold mt-md-1 text-center">手段</h4>
-                                    <h6 class="text-danger text-center">※必須</h6>
+                                <div class="col-md-5 media-margin-top-8rem">
+                                    <h5 class="fw-bold mt-md-1 text-center">手段</h5>
+                                    <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-5">
 
                                     <div class="row g-3">
                                         <div
@@ -339,9 +344,9 @@
 
 
                                             <div class="invalid-feedback">
-                                                <h6
+                                                <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                                    選択してください</h6>
+                                                    選択してください</small>
                                             </div>
                                         </div>
 
@@ -353,9 +358,9 @@
 
 
                                             <div class="invalid-feedback">
-                                                <h6
+                                                <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                                    選択してください</h6>
+                                                    選択してください</small>
                                             </div>
                                         </div>
                                     </div>
@@ -377,9 +382,9 @@
 
 
                                             <div class="invalid-feedback">
-                                                <h6
+                                                <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                                    早退日時を選択してください</h6>
+                                                    早退日時を選択してください</small>
                                             </div>
                                         </div>
                                     </div>
@@ -400,9 +405,9 @@
 
 
                                             <div class="invalid-feedback">
-                                                <h6
+                                                <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
-                                                    遅刻日時を選択してください</h6>
+                                                    遅刻日時を選択してください</small>
                                             </div>
                                         </div>
                                     </div>
@@ -413,10 +418,10 @@
                                 </div>
 
 
-                                <div class="col-md-4 media-margin-top-35rem">
-                                    <h4 class="fw-bold mt-md-1 text-center">メモ</h4>
+                                <div class="col-md-5 media-margin-top-35rem">
+                                    <h5 class="fw-bold mt-md-1 text-center">メモ</h5>
                                 </div>
-                                <div class="col">
+                                <div class="col-md-5">
                                     <textarea class="form-control" id="remark" name="remark" rows="5"
                                         cols="50"></textarea>
 
@@ -581,7 +586,7 @@
             //手段チェック用
             $(".form-check-input[type='checkbox']").each(function (i, e) {
                 console.log(i, e)
-                $("#err_checkbox h6").remove();
+                $("#err_checkbox small").remove();
             });
 
             let elements = document.querySelectorAll(".form-check-input[type='checkbox']");
@@ -597,7 +602,7 @@
             }
 
             if (isChecked) {
-                $("#err_checkbox").append('<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
+                $("#err_checkbox").append('<small class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</small>');
 
 
             }
@@ -614,7 +619,7 @@
         });
 
         function check_checkbox() {
-            $("#err_checkbox h6").remove();
+            $("#err_checkbox small").remove();
             var _result = true;
             var _check_count = 0;
 
@@ -624,7 +629,7 @@
                 }
             });
             if (_check_count == 0) {
-                $("#err_checkbox").append('<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
+                $("#err_checkbox").append('<small class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</small>');
                 _result = false;
             }
             return _result;

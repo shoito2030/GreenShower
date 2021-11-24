@@ -1,151 +1,315 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="UTF-8">
-	<title>就活ポータルトップ</title>
-
-	<meta id="viewport" name="viewport"
-		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="manifest" href="/css/manifest.json" crossorigin="use-credentials">
-	<meta name="application-name" content="WebPortal">
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-title" content="WebPortal">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<html '5893'>
+    <head '5894'>
+    <meta '5895' charset="UTF-8">
+    <title '5896'>ユーザ管理</title>
+    <script '5897' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
 
 
-	<link rel="icon" sizes="192x192" href="/img/favicon.ico">
-	<link rel="shortcut icon" href="/img/favicon.ico">
-	<link rel="apple-touch-icon" href="/img/favicon.ico">
-	<link rel="apple-touch-icon" href="/img/favicon.ico" sizes="192x192">
-	<link rel="apple-touch-icon" href="/img/favicon.ico" sizes="58x58">
-
-	<!-- FontAwesome -->
-	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link '5898' href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10/build/styles/github.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1/font/bootstrap-icons.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<link rel="stylesheet" href="../static/css/common.css">
-	<link rel="stylesheet" href="../static/css/ress.css">
+    <link '5899' rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-	<!-- Googleフォント -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap" rel="stylesheet">
-	<style>
-		html {
-			height: 100%;
-		}
+    <style '5900'>
+        .user-form-label{
+            color: #1A72B3;
+            font-weight: 600;
+        }
+        
+        .card>hr {
+            margin-left: 0;
+            height: 13px;
+            background-color: #F34C53;
+            width: 70%;
+            border: none;
+            margin: 0 auto;
+            padding-left: 30px;
+            text-align: center;
+        }
+        
+        body {
+            background: linear-gradient(-180deg, rgb(255, 247, 251), rgb(255, 221, 219));
+        }
+        
+    </style>
 
-		body {
-			height: 80%;
-		}
-	</style>
 </head>
 
-<body class="bg-color-sky max-height">
+<body '5901'>
 
-	<header class="fixed-top">
-		<nav class="navbar navbar-expand-md navbar-light bg-light">
-			<div class="container-fluid">
+    <div '5902' class="container">
+        <div '5903' class="content-box">
+           
+            <p '5904' th:text="${errmsg}" style="background-color: #ffcc99;"></p>
+           
+            <div '5905' class="card shadow-sm p-3 mb-5 bg-white rounded">
+                <hr '5906'>
+                <div '5907' class="card-body">
+                    <form '5908' method="post" name="userInsert" th:action="@{/user/insert}"
+                          th:object="${userFormForInsert}">
+                        <div '5909' class="row mb-3">
+                            <div '5910' class="d-block d-lg-none col-md-12">
+                                <div '5911'>
+                                    <label '5912' for="user_id" class="user-form-label">ユーザID（メールアドレス）<span '5913' class="badge bg-danger text-white">必須</span></label>
+                                    <input '5914' type="text" class="form-control" name="user_id"
+                                           id="user_id" placeholder="例)xxx@xxx.xx" th:field="*{user_id}"
+                                           oninput="data_input()" />
+                                </div>
+                            </div>
 
-				<a class="navbar-brand fw-bold" href="/"><img src="../static/img/hcs.png"> 就活ポータル.com</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
-					aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+                            <div '5915' class="d-none d-lg-block col-md-12">
+                                <div '5916' class="row ml-5">
 
-				<div class="collapse navbar-collapse" id="navbar">
-					<ul class="navbar-nav me-auto mb-2 mb-md-0 w-100 nav-justified">
+                                    <div '5917' class="col-md-4 mt-5 ml-4">
+                                        <div '5918' class="row">
+                                            <div '5919' class="col-md-10">
+                                                <span '5920' class="user-form-label">ユーザID（メールアドレス）</span>
+                                            </div>
 
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="/">就職活動管理</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link active" href="/report/list">受験報告管理</a>
-						</li>
-
-
-
-
-						<li class="nav-item">
-							<a class="nav-link active" href="/user/list">ユーザ管理</a>
-						</li>
-
-
-						<li class="nav-item">
-							<a class="nav-link active" href="#"><i class="fas fa-envelope"></i>メッセージ</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link active" href="#"><i class="fas fa-cog"></i>設定</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link active" href="/logout">Log out</a>
-						</li>
-
-					</ul>
-
-				</div>
-			</div>
-		</nav>
-	</header>
+                                            <div '5921' class="">
+                                                <span '5922' class="badge bg-danger text-white">必須</span>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-
-	<div class="container mt-5 pt-3 pt-md-5">
-		<div class="row justify-content-center mt-5">
-			<div class="col-sm-6">
-				<div class="card center-block " style="border-radius:50px;">
-					<div class="card-body">
-						<h3 class="card-title fw-bold" style="color:#1e7aca;">就職活動申請</h3>
-						<div class="btn-group-vertical btn-group-lg" role="group">
-							<input type="button" class="btn btn-primary mt-4" value="新規作成"
-								onclick="window.location.href = &#39;/job/request/insert&#39;">
-							<input type="button" class="btn btn-primary mt-4" value="申請一覧"
-								onclick="window.location.href = &#39;/job/request/list&#39;">
-							<input type="button" class="btn btn-primary mt-4" value="報告一覧"
-								onclick="window.location.href = &#39;/job/report/list&#39;">
+                                    <div '5923' class="col-md-7 mt-1 pl-2">
+                                        <label '5924' for="user_id" class="col-sm-11 col-form-label text-secondary">例）xxx@xxx.xx</label>
+                                        <div '5925' class="col-sm-11">
+                                            <input '5926' type="text" class="form-control" name="user_id"
+                                                   id="user_id" th:field="*{user_id}"
+                                                   oninput="data_input()" />
+                                            <span '5927' class="text-danger"
+                                                  th:if="${#fields.hasErrors('user_id')}" th:errors="*{user_id}">user_id
+                                                error</span>
+                                        </div>
+                                    </div>
+                                </div>
 
 
+                            </div>
 
-							<input type="button" class="btn btn-primary mt-4" value="イベント情報 登録"
-								onclick="window.location.href = &#39;/job/event-registration&#39;">
-							<input type="button" class="btn btn-primary mt-4 mb-5" value="申請一覧 出力"
-								onclick="window.location.href = &#39;/job/csv&#39;">
+                        </div>
+                        
+                        <div '5928' class="row mb-3">
+                            <div '5929' class="d-block d-lg-none col-md-12">
+                                <div '5930'>
+                                    <label '5931' for="encrypted_password" class="user-form-label">パスワード<span '5932' class="badge bg-danger text-white">必須</span></label>
+                                    <input '5933' type="password" class="form-control"
+                                           id="encrypted_password" name="encrypted_password"
+                                           placeholder="4～100文字で入力すること" th:field="*{encrypted_password}"
+                                           oninput="data_input()" />
+                                </div>
+                            </div>
 
+                            <div '5934' class="d-none d-lg-block col-md-12">
+                                <div '5935' class="row ml-5">
 
+                                    <div '5936' class="col-md-4 mt-5 ml-4">
+                                        <div '5937' class="row">
+                                            <div '5938' class="col-md-10">
+                                                <span '5939' class="user-form-label">パスワード</span>
+                                            </div>
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-	<script src="https://bootstrap-guide.com/js/style.js"></script>
-
-	<!-- オリジナルスクリプト -->
-	<script src="/js/common.js"></script>
-
-
+                                            <div '5940' class="">
+                                                <span '5941' class="badge bg-danger text-white">必須</span>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-</body>
+                                    <div '5942' class="col-md-7 mt-1 pl-2">
+                                        <label '5943' for="encrypted_password" class="col-sm-11 col-form-label text-secondary">4～100文字で入力しててください</label>
+                                        <div '5944' class="col-sm-11">
+                                            <input '5945' type="password" class="form-control"
+                                                   id="encrypted_password" name="encrypted_password"
+                                                   th:field="*{encrypted_password}"
+                                                   oninput="data_input()" />
+                                            <span '5946' class="text-danger"
+                                                  th:if="${#fields.hasErrors('encrypted_password')}"
+                                                  th:errors="*{encrypted_password}">encrypted_password error</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
 
-</html>
+                        </div>
+                        
+                        
+                        <div '5947' class="row mb-3">
+                            <div '5948' class="d-block d-lg-none col-md-12">
+                                <div '5949'>
+                                    <label '5950' for="name" class="user-form-label">氏名<span '5951' class="badge bg-danger text-white">必須</span></label>
+                                    <input '5952' type="text" class="form-control" name="name"
+                                           id="name" placeholder="例)情報太郎" th:field="*{name}"
+                                           oninput="data_input()" />
+                                </div>
+                            </div>
+
+                            <div '5953' class="d-none d-lg-block col-md-12">
+                                <div '5954' class="row ml-5">
+
+                                    <div '5955' class="col-md-4 mt-5 ml-4">
+                                        <div '5956' class="row">
+                                            <div '5957' class="col-md-10">
+                                                <span '5958' class="user-form-label">氏名</span>
+                                            </div>
+
+                                            <div '5959' class="">
+                                                <span '5960' class="badge bg-danger text-white">必須</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div  class="col-md-7 mt-1 pl-2">
+                                        <label for="name" class="col-sm-11 col-form-label text-secondary">例）情報太郎</label>
+                                        <div  class="col-sm-11">
+                                            <input  type="text" class="form-control" name="name"
+                                                   id="name" th:field="*{name}"
+                                                   oninput="data_input()" />
+                                            <span class="text-danger"
+                                                  th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name
+                                                error</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                        <div '5966' class="row mb-3">
+                            <div '5967' class="d-block d-lg-none col-md-12">
+                                <div '5968'>
+                                    <label '5969' for="role" class="user-form-label">権限<span '5970' class="badge bg-danger text-white">必須</span></label>
+                                    <input '5971' type="radio" name="role" id="role" value="ROLE_STUDENT" onclick="clickBtn1()" checked>学生
+                                    <input '5972' type="radio" name="role" id="role" value="ROLE_TEACHER" onclick="clickBtn2()">担任
+                                    <input '5973' type="radio" name="role" id="role" value="ROLE_STAFF" onclick="clickBtn2()">事務
+                                </div>
+                            </div>
+
+                            <div '5974' class="d-none d-lg-block col-md-12">
+                                <div '5975' class="row ml-5">
+
+                                    <div '5976' class="col-md-4 mt-5 ml-4">
+                                        <div '5977' class="row mt-1">
+                                            <div '5978' class="col-md-10">
+                                                <span '5979' class="user-form-label">権限</span>
+                                            </div>
+
+                                            <div '5980' class="">
+                                                <span '5981' class="badge bg-danger text-white">必須</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div '5982' class="col-md-7 mt-1 pl-2">
+                                        <div '5983' class="col-sm-11 mt-5">
+                                            <input '5984' type="radio" name="role" id="role" value="ROLE_STUDENT" onclick="clickBtn1()" checked>学生
+                                            <input '5985' type="radio" name="role" id="role" value="ROLE_TEACHER" onclick="clickBtn2()">担任
+                                            <input '5986' type="radio" name="role" id="role" value="ROLE_STAFF" onclick="clickBtn2()">事務
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                        
+                        
+                        <div '5987' class="row mb-3">
+                            <div '5988' class="d-block d-lg-none col-md-12">
+                                <div '5989'>
+                                    <label '5990' for="role" class="user-form-label">クラス番号</label>
+                                    <div '5991' class="row">
+                                        <div '5992' class="col-md-6">
+                                            <label '5993' for="dis1" class="col-sm-6 col-form-label text-secondary">SXAY</label>
+                                            <div '5994' class="col">
+                                                <input '5995' type="text" class="form-control" name="classroom" id="dis1" th:field="*{classroom}">
+                                            </div>
+                                        </div>
+
+                                        <div '5996' class="col-md-6">
+                                            <label '5997' for="dis2" class="col-sm-6 col-form-label text-secondary">00</label>
+                                            <div '5998' class="col">
+                                                <input '5999' type="text"
+                                                       class="form-control" name="class_number" 
+                                                       id="dis2" th:field="*{class_number}">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div '6000' class="d-none d-lg-block col-md-12">
+                                <div '6001' class="row ml-5">
+
+                                    <div '6002' class="col-md-4 mt-5 ml-4">
+                                        <div '6003' class="row mt-2">
+                                            <div '6004' class="col-md-10">
+                                                <span '6005' class="user-form-label">クラス番号</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div '6006' class="col-md-7 mt-1 pl-2">
+                                        <div '6007' class="col-sm-11 mt-2">
+                                            <div '6008' class="row">
+                                               <div '6009' class="col-md-6">
+                                                <label '6010' for="dis1" class="col-sm-6 col-form-label text-secondary">SXAY</label>
+                                                <div '6011' class="col">
+                                                    <input '6012' type="text" class="form-control" name="classroom" id="dis1" th:field="*{classroom}">
+                                                    <span '6013' class="text-danger" th:if="${#fields.hasErrors('classroom')}"
+                                                          th:errors="*{classroom}">name error</span>
+                                                </div>
+                                                </div>
+                                                
+                                                <div '6014' class="col-md-6">
+                                                <label '6015' for="dis2" class="col-sm-6 col-form-label text-secondary">00</label>
+                                                <div '6016' class="col">
+                                                    <input '6017' type="text"
+                                                           class="form-control" name="class_number" 
+                                                           id="dis2" th:field="*{class_number}">
+                                                    <span '6018' class="text-danger"
+                                                          th:if="${#fields.hasErrors('class_number')}"
+                                                          th:errors="*{class_number}">name error</span>
+                                                </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+    <script '6019' src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script '6020' src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script '6021' src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body></html>

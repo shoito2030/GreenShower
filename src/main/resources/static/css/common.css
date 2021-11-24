@@ -93,6 +93,11 @@ a {
 	background-color: black;
 }
 
+.job-form-label{
+	color: #1A72B3;
+	font-weight: 600;
+}
+
 /* ヘッダー用 */
 .nav-link {
 	position: relative;
