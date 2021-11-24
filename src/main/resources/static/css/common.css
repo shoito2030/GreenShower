@@ -3,7 +3,7 @@
  1ページにしか使わない設定は、各html内で直接styleタグで指定する.
  */
 html {
-	height: 100%;
+	height: auto;
 }
 
 img {
@@ -13,7 +13,7 @@ img {
 }
 
 body {
-	height: 100%;
+	height: auto;
 	margin: 0;
 	font-family: "Open Sans", sans-serif;
 	text-align: center;
