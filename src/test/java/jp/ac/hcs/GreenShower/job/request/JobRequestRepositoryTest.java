@@ -8,8 +8,11 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Apply_type;
@@ -26,6 +29,12 @@ class JobRequestRepositoryTest {
 	@Autowired
 	JobRequestRepository jobRequestRepository;
 
+	@SpyBean
+	JobRequestRepository repository;
+	
+	@Mock
+	JdbcTemplate jdbc;
+	
 	@Test
 	void selectAllRequestsメソッドの正常系テスト() {
 		// 1.Ready
@@ -117,6 +126,20 @@ class JobRequestRepositoryTest {
 
 		log.warn("[selectApply_idメソッドの正常系テスト]apply_id:" + apply_id);
 	}
+	
+//	@Test
+//	void selectApply_idメソッドの正常系テスト_apply_idが取得できなかった時() {
+//		//JdbcTemplate jdbc = mock(JdbcTemplate.class);
+//		//Map<String, Object> hoge = new Map<String, Object>();
+//		
+////		doReturn(null).when(jdbc).queryForMap(anyString());
+//		doThrow(new  IncorrectResultSizeDataAccessException(0)).when(jdbc).queryForMap(anyString());
+//		int apply_id = jobRequestRepository.selectApply_id();
+//		log.warn("[selectApply_idメソッドの正常系テスト_apply_idが取得できなかった時]apply_id:" + apply_id);
+//		assertEquals(-1, apply_id);
+//
+////		log.warn("[selectApply_idメソッドの正常系テスト_apply_idが取得できなかった時]apply_id:" + apply_id);
+//	}
 
 	@Test
 	void updateJobStatusメソッドの正常系テスト() {
