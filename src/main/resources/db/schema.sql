@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS summary_companies (
 CREATE TABLE IF NOT EXISTS summary_documents (
 	apply_id VARCHAR(254) PRIMARY KEY,
 	company_id VARCHAR(254),
-	receipt_of_tresume TIMESTAMP,
+	receipt_of_resume TIMESTAMP,
 	receipt_of_university_tranriptsscripts TIMESTAMP,
 	receipt_of_university_diploma TIMESTAMP,
 	receipt_of_hcs_transcript TIMESTAMP,

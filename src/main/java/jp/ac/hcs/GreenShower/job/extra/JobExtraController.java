@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.ac.hcs.GreenShower.job.request.JobRequestController;
-import jp.ac.hcs.GreenShower.job.request.JobRequestForm;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -43,10 +42,10 @@ public class JobExtraController {
 	}
 	
 	@PostMapping("/job/request/status-change/document-receipt")
-	public String documentReceirt(JobRequestForm form,Principal principal,Model model) {
+	public String documentReceirt(JobExtraForm form,Principal principal,Model model) {
 		String apply_id = (String)session.getAttribute("apply_id");
 
-		boolean isSuccess = jobExtraService.listRegistion(apply_id,principal.getName());
+		boolean isSuccess = jobExtraService.documentReceirt(form,apply_id,principal.getName());
 
 		// 処理失敗により就職活動申請詳細画面へ
 		if (isSuccess) {
