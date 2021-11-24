@@ -134,13 +134,13 @@ public class JobReportController {
 	}
 
 	/**
-	 * 新たに受験報告情報を登録する
+	 * 新たに就職活動報告情報を登録する
 	 * 
 	 * @param form          登録時の入力チェック用JobReportForm
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
 	 * @param model
-	 * @return 受験報告情報一覧画面
+	 * @return 就職活動報告一覧画面
 	 */
 	@PostMapping("job/report/insert")
 	public String getJobReportInsert(@ModelAttribute @Validated JobReportForm form, BindingResult bindingResult,
@@ -210,8 +210,11 @@ public class JobReportController {
 	/**
 	 * 就職活動報告を修正する
 	 * 
+	 * @param form          修正時の入力チェック用JobReportForm
+	 * @param bindingResult 入力情報の検証結果
+	 * @param principal     ログイン情報
 	 * @param model
-	 * @return
+	 * @return 就職活動報告一覧画面
 	 */
 	@PostMapping("/job/report/fix")
 	public String fixReportContent(Principal principal, Model model, @ModelAttribute @Validated JobReportForm form,
