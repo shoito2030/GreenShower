@@ -170,6 +170,7 @@ public class JobReportController {
 	 * 就職活動報告修正画面を表示する
 	 * 
 	 * @param model
+	 * @param apply_id 申請ID
 	 * @return 就職活動報告修正画面
 	 */
 	@GetMapping("/job/report/fix/{apply_id}")
@@ -266,6 +267,7 @@ public class JobReportController {
 	 * 就職活動報告承認画面を表示する
 	 * 
 	 * @param model
+	 * @param apply_id 申請ID
 	 * @return 就職活動報告承認画面
 	 */
 	@GetMapping("/job/report/status_change/{apply_id}")
