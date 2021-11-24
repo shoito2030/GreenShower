@@ -44,6 +44,7 @@ public class JobReportController {
 	/**
 	 * 就職活動申請報告一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動申請報告一覧画面 or トップ画面
 	 */
@@ -94,6 +95,8 @@ public class JobReportController {
 	/**
 	 * 就職活動報告新規作成画面を表示する
 	 * 
+	 * @param principal ログイン情報
+	 * @param apply_id 申請ID
 	 * @param model
 	 * @return 就職活動報告新規作成画面
 	 */
