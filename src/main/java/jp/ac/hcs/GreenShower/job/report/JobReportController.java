@@ -44,6 +44,7 @@ public class JobReportController {
 	/**
 	 * 就職活動申請報告一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動申請報告一覧画面 or トップ画面
 	 */
@@ -94,6 +95,8 @@ public class JobReportController {
 	/**
 	 * 就職活動報告新規作成画面を表示する
 	 * 
+	 * @param principal ログイン情報
+	 * @param apply_id 申請ID
 	 * @param model
 	 * @return 就職活動報告新規作成画面
 	 */
@@ -134,13 +137,13 @@ public class JobReportController {
 	}
 
 	/**
-	 * 新たに受験報告情報を登録する
+	 * 新たに就職活動報告情報を登録する
 	 * 
 	 * @param form          登録時の入力チェック用JobReportForm
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
 	 * @param model
-	 * @return 受験報告情報一覧画面
+	 * @return 就職活動報告一覧画面
 	 */
 	@PostMapping("job/report/insert")
 	public String getJobReportInsert(@ModelAttribute @Validated JobReportForm form, BindingResult bindingResult,
@@ -170,6 +173,7 @@ public class JobReportController {
 	 * 就職活動報告修正画面を表示する
 	 * 
 	 * @param model
+	 * @param apply_id 申請ID
 	 * @return 就職活動報告修正画面
 	 */
 	@GetMapping("/job/report/fix/{apply_id}")
@@ -210,8 +214,11 @@ public class JobReportController {
 	/**
 	 * 就職活動報告を修正する
 	 * 
+	 * @param form          修正時の入力チェック用JobReportForm
+	 * @param bindingResult 入力情報の検証結果
+	 * @param principal     ログイン情報
 	 * @param model
-	 * @return
+	 * @return 就職活動報告一覧画面
 	 */
 	@PostMapping("/job/report/fix")
 	public String fixReportContent(Principal principal, Model model, @ModelAttribute @Validated JobReportForm form,
@@ -263,6 +270,7 @@ public class JobReportController {
 	 * 就職活動報告承認画面を表示する
 	 * 
 	 * @param model
+	 * @param apply_id 申請ID
 	 * @return 就職活動報告承認画面
 	 */
 	@GetMapping("/job/report/status_change/{apply_id}")

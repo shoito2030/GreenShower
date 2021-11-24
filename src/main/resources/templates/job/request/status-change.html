@@ -231,49 +231,53 @@
 			<br>
 			<p class="font-weight-bold h5">学生の名簿登録</p>
 			<br>
+			<form th:action="@{/job/request/status-change/list-registration}" method="post" class="justify-content-center">
 			<button class="btn btn-warning">登録完了</button>
+			</form>
 			<br>
+			<form th:action="@{/job/request/status-change/document-receipt}" method="post" class="justify-content-center">
 			<p class="font-weight-bold h5">必要書類の受取</p>
 			<div class="row justify-content-md-center mt-md-4">
 				<div class="col-md-3 text-left">
-					<span><input type="checkbox">履歴書<span
+					<span><input type="checkbox" class="form-check-input" name="document" value="1" id="document1">履歴書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-				<span><input type="checkbox">大学成績証明書<span
+					<span><input type="checkbox" class="form-check-input" name="document" value="2" id="document2">大学成績証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">大学（卒業・卒業見込）証明書<span
+					<span><input type="checkbox" class="form-check-input" name="document" value="3" id="document3">大学（卒業・卒業見込）証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">HCS成績証明書<span
+					<span><input type="checkbox" class="form-check-input" name="document" value="4" id="document4">HCS成績証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">HCS卒業見込証明書<span
+					<span><input type="checkbox" class="form-check-input" name="document" value="5" id="document5">HCS卒業見込証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">健康診断証明書<span
+					<span><input type="checkbox" class="form-check-input" name="document" value="6" id="document6">健康診断証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">出身高校成績証明書<span
+					<span><input type="checkbox" class="form-check-input" name="document" value="7" id="document7">出身高校成績証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">推薦書<span
+					<span><input type="checkbox" class="form-check-input" name="document" value="8" id="document8">推薦書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">個人情報等同意書<span
+					<span><input type="checkbox" class="form-check-input" name="document" value="9" id="document9">個人情報等同意書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 
 			</div>
-			<button class="btn btn-info">書類の受取完了</button>
+			<button type="submit" class="btn btn-info" >書類の受取完了</button>
+			</form>
 		</details>
 	</div>
 	<th:block th:insert="components/part::frag_script"></th:block>
