@@ -540,7 +540,7 @@
 			//手段チェック用
 			$(".form-check-input[type='checkbox']").each(function (i, e) {
 				console.log(i, e)
-				$("#err_checkbox h6").remove();
+				$("#err_checkbox h5").remove();
 			});
 
 			let elements = document.querySelectorAll(".form-check-input[type='checkbox']");
@@ -556,7 +556,7 @@
 			}
 
 			if (isChecked) {
-				$("#err_checkbox").append('<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
+				$("#err_checkbox").append('<h5 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h5>');
 
 
 			}
@@ -573,7 +573,7 @@
 		});
 
 		function check_checkbox() {
-			$("#err_checkbox h6").remove();
+			$("#err_checkbox h5").remove();
 			var _result = true;
 			var _check_count = 0;
 
@@ -583,7 +583,7 @@
 				}
 			});
 			if (_check_count == 0) {
-				$("#err_checkbox").append('<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h6>');
+				$("#err_checkbox").append('<h5 class="form-text input-group justify-content-md-start justify-content-center text-danger">手段を選択してください</h5>');
 				_result = false;
 			}
 			return _result;
