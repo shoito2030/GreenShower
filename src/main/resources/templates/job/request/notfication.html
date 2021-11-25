@@ -55,22 +55,22 @@
 								</a>
 							</th:block>
 							<th:block th:if="*{jobRequest.status.id eq '1'}">
-								<a th:href="@{'/job/request/status_change/'+ *{jobRequest.apply_id}}">
+								<a th:href="@{'/job/request/fix/'+ *{jobRequest.apply_id}}">
 								就職活動申請が差し戻されています。修正してください。
 								</a>
 							</th:block>
 							<th:block th:if="*{jobRequest.status.id eq '3'}">
-								<a th:href="@{'/job/report/status_change/'+ *{jobRequest.apply_id}}">
+								<a th:href="@{'/job/request/detail/'+ *{jobRequest.apply_id}}">
 								就職活動申請が承認されました。コース担当に報告してください。
 								</a>
 							</th:block>
 							<th:block th:if="*{jobRequest.status.id eq '4'}">
-								<a th:href="@{'/job/request/status_change/'+ *{jobRequest.apply_id}}">
+								<a th:href="@{'/job/report/insert/'+ *{jobRequest.apply_id}}">
 								就職活動が終わり次第就職活動報告をしてください。
 								</a>
 							</th:block>
 							<th:block th:if="*{jobRequest.status.id eq '5'}">
-								<a th:href="@{'/job/report/status_change/'+ *{jobRequest.apply_id}}">
+								<a th:href="@{'/job/report/fix/'+ *{jobRequest.apply_id}}">
 								就職活動報告が差し戻されています。修正してください。
 								</a>
 							</th:block>

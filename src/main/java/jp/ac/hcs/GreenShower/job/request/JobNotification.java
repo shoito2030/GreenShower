@@ -43,6 +43,7 @@ public class JobNotification {
 		List<JobRequestData> jobRequestList = jobRequestEntity.get().getJobRequestList();
 		List<JobRequestData> jobRequestNotfiList = new ArrayList<JobRequestData>();
 		
+		//担任の通知を取得
 		if(role.equals("ROLE_TEACHER")) {
 			for(JobRequestData data: jobRequestList) {	
 				switch(data.getStatus().getId()) {
@@ -55,6 +56,7 @@ public class JobNotification {
 				}
 			}
 		}
+		//学生の通知を取得
 		if(role.equals("ROLE_STUDENT")) {
 			for(JobRequestData data: jobRequestList) {	
 				switch(data.getStatus().getId()) {

@@ -429,11 +429,18 @@ public class JobRequestService {
 		return rowNumber > 0;
 	}
 
-	public Optional<JobRequestEntity> selectAllNotfication(String name, String role) {
+	/**
+	 * 就職活動申請の申請情報をユーザの権限に応じて取得する
+	 * 
+	 * @param user_id ユーザID
+	 * @param role    権限
+	 * @return - 処理成功時：JobRequestEntityを持つOptional - 処理失敗時：空のOptional
+	 */
+	public Optional<JobRequestEntity> selectAllNotfication(String user_id, String role) {
 		JobRequestEntity jobRequestEntity;
 
 		// ユーザIDに紐づく個人情報を取得
-		Optional<UserData> userData = selectPersonalInfo(name);
+		Optional<UserData> userData = selectPersonalInfo(user_id);
 		if (userData.isEmpty()) {
 			return Optional.empty();
 		}
@@ -444,7 +451,7 @@ public class JobRequestService {
 			// ユーザが『生徒』の場合は、ユーザ自身の申請情報のみを抽出する
 			if (role.equals("ROLE_STUDENT")) {
 				jobRequestEntity.setJobRequestList(jobRequestEntity.getJobRequestList().stream()
-						.filter(report -> report.getApplicant_id().equals(name)).collect(toList()));
+						.filter(report -> report.getApplicant_id().equals(user_id)).collect(toList()));
 			}
 
 		} catch (DataAccessException e) {
