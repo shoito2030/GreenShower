@@ -1,12 +1,16 @@
 package jp.ac.hcs.GreenShower.job.extra;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class JobExtraRepository {
 	
+	private static final String SQL_SELECT_SUMMARY_DOCUMENTS = "SELECT * FROM SUMMARY_DOCUMENTS WHERE APPLY_ID = ?";
 	private static final String SQL_INSERT_SUMMARY_LIST_MANAGEMENT = "INSERT INTO SUMMARY_LIST_MANAGEMENT(APPLY_ID,REGISTER_DATE,REGISTER_USER_ID) VALUES(?,CURRENT_TIMESTAMP,?)";
 	private static final String SQL_INSERT_SUMMARY_DOCUMENTS = "INSERT INTO SUMMARY_DOCUMENTS(APPLY_ID) VALUES(?)";
 	private static final String SQL_UPDATE_SUMMARY_DOCUMENTS_RESUME = "UPDATE SUMMARY_DOCUMENTS SET RECEIPT_OF_RESUME = CURRENT_TIMESTAMP WHERE APPLY_ID = ?";
@@ -23,6 +27,31 @@ public class JobExtraRepository {
 	@Autowired
 	private JdbcTemplate jdbc;
 	
+	public JobExtraData selectSummaryDocuments(String apply_id) throws DataAccessException {
+		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_SUMMARY_DOCUMENTS, apply_id);
+		System.out.println(result);
+		JobExtraData jobExtraData = mappingSelectSummaryDocuments(result);
+
+		return jobExtraData;
+	}
+	
+	private JobExtraData mappingSelectSummaryDocuments(Map<String, Object> result) {
+		JobExtraData data = new JobExtraData();
+		
+		data.setApply_id((String)result.get("apply_id"));
+		data.setReceipt_of_resume(!result.get("receipt_of_resume").equals(null));
+		data.setReceipt_of_university_tranriptsscripts(!result.get("receipt_of_university_tranriptsscripts").equals(null));
+		data.setReceipt_of_university_diploma(!result.get("receipt_of_university_diploma").equals(null));
+		data.setReceipt_of_hcs_transcript(!result.get("receipt_of_hcs_transcript").equals(null));
+		data.setReceipt_of_hcs_diploma(!result.get("receipt_of_hcs_diploma").equals(null));
+		data.setReceipt_of_health_certificate(!result.get("receipt_of_health_certificate").equals(null));
+		data.setReceipt_of_high_school_transcript(!result.get("receipt_of_high_school_transcript").equals(null));
+		data.setReceipt_of_recommendation(!result.get("receipt_of_recommendation").equals(null));
+		data.setReceipt_of_personal_information_agreement(!result.get("receipt_of_personal_information_agreement").equals(null));
+		
+		return data;
+	}
+
 	public int listRegistion(String apply_id,String user_id) {
 		int rowNumber = jdbc.update(SQL_INSERT_SUMMARY_LIST_MANAGEMENT,apply_id,user_id);
 		jdbc.update(SQL_INSERT_SUMMARY_DOCUMENTS,apply_id);

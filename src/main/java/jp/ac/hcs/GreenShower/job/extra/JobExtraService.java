@@ -1,14 +1,31 @@
 package jp.ac.hcs.GreenShower.job.extra;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import jp.ac.hcs.GreenShower.job.request.JobRequestData;
 
 @Service
 public class JobExtraService {
 
 	@Autowired
 	JobExtraRepository jobExtraRepository;
+	
+	public Optional<JobExtraData> selectSummaryDocuments(String apply_id) {
+		JobExtraData jobExtraData;
+
+		try {
+			jobExtraData = jobExtraRepository.selectSummaryDocuments(apply_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return Optional.empty();
+		}
+		return Optional.ofNullable(jobExtraData);
+	}
+	
 	public boolean listRegistion(String apply_id,String user_id) {
 		int rowNumber = 0;
 		try {

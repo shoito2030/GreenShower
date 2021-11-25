@@ -1,6 +1,7 @@
 package jp.ac.hcs.GreenShower.job.extra;
 
 import java.security.Principal;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,7 +29,7 @@ public class JobExtraController {
 		String apply_id = (String)session.getAttribute("apply_id");
 
 		boolean isSuccess = jobExtraService.listRegistion(apply_id,principal.getName());
-
+		
 		// 処理失敗により就職活動申請詳細画面へ 
 		if (isSuccess) {
 			model.addAttribute("msg", "学生の名簿登録が完了しました。");
@@ -44,16 +45,20 @@ public class JobExtraController {
 	@PostMapping("/job/request/status-change/document-receipt")
 	public String documentReceirt(JobExtraForm form,Principal principal,Model model) {
 		String apply_id = (String)session.getAttribute("apply_id");
+		Optional<JobExtraData> jobExtraData;
 
 		boolean isSuccess = jobExtraService.documentReceirt(form,apply_id,principal.getName());
-
+		jobExtraData = jobExtraService.selectSummaryDocuments(apply_id);
+		
 		// 処理失敗により就職活動申請詳細画面へ
 		if (isSuccess) {
 			model.addAttribute("msg", "書類の受取登録が完了しました。");
+			model.addAttribute("jobExtraData",jobExtraData.get());
 			return jobRequestController.getRequestList(principal, model);
 
 		} else {
 			model.addAttribute("errmsg", "書類の受取登録に失敗しました");
+			model.addAttribute("jobExtraData",jobExtraData.get());
 			return jobRequestController.getRequestList(principal, model);
 		}
 		

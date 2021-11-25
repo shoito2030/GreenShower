@@ -157,7 +157,7 @@ public class JobRequestController {
 
 			model.addAttribute("classNumbersMap", classNumbersMap);
 		}
-
+		model.addAttribute("role", role);
 		model.addAttribute("userData", userData.get());
 		return "job/request/insert";
 	}

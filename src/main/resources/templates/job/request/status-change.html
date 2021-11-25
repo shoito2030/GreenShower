@@ -15,276 +15,295 @@
 
 		<div class="container mt-md-5" th:object="${jobRequestData}">
 
-		<div class="row justify-content-md-center mt-md-4">
-			<div class="col-md-2">
-				<span><small class="text-muted">クラス</small><span
-					class="float-md-right mt-md-1 fw-bold h4"
-					th:text="*{classroom}"></span></span>
-			</div>
-			<div class="col-md-1 offset-md-1">
-				<span><small class="text-muted">番号</small><span
-					class="float-md-right mt-md-1 fw-bold h4"
-					th:text="*{class_number}"></span></span>
-			</div>
-			<div class="col-md-2 offset-md-1">
-				<span><small class="text-muted">氏名</small><span
-					class="float-md-right mt-md-1 fw-bold h4"
-					th:text="*{name}"></span></span>
-			</div>
-		</div>
-
-
-
-		<div class="row mt-md-5">
-			<div class="col-md-4 bg-color-white">
-				<p class="fw-bold h4">申請種別</p>
-			</div>
-			<div class="col-md-8">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{apply_type.value}"></p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">企業名</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{company_name}"></p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">内容</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{content.value}"></p>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-5">
-				<p class="fw-bold h4">開始日時・終了日時</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-
-				<div class="row">
-					<div class="col-md-5">
-						<label class="" for="date_activity_from">開始</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_from"
-							th:text="${#dates.format(jobRequestData.date_activity_from, 'yyyy年MM月dd日 HH時mm分')}"></p>
-					</div>
-					<div class="col-md-2 mt-md-4">
-						<p class="h4 text-center text-md-left pl-md-5">~</p>
-					</div>
-					<div class="col-md-5">
-						<label class="" for="date_activity_to">終了</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_to"
-							th:text="${#dates.format(jobRequestData.date_activity_to, 'yyyy年MM月dd日 HH時mm分')}"></p>
-					</div>
+			<div class="row justify-content-md-center mt-md-4">
+				<div class="col-md-2">
+					<span><small class="text-muted">クラス</small><span
+						class="float-md-right mt-md-1 fw-bold h4" th:text="*{classroom}"></span></span>
+				</div>
+				<div class="col-md-1 offset-md-1">
+					<span><small class="text-muted">番号</small><span
+						class="float-md-right mt-md-1 fw-bold h4"
+						th:text="*{class_number}"></span></span>
+				</div>
+				<div class="col-md-2 offset-md-1">
+					<span><small class="text-muted">氏名</small><span
+						class="float-md-right mt-md-1 fw-bold h4" th:text="*{name}"></span></span>
 				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">場所</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5" th:text="*{loc}"></p>
-			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4" th:text="'手段(' + *{way.value} + ')'"></p>
-			</div>
-			<div class="col-md-8 pt-md-4">
 
-				<th:block th:switch="${jobRequestData.way.id}">
-					<div class="row" th:case="1">
+			<div class="row mt-md-5">
+				<div class="col-md-4 bg-color-white">
+					<p class="fw-bold h4">申請種別</p>
+				</div>
+				<div class="col-md-8">
+					<p class="h4 text-center text-md-left pl-md-5"
+						th:text="*{apply_type.value}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="fw-bold h4">企業名</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+					<p class="h4 text-center text-md-left pl-md-5"
+						th:text="*{company_name}"></p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="fw-bold h4">内容</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+					<p class="h4 text-center text-md-left pl-md-5"
+						th:text="*{content.value}"></p>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-5">
+					<p class="fw-bold h4">開始日時・終了日時</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+
+					<div class="row">
 						<div class="col-md-5">
+							<label class="" for="date_activity_from">開始</label>
 							<p class="h4 text-center text-md-left pl-md-5"
-								th:text="${#dates.format(jobRequestData.date_absence_from, 'yyyy年MM月dd日 HH時mm分')}">
-							</p>
+								id="date_activity_from"
+								th:text="${#dates.format(jobRequestData.date_activity_from, 'yyyy年MM月dd日 HH時mm分')}"></p>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2 mt-md-4">
 							<p class="h4 text-center text-md-left pl-md-5">~</p>
 						</div>
 						<div class="col-md-5">
+							<label class="" for="date_activity_to">終了</label>
 							<p class="h4 text-center text-md-left pl-md-5"
-								th:text="${#dates.format(jobRequestData.date_absence_to, 'yyyy年MM月dd日 HH時mm分')}">
-							</p>
+								id="date_activity_to"
+								th:text="${#dates.format(jobRequestData.date_activity_to, 'yyyy年MM月dd日 HH時mm分')}"></p>
 						</div>
 					</div>
+				</div>
+			</div>
 
-					<p class="h4 text-center text-md-left pl-md-5" th:case="2"
-						th:text="${#dates.format(jobRequestData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'">
-					</p>
-					<p class="h4 text-center text-md-left pl-md-5" th:case="3"
-						th:text="${#dates.format(jobRequestData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'に出席します'">
-					</p>
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="fw-bold h4">場所</p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+					<p class="h4 text-center text-md-left pl-md-5" th:text="*{loc}"></p>
+				</div>
+			</div>
 
-					<th:block th:case="4">
-						<p class="h4 text-center text-md-left pl-md-5"
-							th:text="${#dates.format(jobRequestData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'から出席し、'">
-						</p>
-						<p class="h4 text-center text-md-left pl-md-5"
+			<div class="row">
+				<div class="col-md-4 bg-color-white pt-md-4">
+					<p class="fw-bold h4" th:text="'手段(' + *{way.value} + ')'"></p>
+				</div>
+				<div class="col-md-8 pt-md-4">
+
+					<th:block th:switch="${jobRequestData.way.id}">
+						<div class="row" th:case="1">
+							<div class="col-md-5">
+								<p class="h4 text-center text-md-left pl-md-5"
+									th:text="${#dates.format(jobRequestData.date_absence_from, 'yyyy年MM月dd日 HH時mm分')}">
+								</p>
+							</div>
+							<div class="col-md-2">
+								<p class="h4 text-center text-md-left pl-md-5">~</p>
+							</div>
+							<div class="col-md-5">
+								<p class="h4 text-center text-md-left pl-md-5"
+									th:text="${#dates.format(jobRequestData.date_absence_to, 'yyyy年MM月dd日 HH時mm分')}">
+								</p>
+							</div>
+						</div>
+
+						<p class="h4 text-center text-md-left pl-md-5" th:case="2"
 							th:text="${#dates.format(jobRequestData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'">
 						</p>
+						<p class="h4 text-center text-md-left pl-md-5" th:case="3"
+							th:text="${#dates.format(jobRequestData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'に出席します'">
+						</p>
+
+						<th:block th:case="4">
+							<p class="h4 text-center text-md-left pl-md-5"
+								th:text="${#dates.format(jobRequestData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'から出席し、'">
+							</p>
+							<p class="h4 text-center text-md-left pl-md-5"
+								th:text="${#dates.format(jobRequestData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'">
+							</p>
+						</th:block>
+
 					</th:block>
 
-				</th:block>
-
+				</div>
 			</div>
-		</div>
 
-		<!-- AIによる誤字脱字判定の結果が『白』の場合  -->
-		<div class="row" th:unless="${proofreadingData}">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">メモ</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5" th:text="*{remark}"></p>
-			</div>
-		</div>
-
-
-		<!-- AIによる誤字脱字判定の結果が『黒』の場合  -->
-		<th:block th:if="${proofreadingData}">
-			<div class="row">
+			<!-- AIによる誤字脱字判定の結果が『白』の場合  -->
+			<div class="row" th:unless="${proofreadingData}">
 				<div class="col-md-4 bg-color-white pt-md-4">
-					<p class="fw-bold h4">備考</p>
+					<p class="fw-bold h4">メモ</p>
 				</div>
 				<div class="col-md-8 pt-md-4">
-					<p class="h4 text-center text-md-left pl-md-5 lh-lg"
-						th:utext="${proofreadingData.checkedSentence}"></p>
+					<p class="h4 text-center text-md-left pl-md-5" th:text="*{remark}"></p>
 				</div>
 			</div>
-			
-			<div class="row">
-				<div class="col-md-4 bg-color-white pt-md-4">
-					<p class="fw-bold h4">変換候補</p>
+
+
+			<!-- AIによる誤字脱字判定の結果が『黒』の場合  -->
+			<th:block th:if="${proofreadingData}">
+				<div class="row">
+					<div class="col-md-4 bg-color-white pt-md-4">
+						<p class="fw-bold h4">備考</p>
+					</div>
+					<div class="col-md-8 pt-md-4">
+						<p class="h4 text-center text-md-left pl-md-5 lh-lg"
+							th:utext="${proofreadingData.checkedSentence}"></p>
+					</div>
 				</div>
-				<div class="col-md-8 pt-md-4">
 
-					<p class="h4 text-center text-md-left pl-md-5 lh-lg" th:each="alert : ${proofreadingData.alerts}" th:text="${alert.word + ' >> ' + '[' + alert.suggestions + ']'}"></p>
+				<div class="row">
+					<div class="col-md-4 bg-color-white pt-md-4">
+						<p class="fw-bold h4">変換候補</p>
+					</div>
+					<div class="col-md-8 pt-md-4">
 
+						<p class="h4 text-center text-md-left pl-md-5 lh-lg"
+							th:each="alert : ${proofreadingData.alerts}"
+							th:text="${alert.word + ' >> ' + '[' + alert.suggestions + ']'}"></p>
+
+					</div>
 				</div>
-			</div>
-		</th:block>
+			</th:block>
 
-		<!-- メモ以降追加 -->
-		<hr>
-		<form method="post"
-			th:action="@{'/job/request/status-change/' + ${jobRequestData.apply_id}}">
-			<div class="row">
-				<div class="col">
-					<p class="font-weight-bold h4">現在の申請状態</p>
-					<div class="card center-block w-50" style="border-radius: 75px; margin: 0 auto;">
-						<div class="card-body">
-							<p th:text="${jobRequestData.status.value}"></p>
+			<!-- メモ以降追加 -->
+			<hr>
+			<form method="post"
+				th:action="@{'/job/request/status-change/' + ${jobRequestData.apply_id}}">
+				<div class="row">
+					<div class="col">
+						<p class="font-weight-bold h4">現在の申請状態</p>
+						<div class="card center-block w-50"
+							style="border-radius: 75px; margin: 0 auto;">
+							<div class="card-body">
+								<p th:text="${jobRequestData.status.value}"></p>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="pt-md-4 mx-auto" style="width: 90px;">
+							<p class="font-weight-bold h4">変更</p>
+							<select class="form-control" name="status" id="status">
+								<option value="">選択</option>
+								<option value="3">承認</option>
+								<option value="1">差し戻し</option>
+								<option value="99">取消し</option>
+							</select>
+						</div>
+						<div th:if="${errmsg}">
+							<span th:text="${errmsg}" style="color: red;"></span>
 						</div>
 					</div>
 				</div>
-				<div class="col">
-					<div class="pt-md-4 mx-auto" style="width: 90px;">
-						<p class="font-weight-bold h4">変更</p>
-						<select class="form-control" name="status" id="status">
-							<option value="">選択</option>
-							<option value="3">承認</option>
-							<option value="1">差し戻し</option>
-							<option value="99">取消し</option>
-						</select>
-					</div>
-					<div th:if="${errmsg}">
-						<span th:text="${errmsg}" style="color: red;"></span>
-					</div>
-				</div>
-			</div>
-			
-			<div id="indicate" style="display: none;">
-			<div class="row">
-				<div class="pt-md-4 mx-auto" style="width: 200px;">
-					<p class="font-weight-bold h4">指摘欄</p>
-				</div>
-			</div>
 
-			<div class="row">
-				<textarea class="form-control bg-color-white pt-md-4 mx-auto"
-					style="width: 600px; height: 130px;" placeholder="指摘コメントを入力してください" name="indicate"></textarea>
+				<div id="indicate" style="display: none;">
+					<div class="row">
+						<div class="pt-md-4 mx-auto" style="width: 200px;">
+							<p class="font-weight-bold h4">指摘欄</p>
+						</div>
+					</div>
+
+					<div class="row">
+						<textarea class="form-control bg-color-white pt-md-4 mx-auto"
+							style="width: 600px; height: 130px;" placeholder="指摘コメントを入力してください" name="indicate"></textarea>
 					<div th:if="${errmsg}">
 						<span th:text="${indicateErrmsg}" style="color: red;"></span>
 					</div>
-			</div>
-			</div>
-			<br>
-			<button type="submit" class="btn btn-primary">登録</button>
-		</form>
+				</div>
+				</div>
+				<br>
+				<button type="submit" class="btn btn-primary">登録</button>
+			</form>
 		</div>
 		<hr>
 		<details open>
 			<summary>とりまとめ企業について</summary>
+			<div class="container mt-md-5" th:object="${jobExtraData}"></div>
 			<br>
 			<p class="font-weight-bold h5">学生の名簿登録</p>
 			<br>
-			<form th:action="@{/job/request/status-change/list-registration}" method="post" class="justify-content-center">
-			<button class="btn btn-warning">登録完了</button>
+			<form th:action="@{/job/request/status-change/list-registration}"
+				method="post" class="justify-content-center">
+				<button class="btn btn-warning">登録完了</button>
 			</form>
 			<br>
-			<form th:action="@{/job/request/status-change/document-receipt}" method="post" class="justify-content-center">
-			<p class="font-weight-bold h5">必要書類の受取</p>
-			<div class="row justify-content-md-center mt-md-4">
-				<div class="col-md-3 text-left">
-					<span><input type="checkbox" class="form-check-input" name="receipt_of_resume" value="true" id="resume">履歴書<span
-						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
-				</div>
-				<div class="col-md-3">
-					<span><input type="checkbox" class="form-check-input" name="receipt_of_university_tranriptsscripts" value="true" id="university_tranriptsscripts">大学成績証明書<span
-						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
-				</div>
-				<div class="col-md-3">
-					<span><input type="checkbox" class="form-check-input" name="receipt_of_university_diploma" value="true" id="university_diploma">大学（卒業・卒業見込）証明書<span
-						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
-				</div>
-				<div class="col-md-3">
-					<span><input type="checkbox" class="form-check-input" name="receipt_of_hcs_transcript" value="true" id="hcs_transcript">HCS成績証明書<span
-						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
-				</div>
-				<div class="col-md-3">
-					<span><input type="checkbox" class="form-check-input" name="receipt_of_hcs_diploma" value="true" id="hcs_diploma">HCS卒業見込証明書<span
-						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
-				</div>
-				<div class="col-md-3">
-					<span><input type="checkbox" class="form-check-input" name="receipt_of_health_certificate" value="true" id="health_certificate">健康診断証明書<span
-						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
-				</div>
-				<div class="col-md-3">
-					<span><input type="checkbox" class="form-check-input" name="receipt_of_high_school_transcript" value="true" id="high_school_transcript">出身高校成績証明書<span
-						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
-				</div>
-				<div class="col-md-3">
-					<span><input type="checkbox" class="form-check-input" name="receipt_of_recommendation" value="true" id="recommendation">推薦書<span
-						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
-				</div>
-				<div class="col-md-3">
-					<span><input type="checkbox" class="form-check-input" name="receipt_of_personal_information_agreement" value="true" id="personal_information_agreement">個人情報等同意書<span
-						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
-				</div>
+			<form th:action="@{/job/request/status-change/document-receipt}"
+				method="post" class="justify-content-center">
+				<p class="font-weight-bold h5">必要書類の受取</p>
+				<div class="row justify-content-md-center mt-md-4">
+					<div class="col-md-3">
+						<span><input type="checkbox" class="form-check-input"
+							name="receipt_of_resume" value="true" id="resume">履歴書<span
+							class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+					</div>
+					<div class="col-md-3">
+						<span><input type="checkbox" class="form-check-input"
+							name="receipt_of_university_tranriptsscripts" value="true"
+							id="university_tranriptsscripts">大学成績証明書<span
+							class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+					</div>
+					<div class="col-md-3">
+						<span><input type="checkbox" class="form-check-input"
+							name="receipt_of_university_diploma" value="true"
+							id="university_diploma">大学（卒業・卒業見込）証明書<span
+							class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+					</div>
+					<div class="col-md-3">
+						<span><input type="checkbox" class="form-check-input"
+							name="receipt_of_hcs_transcript" value="true" id="hcs_transcript">HCS成績証明書<span
+							class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+					</div>
+					<div class="col-md-3">
+						<span><input type="checkbox" class="form-check-input"
+							name="receipt_of_hcs_diploma" value="true" id="hcs_diploma">HCS卒業見込証明書<span
+							class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+					</div>
+					<div class="col-md-3">
+						<span><input type="checkbox" class="form-check-input"
+							name="receipt_of_health_certificate" value="true"
+							id="health_certificate">健康診断証明書<span
+							class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+					</div>
+					<div class="col-md-3">
+						<span><input type="checkbox" class="form-check-input"
+							name="receipt_of_high_school_transcript" value="true"
+							id="high_school_transcript">出身高校成績証明書<span
+							class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+					</div>
+					<div class="col-md-3">
+						<span><input type="checkbox" class="form-check-input"
+							name="receipt_of_recommendation" value="true" id="recommendation">推薦書<span
+							class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+					</div>
+					<div class="col-md-3">
+						<span><input type="checkbox" class="form-check-input"
+							name="receipt_of_personal_information_agreement" value="true"
+							id="personal_information_agreement">個人情報等同意書<span
+							class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
+					</div>
 
-			</div>
-			<button type="submit" class="btn btn-info" >書類の受取完了</button>
+				</div>
+				<button type="submit" class="btn btn-info">書類の受取完了</button>
 			</form>
-		</details>
+	</div>
+	</details>
 	</div>
 	<th:block th:insert="components/part::frag_script"></th:block>
-	
+
 	<script type="text/javascript">
 		document
 				.getElementById("status")
