@@ -345,6 +345,12 @@ public class JobReportController {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getReportStatus(form.getApply_id(), principal, model);
 		}
+		
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("errmsg", "指摘コメントを再入力してください");
+			model.addAttribute("indicateErrmsg", "指摘コメントが長すぎます");
+			return getReportStatus(form.getApply_id(), principal, model);
+		}
 
 		// 報告状態変更処理実行
 		jobReportService.updateStatus(form);

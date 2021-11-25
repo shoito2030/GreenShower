@@ -154,6 +154,9 @@
 					<textarea class="form-control bg-color-white pt-md-4 mx-auto"
 						style="width: 600px; height: 130px;" placeholder="指摘コメントを入力してください"
 						name="indicate"></textarea>
+						<div th:if="${indicateErrmsg}">
+						<span th:text="${indicateErrmsg}" style="color: red;"></span>
+					</div>
 				</div>
 
 			</div>
