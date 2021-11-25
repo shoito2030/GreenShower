@@ -197,6 +197,7 @@
 					<div class="pt-md-4 mx-auto" style="width: 90px;">
 						<p class="font-weight-bold h4">変更</p>
 						<select class="form-control" name="status" id="status">
+							<option value="">選択</option>
 							<option value="3">承認</option>
 							<option value="1">差し戻し</option>
 							<option value="99">取消し</option>
@@ -230,49 +231,53 @@
 			<br>
 			<p class="font-weight-bold h5">学生の名簿登録</p>
 			<br>
+			<form th:action="@{/job/request/status-change/list-registration}" method="post" class="justify-content-center">
 			<button class="btn btn-warning">登録完了</button>
+			</form>
 			<br>
+			<form th:action="@{/job/request/status-change/document-receipt}" method="post" class="justify-content-center">
 			<p class="font-weight-bold h5">必要書類の受取</p>
 			<div class="row justify-content-md-center mt-md-4">
 				<div class="col-md-3 text-left">
-					<span><input type="checkbox">履歴書<span
+					<span><input type="checkbox" class="form-check-input" name="receipt_of_resume" value="true" id="resume">履歴書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-				<span><input type="checkbox">大学成績証明書<span
+					<span><input type="checkbox" class="form-check-input" name="receipt_of_university_tranriptsscripts" value="true" id="university_tranriptsscripts">大学成績証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">大学（卒業・卒業見込）証明書<span
+					<span><input type="checkbox" class="form-check-input" name="receipt_of_university_diploma" value="true" id="university_diploma">大学（卒業・卒業見込）証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">HCS成績証明書<span
+					<span><input type="checkbox" class="form-check-input" name="receipt_of_hcs_transcript" value="true" id="hcs_transcript">HCS成績証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">HCS卒業見込証明書<span
+					<span><input type="checkbox" class="form-check-input" name="receipt_of_hcs_diploma" value="true" id="hcs_diploma">HCS卒業見込証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">健康診断証明書<span
+					<span><input type="checkbox" class="form-check-input" name="receipt_of_health_certificate" value="true" id="health_certificate">健康診断証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">出身高校成績証明書<span
+					<span><input type="checkbox" class="form-check-input" name="receipt_of_high_school_transcript" value="true" id="high_school_transcript">出身高校成績証明書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">推薦書<span
+					<span><input type="checkbox" class="form-check-input" name="receipt_of_recommendation" value="true" id="recommendation">推薦書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 				<div class="col-md-3">
-					<span><input type="checkbox">個人情報等同意書<span
+					<span><input type="checkbox" class="form-check-input" name="receipt_of_personal_information_agreement" value="true" id="personal_information_agreement">個人情報等同意書<span
 						class="float-md-right mt-md-1 font-weight-bold h4"></span></span>
 				</div>
 
 			</div>
-			<button class="btn btn-info">書類の受取完了</button>
+			<button type="submit" class="btn btn-info" >書類の受取完了</button>
+			</form>
 		</details>
 	</div>
 	<th:block th:insert="components/part::frag_script"></th:block>

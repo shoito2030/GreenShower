@@ -236,7 +236,8 @@ public class JobRequestController {
 			model.addAttribute("errmsg", "取消済なので状態を変更できません。");
 			return getRequestList(principal, model);
 		}
-
+		
+		session.setAttribute("apply_id", apply_id);
 		model.addAttribute("jobRequestData", jobRequestData.get());
 
 		// AIサービスの呼び出し

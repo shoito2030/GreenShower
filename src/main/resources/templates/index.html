@@ -8,19 +8,28 @@
 <th:block th:insert="components/part::frag_mobile"></th:block>
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 80%;
+    }
+</style>
 </head>
 
-<body>
+<body class="bg-color-sky max-height">
 	<th:block th:insert="components/part::frag_header"></th:block>
 	
 
 
-	<div class="container-lg mt-3">
+	<div class="container mt-5 pt-3 pt-md-5">
         <div class="row justify-content-md-center">
             <div class="col-sm-6">
-                <div class="card center-block" style="border-radius:75px;">
+                <div class="card center-block" style="border-radius:50px;">
                     <div class="card-body">
-                        <h3 class="card-title">就職活動申請</h3>
+                        <h3 class="card-title fw-bold" style="color:#1e7aca;">就職活動申請</h3>
                         <div class="btn-group-vertical btn-group-lg" role="group">
                             <input type="button" class="btn btn-primary mt-4" value="新規作成"
 							th:onclick="'window.location.href = \'' + @{/job/request/insert} + '\''">

@@ -12,7 +12,10 @@ import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData.Content;
 import jp.ac.hcs.GreenShower.user.UserData;
-
+/**
+ * 就職活動報告に関する処理を行うRepositoryクラス
+ *
+ */
 @Repository
 public class JobReportRepository {
 
