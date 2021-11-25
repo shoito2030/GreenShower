@@ -101,7 +101,7 @@ public class JobReportController {
 	 * @return 就職活動報告新規作成画面
 	 */
 	@GetMapping("/job/report/insert/{apply_id}")
-	public String getReportInert(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
+	public String getReportInert(@PathVariable("apply_id") String apply_id, JobReportForm form,  Principal principal, Model model) {
 		String status = jobReportService.selectJobHuntingStatus(apply_id);
 		
 		if(status == null) {
@@ -155,7 +155,7 @@ public class JobReportController {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("errmsg", "報告処理に失敗しました。");
 			session.removeAttribute("apply_id");
-			return getReportList(principal, model);
+			return getReportInert(form.getApply_id(), form, principal, model);
 		}
 
 		// 追加処理実行

@@ -39,7 +39,7 @@
 
 	<h1 class="title ml-md-5 text-sm-center text-md-left pl-md-5">就職活動報告 新規登録</h1>
 
-	<form class="container mt-md-5" method="post" th:action="@{/job/report/insert}">
+	<form class="container mt-md-5" method="post" th:action="@{/job/report/insert}" th:object="${jobReportForm}">
 		<div class="row mt-md-4 pr-md-5">
 			<div class="col-md-2 pr-md-5">
 				<span><small class="text-muted">クラス</small><span
@@ -74,7 +74,6 @@
 						<label class="form-check-label">進まない</label>
 					</div>
 				</div>
-				<p th:text="${errmsg}" class="text-danger"></p>
 			</div>
 		</div>
 
@@ -87,6 +86,9 @@
 			</div>
 			<div class="col-md-6 mb-md-3">
 				<textarea class="form-control" id="remark" name="remark" rows="5" cols="50"></textarea>
+				<h6 class="form-text input-group justify-content-md-start justify-content-center text-danger"
+					th:if="${#fields.hasErrors('remark')}" th:errors="*{remark}">エラーメッセージ
+				</h6>
 			</div>
 		</div>
 
