@@ -74,7 +74,7 @@
     </style>
 </head>
 
-<body class="bg-color-sky max-height">
+<body class="bg-color-admin max-height">
 
     <header class="fixed-top">
         <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -123,10 +123,10 @@
 
     <div class="container mt-5 pt-5 pt-md-5">
         <div class="row justify-content-md-center">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <div class="card center-block" style="border-radius:50px;">
                     <div class="card-body">
-                        <h3 class="card-title fw-bold" style="color:#1e7aca;">就職活動申請
+                        <h3 class="card-title fw-bold fw-title-admin">就職活動申請
                             新規登録</h3>
                         <form class="container mt-md-5 needs-validation" novalidate method="post"
                             action="/job/request/insert">
@@ -156,12 +156,12 @@
                             </div>
                             <div class="row row-cols-1 row-cols-md-2 gy-3 mb-md-5">
 
-                                <div class="col-md-5">
-                                    <h5 class="job-form-label text-center">申請種別</h5>
-                                    
+                                <div class="col-md-5 mb-1">
+                                    <h5 class="fw-bold text-center">申請種別</h5>
+
                                     <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-5 mb-1 mt-md-3">
                                     <div class="input-group justify-content-around">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="apply_type"
@@ -189,14 +189,19 @@
                                 </div>
 
 
-                                <div class="col-md-5 mt-md-4">
+                                <div class="col-md-5 mb-1 mt-md-4">
                                     <h5 class="fw-bold text-center">企業名</h5>
                                     <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-5 mb-1">
                                     <input type="text" class="form-control" name="company_name" required
                                         id="company_name" value="">
 
+                                    <small
+                                        class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                        th:if="${#fields.hasErrors('company_name')}" th:errors="*{company_name}">
+                                        エラーメッセージ
+                                    </small>
 
 
                                     <div class="invalid-feedback">
@@ -207,11 +212,11 @@
                                 </div>
 
 
-                                <div class="col-md-5">
+                                <div class="col-md-5 mb-1">
                                     <h5 class="fw-bold mt-md-1 text-center">内容</h5>
                                     <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col-md-5 pt-md-2">
+                                <div class="col-md-5 mb-1">
                                     <div class="input-group justify-content-around">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" id="content1" name="content"
@@ -239,24 +244,31 @@
                                             <label class="form-check-label" for="content99">その他</label>
                                         </div>
 
-
+                                        <small
+                                            class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                            th:if="${#fields.hasErrors('content')}" th:errors="*{content}">
+                                            エラーメッセージ</small>
 
                                     </div>
                                 </div>
 
 
-                                <div class="col-md-5">
+                                <div class="col-md-5 mb-2">
                                     <h5 class="fw-bold mt-md-4 text-center">開始日時・終了日時</h5>
                                     <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-5 mb-2">
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <label for="date_activity_from"
                                                 class="form-label input-group justify-content-center">開始</label>
                                             <input type="datetime-local" class="form-control dateValid"
                                                 name="date_activity_from" id="date_activity_from" required>
-
+<small
+                                                class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                                th:if="${#fields.hasErrors('date_activity_from')}"
+                                                th:errors="*{date_activity_from}">
+                                                エラーメッセージ</small>
 
                                             <div class="invalid-feedback">
                                                 <small
@@ -269,7 +281,11 @@
                                                 class="form-label input-group justify-content-around">終了</label>
                                             <input type="datetime-local" class="form-control dateValid"
                                                 name="date_activity_to" id="date_activity_to" required>
-
+                                            <small
+                                                class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                                th:if="${#fields.hasErrors('date_activity_to')}"
+                                                th:errors="*{date_activity_to}">
+                                                エラーメッセージ</small>
 
                                             <div class="invalid-feedback">
                                                 <small
@@ -287,13 +303,13 @@
                                 </div>
 
 
-                                <div class="col-md-5">
+                                <div class="col-md-5 mb-4">
                                     <h5 class="fw-bold mt-md-1 text-center">郵便番号</h5>
                                 </div>
-                                <div class="col-md-5">
-                                    <div class="input-group w-50 margin-md-0-auto">
+                                <div class="col-md-5 mb-4">
+                                    <div class="input-group w-75 margin-md-0-auto">
                                         <input type="text" class="form-control" id="zipcode">
-                                        <button type="button" id="zip-btn" class="btn btn-primary">検索</button>
+                                        <button type="button" id="zip-btn" class="btn btn-danger">検索</button>
                                     </div>
 
                                     <div class="invalid-feedback">
@@ -304,13 +320,16 @@
                                 </div>
 
 
-                                <div class="col-md-5 mt-md-5">
+                                <div class="col-md-5 mb-1">
                                     <h5 class="fw-bold mt-md-1 text-center">場所</h5>
                                     <small class="text-danger text-center">※必須</small>
                                 </div>
-                                <div class="col-md-5 mt-md-5">
+                                <div class="col-md-5 mb-1">
                                     <input type="text" class="form-control" name="loc" id="loc" required value="">
-
+                                    <small
+                                        class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                        th:if="${#fields.hasErrors('loc')}" th:errors="*{loc}">エラーメッセージ
+                                    </small>
 
                                     <div class="invalid-feedback">
                                         <small
@@ -342,7 +361,12 @@
                                             <input type="datetime-local" class="form-control dateValid"
                                                 name="date_absence_from" id="date_absence_from">
 
-
+                                            <small
+                                                class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                                th:if="${#fields.hasErrors('date_absence_from')}"
+                                                th:errors="*{date_absence_from}">
+                                                エラーメッセージ
+                                            </small>
                                             <div class="invalid-feedback">
                                                 <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
@@ -355,7 +379,12 @@
                                                 class="form-label input-group justify-content-center">終了</label>
                                             <input type="datetime-local" class="form-control dateValid"
                                                 name="date_absence_to" id="date_absence_to">
-
+                                            <small
+                                                class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                                th:if="${#fields.hasErrors('date_absence_to')}"
+                                                th:errors="*{date_absence_to}">
+                                                エラーメッセージ
+                                            </small>
 
                                             <div class="invalid-feedback">
                                                 <small
@@ -379,7 +408,12 @@
                                         <div class="col pt-md-2">
                                             <input type="datetime-local" class="form-control dateValid"
                                                 name="leave_early_date" id="leave_early_date">
-
+                                            <small
+                                                class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                                th:if="${#fields.hasErrors('leave_early_date')}"
+                                                th:errors="*{leave_early_date}">
+                                                エラーメッセージ
+                                            </small>
 
                                             <div class="invalid-feedback">
                                                 <small
@@ -403,7 +437,12 @@
                                             <input type="datetime-local" class="form-control dateValid"
                                                 name="attendance_date" id="attendance_date">
 
-
+                                            <small
+                                                class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                                th:if="${#fields.hasErrors('attendance_date')}"
+                                                th:errors="*{attendance_date}">
+                                                エラーメッセージ
+                                            </small>
                                             <div class="invalid-feedback">
                                                 <small
                                                     class="form-text input-group justify-content-md-start justify-content-center text-danger">
@@ -412,7 +451,10 @@
                                         </div>
                                     </div>
 
-
+                                    <small
+                                        class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                        th:if="${#fields.hasErrors('way')}" th:errors="*{way}">エラーメッセージ
+                                    </small>
                                     <div class="err_text" id="err_checkbox"></div>
 
                                 </div>
@@ -424,14 +466,17 @@
                                 <div class="col-md-5">
                                     <textarea class="form-control" id="remark" name="remark" rows="5"
                                         cols="50"></textarea>
-
+                                    <small
+                                        class="form-text input-group justify-content-md-start justify-content-center text-danger"
+                                        th:if="${#fields.hasErrors('remark')}" th:errors="*{remark}">エラーメッセージ
+                                    </small>
                                 </div>
 
                             </div>
 
 
                             <div class="d-grid col-4 mx-auto mt-5">
-                                <button class="btn btn-primary btn-lg" type="submit" id="submit">登録</button>
+                                <button class="btn btn-danger btn-lg" type="submit" id="submit">登録</button>
                             </div>
                         </form>
                     </div>
@@ -457,7 +502,7 @@
     <script src="/js/common.js"></script>
 
 
-    <script src="/js/wayValid.js"></script>
+    <script src="../../../static/js/wayValid.js"></script>
 
     <!-- オリジナルスクリプト -->
     <script type="text/javascript">
