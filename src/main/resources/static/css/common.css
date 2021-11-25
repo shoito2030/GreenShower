@@ -43,7 +43,7 @@ a {
 
 .container {
 	width: 80%; /* 幅は親要素の80% */
-	max-width: 1500px; /* 幅は最大500pxまでしか広げない */
+	max-width: 1500px; /* 幅は最大1500pxまでしか広げない */
 	margin: 0 auto; /* 左右をauto指定にして左右中央揃えに */
 }
 
