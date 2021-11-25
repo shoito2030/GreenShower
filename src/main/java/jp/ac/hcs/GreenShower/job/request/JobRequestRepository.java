@@ -27,7 +27,11 @@ public class JobRequestRepository {
 	private static final String SQL_SELECT_ALL_REQUESTS = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS  FROM JOB_HUNTING JH\r\n"
 			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID\r\n"
 			+ "WHERE NOT EXISTS(SELECT *  FROM REPORTS REP WHERE JH.APPLY_ID  = REP.APPLY_ID) AND U.CLASSROOM = ? ORDER BY JH.STATUS DESC;";
-
+	
+	/** 申請情報を全件取得(報告済みも含む)*/
+	private static final String SQL_SELECT_ALL_NOTFICATION = "SELECT U.NAME, U.CLASSROOM, U.CLASS_NUMBER, JH.APPLY_ID, JH.APPLICANT_ID, JH.CONTENT, JH.COMPANY_NAME, JH.STATUS  FROM JOB_HUNTING JH\r\n"
+			+ "LEFT JOIN USERS U ON  U.USER_ID  =  JH.APPLICANT_ID\r\n"
+			+ "WHERE U.CLASSROOM = ? ORDER BY JH.STATUS DESC;";
 	/** ユーザIDからクラス・番号・名前を取得するSQL */
 	private static final String SQL_SELECT_PERSONAL_INFO = "SELECT NAME,CLASSROOM,CLASS_NUMBER  FROM USERS WHERE USER_ID  = ?;";
 	
@@ -77,6 +81,7 @@ public class JobRequestRepository {
 	private static final String SQL_UPDATE_JOB_HUNTING = "UPDATE JOB_HUNTING SET STATUS = '2' WHERE APPLY_ID = ?;";
 	@Autowired
 	private JdbcTemplate jdbc;
+
 
 	/**
 	 * 申請情報を全件取得（ユーザの所属クラスのもののみ）する
@@ -363,5 +368,12 @@ public class JobRequestRepository {
 		int rowNumber = jdbc.update(SQL_NOTICE_COURSE_DIRECTOR, apply_id);
 
 		return rowNumber;
+	}
+
+	public JobRequestEntity selectAllNotfication(String classroom) {
+		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_NOTFICATION, classroom);
+		JobRequestEntity jobRequestEntity = mappingSelectResult(resultList);
+
+		return jobRequestEntity;
 	}
 }

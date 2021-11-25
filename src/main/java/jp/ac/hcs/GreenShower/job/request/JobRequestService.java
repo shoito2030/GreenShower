@@ -429,4 +429,29 @@ public class JobRequestService {
 		return rowNumber > 0;
 	}
 
+	public Optional<JobRequestEntity> selectAllNotfication(String name, String role) {
+		JobRequestEntity jobRequestEntity;
+
+		// ユーザIDに紐づく個人情報を取得
+		Optional<UserData> userData = selectPersonalInfo(name);
+		if (userData.isEmpty()) {
+			return Optional.empty();
+		}
+
+		try {
+			jobRequestEntity = jobRequestRepository.selectAllNotfication(userData.get().getClassroom());
+
+			// ユーザが『生徒』の場合は、ユーザ自身の申請情報のみを抽出する
+			if (role.equals("ROLE_STUDENT")) {
+				jobRequestEntity.setJobRequestList(jobRequestEntity.getJobRequestList().stream()
+						.filter(report -> report.getApplicant_id().equals(name)).collect(toList()));
+			}
+
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			return Optional.empty();
+		}
+		return Optional.ofNullable(jobRequestEntity);
+	}
+
 }

@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS messages (
 	message_id VARCHAR(254) PRIMARY KEY,
 	user_id VARCHAR(254) NOT NULL,
 	event_id VARCHAR(254),
-        subject VARCHAR(254) NOT NULL,
+    subject VARCHAR(254) NOT NULL,
 	content VARCHAR(254),
 	is_checked boolean NOT NULL DEFAULT FALSE,
 	sender_id VARCHAR(254) NOT NULL,	

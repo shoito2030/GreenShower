@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<meta charset="UTF-8">
+	<title>就職活動申請一覧画面</title>
+
+	<script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+	<script>
+		jQuery(function ($) {
+			$(".table")
+				.DataTable(
+					{
+						"language": {
+							"url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Japanese.json"
+						}
+					});
+		});
+	</script>
+
+	<th:block th:insert="components/part::frag_mobile"></th:block>
+	<th:block th:insert="components/part::frag_icon"></th:block>
+	<th:block th:insert="components/part::frag_style"></th:block>
+</head>
+
+<body>
+
+	<th:block th:insert="components/part::frag_header"></th:block>
+
+	就職活動申請一覧画面
+	<div class="container">
+		<div class="content-box">
+			<div class="resposive">
+				<ul>
+				<li th:each="jobRequest : ${jobRequestList}">
+				
+				</li>
+				</ul>
+				<table class="table table-striped table-light text-nowrap">
+					<tbody>
+						<tr th:each="jobRequest : ${jobRequestList}">
+						<td>
+							<th:block th:if="*{jobRequest.status.id eq '2'}">
+								<a th:href="@{'/job/request/status_change/'+ *{jobRequest.apply_id}}">
+								<span th:text="*{jobRequest.name}"></span>から就職活動申請が来ています。承認してください。
+								</a>
+							</th:block>
+							<th:block th:if="*{jobRequest.status.id eq '6'}">
+								<a th:href="@{'/job/report/status_change/'+ *{jobRequest.apply_id}}">
+								<span th:text="*{jobRequest.name}"></span>から就職活動報告が来ています。承認してください。
+								</a>
+							</th:block>
+							<th:block th:if="*{jobRequest.status.id eq '1'}">
+								<a th:href="@{'/job/request/status_change/'+ *{jobRequest.apply_id}}">
+								就職活動申請が差し戻されています。修正してください。
+								</a>
+							</th:block>
+							<th:block th:if="*{jobRequest.status.id eq '3'}">
+								<a th:href="@{'/job/report/status_change/'+ *{jobRequest.apply_id}}">
+								就職活動申請が承認されました。コース担当に報告してください。
+								</a>
+							</th:block>
+							<th:block th:if="*{jobRequest.status.id eq '4'}">
+								<a th:href="@{'/job/request/status_change/'+ *{jobRequest.apply_id}}">
+								就職活動が終わり次第就職活動報告をしてください。
+								</a>
+							</th:block>
+							<th:block th:if="*{jobRequest.status.id eq '5'}">
+								<a th:href="@{'/job/report/status_change/'+ *{jobRequest.apply_id}}">
+								就職活動報告が差し戻されています。修正してください。
+								</a>
+							</th:block>
+						</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</th:block>
+
+
+	<th:block th:insert="components/part::frag_script"></th:block>
+
+
+</body>
+
+</html>
