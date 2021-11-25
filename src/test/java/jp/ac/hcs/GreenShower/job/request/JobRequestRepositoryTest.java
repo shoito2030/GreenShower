@@ -241,5 +241,17 @@ class JobRequestRepositoryTest {
 
 		log.warn("[noticeCourseDirectorメソッドの正常系テスト]rowNumber:" + rowNumber);
 	}
+	
+	@Test
+	void selectAllNotficationメソッドの正常系テスト() {
+		// 1.Ready
+		String classroom = "S3A1";
+		// 2.Do
+		JobRequestEntity jobRequestEntity = jobRequestRepository.selectAllNotfication(classroom);
+		// 3.Assert
+		assertNotNull(jobRequestEntity);
+		// 4.Logs
+		log.warn("[selectAllNotficationメソッドの正常系テスト]jobRequestEntity:" + jobRequestEntity.toString());
+	}
 
 }

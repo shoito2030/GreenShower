@@ -819,4 +819,56 @@ class JobRequestServiceTest {
 		log.warn("[hasNoticedCourseDirectorの異常系テスト]result:" + result);
 	}
 
+	@Test
+	void selectAllNotficationの正常系テスト() {
+		// 1.Ready
+		String user_id = "yamada@xxx.co.jp";
+		String role = "ROLE_STUDENT";
+		// 2.Do
+		Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllNotfication(user_id, role);
+		// 3.Assert
+		assertNotNull(jobRequestEntity);
+		// 4.Logs
+		log.warn("[selectAllNotficationメソッドの正常系テスト]reportEntity:" + jobRequestEntity.toString());
+	}
+	
+	@Test
+	void selectAllNotficationの正常系テスト_ユーザが生徒ではない場合() {
+		// 1.Ready
+		String user_id = "abe@xxx.co.jp";
+		String role = "ROLE_TEACHER";
+		// 2.Do
+		Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllNotfication(user_id, role);
+		// 3.Assert
+		assertNotNull(jobRequestEntity);
+		// 4.Logs
+		log.warn("[selectAllNotficationメソッドの正常系テスト_ユーザが生徒ではない場合]reportEntity:" + jobRequestEntity.toString());
+	}
+	
+	@Test
+	void selectAllNotficationの正常系テスト_存在しないユーザの場合() {
+		// 1.Ready
+		String user_id = "empty@xxx.co.jp";
+		String role = "ROLE_EMPTY";
+		// 2.Do
+		Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllNotfication(user_id, role);
+		// 3.Assert
+		assertNotNull(jobRequestEntity);
+		// 4.Logs
+		log.warn("[selectAllNotficationメソッドの正常系テスト_存在しないユーザの場合]reportEntity:" + jobRequestEntity.toString());
+	}
+	
+	@Test
+	void selectAllNotficationの異常系テスト() {
+		// 1.Ready
+		String user_id = "yamada@xxx.co.jp";
+		String role = "ROLE_STUDENT";
+		doThrow(new DataAccessResourceFailureException("")).when(jobRequestRepository).selectAllNotfication(any());
+		// 2.Do
+		Optional<JobRequestEntity> jobRequestEntity = jobRequestService.selectAllNotfication(user_id, role);
+		// 3.Assert
+		assertTrue(jobRequestEntity.isEmpty());
+		// 4.Logs
+		log.warn("[selectAllNotficationメソッドの異常系テスト]reportEntity:" + jobRequestEntity.toString());
+	}
 }
