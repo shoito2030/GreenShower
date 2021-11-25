@@ -1,24 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-	<meta charset="UTF-8">
-	<title>就職活動申請詳細画面</title>
-	<th:block th:insert="components/part::frag_mobile"></th:block>
-	<th:block th:insert="components/part::frag_icon"></th:block>
-	<th:block th:insert="components/part::frag_style"></th:block>
-	<style>
-		.container {
-			width: 90%;
-		}
+<meta charset="UTF-8">
+<title>就職活動申請詳細画面</title>
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
+<style>
+html {
+	height: 100%;
+}
 
-		/* スマホ縦対応 1カラン */
-		@media screen and (max-width: 800px) {
-			.container {
-				width: 100%;
-			}
-		}
-	</style>
+body {
+	height: 80%;
+}
+
+.container {
+	width: 90%;
+}
+
+/* スマホ縦対応 1カラン */
+@media screen and (max-width: 800px) {
+	.container {
+		width: 95%;
+	}
+	html {
+		height: auto;
+	}
+	body {
+		height: auto;
+	}
+}
+</style>
 </head>
 
 <body class="bg-color-general max-height">
@@ -28,28 +43,29 @@
 
 		<div class="row justify-content-md-center">
 			<div class="col-12">
-				<div class="card center-block" style="border-radius:50px;">
+				<div class="card center-block" style="border-radius: 50px;">
 					<div class="card-body">
 						<h3 class="card-title fw-bold fw-title-general">就職活動申請 詳細</h3>
 
 						<div class="row justify-content-md-center mt-md-4">
 							<div class="col-md-2">
 								<span><small class="text-muted">クラス</small><span
-										class="float-md-right mt-md-1 fw-bold h5">S3A1</span></span>
+									class="float-md-right mt-md-1 fw-bold h5">S3A1</span></span>
 							</div>
 							<div class="col-md-2 offset-md-1">
 								<span><small class="text-muted">番号</small><span
-										class="float-md-right mt-md-1 fw-bold h5">01</span></span>
+									class="float-md-right mt-md-1 fw-bold h5">01</span></span>
 							</div>
 							<div class="col-md-2 offset-md-1">
 								<span><small class="text-muted">氏名</small><span
-										class="float-md-right mt-md-1 fw-bold h5">石田悠介</span></span>
+									class="float-md-right mt-md-1 fw-bold h5">石田悠介</span></span>
 							</div>
 						</div>
 
 						<div class="row g-5 mt-1">
 							<div class="mt-md-5 col-md-5 col-lg-4 order-md-last">
-								<h5 class="d-flex justify-content-center align-items-center mb-3">
+								<h5
+									class="d-flex justify-content-center align-items-center mb-3">
 									<span class="fw-bold">現在の申請状態</span>
 								</h5>
 								<ul class="list-group mb-3">
@@ -58,7 +74,8 @@
 									</li>
 								</ul>
 
-								<h5 class="d-flex justify-content-center align-items-center mb-3">
+								<h5
+									class="d-flex justify-content-center align-items-center mb-3 mt-md-4">
 									<span class="fw-bold">指摘事項</span>
 								</h5>
 								<ul class="list-group mb-3">
@@ -73,19 +90,21 @@
 							<div class="col-md-7 col-lg-8 mt-md-5">
 								<div class="row g-3 justify-content-around">
 
-									<div class="col-md-4">
+									<div class="col-md-4 mb-md-3">
 										<h5 class="fw-bold text-center">申請種別</h5>
 									</div>
-									<div class="col-md-8">
-										<h5 class="text-center text-md-left" th:text="*{apply_type.value}">hoge</h5>
+									<div class="col-md-8 mb-md-3">
+										<h5 class="text-center text-md-left"
+											th:text="*{apply_type.value}">hoge</h5>
 									</div>
 
 
-									<div class="col-md-4">
+									<div class="col-md-4 mb-md-3">
 										<h5 class="fw-bold text-center">企業名</h5>
 									</div>
-									<div class="col-md-8">
-										<h5 class="text-center text-md-left pl-md-5" th:text="*{company_name}">hoge</h5>
+									<div class="col-md-8 mb-md-3">
+										<h5 class="text-center text-md-left pl-md-5"
+											th:text="*{company_name}">hoge</h5>
 									</div>
 
 
@@ -93,21 +112,22 @@
 										<h5 class="fw-bold text-center">内容</h5>
 									</div>
 									<div class="col-md-8">
-										<h5 class="text-center text-md-left pl-md-5" th:text="*{content.value}">hoge
-										</h5>
+										<h5 class="text-center text-md-left pl-md-5"
+											th:text="*{content.value}">hoge</h5>
 									</div>
 
 									<hr class="my-4">
 
-									<div class="col-md-4 bg-color-white pt-md-5">
+									<div class="col-md-4  pt-md-2">
 										<h5 class="fw-bold">開始・終了日時</h5>
 									</div>
-									<div class="col-md-8 pt-md-4">
+									<div class="col-md-8">
 
 										<div class="row">
 											<div class="col-md-5">
 												<label class="" for="date_activity_from">開始</label>
-												<h5 class="text-center text-md-left pl-md-5" id="date_activity_from"
+												<h5 class="text-center text-md-left pl-md-5"
+													id="date_activity_from"
 													th:text="${#dates.format(jobRequestData.date_activity_from, 'yyyy年MM月dd日 HH時mm分')}">
 												</h5>
 											</div>
@@ -116,7 +136,8 @@
 											</div>
 											<div class="col-md-5">
 												<label class="" for="date_activity_to">終了</label>
-												<h5 class="text-center text-md-left pl-md-5" id="date_activity_to"
+												<h5 class="text-center text-md-left pl-md-5"
+													id="date_activity_to"
 													th:text="${#dates.format(jobRequestData.date_activity_to, 'yyyy年MM月dd日 HH時mm分')}">
 												</h5>
 											</div>
@@ -168,11 +189,12 @@
 									</div>
 
 
-									<div class="col-md-4">
+									<div class="col-md-4 mt-md-5 mb-md-5">
 										<h5 class="fw-bold text-center">メモ</h5>
 									</div>
-									<div class="col-md-8">
-										<h5 class="text-center text-md-left pl-md-5" th:text="*{remark}">hoge</h5>
+									<div class="col-md-8 mt-md-5 mb-md-5">
+										<h5 class="text-center text-md-left pl-md-5"
+											th:text="*{remark}">hoge</h5>
 									</div>
 
 								</div>
@@ -181,7 +203,8 @@
 
 							</div>
 						</div>
-						<div class="row mt-5 mb-5" th:if="${jobRequestData.status.id == '3'}">
+						<div class="row mt-5 mb-5"
+							th:if="${jobRequestData.status.id == '3'}">
 							<form th:action="@{/job/request/detail/notice}" method="post"
 								class="justify-content-center">
 								<button class="btn-lg btn-primary">コース担当に報告しました</button>
