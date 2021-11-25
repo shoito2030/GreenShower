@@ -95,8 +95,9 @@ public class JobReportController {
 	/**
 	 * 就職活動報告新規作成画面を表示する
 	 * 
-	 * @param principal ログイン情報
 	 * @param apply_id 申請ID
+	 * @param form          登録時の入力チェック用JobReportForm
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動報告新規作成画面
 	 */
@@ -172,8 +173,10 @@ public class JobReportController {
 	/**
 	 * 就職活動報告修正画面を表示する
 	 * 
-	 * @param model
 	 * @param apply_id 申請ID
+	 * @param form 修正時の入力チェック用
+	 * @param principal ログイン情報
+	 * @param model
 	 * @return 就職活動報告修正画面
 	 */
 	@GetMapping("/job/report/fix/{apply_id}")
@@ -207,7 +210,7 @@ public class JobReportController {
 		session.setAttribute("apply_id", apply_id);
 
 		model.addAttribute("jobReportData", jobReportData.get());
-
+		session.setAttribute("applicant_id", jobReportData.get().getApplicant_id());
 		return "/job/report/fix";
 	}
 
@@ -225,8 +228,18 @@ public class JobReportController {
 			BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("msg", "報告内容の変更に失敗しました。");
-			return getReportList(principal, model);
+			Optional<UserData> userData = null;
+			String applicant_id = (String)session.getAttribute("applicant_id");
+
+			// ユーザの情報を取得
+			userData = jobReportService.selectPersonalInfoUserId(applicant_id);
+			
+			form.setClassroom(userData.get().getClassroom());
+			form.setClass_number(userData.get().getClass_number());
+			form.setName(userData.get().getName());
+			
+			model.addAttribute("jobReportForm", form);
+			return "/job/report/fix";
 		}
 
 		String apply_id = (String) session.getAttribute("apply_id");

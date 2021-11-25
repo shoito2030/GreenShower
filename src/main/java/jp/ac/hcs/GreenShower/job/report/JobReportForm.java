@@ -16,6 +16,21 @@ public class JobReportForm {
 	private String apply_id;
 	
 	/**
+	 * クラス
+	 */
+	protected String classroom;
+	
+	/**
+	 * 出席番号
+	 */
+	private String class_number;
+	
+	/**
+	 * 氏名
+	 */
+	protected String name;
+	
+	/**
 	 * 進退
 	 * TRUE:進める
 	 * FALSE：進めない
