@@ -258,7 +258,7 @@ public class JobRequestController {
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
 	 * @param model
-	 * @return - 処理成功時：就職活動申請トップ画面 - 入力内容誤り：就職活動申請管理画面
+	 * @return - 処理成功時：就職活動申請一覧画面 - 入力内容誤り：就職活動申請管理画面
 	 */
 	@PostMapping("/job/request/status-change/{apply_id}")
 	public String JobRequestStatusChange(@PathVariable("apply_id") String apply_id, JobRequestForm form,
@@ -276,6 +276,12 @@ public class JobRequestController {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getRequestStatusChange(principal, apply_id, model);
 		}
+		
+		if (form.getIndicate().length() > 254){
+			model.addAttribute("errmsg", "指摘コメントを再入力してください");
+			model.addAttribute("indicateErrmsg", "指摘コメントが長すぎます");
+			return getRequestStatusChange(principal, apply_id, model);
+		}
 
 		boolean isSuccess = jobRequestService.hasUpdateJobStatus(apply_id, form);
 
@@ -285,7 +291,7 @@ public class JobRequestController {
 			model.addAttribute("errmsg", "申請状態の変更に失敗しました。");
 		}
 
-		return "index";
+		return getRequestList(principal, model);
 	}
 
 	/**
