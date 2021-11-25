@@ -19,7 +19,7 @@
 </style>
 </head>
 
-<body class="bg-color-sky max-height">
+<body class="bg-color-general max-height">
 	<th:block th:insert="components/part::frag_header"></th:block>
 	
 
@@ -29,7 +29,7 @@
             <div class="col-sm-6">
                 <div class="card center-block" style="border-radius:50px;">
                     <div class="card-body">
-                        <h3 class="card-title fw-bold" style="color:#1e7aca;">就職活動申請</h3>
+                        <h3 class="card-title fw-bold fw-title-general">就職活動申請</h3>
                         <div class="btn-group-vertical btn-group-lg" role="group">
                             <input type="button" class="btn btn-primary mt-4" value="新規作成"
 							th:onclick="'window.location.href = \'' + @{/job/request/insert} + '\''">
