@@ -265,7 +265,7 @@ public class JobRequestController {
 			Principal principal, Model model) {
 
 		if (form.getStatus().equals("1") && form.getIndicate().equals("")) {
-			model.addAttribute("errmsg", "差し戻しの場合、備考は必須です。");
+			model.addAttribute("errmsg", "差し戻しの場合、指摘欄は必須です。");
 			return getRequestStatusChange(principal, apply_id, model);
 
 		} else if (form.getStatus().isEmpty()) {
