@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
+/**
+ * 就職活動申請のCSV出力に関する処理を行うRepositoryクラス
+ *
+ */
 @Repository
 public class JobCsvRequestRepository {
 	
