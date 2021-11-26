@@ -30,7 +30,7 @@ public class JobExtraRepository {
 	private JdbcTemplate jdbc;
 	
 //	/**
-//	 * 申請IDに一致したとりまとめ書類マスタを一件取得する
+//	 * 申請IDに一致したとりまとめ書類マスタを一件取得する 
 //	 * @param apply_id 申請ID
 //	 * @return JobExtraData
 //	 * @throws DataAccessException
