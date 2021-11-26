@@ -34,13 +34,26 @@
         body {
             height: 80%;
         }
+        
+        /* スマホ縦対応 1カラン */
+@media screen and (max-width: 800px) {
+	.container {
+		width: 95%;
+	}
+	html {
+		height: auto;
+	}
+	body {
+		height: auto;
+	}
+}
     </style>
 </head>
 
 <body class="bg-color-general max-height">
 
 	<th:block th:insert="components/part::frag_header"></th:block>
-	<div class="container mt-5 pt-3 pt-md-5">
+	<div class="container mt-5 pt-3 pt-5">
 		<div class="row justify-content-md-center">
 			<div class="col-sm-12">
 				<div class="card center-block" style="border-radius:50px;">
@@ -81,7 +94,9 @@
 													th:href="@{'/job/request/detail/'+ *{jobRequest.apply_id}}">詳細</a>
 											</td>
 
-											<td><a class="btn btn-primary"
+											<td><a class="btn" style="color: #fff;
+												background-color: #337ab7;
+												border-color: #2e6da4;"
 													th:href="@{'/job/report/insert/'+ *{jobRequest.apply_id}}">報告</a>
 											</td>
 											<td><a class="btn btn-success"
@@ -129,7 +144,9 @@
 													th:href="@{'/job/request/detail/'+ *{jobRequest.apply_id}}">詳細</a>
 											</td>
 
-											<td><a class="btn btn-primary"
+											<td><a class="btn" style="color: #fff;
+												background-color: #337ab7;
+												border-color: #2e6da4;"
 													th:href="@{'/job/report/insert/'+ *{jobRequest.apply_id}}">報告</a>
 											</td>
 											<td><a class="btn btn-success"
