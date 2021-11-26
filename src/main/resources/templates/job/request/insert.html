@@ -24,6 +24,10 @@
 	.margin-md-0-auto {
 		margin: 0 auto;
 	}
+
+	.container {
+		width: 95%;
+	}
 }
 
 @media screen and (min-width: 801px) {
@@ -61,7 +65,7 @@
 								<dl class="row mb-5 text-center justify-content-center"
 									th:object="${userData}">
 									<dt class="col-sm-2 pt-md-1">クラス</dt>
-									<dl class="col-sm-2 fs-5 fw-bold" name="classroom"
+									<dl class="col-sm-2 fs-5 fw-bold responsive-fw-size" name="classroom"
 										id="classroom" th:text=*{classroom}>
 									</dl>
 
@@ -70,7 +74,7 @@
 										class="col-sm-1">
 										<dd class="col-sm-1">
 											<select name="class_number" id="class_number"
-												class="fs-5 fw-bold">
+												class="fs-5 fw-bold responsive-fw-size">
 												<option value="zero">--</option>
 												<option value="01">01</option>
 											</select>
@@ -78,19 +82,19 @@
 									</th:block>
 									<th:block sec:authorize="hasRole('ROLE_STUDENT')"
 										class="col-sm-1">
-										<span id="class_number" class="col-sm-2 fs-5 fw-bold"
-											th:text="*{class_number}"></span>
+										<dl id="class_number" class="col-sm-2 fs-5 fw-bold responsive-fw-size"
+											th:text="*{class_number}"></dl>
 									</th:block>
 
 									<dt class="col-sm-2 pt-md-1">氏名</dt>
 									<th:block sec:authorize="hasRole('ROLE_STUDENT')"
 										class="col-sm-1">
-										<dd class="col-sm-2 fs-5 fw-bold" name="name" id="name"
+										<dd class="col-sm-2 fs-5 fw-bold responsive-fw-size" name="name" id="name"
 											th:text=*{name}></dd>
 									</th:block>
 									<th:block sec:authorize="hasRole('ROLE_TEACHER')"
 										class="col-sm-1">
-										<dd class="col-sm-2 fs-5 fw-bold" name="name" id="name">情報太郎</dd>
+										<dd class="col-sm-2 fs-5 fw-bold responsive-fw-size" name="name" id="name">情報太郎</dd>
 									</th:block>
 								</dl>
 

@@ -9,13 +9,7 @@
 <th:block th:insert="components/part::frag_icon"></th:block>
 <th:block th:insert="components/part::frag_style"></th:block>
 <style>
-html {
-	height: 100%;
-}
 
-body {
-	height: 80%;
-}
 
 .container {
 	width: 90%;
@@ -50,15 +44,17 @@ body {
 						<div class="row justify-content-md-center mt-md-4">
 							<div class="col-md-2">
 								<span><small class="text-muted">クラス</small><span
-									class="float-md-right mt-md-1 fw-bold h5">S3A1</span></span>
+									class="h5 float-md-right mt-md-1 fw-bold responsive-fw-size"
+										th:text="*{classroom}">S3A1</span></span>
 							</div>
 							<div class="col-md-2 offset-md-1">
 								<span><small class="text-muted">番号</small><span
-									class="float-md-right mt-md-1 fw-bold h5">01</span></span>
+									class="h5 float-md-right mt-md-1 fw-bold responsive-fw-size"
+										th:text="*{class_number}">01</span></span>
 							</div>
 							<div class="col-md-2 offset-md-1">
 								<span><small class="text-muted">氏名</small><span
-									class="float-md-right mt-md-1 fw-bold h5">石田悠介</span></span>
+									class="h5 float-md-right mt-md-1 fw-bold responsive-fw-size" th:text="*{name}">石田悠介</span></span>
 							</div>
 						</div>
 
@@ -70,7 +66,7 @@ body {
 								</h5>
 								<ul class="list-group mb-3">
 									<li class="list-group-item lh-sm">
-										<h5 th:text="${jobRequestData.status.value}"></h5>
+										<h5 class="responsive-fw-size" th:text="${jobRequestData.status.value}"></h5>
 									</li>
 								</ul>
 
@@ -80,7 +76,7 @@ body {
 								</h5>
 								<ul class="list-group mb-3">
 									<li class="list-group-item lh-sm">
-										<h5 th:text="${jobRequestData.indicate}">hoge</h5>
+										<h5 class="responsive-fw-size" th:text="${jobRequestData.indicate}">hoge</h5>
 									</li>
 								</ul>
 							</div>
@@ -93,8 +89,8 @@ body {
 									<div class="col-md-4 mb-md-3">
 										<h5 class="fw-bold text-center">申請種別</h5>
 									</div>
-									<div class="col-md-8 mb-md-3">
-										<h5 class="text-center text-md-left"
+									<div class="col-md-6 offset-md-2 mb-md-3">
+										<h5 class="text-center text-md-start responsive-fw-size"
 											th:text="*{apply_type.value}">hoge</h5>
 									</div>
 
@@ -102,8 +98,8 @@ body {
 									<div class="col-md-4 mb-md-3">
 										<h5 class="fw-bold text-center">企業名</h5>
 									</div>
-									<div class="col-md-8 mb-md-3">
-										<h5 class="text-center text-md-left pl-md-5"
+									<div class="col-md-6 offset-md-2 mb-md-3">
+										<h5 class="text-center text-md-start pl-md-5 responsive-fw-size"
 											th:text="*{company_name}">hoge</h5>
 									</div>
 
@@ -111,32 +107,32 @@ body {
 									<div class="col-md-4">
 										<h5 class="fw-bold text-center">内容</h5>
 									</div>
-									<div class="col-md-8">
-										<h5 class="text-center text-md-left pl-md-5"
+									<div class="col-md-6 offset-md-2">
+										<h5 class="text-center text-md-start pl-md-5 responsive-fw-size"
 											th:text="*{content.value}">hoge</h5>
 									</div>
 
 									<hr class="my-4">
 
-									<div class="col-md-4  pt-md-2">
+									<div class="col-md-4  pt-md-4">
 										<h5 class="fw-bold">開始・終了日時</h5>
 									</div>
-									<div class="col-md-8">
+									<div class="col-md-6 offset-md-2">
 
 										<div class="row">
 											<div class="col-md-5">
 												<label class="" for="date_activity_from">開始</label>
-												<h5 class="text-center text-md-left pl-md-5"
+												<h5 class="text-center text-md-start pl-md-5 responsive-fw-size"
 													id="date_activity_from"
 													th:text="${#dates.format(jobRequestData.date_activity_from, 'yyyy年MM月dd日 HH時mm分')}">
 												</h5>
 											</div>
 											<div class="col-md-2 mt-md-4">
-												<h5 class="text-center text-md-left pl-md-5">~</h5>
+												<h5 class="text-center text-md-start pl-md-5 responsive-fw-size">~</h5>
 											</div>
 											<div class="col-md-5">
 												<label class="" for="date_activity_to">終了</label>
-												<h5 class="text-center text-md-left pl-md-5"
+												<h5 class="text-center text-md-start pl-md-5 responsive-fw-size"
 													id="date_activity_to"
 													th:text="${#dates.format(jobRequestData.date_activity_to, 'yyyy年MM月dd日 HH時mm分')}">
 												</h5>
@@ -149,37 +145,37 @@ body {
 									<div class="col-md-4 bg-color-white pt-md-4">
 										<h5 class="fw-bold" th:text="'手段(' + *{way.value} + ')'"></h5>
 									</div>
-									<div class="col-md-8 pt-md-4">
+									<div class="col-md-6 offset-md-2 pt-md-4">
 
 										<th:block th:switch="${jobRequestData.way.id}">
 											<div class="row" th:case="1">
 												<div class="col-md-5">
-													<h5 class="text-center text-md-left pl-md-5"
+													<h5 class="text-center text-md-start pl-md-5 responsive-fw-size"
 														th:text="${#dates.format(jobRequestData.date_absence_from, 'yyyy年MM月dd日 HH時mm分')}">
 													</h5>
 												</div>
 												<div class="col-md-2">
-													<h5 class="text-center text-md-left pl-md-5">~</h5>
+													<h5 class="text-center text-md-start pl-md-5 responsive-fw-size">~</h5>
 												</div>
 												<div class="col-md-5">
-													<h5 class="text-center text-md-left pl-md-5"
+													<h5 class="text-center text-md-start pl-md-5 responsive-fw-size"
 														th:text="${#dates.format(jobRequestData.date_absence_to, 'yyyy年MM月dd日 HH時mm分')}">
 													</h5>
 												</div>
 											</div>
 
-											<h5 class="text-center text-md-left pl-md-5" th:case="2"
+											<h5 class="text-center text-md-start pl-md-5 responsive-fw-size" th:case="2"
 												th:text="${#dates.format(jobRequestData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'">
 											</h5>
-											<h5 class="text-center text-md-left pl-md-5" th:case="3"
+											<h5 class="text-center text-md-start pl-md-5 responsive-fw-size" th:case="3"
 												th:text="${#dates.format(jobRequestData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'に出席します'">
 											</h5>
 
 											<th:block th:case="4">
-												<h5 class="text-center text-md-left pl-md-5"
+												<h5 class="text-center text-md-start pl-md-5 responsive-fw-size"
 													th:text="${#dates.format(jobRequestData.attendance_date, 'yyyy年MM月dd日 HH時mm分')} + 'から出席し、'">
 												</h5>
-												<h5 class="text-center text-md-left pl-md-5"
+												<h5 class="text-center text-md-start pl-md-5 responsive-fw-size"
 													th:text="${#dates.format(jobRequestData.leave_early_date, 'yyyy年MM月dd日 HH時mm分')} + 'に早退します'">
 													<h5>
 											</th:block>
@@ -192,8 +188,8 @@ body {
 									<div class="col-md-4 mt-md-5 mb-md-5">
 										<h5 class="fw-bold text-center">メモ</h5>
 									</div>
-									<div class="col-md-8 mt-md-5 mb-md-5">
-										<h5 class="text-center text-md-left pl-md-5"
+									<div class="col-md-6 offset-md-2 mt-md-5 mb-md-5">
+										<h5 class="text-center text-md-start pl-md-5 responsive-fw-size"
 											th:text="*{remark}">hoge</h5>
 									</div>
 
@@ -207,7 +203,7 @@ body {
 							th:if="${jobRequestData.status.id == '3'}">
 							<form th:action="@{/job/request/detail/notice}" method="post"
 								class="justify-content-center">
-								<button class="btn-lg btn-primary">コース担当に報告しました</button>
+								<button class="btn-lg btn-primary responsive-btn-size">コース担当に報告しました</button>
 							</form>
 						</div>
 					</div>

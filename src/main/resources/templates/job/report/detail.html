@@ -1,135 +1,169 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
-<meta charset="UTF-8">
-<title>就職活動報告詳細画面</title>
-<th:block th:insert="components/part::frag_mobile"></th:block>
-<th:block th:insert="components/part::frag_icon"></th:block>
-<th:block th:insert="components/part::frag_style"></th:block>
+	<meta charset="UTF-8">
+	<title>就職活動報告詳細画面</title>
+	<th:block th:insert="components/part::frag_mobile"></th:block>
+	<th:block th:insert="components/part::frag_icon"></th:block>
+	<th:block th:insert="components/part::frag_style"></th:block>
+
+	<style>
+		.container {
+			width: 90%;
+		}
+
+		html {
+			height: 100%;
+		}
+
+		body {
+			height: 80%;
+		}
+
+		/* スマホ縦対応 1カラン */
+		@media screen and (max-width: 800px) {
+			.container {
+				width: 95%;
+			}
+
+			html {
+				height: auto;
+			}
+
+			body {
+				height: auto;
+			}
+		}
+	</style>
 </head>
 
-<body class="bg-color-sky">
+<body class="bg-color-general max-height">
 	<th:block th:insert="components/part::frag_header"></th:block>
 
-	<h1 class="title">就職活動報告 詳細</h1>
-	<div class="container mt-md-5" th:object="${jobReportData}">
+	<div class="container mt-5 pt-5 pt-md-5" th:object="${jobReportData}">
 
-		<div class="row justify-content-md-center mt-md-4">
-			<div class="col-md-2">
-				<span><small class="text-muted">クラス</small><span
-					class="float-md-right mt-md-1 fw-bold h4"
-					th:text="*{classroom}"></span></span>
-			</div>
-			<div class="col-md-1 offset-md-1">
-				<span><small class="text-muted">番号</small><span
-					class="float-md-right mt-md-1 fw-bold h4"
-					th:text="*{class_number}"></span></span>
-			</div>
-			<div class="col-md-2 offset-md-1">
-				<span><small class="text-muted">氏名</small><span
-					class="float-md-right mt-md-1 fw-bold h4"
-					th:text="*{name}"></span></span>
-			</div>
-		</div>
-
-
-
-		<div class="row mt-md-5">
-			<div class="col-md-4 bg-color-white">
-				<p class="fw-bold h4">申請種別</p>
-			</div>
-			<div class="col-md-8">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{apply_type.value}"></p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">企業名</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{company_name}"></p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">内容</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5"
-					th:text="*{content.value}"></p>
-			</div>
-		</div>
-
-
-
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">進退</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<th:block th:if="${jobReportData.advance_or_retreat}">
-					<p class="h4 text-center text-md-left pl-md-5">進める</p>
-				</th:block>
-
-				<th:block th:unless="${jobReportData.advance_or_retreat}">
-					<p class="h4 text-center text-md-left pl-md-5">進めない</p>
-				</th:block>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">備考</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5" th:text="*{remark}"></p>
-			</div>
-		</div>
-
-
-
-		<!-- メモ以降追加 -->
-		<div class="row mt-md-5">
-			<div class="col-md-5 ">
-				<p class="fw-bold h4">現在の申請状態</p>
-				<div class="card center-block w-50"
-					style="border-radius: 75px; margin: 0 auto;">
+		<div class="row justify-content-md-center">
+			<div class="col-12">
+				<div class="card center-block" style="border-radius: 50px;">
 					<div class="card-body">
+						<h3 class="card-title fw-bold fw-title-general">就職活動報告 詳細</h3>
 
-						<p th:text="${jobReportData.status.value}"></p>
+						<div class="row justify-content-md-center mt-md-4">
+							<div class="col-md-2">
+								<span><small class="text-muted">クラス</small><span
+									class="h5 float-md-right mt-md-1 fw-bold responsive-fw-size"
+										th:text="*{classroom}">S3A1</span></span>
+							</div>
+							<div class="col-md-2 offset-md-1">
+								<span><small class="text-muted">番号</small><span
+									class="h5 float-md-right mt-md-1 fw-bold responsive-fw-size"
+										th:text="*{class_number}">01</span></span>
+							</div>
+							<div class="col-md-2 offset-md-1">
+								<span><small class="text-muted">氏名</small><span
+									class="h5 float-md-right mt-md-1 fw-bold responsive-fw-size" th:text="*{name}">石田悠介</span></span>
+							</div>
+						</div>
 
+						<div class="row g-5 mt-1">
+							<div class="mt-md-5 col-md-5 col-lg-4 order-md-last">
+								<h5 class="d-flex justify-content-center align-items-center mb-3">
+									<span class="fw-bold">現在の申請状態</span>
+								</h5>
+								<ul class="list-group mb-3">
+									<li class="list-group-item lh-sm">
+										<h5 class="responsive-fw-size" th:text="*{status.value}"></h5>
+									</li>
+								</ul>
+
+								<h5 class="d-flex justify-content-center align-items-center mb-3 mt-md-4">
+									<span class="fw-bold">指摘事項</span>
+								</h5>
+								<ul class="list-group mb-3">
+									<li class="list-group-item lh-sm">
+										<h5 class="responsive-fw-size" th:text="*{indicate}">hoge</h5>
+									</li>
+								</ul>
+							</div>
+
+
+
+							<div class="col-md-7 col-lg-8 mt-md-5">
+								<div class="row g-3 justify-content-around">
+
+									<div class="col-md-4 mb-md-3">
+										<h5 class="fw-bold text-center">申請種別</h5>
+									</div>
+									<div class="col-md-6 offset-md-2 mb-md-3">
+										<h5 class="responsive-fw-size text-center text-md-start" th:text="*{apply_type.value}">hoge</h5>
+									</div>
+
+
+									<div class="col-md-4 mb-md-3">
+										<h5 class="fw-bold text-center">企業名</h5>
+									</div>
+									<div class="col-md-6 offset-md-2 mb-md-3">
+										<h5 class="responsive-fw-size text-center text-md-start pl-md-5" th:text="*{company_name}">hoge</h5>
+									</div>
+
+
+									<div class="col-md-4">
+										<h5 class="fw-bold text-center">内容</h5>
+									</div>
+									<div class="col-md-6 offset-md-2">
+										<h5 class="responsive-fw-size text-center text-md-start pl-md-5" th:text="*{content.value}">hoge
+										</h5>
+									</div>
+
+									<hr class="my-4">
+
+									<div class="col-md-4">
+										<h5 class="fw-bold text-center">進退</h5>
+									</div>
+									<div class="col-md-6 offset-md-2">
+										<th:block th:if="${jobReportData.advance_or_retreat}">
+											<h5 class="responsive-fw-size text-center text-md-start pl-md-5">進める</h5>
+										</th:block>
+
+										<th:block th:unless="${jobReportData.advance_or_retreat}">
+											<h5 class="responsive-fw-size text-center text-md-start pl-md-5">進めない</h5>
+										</th:block>
+									</div>
+
+									<hr class="my-4">
+
+									<div class="col-md-4">
+										<h5 class="fw-bold text-center">備考</h5>
+									</div>
+									<div class="col-md-6 offset-md-2">
+										<h5 class="responsive-fw-size text-center text-md-start pl-md-5" th:text="*{remark}">hoge
+										</h5>
+									</div>
+
+
+								</div>
+
+
+
+							</div>
+						</div>
+					</div>
+
+					<div class="row pt-md-2">
+						<div class="col-md-12 pt-5">
+							<p class="responsive-fw-size">
+								申請時の情報は<a class="h5" href="/job/request/detail/3">こちら</a>
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-7">
-				<p class="fw-bold h4">指摘事項</p>
-				<div class="card">
-					<div class="card-body">
-						<p th:text="${jobReportData.indicate}"></p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- 報告詳細用 -->
-
-		<div class="row pt-md-2">
-			<div class="col-md-12 bg-color-white pt-md-5"
-				style="background-color: #DAE8FC;">
-				<p class="h">
-					申請時の情報は<a class="h4"
-						th:href="@{'/job/request/detail/'+ ${jobReportData.apply_id}}">こちら</a>
-				</p>
 			</div>
 		</div>
 	</div>
 
+
 	<th:block th:insert="components/part::frag_script"></th:block>
 </body>
+
 </html>
