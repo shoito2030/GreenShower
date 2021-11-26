@@ -1,7 +1,6 @@
 package jp.ac.hcs.GreenShower.job.extra;
 
 import java.security.Principal;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,13 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.ac.hcs.GreenShower.job.request.JobRequestController;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * 就職活動申請のとりまとめ機能に関する処理を行うControllerクラス
  * 
  */
-@Slf4j
 @Controller
 public class JobExtraController {
 
@@ -63,7 +60,6 @@ public class JobExtraController {
 	@PostMapping("/job/request/status-change/document-receipt")
 	public String documentReceirt(JobExtraForm form,Principal principal,Model model) {
 		String apply_id = (String)session.getAttribute("apply_id");
-		Optional<JobExtraData> jobExtraData;
 
 		boolean isSuccess = jobExtraService.documentReceirt(form,apply_id,principal.getName());
 //		jobExtraData = jobExtraService.selectSummaryDocuments(apply_id);
