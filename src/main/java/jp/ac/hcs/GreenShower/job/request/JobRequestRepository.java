@@ -150,11 +150,10 @@ public class JobRequestRepository {
 	}
 
 	/**
-	 * 受け取ったデータをJobRequsettEntity形式にマッピングする.
+	 * 受け取ったデータをJobRequsetEntity形式にマッピングする.
 	 * 
 	 * @param result 問い合わせ結果
 	 * @return JobRequestData
-	 * @throws DataAccessException
 	 */
 	private JobRequestData mappingSelectResult(Map<String, Object> result) {
 		JobRequestData data = new JobRequestData();
@@ -186,11 +185,10 @@ public class JobRequestRepository {
 	}
 
 	/**
-	 * 受け取ったデータをJobRequsettEntity形式にマッピングする.
+	 * 受け取ったデータをJobRequsetEntity形式にマッピングする.
 	 * 
 	 * @param resultList 問い合わせ結果
 	 * @return JobRequestEntity
-	 * @throws DataAccessException
 	 */
 	private JobRequestEntity mappingSelectResult(List<Map<String, Object>> resultList) {
 		JobRequestEntity entity = new JobRequestEntity();
@@ -233,7 +231,6 @@ public class JobRequestRepository {
 	 * 
 	 * @param result 問い合わせ結果
 	 * @return UserData
-	 * @throws DataAccessException
 	 */
 	private UserData mappingSelectPersonalInfoResult(Map<String, Object> result) {
 		UserData data = new UserData();		

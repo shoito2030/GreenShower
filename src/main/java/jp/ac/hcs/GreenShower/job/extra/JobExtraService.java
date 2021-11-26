@@ -1,12 +1,8 @@
 package jp.ac.hcs.GreenShower.job.extra;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-
-import jp.ac.hcs.GreenShower.job.request.JobRequestData;
 
 @Service
 public class JobExtraService {
@@ -14,18 +10,31 @@ public class JobExtraService {
 	@Autowired
 	JobExtraRepository jobExtraRepository;
 	
-	public Optional<JobExtraData> selectSummaryDocuments(String apply_id) {
-		JobExtraData jobExtraData;
-
-		try {
-			jobExtraData = jobExtraRepository.selectSummaryDocuments(apply_id);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-			return Optional.empty();
-		}
-		return Optional.ofNullable(jobExtraData);
-	}
 	
+//	/**
+//	 * 申請IDに一致したとりまとめ書類マスタを一件取得する
+//	 * 
+//	 * @param apply_id 申請ID
+//	 * @return - 処理成功時：JobExtraDataを持つOptional - 処理失敗時、不正な操作時：空のOptional
+//	 */
+//	public Optional<JobExtraData> selectSummaryDocuments(String apply_id) {
+//		JobExtraData jobExtraData;
+//
+//		try {
+//			jobExtraData = jobExtraRepository.selectSummaryDocuments(apply_id);
+//		} catch (DataAccessException e) {
+//			e.printStackTrace();
+//			return Optional.empty();
+//		}
+//		return Optional.ofNullable(jobExtraData);
+//	}
+	
+	/**
+	 * 新たに学生をとりまとめ名簿に登録した日時をデータベースに登録する
+	 * @param apply_id 申請ID
+	 * @param user_id  ユーザID
+	 * @return - true：追加件数1件（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
+	 */
 	public boolean listRegistion(String apply_id,String user_id) {
 		int rowNumber = 0;
 		try {
@@ -37,7 +46,14 @@ public class JobExtraService {
 
 		return rowNumber > 0;
 	}
-
+	
+	/**
+	 * 受け取った書類の日時をデータベースに登録する
+	 * @param form     入力情報
+	 * @param apply_id 申請ID
+	 * @param user_id  ユーザID
+	 * @return - true：追加件数1件（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
+	 */
 	public boolean documentReceirt(JobExtraForm form,String apply_id,String user_id) {
 		int rowNumber = 0;
 		try {
