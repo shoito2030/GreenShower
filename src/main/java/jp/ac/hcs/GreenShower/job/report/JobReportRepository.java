@@ -214,7 +214,7 @@ public class JobReportRepository {
 	
 	
 	/**
-	 * job_huntingテーブルとreportsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
+	 * job_huntingテーブルとreportsテーブルから取得したデータをJobRequsetEntity形式にマッピングする.
 	 * 
 	 * @param result job_huntingテーブルとreportsテーブルから取得したデータ
 	 * @return JobRequestdata
@@ -241,7 +241,7 @@ public class JobReportRepository {
 	}
 
 	/**
-	 *  job_huntingテーブルとreportsテーブルから取得したデータをJobRequsettEntity形式にマッピングする.
+	 *  job_huntingテーブルとreportsテーブルから取得したデータをJobRequsetEntity形式にマッピングする.
 	 * 
 	 * @param resultList report job_huntingテーブルとrequestsテーブルから取得したデータ
 	 * @return JobRequestEntity

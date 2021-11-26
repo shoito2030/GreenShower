@@ -95,8 +95,8 @@ public class JobReportController {
 	/**
 	 * 就職活動報告新規作成画面を表示する
 	 * 
-	 * @param apply_id 申請ID
-	 * @param form          登録時の入力チェック用JobReportForm
+	 * @param apply_id  申請ID
+	 * @param form      登録時の入力チェック用JobReportForm
 	 * @param principal ログイン情報
 	 * @param model
 	 * @return 就職活動報告新規作成画面

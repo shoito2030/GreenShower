@@ -5,6 +5,9 @@ import java.util.List;
 
 import lombok.Data;
 
+/**
+ * とりまとめ書類をまとめて管理する為のエンティティクラス
+ */
 @Data
 public class JobExtraEntity {
 	
