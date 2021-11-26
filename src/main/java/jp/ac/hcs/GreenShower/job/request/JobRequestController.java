@@ -3,6 +3,7 @@ package jp.ac.hcs.GreenShower.job.request;
 import static java.util.stream.Collectors.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -317,10 +318,6 @@ public class JobRequestController {
 		jobRequestData = jobRequestService.selectOne(apply_id, principal.getName(), role);
 
 		String status = jobRequestService.selectJobHuntingStatus(apply_id);
-		
-		if(status == null) {
-			return getRequestList(principal, model);
-		}
 
 		// 状態が『申請完了』である場合
 		if (status.equals("4")) {
@@ -411,5 +408,58 @@ public class JobRequestController {
 		jobRequestService.hasInsertedEvent(form, principal.getName());
 		return "index";
 
+	}
+	
+	/**
+	 * 通知の取得を行う
+	 * 
+	 * @param principal ログイン情報
+	 * @param model
+	 * @return 通知一覧画面
+	 */
+	@GetMapping("/job/request/notification")
+	public String getNotificationList(Principal principal, Model model) {
+		Optional<JobRequestEntity> jobRequestEntity;
+		String role = ((Authentication) principal).getAuthorities().toString().replace("[", "").replace("]", "");
+
+		jobRequestEntity = jobRequestService.selectAllNotfication(principal.getName(), role);
+		
+		List<JobRequestData> jobRequestList = jobRequestEntity.get().getJobRequestList();
+		List<JobRequestData> jobRequestNotfiList = new ArrayList<JobRequestData>();
+		
+		//担任の通知を取得
+		if(role.equals("ROLE_TEACHER")) {
+			for(JobRequestData data: jobRequestList) {	
+				switch(data.getStatus().getId()) {
+					case "2":
+					jobRequestNotfiList.add(data);
+					break;
+					case "6":
+					jobRequestNotfiList.add(data);
+					break;
+				}
+			}
+		}
+		//学生の通知を取得
+		if(role.equals("ROLE_STUDENT")) {
+			for(JobRequestData data: jobRequestList) {	
+				switch(data.getStatus().getId()) {
+					case "1":
+					jobRequestNotfiList.add(data);
+					break;
+					case "3":
+					jobRequestNotfiList.add(data);
+					break;
+					case "4":
+					jobRequestNotfiList.add(data);
+					break;
+					case "5":
+					jobRequestNotfiList.add(data);
+					break;
+				}
+			}
+		}
+		model.addAttribute("jobRequestList", jobRequestNotfiList);
+		return "job/request/notfication";
 	}
 }
