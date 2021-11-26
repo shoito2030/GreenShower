@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>就職活動申請詳細画面</title>
 
+<head>
+	<meta charset="UTF-8">
+	<title>就職活動報告詳細画面</title>
+	
 		<meta id="viewport" name="viewport"
 			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link rel="manifest" href="/css/manifest.json" crossorigin="use-credentials">
@@ -14,7 +15,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	
-
+	
 		<link rel="icon" sizes="192x192" href="/img/favicon.ico">
 		<link rel="shortcut icon" href="/img/favicon.ico">
 		<link rel="apple-touch-icon" href="/img/favicon.ico">
@@ -24,7 +25,7 @@
 		<!-- FontAwesome -->
 		<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 	
-
+	
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
         crossorigin="anonymous">
@@ -40,15 +41,42 @@
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap" rel="stylesheet">
 	
 
+	<style>
+		.container {
+			width: 90%;
+		}
+
+		html {
+				height: 100%;
+			}
+
+			body {
+				height: 80%;
+			}
+
+		/* スマホ縦対応 1カラン */
+		@media screen and (max-width: 800px) {
+			.container {
+				width: 95%;
+			}
+
+			html {
+				height: auto;
+			}
+
+			body {
+				height: auto;
+			}
+		}
+	</style>
 </head>
 
-<body class="bg-color-sky">
+<body class="bg-color-general max-height">
 	
-		<header>
+		<header class="fixed-top">
 			<nav class="navbar navbar-expand-md navbar-light bg-light">
 				<div class="container-fluid">
-					
-					<a class="navbar-brand" href="/"> 就活ポータル.com</a>
+					<a class="navbar-brand fw-bold" href="/"><img src="/img/hcs.png"> 就活ポータル.com</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
 						aria-controls="navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
 						<span class="navbar-toggler-icon"></span>
@@ -90,146 +118,121 @@
 		</header>
 	
 
-	<h1 class="title">就職活動申請 詳細</h1>
+	<div class="container mt-5 pt-5 pt-md-5">
 
-	<div class="container mt-md-5">
-
-		<div class="row justify-content-md-center mt-md-4">
-			<div class="col-md-2">
-				<span><small class="text-muted">クラス</small><span
-					class="float-md-right mt-md-1 fw-bold h4">S3A2</span></span>
-			</div>
-			<div class="col-md-1 offset-md-1">
-				<span><small class="text-muted">番号</small><span
-					class="float-md-right mt-md-1 fw-bold h4">02</span></span>
-			</div>
-			<div class="col-md-2 offset-md-1">
-				<span><small class="text-muted">氏名</small><span
-					class="float-md-right mt-md-1 fw-bold h4">山田啓介</span></span>
-			</div>
-		</div>
-
-
-
-		<div class="row mt-md-5">
-			<div class="col-md-4 bg-color-white">
-				<p class="fw-bold h4">申請種別</p>
-			</div>
-			<div class="col-md-8">
-				<p class="h4 text-center text-md-left pl-md-5">とりまとめ</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">企業名</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5">ブラックシャワー株式会社</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">内容</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5">単独</p>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-5">
-				<p class="fw-bold h4">開始日時・終了日時</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-
-				<div class="row">
-					<div class="col-md-5">
-						<label class="" for="date_activity_from">開始</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_from">2021年07月17日 10時00分</p>
-					</div>
-					<div class="col-md-2 mt-md-4">
-						<p class="h4 text-center text-md-left pl-md-5">~</p>
-					</div>
-					<div class="col-md-5">
-						<label class="" for="date_activity_to">終了</label>
-						<p class="h4 text-center text-md-left pl-md-5"
-							id="date_activity_to">2021年07月17日 15時00分</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">場所</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5">北海道情報専門学校</p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">手段(遅刻)</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-
-				
-					
-
-					
-					<p class="h4 text-center text-md-left pl-md-5">2021年07月17日 12時00分に出席します</p>
-
-					
-
-				
-
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 bg-color-white pt-md-4">
-				<p class="fw-bold h4">メモ</p>
-			</div>
-			<div class="col-md-8 pt-md-4">
-				<p class="h4 text-center text-md-left pl-md-5">阿部先生が代わりに申請しました。</p>
-			</div>
-		</div>
-
-
-		<!-- メモ以降追加 -->
-		<div class="row mt-md-5">
-			<div class="col-md-5 ">
-				<p class="fw-bold h4">現在の申請状態</p>
-				<div class="card center-block w-50"
-					style="border-radius: 75px; margin: 0 auto;">
+		<div class="row justify-content-md-center">
+			<div class="col-12">
+				<div class="card center-block" style="border-radius: 50px;">
 					<div class="card-body">
+						<h3 class="card-title fw-bold fw-title-general">就職活動報告 詳細</h3>
 
-						<p>申請完了</p>
+						<div class="row justify-content-md-center mt-md-4">
+							<div class="col-md-2">
+								<span><small class="text-muted">クラス</small><span
+									class="h5 float-md-right mt-md-1 fw-bold responsive-fw-size">S3A2</span></span>
+							</div>
+							<div class="col-md-2 offset-md-1">
+								<span><small class="text-muted">番号</small><span
+									class="h5 float-md-right mt-md-1 fw-bold responsive-fw-size">01</span></span>
+							</div>
+							<div class="col-md-2 offset-md-1">
+								<span><small class="text-muted">氏名</small><span
+									class="h5 float-md-right mt-md-1 fw-bold responsive-fw-size">山田啓介</span></span>
+							</div>
+						</div>
 
-					</div>
-				</div>
-			</div>
-			<div class="col-md-7">
-				<p class="fw-bold h4">指摘事項</p>
-				<div class="card">
-					<div class="card-body">
-						<p></p>
+						<div class="row g-5 mt-1">
+							<div class="mt-md-5 col-md-5 col-lg-4 order-md-last">
+								<h5 class="d-flex justify-content-center align-items-center mb-3">
+									<span class="fw-bold">現在の申請状態</span>
+								</h5>
+								<ul class="list-group mb-3">
+									<li class="list-group-item lh-sm">
+										<h5 class="responsive-fw-size">報告作成中</h5>
+									</li>
+								</ul>
+
+								<h5 class="d-flex justify-content-center align-items-center mb-3 mt-md-4">
+									<span class="fw-bold">指摘事項</span>
+								</h5>
+								<ul class="list-group mb-3">
+									<li class="list-group-item lh-sm">
+										<h5></h5>
+									</li>
+								</ul>
+							</div>
+
+
+
+							<div class="col-md-7 col-lg-8 mt-md-5">
+								<div class="row g-3 justify-content-around">
+
+									<div class="col-md-4 mb-md-3">
+										<h5 class="fw-bold text-center">申請種別</h5>
+									</div>
+									<div class="col-md-8 mb-md-3">
+										<h5 class="text-center text-md-left responsive-fw-size">個人</h5>
+									</div>
+
+
+									<div class="col-md-4 mb-md-3">
+										<h5 class="fw-bold text-center">企業名</h5>
+									</div>
+									<div class="col-md-8 mb-md-3">
+										<h5 class="text-center text-md-left responsive-fw-size">レッドシャワー株式会社</h5>
+									</div>
+
+
+									<div class="col-md-4">
+										<h5 class="fw-bold text-center">内容</h5>
+									</div>
+									<div class="col-md-6 offset-md-2">
+										<h5 class="text-center text-md-start responsive-fw-size">単独</h5>
+									</div>
+
+									<hr class="my-4">
+
+									<div class="col-md-4">
+										<h5 class="fw-bold text-center">進退</h5>
+									</div>
+									<div class="col-md-6 offset-md-2">
+										
+											<h5 class="text-center text-md-start responsive-fw-size">進める</h5>
+										
+
+										
+									</div>
+
+									<hr class="my-4">
+
+									<div class="col-md-4">
+										<h5 class="fw-bold text-center">備考</h5>
+									</div>
+									<div class="col-md-6 offset-md-2">
+										<h5 class="text-center text-md-start responsive-fw-size">報告詳細から申請詳細に遷移できるかテスト</h5>
+									</div>
+
+
+								</div>
+
+
+								
+							</div>
+							
+						</div>
+						<div class="row pt-md-2">
+							<div class="col-md-12 pt-5">
+								<p class="responsive-fw-size">
+									申請時の情報は<a class="h5" href="/job/request/detail/3">こちら</a>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-    <div class="row mt-5 mb-5">
-      <form action="#" class="justify-content-center">
-        <button class="btn-lg btn-primary">コース担当に報告しました</button>
-      </form>
-    </div>
 	</div>
+	
 
 	
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -247,4 +250,5 @@
 
 	
 </body>
+
 </html>

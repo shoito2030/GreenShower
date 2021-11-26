@@ -93,8 +93,8 @@ a {
 	background-color: black;
 }
 
-.job-form-label{
-	color: #1A72B3;
+.job-form-label {
+	color: #1a72b3;
 	font-weight: 600;
 }
 
@@ -174,7 +174,7 @@ a {
 }
 
 .bg-color-admin {
-	background-image: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%);
+	background-image: linear-gradient(135deg, #ffd3a5 10%, #fd6585 100%);
 }
 
 .bg-color-white {
@@ -183,11 +183,11 @@ a {
 
 /* タイトル色 */
 .fw-title-general {
-	color:#1e7aca;
+	color: #1e7aca;
 }
 
 .fw-title-admin {
-	color:#FD6585;
+	color: #fd6585;
 }
 
 /* 見出し用 */
@@ -260,22 +260,22 @@ select {
 	text-decoration: none;
 	border-radius: 4px;
 	color: #ffffff;
-	background-image: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%);
+	background-image: linear-gradient(135deg, #ffd3a5 10%, #fd6585 100%);
 	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
 	border-bottom: solid 3px #f18da3;
 }
 
-.btn-successbtn {
-	/* color: #fff;
-	background-color: #337ab7;
-	border-color: #2e6da4; */
-	display: inline-block;
-	padding: 0.5em 1em;
-	text-decoration: none;
-	border-radius: 4px;
-	color: #ffffff;
-	background-image: linear-gradient(#70F570 0%, #49C628 100%);
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
-	border-bottom: solid 3px #5e7fca;
+
+/* 文字サイズ用 */
+@media (max-width: 575.98px) {
+	.responsive-fw-size {
+		font-size: 1.0rem;
+	}
 }
 
+/* ボタンサイズ用 */
+@media (max-width: 575.98px) {
+	.responsive-btn-size {
+		font-size: 1.0rem;
+	}
+}
