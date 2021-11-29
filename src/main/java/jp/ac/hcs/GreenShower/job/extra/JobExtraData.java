@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * 1件のとりまとめ書類を管理するDAO
- * 
+ *
  */
 @Data
 public class JobExtraData{
