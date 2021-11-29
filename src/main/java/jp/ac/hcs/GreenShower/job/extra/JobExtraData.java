@@ -1,6 +1,5 @@
 package jp.ac.hcs.GreenShower.job.extra;
 
-import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import lombok.Data;
 
 /**
@@ -8,7 +7,7 @@ import lombok.Data;
  *
  */
 @Data
-public class JobExtraData extends JobHuntingData{
+public class JobExtraData{
 
 	/**
 	 * 履歴書受領日時
