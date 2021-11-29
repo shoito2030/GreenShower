@@ -55,15 +55,15 @@ CREATE TABLE IF NOT EXISTS job_hunting (
  */
  CREATE TABLE IF NOT EXISTS requests (
     apply_id VARCHAR(254) PRIMARY KEY,
-    date_activity_from DATETIME NOT NULL,
-    date_activity_to DATETIME NOT NULL,
+    date_activity_from TIMESTAMP NOT NULL,
+    date_activity_to TIMESTAMP NOT NULL,
     loc VARCHAR(100) NOT NULL,
     
     way CHAR(1) NOT NULL,
-    date_absence_from DATETIME,
-    date_absence_to DATETIME,
-    leave_early_date DATETIME,
-    attendance_date DATETIME,
+    date_absence_from TIMESTAMP,
+    date_absence_to TIMESTAMP,
+    leave_early_date TIMESTAMP,
+    attendance_date TIMESTAMP,
     remark VARCHAR(254),
     
     register_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),

@@ -27,12 +27,15 @@
 	<div class="container mt-5 pt-3 pt-5">
         <div class="row justify-content-md-center">
             <div class="col-sm-6">
-            	<div th:if="${msg}" class="alert alert-success w-75 mx-auto mt-5" role="alert">
-					<span th:text="${msg}"></span>
-				</div>
                 <div class="card center-block" style="border-radius:50px;">
                     <div class="card-body">
                         <h3 class="card-title fw-bold fw-title-general">就職活動申請</h3>
+                        <div th:if="${msg}" class="alert alert-success w-75 mx-auto mt-5" role="alert">
+                            <span th:text="${msg}"></span>
+                        </div>
+                        <div th:if="${errmsg}" class="alert alert-danger w-75 mx-auto mt-5" role="alert">
+                            <span th:text="${errmsg}"></span>
+                        </div>
                         <div class="btn-group-vertical btn-group-lg" role="group">
                             <input type="button" class="btn btn-primary mt-4" value="新規作成"
 							th:onclick="'window.location.href = \'' + @{/job/request/insert} + '\''">
