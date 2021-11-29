@@ -44,13 +44,7 @@
             width: 90%;
         }
 
-        html {
-            height: 100%;
-        }
-
-        body {
-            height: 80%;
-        }
+        
 
         /* スマホ縦対応 1カラン */
         @media screen and (max-width: 800px) {
@@ -69,7 +63,7 @@
     </style>
 </head>
 
-<body class="bg-color-general max-height">
+<body class="bg-color-admin max-height">
 
     <header class="fixed-top">
         <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -121,7 +115,7 @@
             <div class="col-12">
                 <div class="card center-block" style="border-radius: 50px;">
                     <div class="card-body">
-                        <h3 class="card-title fw-bold fw-title-general">就職活動報告 承認</h3>
+                        <h3 class="card-title fw-bold fw-title-admin">就職活動報告 承認</h3>
 
                         <div class="row justify-content-md-center mt-md-4">
                             <div class="col-md-2">
@@ -149,22 +143,12 @@
                                     </li>
                                 </ul>
 
-                                <h5 class="d-flex justify-content-center align-items-center mb-3 mt-md-4">
-                                    <span class="fw-bold">指摘事項</span>
-                                </h5>
-                                <ul class="list-group mb-3 mb-md-5">
-                                    <li class="list-group-item lh-sm">
-                                        <h5></h5>
-                                    </li>
-                                </ul>
-
-
                                 <h5 class="d-flex justify-content-center align-items-center mb-3 mt-md-5">
                                     <span class="fw-bold">申請状態の更新</span>
                                 </h5>
                                 <ul class="list-group mb-3">
                                     <li class="list-group-item d-flex justify-content-between lh-sm">
-                                        <select id="status" class="form-control" name="status">
+                                        <select id="" class="form-control" name="status">
                                             <option value="">選択</option>
                                             <option value="7">承認</option>
                                             <option value="5">差し戻し</option>
@@ -173,7 +157,7 @@
 
                                     </li>
 
-                                    <li class="list-group-item d-flex justify-content-between lh-sm" id="indicate" style="display: none;">
+                                    <li class="list-group-item d-flex justify-content-between lh-sm" id="indicate">
                                                 <textarea class="form-control pt-md-4 mx-auto" style="height: 130px;"
                                                     placeholder="指摘コメントを入力してください" name="indicate"></textarea>
                                     </li>
@@ -190,6 +174,57 @@
                                         </form>
                                     </li>
                                 </ul>
+
+                                <form method="post" th:action="@{/job/report/status_change}">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="fw-bold h4">現在の報告状態</p>
+                                            <div class="card center-block w-50"
+                                                style="border-radius: 75px; margin: 0 auto">
+                                                <div class="card-body">
+                                                    <p th:text="${jobReportData.status.value}"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="pt-md-4 mx-auto" style="width: 90px;">
+                                                <p class="fw-bold h4">変更</p>
+                                                <select id="status" class="form-control" style="width: 110px;"
+                                                    name="status">
+                                                    <option value="">選択</option>
+                                                    <option value="7">承認</option>
+                                                    <option value="5">差し戻し</option>
+                                                    <option value="99">取消し</option>
+                                                </select>
+                                            </div>
+                                            <div th:if="${errmsg}">
+                                                <span th:text="${errmsg}" style="color: red;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                        
+                                    <div id="indicate" style="display: none;">
+                        
+                                        <div class="row">
+                                            <div class="pt-md-4 mx-auto" style="width: 200px;">
+                                                <p class="fw-bold h4">指摘欄</p>
+                                            </div>
+                                        </div>
+                        
+                                        <div class="row">
+                                            <textarea class="form-control bg-color-white pt-md-4 mx-auto"
+                                                style="width: 600px; height: 130px;" placeholder="指摘コメントを入力してください"
+                                                name="indicate"></textarea>
+                                                <div th:if="${indicateErrmsg}">
+                                                <span th:text="${indicateErrmsg}" style="color: red;"></span>
+                                            </div>
+                                        </div>
+                        
+                                    </div>
+                                    <br> <br>
+                                    <button type="submit" class="btn btn-primary"
+                                        style="-webkit-appearance: none; width: 200px; height: 45px; font-size: 23px;">登録</button>
+                                </form>
 
 
                             </div>
