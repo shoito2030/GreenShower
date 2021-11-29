@@ -7,6 +7,9 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * WebConfigクラス
+ */
 @Configuration
 public class WebConfig {
 
@@ -18,7 +21,10 @@ public class WebConfig {
 	
 	/** 就職申請一覧情報のCSVファイル名 */
 	public static final String FILENAME_JOBREQUEST_CSV = "request.csv";
-
+	/**
+	 * メッセージのパラメーター化と国際化をサポートする、メッセージを解決するための戦略インターフェース。
+	 * @return bean
+	 */
 	@Bean
 	public MessageSource messageSource() {
 
@@ -30,6 +36,10 @@ public class WebConfig {
 		return bean;
 	}
 
+	/**
+	 * Spring アプリケーションコンテキストでの javax.validation （JSR-303）セットアップの中心的なクラスです
+	 * @return localValidatorFactoryBean
+	 */
 	@Bean
 	public LocalValidatorFactoryBean localValidatorFactoryBean() {
 
@@ -39,7 +49,12 @@ public class WebConfig {
 
 		return localValidatorFactoryBean;
 	}
-
+	
+	/**
+	 * HTTP リクエストを実行する
+	 * 
+	 * @return RestTemplate
+	 */
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();

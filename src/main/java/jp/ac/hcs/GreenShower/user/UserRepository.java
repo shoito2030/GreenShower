@@ -48,7 +48,7 @@ public class UserRepository {
 	 * usersテーブルから全データを取得.
 	 * 
 	 * @return UserEntity
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public UserEntity selectAll() throws DataAccessException {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL);
@@ -60,7 +60,7 @@ public class UserRepository {
 	 * usersテーブルからユーザIDをキーにデータを1件を取得.
 	 * @param user_id 検索するユーザID
 	 * @return UserEntity
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public UserData selectOne(String user_id) throws DataAccessException {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, user_id);
@@ -105,7 +105,7 @@ public class UserRepository {
 	 * 
 	 * @param data 追加するユーザ情報
 	 * @return 追加データ数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int insertOne(UserData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_INSERT_ONE, 
@@ -125,7 +125,7 @@ public class UserRepository {
 	 * (管理用)usersテーブルのデータを1件更新する(パスワード更新有).
 	 * @param data 更新するユーザ情報
 	 * @return 更新データ数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateOneForAdmin(UserData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_UPDATE_ONE_FOR_ADMIN,
@@ -145,7 +145,7 @@ public class UserRepository {
 	 * userテーブルのデータを1件削除する.
 	 * @param user_id 削除するユーザID
 	 * @return 削除データ数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int deleteOne(String user_id) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_DELETE_ONE, user_id);
@@ -157,7 +157,7 @@ public class UserRepository {
 	 * (管理用)Userテーブルのデータを1件更新する(パスワード更新無).
 	 * @param userData 更新するユーザ情報
 	 * @return 更新データ数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateOne(UserData userData) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_UPDATE_ONE,
