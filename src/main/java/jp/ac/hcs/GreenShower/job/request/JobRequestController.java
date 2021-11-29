@@ -352,7 +352,7 @@ public class JobRequestController {
 	 * 就職活動申請内容変更処理を行う
 	 * 
 	 * @param form 登録時の入力チェック用JobRequestForm
-	 * @param bindingResult バインディング結果を表す
+	 * @param bindingResult バインディング結果を表す 
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
 	 * @param model viewに変数を渡す
