@@ -34,7 +34,7 @@ public class ReportService {
 	/**
 	 * 受験報告情報を全件取得する
 	 * 
-	 * @return Optional<ReportEntity>
+	 * @return Optional ReportEntity
 	 */
 	public Optional<ReportEntity> selectAll() {
 		ReportEntity reportEntity;
@@ -53,7 +53,7 @@ public class ReportService {
 	/**
 	 * 受験報告情報を取得する
 	 * 
-	 * @return Optional<ReportData>
+	 * @return Optional ReportData
 	 */
 	public Optional<ReportData> selectOne(String report_id) {
 		ReportData reportEntity;
@@ -171,7 +171,6 @@ public class ReportService {
 	
 	/**
 	 * タスク情報をCSVファイルとしてサーバに保存する.
-	 * @param user_id ユーザID
 	 * @throws DataAccessException
 	 */
 	public void reportListCsvOut() throws DataAccessException {

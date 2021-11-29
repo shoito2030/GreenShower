@@ -193,7 +193,7 @@ public class ReportController {
 	/**
 	 * 受験報告情報を更新をする
 	 * 
-	 * @param user_id   検索するユーザID
+	 * @param report_id 更新する報告のID
 	 * @param principal ログイン情報
 	 * @param model
 	 * @return 受験報告情報一覧画面

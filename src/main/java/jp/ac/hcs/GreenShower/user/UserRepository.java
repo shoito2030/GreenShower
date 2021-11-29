@@ -155,7 +155,7 @@ public class UserRepository {
 	
 	/**
 	 * (管理用)Userテーブルのデータを1件更新する(パスワード更新無).
-	 * @param data 更新するユーザ情報
+	 * @param userData 更新するユーザ情報
 	 * @return 更新データ数
 	 * @throws DataAccessException
 	 */

@@ -21,7 +21,7 @@ public class UserService {
 	/**
 	 * ユーザ情報を全件取得する
 	 * 
-	 * @return Optional<UserEntity>
+	 * @return Optional UserEntity
 	 */
 	public Optional<UserEntity> selectAll() {
 		UserEntity userEntity;
@@ -40,7 +40,7 @@ public class UserService {
 	 * ユーザIDに紐づいた情報を1件だけ取得する
 	 * 
 	 * @param user_id ユーザID
-	 * @return Optional<UserData>
+	 * @return Optional UserData
 	 */
 	public Optional<UserData> selectOne(String user_id) {
 		UserData userData;
