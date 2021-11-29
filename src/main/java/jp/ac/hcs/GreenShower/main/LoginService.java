@@ -27,7 +27,7 @@ public class LoginService {
 
 	/**
 	 * ログインしたユーザのユーザ情報を取得する.
-	 * @param principal ログイン情報
+	 * @param name ユーザID
 	 * @return ログインユーザのユーザ情報
 	 */
 	public UserData getLoginUserInfo(String name) {

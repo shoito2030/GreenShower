@@ -98,7 +98,6 @@ public class JobRequestController {
 	 * 個人の申請情報を取得し就職活動申請詳細画面を表示する
 	 * 
 	 * @param principal ログイン情報
-	 * @param apply_id  申請ID
 	 * @param model
 	 * @return - 処理成功時：就職活動申請詳細画面 - 処理失敗時：就職活動申請一覧画面
 	 */

@@ -152,43 +152,6 @@ public class ReportController {
 		return "report/edit";
 	}
 	
-	/**
-	 * 受験報告情報を更新をする
-	 * 
-	 * @param user_id   検索するユーザID
-	 * @param principal ログイン情報
-	 * @param model
-	 * @return 受験報告情報一覧画面
-	 */
-	@PostMapping("report/update")
-	public String getReportUpdate(@ModelAttribute @Validated ReportForm form,
-			 Principal principal, Model model) {
-		
-		log.info("入力情報：" + form.toString());
-
-//		// 入力チェックに引っかかった場合、前の画面に戻る
-//		if (bindingResult.hasErrors()) {
-//			log.info("[" + principal.getName() + "]さんが新しいユーザの登録に失敗しました。");
-//			log.info("入力情報：" + form.toString());
-//
-//			model.addAttribute("errmsg", "ユーザ情報の登録に失敗しました。入力内容をお確かめください。");
-
-//			return getReportInsert(form, model);
-//		}
-//		
-//		// ユーザIDに紐づく情報を取得（取得できなかった場合は空のOptionalが格納される）
-//		boolean isSuccess = reportService.update(form);
-//		
-//		if(isSuccess) {
-//			log.info("[" + principal.getName() + "]さんが受験報告情報を修正しました");
-//		} else {
-//			log.info("[" + principal.getName() + "]さんが受験報告情報を修正しました");
-//		}
-//		
-
-		return getReportList(model);
-	}
-	
 	
 	/**
 	 * 受験報告情報を更新をする

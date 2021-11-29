@@ -25,7 +25,7 @@ public class JobReportService {
 	 * 
 	 * @param user_id ユーザID
 	 * @param role アクターの権限
-	 * @return Optional<jobReportEntity>
+	 * @return Optional jobReportEntity 
 	 */
 	public Optional<JobReportEntity> selectAllReports(String user_id, String role) {
 		JobReportEntity jobReportEntity;
@@ -58,7 +58,7 @@ public class JobReportService {
 	 * 就職活動申請の報告情報を1件取得する
 	 * 
 	 * @param apply_id
-	 * @return Optional<jobJobReportData>
+	 * @return Optional jobJobReportData 
 	 */
 	public Optional<JobReportData> selectOne(String apply_id) {
 		JobReportData jobReportData;
@@ -76,7 +76,7 @@ public class JobReportService {
 	 * applyIdからユーザの個人情報を1件取得
 	 * 
 	 * @param apply_id 申請ID
-	 * @return Optional<userData>
+	 * @return Optional userData 
 	 */
 	public Optional<UserData> selectPersonalInfoApply(String apply_id) {
 		UserData userData;
@@ -94,7 +94,7 @@ public class JobReportService {
 	 * userIdからユーザの個人情報を1件取得
 	 * 
 	 * @param user_id ユーザID
-	 * @return Optional<userData>
+	 * @return Optional userData
 	 */
 	public Optional<UserData> selectPersonalInfoUserId(String user_id) {
 		UserData userData;
