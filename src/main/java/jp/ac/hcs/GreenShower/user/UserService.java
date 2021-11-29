@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import jp.ac.hcs.GreenShower.user.UserData.Role;
 
-@Service
 /**
  *ユーザマスタに関する操作を行う業務クラス
  */
+@Service
 public class UserService {
 
 	@Autowired
@@ -95,6 +95,7 @@ public class UserService {
 	 * ユーザマスタの情報を更新する（管理者のみが利用）
 	 * 
 	 * @param form 検証済み入力データ
+	 * @param update_user_id 更新するユーザID
 	 * @return - true：更新件数1件以上（処理成功）の場合 - false：更新件数0件（処理失敗）の場合
 	 */
 	public boolean updateForAdmin(UserFormForUpdate form, String update_user_id) {

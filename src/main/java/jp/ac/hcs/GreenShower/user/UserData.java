@@ -79,7 +79,12 @@ public class UserData {
 	private int user_status;
 	
 	public enum Role {
-		ROLE_STUDENT("学生", "ROLE_STUDENT"), ROLE_TEACHER("担任", "ROLE_TEACHER"), ROLE_STAFF("事務", "ROLE_STAFF");
+		/** 学生 ROLE_STUDENT */
+		ROLE_STUDENT("学生", "ROLE_STUDENT"),
+		/** 担任 ROLE_TEACHER */
+		ROLE_TEACHER("担任", "ROLE_TEACHER"), 
+		/** 事務 ROLE_STAFF */
+		ROLE_STAFF("事務", "ROLE_STAFF");
 
 		/** ラベル */
 		private String label;
