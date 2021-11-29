@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@Controller
 /**
  * ユーザ情報に関する処理を行うControllerクラス
  */
+@Slf4j
+@Controller
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -28,7 +28,7 @@ public class UserController {
 	/**
 	 * ユーザ情報一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
-	 * @param model
+	 * @param model 変数を渡す
 	 * @return ユーザ情報一覧画面 or トップ画面
 	 */
 	@GetMapping("/user/list")
@@ -50,7 +50,7 @@ public class UserController {
 	 * ユーザ登録画面（管理者用）を表示する
 	 * 
 	 * @param form  登録時の入力チェック用UserForm
-	 * @param model
+	 * @param model 変数を渡す
 	 * @return ユーザ登録画面（管理者用）
 	 */
 	@GetMapping("/user/insert")
@@ -97,7 +97,7 @@ public class UserController {
 	 * 
 	 * @param user_id   検索するユーザID
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model 変数を渡す
 	 * @return - 処理成功時：ユーザ詳細情報画面 - 処理失敗時：トップ画面
 	 */
 	@GetMapping("user/detail/{id}")
@@ -121,7 +121,7 @@ public class UserController {
 	 * 
 	 * @param user_id   ユーザID
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model 変数を渡す
 	 * @return getUserListに処理を委譲しているのでそちらを参照すること
 	 */
 	@PostMapping("user/delete")
@@ -147,7 +147,7 @@ public class UserController {
 	 * @param form          入力情報
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
-	 * @param model
+	 * @param model 変数を渡す
 	 * @return getUserListに処理を委譲しているのでそちらを参照すること
 	 */
 	@PostMapping("user/update")

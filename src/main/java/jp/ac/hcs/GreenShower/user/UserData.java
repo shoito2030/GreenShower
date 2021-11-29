@@ -78,6 +78,9 @@ public class UserData {
 	 */
 	private int user_status;
 	
+	/**
+	 * ユーザ権限
+	 */
 	public enum Role {
 		/** 学生 ROLE_STUDENT */
 		ROLE_STUDENT("学生", "ROLE_STUDENT"),
@@ -97,11 +100,19 @@ public class UserData {
 			this.label = label;
 			this.value = value;
 		}
-
+		
+		/**
+		 * labelを取得
+		 * @return label
+		 */
 		public String getLabel() {
 			return this.label;
 		}
-
+		
+		/**
+		 * valueを取得
+		 * @return value
+		 */
 		public String getValue() {
 			return this.value;
 		}
