@@ -47,8 +47,8 @@ public class JobRequestController {
 
 	/**
 	 * 就職活動申請申請一覧画面を表示する
-	 * 
-	 * @param model
+	 * @param principal ログイン情報
+	 * @param model viewに変数を渡す
 	 * @return - 処理成功時：就職活動申請一覧画面 - 処理失敗時：就職活動申請トップ画面
 	 */
 	@GetMapping("/job/request/list")
@@ -73,7 +73,7 @@ public class JobRequestController {
 	 * 
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return - 処理成功時：就職活動申請詳細画面 - 処理失敗時：就職活動申請一覧画面
 	 */
 	@GetMapping("/job/request/detail/{apply_id}")
@@ -98,7 +98,7 @@ public class JobRequestController {
 	 * 個人の申請情報を取得し就職活動申請詳細画面を表示する
 	 * 
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return - 処理成功時：就職活動申請詳細画面 - 処理失敗時：就職活動申請一覧画面
 	 */
 	@PostMapping("/job/request/detail/notice")
@@ -121,8 +121,9 @@ public class JobRequestController {
 	/**
 	 * 就職活動申請登録画面を表示する
 	 * 
+	 * @param form 登録時の入力チェック用JobRequestForm
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return - 処理成功時：就職活動申請新規作成画面 - 処理失敗時：就職活動申請一覧画面
 	 */
 	@GetMapping("/job/request/insert")
@@ -168,7 +169,7 @@ public class JobRequestController {
 	 * @param form          登録時の入力チェック用JobRequestForm
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return - 入力内容誤り：就職活動申請新規作成画面 - 処理終了時（成否に関わらず）就職活動申請トップ画面
 	 */
 	@PostMapping("/job/request/insert")
@@ -215,7 +216,7 @@ public class JobRequestController {
 	 * 
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return - 処理成功時：就職活動申請管理画面 - 処理失敗時：就職活動申請一覧画面
 	 */
 	@GetMapping("/job/request/status_change/{apply_id}")
@@ -255,9 +256,10 @@ public class JobRequestController {
 	/**
 	 * 就職活動申請状態変更処理を行う
 	 * 
+	 * @param form 登録時の入力チェック用JobRequestForm
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return - 処理成功時：就職活動申請一覧画面 - 入力内容誤り：就職活動申請管理画面
 	 */
 	@PostMapping("/job/request/status-change/{apply_id}")
@@ -303,7 +305,7 @@ public class JobRequestController {
 	 * 
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return 就職活動申請修正画面
 	 */
 	@GetMapping("/job/request/fix/{apply_id}")
@@ -349,9 +351,11 @@ public class JobRequestController {
 	/**
 	 * 就職活動申請内容変更処理を行う
 	 * 
+	 * @param form 登録時の入力チェック用JobRequestForm
+	 * @param bindingResult バインディング結果を表す
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return 就職活動申請一覧画面
 	 */
 	@PostMapping("/job/request/fix/{apply_id}")
@@ -386,7 +390,7 @@ public class JobRequestController {
 	 * 就職活動イベント登録画面を表示する
 	 * 
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return 就職活動イベント登録画面
 	 */
 	@GetMapping("/job/event-registration")
@@ -398,8 +402,9 @@ public class JobRequestController {
 	/**
 	 * イベント情報登録処理を行う
 	 * 
+	 * @param form 登録時の入力チェック用JobRequestForm
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return 就職活動トップ画面
 	 */
 	@PostMapping("/job/event-registration")

@@ -200,7 +200,7 @@ public class ReportRepository {
 	/**
 	 * TaskテーブルからユーザIDをキーにデータを全件取得し、CSVファイルとしてサーバに保存する.
 	 * 
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public void reportlistCsvOut() throws DataAccessException {
 

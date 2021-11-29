@@ -57,7 +57,7 @@ public class JobReportService {
 	/**
 	 * 就職活動申請の報告情報を1件取得する
 	 * 
-	 * @param apply_id
+	 * @param apply_id 申請ID
 	 * @return Optional jobJobReportData 
 	 */
 	public Optional<JobReportData> selectOne(String apply_id) {
@@ -234,6 +234,7 @@ public class JobReportService {
 	/**
 	 * 報告修正した際にstatusを変更する
 	 * @param apply_id 申請ID
+	 * @return - true：追加件数1件以上（処理成功）の場合 - false：追加件数0件（処理失敗）の場合
 	 */
 	public boolean updateStatusFixed(String apply_id) {
 		int rowNumber = 0;

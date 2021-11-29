@@ -6,6 +6,10 @@ import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * １件の報告情報（報告マスタの１カラム）を管理するDAO
+ *
+ */
 @Data
 @EqualsAndHashCode(callSuper=true)
 public class JobReportData extends JobHuntingData {

@@ -61,8 +61,8 @@ public class JobReportRepository {
 	/**
 	 * 報告情報を全権取得する
 	 * 
-	 * @param classroom
-	 * @return jobReportEntity
+	 * @param classroom 所属クラス
+	 * @return jobReportEntity  
 	 */
 	public JobReportEntity selectAllReports(String classroom) {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_REPORTS, classroom);
@@ -124,7 +124,7 @@ public class JobReportRepository {
 	 * 
 	 * @param data 追加する報告情報
 	 * @return 追加データ数:0または1
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int insertOne(JobReportData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_INSERT_ONE_REPORTS,data.getApply_id(), data.isAdvance_or_retreat(), data.getRemark(), data.getRegister_user_id());
@@ -135,9 +135,9 @@ public class JobReportRepository {
 	/**
 	 * reportsテーブルの進退を『進めない』に変更する
 	 * 
-	 * @param apply_id
+	 * @param apply_id 申請ID
 	 * @return 追加データ数:0または1
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateAdvance_or_retreat_to_false(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_ADVANCE_OR_RETREAT_TO_FALSE, apply_id);
@@ -147,9 +147,9 @@ public class JobReportRepository {
 	/**
 	 * reportsテーブルの進退を『進める』に変更する
 	 * 
-	 * @param apply_id
+	 * @param apply_id 申請ID
 	 * @return 追加データ数:0または1
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateAdvance_or_retreat_to_true(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_ADVANCE_OR_RETREAT_TO_TRUE, apply_id);
@@ -159,10 +159,10 @@ public class JobReportRepository {
 	/**
 	 * reportsテーブルのメモを変更する
 	 * 
-	 * @param apply_id
-	 * @param remark
+	 * @param apply_id 申請ID
+	 * @param remark メモ
 	 * @return 修正データ数:0または1
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateRemark(String apply_id, String remark) {
 		int rowNumber = jdbc.update(SQL_UPDATE_REMARK, remark, apply_id);
@@ -174,7 +174,7 @@ public class JobReportRepository {
 	 * 
 	 * @param apply_id 申請ID
 	 * @return 追加データ数:0または1
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateStatusOne(String apply_id) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOB_HUNTING, apply_id);
@@ -187,7 +187,7 @@ public class JobReportRepository {
 	 * 
 	 * @param form 追加するユーザ情報
 	 * @return 追加データ数:0または1
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateStatus(JobReportForm form) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS,
