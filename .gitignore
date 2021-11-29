@@ -162,6 +162,5 @@ $RECYCLE.BIN/
 
 ### Original ###
 hoge/
-doc/
 
 # End of https://www.gitignore.io/api/git,java,maven,eclipse,windows
