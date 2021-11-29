@@ -5,6 +5,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+/**
+ * とりまとめに関するDBを操作するRepositoryクラス
+ *
+ */
 @Repository
 public class JobExtraRepository {
 	
@@ -70,7 +74,7 @@ public class JobExtraRepository {
 	 * @param apply_id 申請ID
 	 * @param user_id  ユーザID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int listRegistion(String apply_id,String user_id) {
 		int rowNumber = jdbc.update(SQL_INSERT_SUMMARY_LIST_MANAGEMENT,apply_id,user_id);
@@ -83,7 +87,7 @@ public class JobExtraRepository {
 	 * 履歴書を受け取った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateResume(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_RESUME,apply_id);
@@ -95,7 +99,7 @@ public class JobExtraRepository {
 	 * 大学成績証明書を受け取った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateUniversityTranriptsscripts(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_UNIVERSITY_TRANRIPTSSCRIPTS,apply_id);
@@ -107,7 +111,7 @@ public class JobExtraRepository {
 	 * 大学（卒業・卒業見込み）証明書を受け取った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateUniversityDiploma(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_UNIVERSITY_DIPLOMA,apply_id);
@@ -119,7 +123,7 @@ public class JobExtraRepository {
 	 * HCS成績証明書を受け取った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateHcsTranscript(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_HCS_TRANSCRIPT,apply_id);
@@ -131,7 +135,7 @@ public class JobExtraRepository {
 	 * HCS卒業見込み証明書を受け取った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateHcsDiploma(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_HCS_DIPLOMA,apply_id);
@@ -143,7 +147,7 @@ public class JobExtraRepository {
 	 * 健康診断証明書を受け取った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateHealthCertificate(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_HEALTH_CERTIFICATE,apply_id);
@@ -155,7 +159,7 @@ public class JobExtraRepository {
 	 * 出身高校成績証明書を受け取った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateHighSchoolTranscript(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_HIGH_SCHOOL_TRANSCRIPT,apply_id);
@@ -167,7 +171,7 @@ public class JobExtraRepository {
 	 * 推薦書を受け取った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateRecommendation(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_RECOMMENDATION,apply_id);
@@ -179,7 +183,7 @@ public class JobExtraRepository {
 	 * 個人情報等同意書を受け取った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateInformationAgreement(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_PERSONAL_INFORMATION_AGREEMENT,apply_id);
@@ -191,7 +195,7 @@ public class JobExtraRepository {
 	 * すべての書類が揃った日時を登録する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public int updateRequired(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_SUMMARY_DOCUMENTS_ALL_REQUIRED,apply_id);

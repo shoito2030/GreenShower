@@ -36,6 +36,7 @@ public class JobApiController {
 	/**
 	 * リクエストを受けユーザを検索する
 	 * @param json ユーザの所属クラスと出席番号のjson
+	 * @param principal ログイン情報
 	 * @return userData ユーザの氏名、クラス、番号
 	 */
 	@RequestMapping("/job/request/insert/getUserInfo")

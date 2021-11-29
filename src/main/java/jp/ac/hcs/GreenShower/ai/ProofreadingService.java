@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * 誤字脱字チェックを行う recruit社の校正APIを活用する 
- * @see https://a3rt.recruit.co.jp/product/proofreadingAPI/
+ * @see "https://a3rt.recruit.co.jp/product/proofreadingAPI/"
  */
 @Service
 @Transactional

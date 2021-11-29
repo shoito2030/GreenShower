@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+/**
+ * とりまとめ機能に関する処理を行うServiceクラス
+ * 
+ */
 @Service
 public class JobExtraService {
 

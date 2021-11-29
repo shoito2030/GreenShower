@@ -13,8 +13,17 @@ import jp.ac.hcs.GreenShower.WebConfig;
 import jp.ac.hcs.GreenShower.job.common.CommonEnum;
 import jp.ac.hcs.GreenShower.job.common.JobHuntingData;
 
+/**
+ * データベースの内容からCSVファイルを作成する
+ *
+ */
 public class JobCsvRequestRowCallbackHandler implements RowCallbackHandler{
 	
+	/**
+	 * データベースの内容からCSVファイルを作成する
+	 * @param rs 申請一覧テーブルのデータ
+	 * @throws SQLException データベース・アクセス・エラーまたはその他のエラーに関する情報を提供する例外
+	 */
 	@Override
 	public void processRow(ResultSet rs) throws SQLException {
 

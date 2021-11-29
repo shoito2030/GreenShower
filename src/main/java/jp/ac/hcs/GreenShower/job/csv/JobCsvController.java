@@ -8,12 +8,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import jp.ac.hcs.GreenShower.WebConfig;
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * 
+ *
+ */
 @Slf4j
 @Controller
 public class JobCsvController {
@@ -25,11 +29,10 @@ public class JobCsvController {
 	/**
 	 * すべての就職活動申請一覧情報をCSVファイルとしてダウンロードさせる
 	 * @param principal ログイン情報
-	 * @param model
 	 * @return 就職活動申請一覧情報のCSVファイル
 	 */
 	@GetMapping("/job/csv")
-	public ResponseEntity<byte[]> getJobRequestCsv(Principal principal, Model model) {
+	public ResponseEntity<byte[]> getJobRequestCsv(Principal principal) {
 
 		final String OUTPUT_FULLPATH = WebConfig.OUTPUT_PATH + WebConfig.FILENAME_JOBREQUEST_CSV;
 

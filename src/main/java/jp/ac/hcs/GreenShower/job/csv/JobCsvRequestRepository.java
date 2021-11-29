@@ -19,7 +19,7 @@ public class JobCsvRequestRepository {
 	
 	/**
 	 * requestsテーブル、job_huntingテーブルから報告完了した申請データを全件取得し、CSVファイルとしてサーバに保存する.
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public void requestListCsvOut() throws DataAccessException {
 

@@ -4,15 +4,17 @@ import java.util.Arrays;
 
 /**
  * コード定義Enum専用のインターフェース
- * 
- * @param E extends Enum<E> EnumまたはEnumを継承したクラス
  */
 public interface CommonEnum <E extends Enum<E>>{
 	
-	/** ID返却 */
+	/** ID返却
+	 * @return 参照するEnumのid
+	 */
 	String getId();
 
-	/** 値返却 */
+	/** 値返却
+	 * @return  参照するEnumのvalue
+	 */
 	String getValue();
 	
 	/**
@@ -46,7 +48,7 @@ public interface CommonEnum <E extends Enum<E>>{
      * 指定されたCommonEnumを実装したEnumの、指定されたIDの列挙子を返却する
      * @param <E>CommonEnumを継承したEnum
      * @param clazz CommonEnumのクラス
-     * @param id 
+     * @param id 取り出したいEnumのid
      * @return -成功時：IDに合致したEnum -失敗時：null
      */
     static <E extends Enum<E>> E getEnum(Class<? extends CommonEnum<E>> clazz, String id) {

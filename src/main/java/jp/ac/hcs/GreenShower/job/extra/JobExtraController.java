@@ -28,8 +28,8 @@ public class JobExtraController {
 	/**
 	 * 新たに学生をとりまとめ名簿に登録した旨を登録する
 	 * 
-	 * @param principal     ログイン情報
-	 * @param model
+	 * @param principal   ログイン情報
+	 * @param model       viewへ変数を渡す
 	 * @return - 就職活動申請一覧画面
 	 */
 	@PostMapping("/job/request/status-change/list-registration")
@@ -54,7 +54,7 @@ public class JobExtraController {
 	 * 就職活動に必要な書類を受け取った際にその日時を登録する
 	 * @param form          JobExtraData
 	 * @param principal     ログイン情報
-	 * @param model
+	 * @param model         viewへ変数を渡す
 	 * @return - 就職活動申請一覧画面
 	 */
 	@PostMapping("/job/request/status-change/document-receipt")
