@@ -396,8 +396,8 @@ public class JobRequestService {
 	/**
 	 * 申請修正した際にstatusを変更する
 	 * 
-	 * @param apply_id
-	 * @return rowNumber
+	 * @param apply_id 申請ID
+	 * @return rowNumber 成功:true 失敗:false 
 	 */
 	public boolean updateStatusFixed(String apply_id) {
 		int rowNumber = 0;
@@ -415,7 +415,7 @@ public class JobRequestService {
 	 * 生徒が先生から申請の承認をもらったことをコース担当に報告する
 	 * 
 	 * @param apply_id 申請ID
-	 * @return
+	 * @return rowNumber 成功:true 失敗:false 
 	 */
 	public boolean hasNoticedCourseDirector(String apply_id) {
 		int rowNumber = 0;

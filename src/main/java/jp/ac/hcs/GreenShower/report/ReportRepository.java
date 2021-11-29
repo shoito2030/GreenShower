@@ -57,7 +57,7 @@ public class ReportRepository {
 	 * reportテーブルから全データを取得.
 	 * 
 	 * @return ReportEntity
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public ReportEntity selectAll() throws DataAccessException {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL);
@@ -70,7 +70,7 @@ public class ReportRepository {
 	 * 
 	 * @param report_id 検索するレポートID
 	 * @return ReportData
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public ReportData selectOne(String report_id) throws DataAccessException {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ONE, report_id);
@@ -85,7 +85,7 @@ public class ReportRepository {
 	 * 
 	 * @param data 追加するユーザ情報
 	 * @return 追加データ数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int insertOne(ReportData data) throws DataAccessException {
 		int rowNumber = jdbc.update(SQL_INSERT_ONE,
@@ -188,9 +188,9 @@ public class ReportRepository {
 
 	/**
 	 * 
-	 * @param report_id
-	 * @param report_status
-	 * @return
+	 * @param report_id a
+	 * @param report_status a
+	 * @return rowNumber
 	 */
 	public int updateStatus(String report_id, String report_status) {
 		int rowNumber = jdbc.update(SQL_UPDATE_REPORT_STATUS, report_status, report_id);

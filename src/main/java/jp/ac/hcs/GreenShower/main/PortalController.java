@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.ac.hcs.GreenShower.user.UserData;
 
+/**
+ * ログイン後トップ画面を表示する
+ */
 @Controller
 public class PortalController {
 
@@ -16,7 +19,7 @@ public class PortalController {
 
 	/**
 	 * トップ画面を表示する.
-	 * @param principal
+	 * @param principal ログイン情報
 	 * @return トップ画面
 	 */
 	@RequestMapping("/")

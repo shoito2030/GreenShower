@@ -12,7 +12,7 @@ public class LoginController {
 	
 	/**
 	 * ログイン画面を表示する
-	 * @param model
+	 * @param model 変数を渡す
 	 * @return ログイン画面
 	 */
 	@GetMapping("/login")

@@ -3,7 +3,9 @@ package jp.ac.hcs.GreenShower.report;
 import java.util.Date;
 
 import lombok.Data;
-
+/**
+ * 受験報告
+ */
 @Data
 public class ReportData {
 	/**

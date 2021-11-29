@@ -86,9 +86,9 @@ public class JobRequestRepository {
 	/**
 	 * 申請情報を全件取得（ユーザの所属クラスのもののみ）する
 	 * 
-	 * @param classroom
+	 * @param classroom 所属クラス
 	 * @return jobRequestEntity
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public JobRequestEntity selectAllRequests(String classroom) throws DataAccessException {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_REQUESTS, classroom);
@@ -102,7 +102,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param apply_id 申請ID
 	 * @return JobRequestData
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public JobRequestData selectOne(String apply_id) {
 		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_REQUEST, apply_id);
@@ -116,7 +116,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param user_id ユーザID
 	 * @return UserData 
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public UserData selectPersonalInfo(String user_id) {
 		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO, user_id);
@@ -129,7 +129,7 @@ public class JobRequestRepository {
 	 * @param classroom クラス
 	 * @param class_number 出席番号
 	 * @return data
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public UserData selectPersonalInfo(String classroom, String class_number) {
 		Map<String, Object> result = jdbc.queryForMap(SQL_SELECT_PERSONAL_INFO_FOR_API, classroom, class_number);
@@ -142,7 +142,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param user_id 担任のユーザID
 	 * @return studentsNumber 生徒数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int selectStudentsNumber(String user_id) {
 		Map<String, Object> studentsNumber = jdbc.queryForMap(SQL_SELECT_STUDENTS_NUMBER, user_id);
@@ -246,7 +246,7 @@ public class JobRequestRepository {
 	 * 就職活動申請新規作成処理を実行する
 	 * @param data 申請情報を格納したオブジェクト（JobRequestData）
 	 * @return rowNumber 追加に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int insertOne(JobRequestData data) {
 		int rowNumber = jdbc.update(SQL_INSERT_JOB_HUNTING, data.getApply_id(), data.getApplicant_id(),
@@ -262,7 +262,7 @@ public class JobRequestRepository {
 	/**
 	 * 最新の申請IDを取得する
 	 * @return apply_id
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int selectApply_id() {
 		Map<String, Object> temp = jdbc.queryForMap(SQL_MAX_APPLY_ID);
@@ -275,7 +275,7 @@ public class JobRequestRepository {
 	 * @param status 申請状態
 	 * @param indicate 指摘事項
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int updateJobStatus(String apply_id, String status, String indicate) {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBSTATUS, status, indicate, apply_id);
@@ -287,7 +287,7 @@ public class JobRequestRepository {
 	 * @param data 申請情報を格納したオブジェクト(JobRequestData)
 	 * @param apply_id 申請ID
 	 * @return rowNumber 変更に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int updateJobContent(JobRequestData data, String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBCONTENT_REQUESTS, data.getDate_activity_from(),
@@ -304,7 +304,7 @@ public class JobRequestRepository {
 	 * @param eventData イベント情報を格納したオブジェクト
 	 * @param user_id ユーザID
 	 * @return rowNumber 登録に成功した件数
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int insertEvent(EventData eventData, String user_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOBEVENT,eventData.getEvent_id(), eventData.getCompany_name(), eventData.getDatetime(), eventData.getLoc(), eventData.getContent(), eventData.getBring(), user_id);
@@ -315,7 +315,7 @@ public class JobRequestRepository {
 	 * 最新のイベントIDを取得する
 	 * 
 	 * @return event_id
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int selectEvent_id() {
 		Map<String, Object> temp = jdbc.queryForMap(SQL_MAX_EVENT_ID);
@@ -327,7 +327,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param apply_id 申請ID
 	 * @return UserData ユーザ情報
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public String selectJobHuntingStatus(String apply_id) {
 		String status = (String) jdbc.queryForMap(SQL_SELECT_JOB_HUNTING_STATUS, apply_id).get("status");
@@ -339,7 +339,7 @@ public class JobRequestRepository {
 	 * 
 	 * @param apply_id 申請ID
 	 * @return 変更データ数:0または1
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int updateStatusOne(String apply_id) {
 		int rowNumber = jdbc.update(SQL_UPDATE_JOB_HUNTING, apply_id);
@@ -352,14 +352,19 @@ public class JobRequestRepository {
 	 * コース担当報告済登録機能を実行する
 	 * @param apply_id 申請ID
 	 * @return rowNumber 追加データ数:0または1
-	 * @throws DataAccessException
+	 * @throws DataAccessException データベースエラー
 	 */
 	public int noticeCourseDirector(String apply_id) {
 		int rowNumber = jdbc.update(SQL_NOTICE_COURSE_DIRECTOR, apply_id);
 
 		return rowNumber;
 	}
-
+	
+	/**
+	 * 通知が必要な就職活動申請を取得する
+	 * @param classroom 所属クラス
+	 * @return jobRequestEntity 就職活動申請リスト
+	 */
 	public JobRequestEntity selectAllNotfication(String classroom) {
 		List<Map<String, Object>> resultList = jdbc.queryForList(SQL_SELECT_ALL_NOTFICATION, classroom);
 		JobRequestEntity jobRequestEntity = mappingSelectResult(resultList);

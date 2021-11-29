@@ -34,7 +34,7 @@ public class ReportController {
 	/**
 	 * 受験報告情報一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
-	 * @param model
+	 * @param model 変数を渡す
 	 * @return 受験報告情報一覧画面 or トップ画面
 	 */
 	@GetMapping("/report/list")
@@ -56,7 +56,7 @@ public class ReportController {
 	 * 受験報告情報登録画面を表示する
 	 * 
 	 * @param form  登録時の入力チェック用ReportForm
-	 * @param model
+	 * @param model 変数
 	 * @return 受験報告情報登録画面
 	 */
 	@GetMapping("report/insert")
@@ -70,7 +70,7 @@ public class ReportController {
 	 * @param form          登録時の入力チェック用ReportForm
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
-	 * @param model
+	 * @param model 変数
 	 * @return 受験報告情報一覧画面
 	 */
 	@PostMapping("report/insert")
@@ -108,7 +108,7 @@ public class ReportController {
 	 * 
 	 * @param report_id   検索するユーザID
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model 変数
 	 * @return - 処理成功時：受験報告詳細情報画面 - 処理失敗時：受験報告情報一覧画面
 	 */
 	@GetMapping("report/detail/{id}")
@@ -133,7 +133,7 @@ public class ReportController {
 	 * 
 	 * @param report_id   検索するユーザID
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model 変数
 	 * @return - 処理成功時：受験報告編集画面 - 処理失敗時：受験報告情報一覧画面
 	 */
 	@GetMapping("report/edit/{id}")
@@ -158,7 +158,8 @@ public class ReportController {
 	 * 
 	 * @param report_id 更新する報告のID
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param report_status 状態
+	 * @param model 変数
 	 * @return 受験報告情報一覧画面
 	 */
 	@PostMapping("report/change_status/{report_id}")
@@ -174,7 +175,7 @@ public class ReportController {
 	 * 自分の全てのタスク情報をCSVファイルとしてダウンロードさせる.
 	 * 
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model 変数
 	 * @return タスク情報のCSVファイル
 	 */
 	@PostMapping("/report/csv")

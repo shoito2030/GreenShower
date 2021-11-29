@@ -4,6 +4,9 @@ import java.util.Date;
 
 import lombok.Data;
 
+/**
+ * 受験報告入力チェック
+ */
 @Data
 public class ReportForm {
 	

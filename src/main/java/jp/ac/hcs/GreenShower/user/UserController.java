@@ -64,7 +64,7 @@ public class UserController {
 	 * @param form          入力情報
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
-	 * @param model
+	 * @param model 変数を渡す
 	 * @return - 処理失敗時：ユーザ登録画面（管理者用） - 処理成功時：getUserListに処理を委譲しているのでそちらを参照すること
 	 */
 	@PostMapping("user/insert")
