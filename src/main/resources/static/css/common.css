@@ -120,26 +120,8 @@ a {
 	.nav-link:last-child {
 		border-bottom: solid 1px rgba(0, 0, 0, 0.1);
 	}
-
-	.bg-color-sky {
-		background-color: white;
-	}
-
-	.bg-color-white {
-		background-color: #dae8fc;
-	}
 }
 
-/* スマホ横＆タブレット縦対応 ２カラン */
-@media screen and (min-width: 500px) and (max-width: 800px) {
-	.bg-color-sky {
-		background-color: white;
-	}
-
-	.bg-color-white {
-		background-color: #dae8fc;
-	}
-}
 
 /* タブレット横＆ＰＣ対応 3カラン */
 @media screen and (min-width: 801px) {
@@ -159,12 +141,8 @@ a {
 		width: 100%;
 	}
 
-	.bg-color-sky {
-		background-color: #dae8fc;
-	}
-
-	.bg-color-white {
-		background-color: white;
+	.responsive-btn-width {
+		width: 40%;
 	}
 }
 
@@ -190,24 +168,6 @@ a {
 	color: #fd6585;
 }
 
-/* 見出し用 */
-h1.title {
-	font-size: 24px;
-}
-
-@media only screen and (min-width: 651px) {
-	/* 中画面用 */
-	h1.title {
-		font-size: 26px;
-	}
-}
-
-@media only screen and (min-width: 961px) {
-	/* 大画面用 */
-	h1.title {
-		font-size: 28px;
-	}
-}
 
 select {
 	-moz-appearance: menulist;
@@ -290,5 +250,11 @@ select {
 @media (max-width: 575.98px) {
 	.responsive-btn-size {
 		font-size: 1.0rem;
+	}
+}
+
+@media (max-width: 575.98px) {
+	.responsive-btn-width {
+		width: 40%;
 	}
 }
