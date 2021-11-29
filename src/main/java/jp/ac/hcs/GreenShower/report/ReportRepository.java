@@ -19,7 +19,13 @@ import jp.ac.hcs.GreenShower.report.ReportData.Test_section;
 import jp.ac.hcs.GreenShower.report.ReportData.Test_summary;
 import jp.ac.hcs.GreenShower.report.ReportData.Venue_section;
 
+
+/** 
+ * 受験報告に関する処理を行うRepositoryクラス
+ * 
+ */
 @Repository
+
 public class ReportRepository {
 
 	/** SQL 全件取得（クラスと出席番号の昇順） */

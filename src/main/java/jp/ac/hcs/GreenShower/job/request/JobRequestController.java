@@ -418,7 +418,7 @@ public class JobRequestController {
 	 * 通知の取得を行う
 	 * 
 	 * @param principal ログイン情報
-	 * @param model
+	 * @param model viewに変数を渡す
 	 * @return 通知一覧画面
 	 */
 	@GetMapping("/job/request/notification")

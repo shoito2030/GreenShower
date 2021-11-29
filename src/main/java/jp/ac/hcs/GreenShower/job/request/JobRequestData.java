@@ -65,11 +65,18 @@ public class JobRequestData extends JobHuntingData{
 	 */
 	private String register_user_id;
 	
+	/**
+	 * 手段
+	 */
 	public enum Way implements CommonEnum<Way>{
 		
+		/** 手段 1 欠席 */
 		ABSENCE("1","欠席"),
+		/** 手段 2 早退 */
 		LEAVE("2","早退"),
+		/** 手段 3 遅刻 */
 		LATE("3","遅刻"),
+		/** 手段 4 遅刻及び早退 */
 		LEAVE_AND_LATE("4","遅刻及び早退");
 		
 		/** ID */

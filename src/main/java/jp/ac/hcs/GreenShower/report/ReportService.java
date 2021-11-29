@@ -52,7 +52,7 @@ public class ReportService {
 	
 	/**
 	 * 受験報告情報を取得する
-	 * 
+	 * @param report_id 受験報告ID
 	 * @return Optional ReportData
 	 */
 	public Optional<ReportData> selectOne(String report_id) {
@@ -153,8 +153,9 @@ public class ReportService {
 	
 	/**
 	 * 受験報告情報ステータス変更用
-	 * @param report_id
-	 * @param report_status
+	 * @param report_id 受験報告ID
+	 * @param report_status 受験報告状態
+	 * @return - true：更新件数1件（処理成功）の場合 - false：更新件数0件（処理失敗）の場合
 	 */
 	public boolean updateStatus(String report_id, String report_status) {
 		int rowNumber = 0;
@@ -171,7 +172,7 @@ public class ReportService {
 	
 	/**
 	 * タスク情報をCSVファイルとしてサーバに保存する.
-	 * @throws DataAccessException
+	 * @throws DataAccessException データアクセス時の例外
 	 */
 	public void reportListCsvOut() throws DataAccessException {
 		reportRepository.reportlistCsvOut();
