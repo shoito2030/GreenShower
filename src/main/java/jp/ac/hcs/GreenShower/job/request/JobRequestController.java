@@ -246,9 +246,11 @@ public class JobRequestController {
 				.proofreading(jobRequestData.get().getRemark());
 
 		// 値が入っていた（検査結果が黒）だった場合に実行
-		if (!proofreadingData.isEmpty()) {
+		if (!proofreadingData.isEmpty() && proofreadingData.get().getResultID() != null) {
 			model.addAttribute("proofreadingData", proofreadingData.get());
 			log.info("校正結果： " + proofreadingData.get());
+		} else {
+			model.addAttribute("proofreadingDataIsNotExsist", null);
 		}
 		return "job/request/status-change";
 	}

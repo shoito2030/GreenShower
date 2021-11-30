@@ -148,7 +148,7 @@
 							</div>
 
 							<!-- AIによる誤字脱字判定の結果が『白』の場合  -->
-							<div class="row" th:unless="${proofreadingData}">
+							<div class="row" th:if="${proofreadingDataIsNotExsist}">
 								<div class="col-md-4 bg-color-white pt-md-4">
 									<p class="fw-bold h4">メモ</p>
 								</div>
@@ -162,7 +162,7 @@
 							<th:block th:if="${proofreadingData}">
 								<div class="row">
 									<div class="col-md-4 bg-color-white pt-md-4">
-										<p class="fw-bold h4">備考</p>
+										<p class="fw-bold h4">メモ</p>
 									</div>
 									<div class="col-md-8 pt-md-4">
 										<p class="h4 text-center text-md-left pl-md-5 lh-lg"
