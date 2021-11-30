@@ -45,7 +45,7 @@ public class JobReportController {
 	 * 就職活動申請報告一覧画面を表示する - 処理失敗時：トップ画面を表示
 	 * 
 	 * @param principal ログイン情報
-	 * @param model viewに変数を渡す
+	 * @param model     viewに変数を渡す
 	 * @return 就職活動申請報告一覧画面 or トップ画面
 	 */
 	@GetMapping("/job/report/list")
@@ -73,7 +73,7 @@ public class JobReportController {
 	 * 
 	 * @param principal ログイン情報
 	 * @param apply_id  申請ID
-	 * @param model viewに変数を渡す
+	 * @param model     viewに変数を渡す
 	 * @return 就職活動申請詳細画面
 	 */
 	@GetMapping("/job/report/detail/{apply_id}")
@@ -98,14 +98,15 @@ public class JobReportController {
 	 * @param apply_id  申請ID
 	 * @param form      登録時の入力チェック用JobReportForm
 	 * @param principal ログイン情報
-	 * @param model viewに変数を渡す
+	 * @param model     viewに変数を渡す
 	 * @return 就職活動報告新規作成画面
 	 */
 	@GetMapping("/job/report/insert/{apply_id}")
-	public String getReportInert(@PathVariable("apply_id") String apply_id, JobReportForm form,  Principal principal, Model model) {
+	public String getReportInert(@PathVariable("apply_id") String apply_id, JobReportForm form, Principal principal,
+			Model model) {
 		String status = jobReportService.selectJobHuntingStatus(apply_id);
-		
-		if(status == null) {
+
+		if (status == null) {
 			return getReportList(principal, model);
 		}
 
@@ -173,9 +174,9 @@ public class JobReportController {
 	/**
 	 * 就職活動報告修正画面を表示する
 	 * 
-	 * @param apply_id 申請ID
+	 * @param apply_id  申請ID
 	 * @param principal ログイン情報
-	 * @param model viewに変数を渡す
+	 * @param model     viewに変数を渡す
 	 * @return 就職活動報告修正画面
 	 */
 	@GetMapping("/job/report/fix/{apply_id}")
@@ -219,7 +220,7 @@ public class JobReportController {
 	 * @param form          修正時の入力チェック用JobReportForm
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
-	 * @param model viewに変数を渡す
+	 * @param model         viewに変数を渡す
 	 * @return 就職活動報告一覧画面
 	 */
 	@PostMapping("/job/report/fix")
@@ -228,15 +229,15 @@ public class JobReportController {
 
 		if (bindingResult.hasErrors()) {
 			Optional<UserData> userData = null;
-			String applicant_id = (String)session.getAttribute("applicant_id");
+			String applicant_id = (String) session.getAttribute("applicant_id");
 
 			// ユーザの情報を取得
 			userData = jobReportService.selectPersonalInfoUserId(applicant_id);
-			
+
 			form.setClassroom(userData.get().getClassroom());
 			form.setClass_number(userData.get().getClass_number());
 			form.setName(userData.get().getName());
-			
+
 			model.addAttribute("jobReportForm", form);
 			return "/job/report/fix";
 		}
@@ -282,16 +283,17 @@ public class JobReportController {
 	 * 就職活動報告承認画面を表示する
 	 * 
 	 * @param principal ログイン情報
-	 * @param model viewに変数を渡す
-	 * @param apply_id 申請ID
+	 * @param model     viewに変数を渡す
+	 * @param apply_id  申請ID
 	 * @return 就職活動報告承認画面
 	 */
 	@GetMapping("/job/report/status_change/{apply_id}")
 	/**
 	 * 就職活動申請の報告状態変更を実行する
-	 * @param apply_id 申請ID
+	 * 
+	 * @param apply_id  申請ID
 	 * @param principal ログイン情報
-	 * @param model viewに変数を渡す
+	 * @param model     viewに変数を渡す
 	 * @return 成功-報告一覧画面 失敗-報告状態変更画面
 	 */
 	public String getReportStatus(@PathVariable("apply_id") String apply_id, Principal principal, Model model) {
@@ -314,9 +316,10 @@ public class JobReportController {
 		Optional<ProofreadingData> proofreadingData = proofreadingService.proofreading(jobReportData.get().getRemark());
 
 		// 値が入っていた（検査結果が黒）だった場合に実行
-		if (!proofreadingData.isEmpty()) {
+		if (!proofreadingData.isEmpty() && proofreadingData.get().getResultID() != null) {
 			model.addAttribute("proofreadingData", proofreadingData.get());
-		}
+			log.info("校正結果： " + proofreadingData.get());
+		} 
 
 		model.addAttribute("jobReportData", jobReportData.get());
 
@@ -332,7 +335,7 @@ public class JobReportController {
 	 * @param form          登録時の入力チェック用JobReportForm
 	 * @param bindingResult 入力情報の検証結果
 	 * @param principal     ログイン情報
-	 * @param model viewに変数を渡す
+	 * @param model         viewに変数を渡す
 	 * @return 受験報告情報一覧画面
 	 */
 	@PostMapping("job/report/status_change")
@@ -352,7 +355,7 @@ public class JobReportController {
 			model.addAttribute("errmsg", "改ざんしないでください。");
 			return getReportStatus(form.getApply_id(), principal, model);
 		}
-		
+
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("errmsg", "指摘コメントを再入力してください");
 			model.addAttribute("indicateErrmsg", "指摘コメントが長すぎます");

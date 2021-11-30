@@ -1,35 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-	<meta charset="UTF-8">
-	<title>就職活動報告承認画面</title>
-	<th:block th:insert="components/part::frag_mobile"></th:block>
-	<th:block th:insert="components/part::frag_icon"></th:block>
-	<th:block th:insert="components/part::frag_style"></th:block>
+<meta charset="UTF-8">
+<title>就職活動報告承認画面</title>
+<th:block th:insert="components/part::frag_mobile"></th:block>
+<th:block th:insert="components/part::frag_icon"></th:block>
+<th:block th:insert="components/part::frag_style"></th:block>
 
-	<style>
-		.container {
-			width: 90%;
-		}
+<style>
+.container {
+	width: 90%;
+}
 
-
-
-		/* スマホ縦対応 1カラン */
-		@media screen and (max-width: 800px) {
-			.container {
-				width: 95%;
-			}
-
-			html {
-				height: auto;
-			}
-
-			body {
-				height: auto;
-			}
-		}
-	</style>
+/* スマホ縦対応 1カラン */
+@media screen and (max-width: 800px) {
+	.container {
+		width: 95%;
+	}
+	html {
+		height: auto;
+	}
+	body {
+		height: auto;
+	}
+}
+</style>
 </head>
 
 <body class="bg-color-admin max-height">
@@ -46,16 +43,17 @@
 						<div class="row justify-content-md-center mt-md-4">
 							<div class="col-md-2">
 								<span><small class="text-muted">クラス</small><span
-										class="float-md-right mt-md-1 fw-bold h4" th:text="*{classroom}"></span></span>
+									class="float-md-right mt-md-1 fw-bold h4"
+									th:text="*{classroom}"></span></span>
 							</div>
 							<div class="col-md-1 offset-md-1">
 								<span><small class="text-muted">番号</small><span
-										class="float-md-right mt-md-1 fw-bold h4"
-										th:text="*{class_number}"></span></span>
+									class="float-md-right mt-md-1 fw-bold h4"
+									th:text="*{class_number}"></span></span>
 							</div>
 							<div class="col-md-2 offset-md-1">
 								<span><small class="text-muted">氏名</small><span
-										class="float-md-right mt-md-1 fw-bold h4" th:text="*{name}"></span></span>
+									class="float-md-right mt-md-1 fw-bold h4" th:text="*{name}"></span></span>
 							</div>
 						</div>
 
@@ -66,7 +64,8 @@
 								<p class="fw-bold h4">申請種別</p>
 							</div>
 							<div class="col-md-8">
-								<p class="h4 text-center text-md-left pl-md-5" th:text="*{apply_type.value}"></p>
+								<p class="h4 text-center text-md-left pl-md-5"
+									th:text="*{apply_type.value}"></p>
 							</div>
 						</div>
 
@@ -75,7 +74,8 @@
 								<p class="fw-bold h4">企業名</p>
 							</div>
 							<div class="col-md-8 pt-md-4">
-								<p class="h4 text-center text-md-left pl-md-5" th:text="*{company_name}"></p>
+								<p class="h4 text-center text-md-left pl-md-5"
+									th:text="*{company_name}"></p>
 							</div>
 						</div>
 
@@ -84,7 +84,8 @@
 								<p class="fw-bold h4">内容</p>
 							</div>
 							<div class="col-md-8 pt-md-4">
-								<p class="h4 text-center text-md-left pl-md-5" th:text="*{content.value}"></p>
+								<p class="h4 text-center text-md-left pl-md-5"
+									th:text="*{content.value}"></p>
 							</div>
 						</div>
 
@@ -104,29 +105,19 @@
 						</div>
 
 
-						<!-- AIによる誤字脱字判定の結果が『白』の場合  -->
-						<div class="row" th:unless="${proofreadingData}">
-							<div class="col-md-4 bg-color-white pt-md-4">
-								<p class="fw-bold h4">備考</p>
-							</div>
-							<div class="col-md-8 pt-md-4">
-								<p class="h4 text-center text-md-left pl-md-5" th:text="*{remark}"></p>
-							</div>
+
+						<div class="col-md-4 bg-color-white pt-md-4">
+							<p class="fw-bold h4">備考</p>
 						</div>
+						<div class="col-md-8 pt-md-4">
+							<p class="h4 text-center text-md-left pl-md-5"
+								th:text="*{remark}"></p>
+						</div>
+
 
 
 						<!-- AIによる誤字脱字判定の結果が『黒』の場合  -->
 						<th:block th:if="${proofreadingData}">
-							<div class="row">
-								<div class="col-md-4 bg-color-white pt-md-4">
-									<p class="fw-bold h4">備考</p>
-								</div>
-								<div class="col-md-8 pt-md-4">
-									<p class="h4 text-center text-md-left pl-md-5 lh-lg"
-										th:utext="${proofreadingData.checkedSentence}">
-									</p>
-								</div>
-							</div>
 
 							<div class="row">
 								<div class="col-md-4 bg-color-white pt-md-4">
@@ -149,7 +140,8 @@
 							<div class="row">
 								<div class="col">
 									<p class="fw-bold h4">現在の報告状態</p>
-									<div class="card center-block w-50" style="border-radius: 75px; margin: 0 auto">
+									<div class="card center-block w-50"
+										style="border-radius: 75px; margin: 0 auto">
 										<div class="card-body">
 											<p th:text="${jobReportData.status.value}"></p>
 										</div>
@@ -158,7 +150,8 @@
 								<div class="col">
 									<div class="pt-md-4 mx-auto" style="width: 90px;">
 										<p class="fw-bold h4">変更</p>
-										<select id="status" class="form-control" style="width: 110px;" name="status">
+										<select id="status" class="form-control" style="width: 110px;"
+											name="status">
 											<option value="">選択</option>
 											<option value="7">承認</option>
 											<option value="5">差し戻し</option>
@@ -181,8 +174,8 @@
 
 								<div class="row">
 									<textarea class="form-control bg-color-white pt-md-4 mx-auto"
-										style="width: 600px; height: 130px;" placeholder="指摘コメントを入力してください"
-										name="indicate"></textarea>
+										style="width: 600px; height: 130px;"
+										placeholder="指摘コメントを入力してください" name="indicate"></textarea>
 									<div th:if="${indicateErrmsg}">
 										<span th:text="${indicateErrmsg}" style="color: red;"></span>
 									</div>
@@ -193,7 +186,7 @@
 							<button type="submit" class="btn btn-danger"
 								style="-webkit-appearance: none; width: 200px; height: 45px; font-size: 23px;">登録</button>
 						</form>
-						
+
 					</div>
 
 				</div>
@@ -206,21 +199,21 @@
 	<th:block th:insert="components/part::frag_script"></th:block>
 	<script type="text/javascript">
 		document
-			.getElementById("status")
-			.addEventListener(
-				"change",
-				function () {
-					var age_elem = document.getElementById("status");
-					var s_value = age_elem.options[age_elem.selectedIndex].value;
-					var box_div_elem = document
-						.getElementById("indicate");
+				.getElementById("status")
+				.addEventListener(
+						"change",
+						function() {
+							var age_elem = document.getElementById("status");
+							var s_value = age_elem.options[age_elem.selectedIndex].value;
+							var box_div_elem = document
+									.getElementById("indicate");
 
-					if (s_value != "5") {
-						box_div_elem.style.display = 'none';
-					} else {
-						box_div_elem.style.display = 'block';
-					}
-				}, false);
+							if (s_value != "5") {
+								box_div_elem.style.display = 'none';
+							} else {
+								box_div_elem.style.display = 'block';
+							}
+						}, false);
 	</script>
 </body>
 

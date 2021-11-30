@@ -249,9 +249,7 @@ public class JobRequestController {
 		if (!proofreadingData.isEmpty() && proofreadingData.get().getResultID() != null) {
 			model.addAttribute("proofreadingData", proofreadingData.get());
 			log.info("校正結果： " + proofreadingData.get());
-		} else {
-			model.addAttribute("proofreadingDataIsNotExsist", null);
-		}
+		} 
 		return "job/request/status-change";
 	}
 
